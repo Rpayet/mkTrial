@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CupRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\RaceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CupRepository::class)]
-class Cup
+#[ORM\Entity(repositoryClass: RaceRepository::class)]
+class Race
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,13 +22,9 @@ class Cup
     #[ORM\Column(length: 255)]
     private ?string $picture = null;
 
-    #[ORM\OneToMany(mappedBy: 'cup', targetEntity: Race::class)]
-    private Collection $races;
-
-    public function __construct()
-    {
-        $this->races = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'races')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Cup $cup = null;
 
     public function getId(): ?int
     {
@@ -73,32 +67,14 @@ class Cup
         return $this;
     }
 
-    /**
-     * @return Collection<int, Race>
-     */
-    public function getRaces(): Collection
+    public function getCup(): ?Cup
     {
-        return $this->races;
+        return $this->cup;
     }
 
-    public function addRace(Race $race): self
+    public function setCup(?Cup $cup): self
     {
-        if (!$this->races->contains($race)) {
-            $this->races->add($race);
-            $race->setCup($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRace(Race $race): self
-    {
-        if ($this->races->removeElement($race)) {
-            // set the owning side to null (unless already changed)
-            if ($race->getCup() === $this) {
-                $race->setCup(null);
-            }
-        }
+        $this->cup = $cup;
 
         return $this;
     }
