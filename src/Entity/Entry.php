@@ -23,6 +23,7 @@ class Entry
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'entries')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'entries')]
