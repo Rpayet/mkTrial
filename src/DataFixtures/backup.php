@@ -1,5 +1,8 @@
 <?php
 
+use App\Entity\Cup;
+use App\Entity\Race;
+
 $cups = ['champignon', 'fleur', 'étoile', 'spéciale', 
 'œuf', 'crossing', 'carapace', 'banane', 
 'feuille', 'éclair', 'triforce', 'clochette',
