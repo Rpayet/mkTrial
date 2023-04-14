@@ -38,8 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Tournament $tournament = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Tournament::class)]
+    private Collection $tournaments;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Entry::class)]
     private Collection $entries;
@@ -155,14 +155,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTournament(): ?Tournament
+    /**
+     * @return Collection<int, Tournament>
+     */
+    public function getTournaments(): Collection
     {
-        return $this->tournament;
+        return $this->tournaments;
     }
 
-    public function setTournament(?Tournament $tournament): self
+    public function addTournament(Tournament $tournament): self
     {
-        $this->tournament = $tournament;
+        if (!$this->tournaments->contains($tournament)) {
+            $this->tournaments->add($tournament);
+            $tournament->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTournament(Tournament $tournament): self
+    {
+        if ($this->tournaments->removeElement($tournament)) {
+            // set the owning side to null (unless already changed)
+            if ($tournament->getUser() === $this) {
+                $tournament->setUser(null);
+            }
+        }
 
         return $this;
     }

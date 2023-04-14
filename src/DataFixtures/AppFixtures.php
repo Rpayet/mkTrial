@@ -3,14 +3,30 @@
 namespace App\DataFixtures;
 
 use App\Entity\Cup;
+use App\Entity\Entry;
 use App\Entity\Race;
+use App\Entity\Tournament;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Faker\Factory as FakerFactory;
 
 class AppFixtures extends Fixture
 {
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher= $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
+        $faker = FakerFactory::create('fr_FR');
+
+        $users = [];
+        $races = [];
        
         $cups = ['champignon', 'fleur', 'étoile', 'spéciale', 
                 'œuf', 'crossing', 'carapace', 'banane', 
@@ -56,6 +72,7 @@ class AppFixtures extends Fixture
         $acorn = ['tba', 'tba', 'tba', 'tba'];
         $spiny = ['tba', 'tba', 'tba', 'tba'];
 
+        // Pour remplir les tables Cup et Race
         foreach ($cups as $index => $cupName) {
             $enCupName = $cups_en[$index];
             $cup = new Cup();
@@ -76,6 +93,49 @@ class AppFixtures extends Fixture
             
             $manager->persist($cup);
         }
+
+        // Collection de faux Utilisateurs
+        for ($i =0; $i < 10; $i++) {
+           
+            $user = new User();
+            $user->setName($faker->firstName())
+                ->setEmail($faker->email())
+                ->setPassword('bateau')
+                ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-10 days', 'now')))
+                ->setPicture('https://www.gravatar.com/avatar/'.md5($user->getEmail()).'?d=identicon&r=g');
+
+            $manager->persist($user);
+            $users[] = $user;
+        }
+
+        // Collection de faux évènements
+        for ($i=0; $i < 50 ; $i++) { 
+            $race = $races[array_rand($races)];
+            $user = $users[array_rand($users)];
+            $tournament = new Tournament();
+            $tournament->setName($faker->word())
+            ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-30 days', 'now')))
+            ->setEndAt($faker->dateTimeBetween(\DateTime::createFromImmutable($tournament->getCreatedAt()), '+30 days'))
+            ->setRace($race)
+            ->setUser($user)
+            ->setSpeed(rand(0, 1) == 0 ? '150cc' : '200cc')
+            ->setPrivacy(rand(0, 1) == 0 ? true : false);
+                        
+            for ($j=0; $j < rand(1,12) ; $j++) { 
+                $entry = new Entry();
+                $entry ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween(\DateTime::createFromImmutable($tournament->getCreatedAt()), $tournament->getEndAt())))
+            
+                -> setTime($faker->numberBetween(50000, 120000))
+                -> setUser($users[array_rand($users)])
+                -> setPicture('https://i.servimg.com/u/f18/18/85/67/82/tm/wiiu_s30.jpg');
+
+                $tournament ->addEntry($entry);
+                $manager ->persist($entry);
+           }
+
+           $manager -> persist($tournament);
+            
+        }       
 
         $manager->flush();
     }

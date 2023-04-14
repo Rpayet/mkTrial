@@ -46,15 +46,15 @@ class Tournament
     #[Assert\NotBlank(message: 'Choix de course requis.')]
     private ?Race $race = null;
 
-    #[ORM\OneToMany(mappedBy: 'tournament', targetEntity: User::class)]
-    private Collection $users;
+    #[ORM\ManyToOne(inversedBy: 'tournaments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'tournament', targetEntity: Entry::class)]
     private Collection $entries;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->entries = new ArrayCollection();
     }
 
@@ -135,32 +135,14 @@ class Tournament
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setTournament($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getTournament() === $this) {
-                $user->setTournament(null);
-            }
-        }
+        $this->user = $user;
 
         return $this;
     }
