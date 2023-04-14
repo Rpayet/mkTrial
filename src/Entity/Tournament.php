@@ -49,9 +49,13 @@ class Tournament
     #[ORM\OneToMany(mappedBy: 'tournament', targetEntity: User::class)]
     private Collection $users;
 
+    #[ORM\OneToMany(mappedBy: 'tournament', targetEntity: Entry::class)]
+    private Collection $entries;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->entries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +159,36 @@ class Tournament
             // set the owning side to null (unless already changed)
             if ($user->getTournament() === $this) {
                 $user->setTournament(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entry>
+     */
+    public function getEntries(): Collection
+    {
+        return $this->entries;
+    }
+
+    public function addEntry(Entry $entry): self
+    {
+        if (!$this->entries->contains($entry)) {
+            $this->entries->add($entry);
+            $entry->setTournament($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntry(Entry $entry): self
+    {
+        if ($this->entries->removeElement($entry)) {
+            // set the owning side to null (unless already changed)
+            if ($entry->getTournament() === $this) {
+                $entry->setTournament(null);
             }
         }
 
