@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TournamentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TournamentRepository::class)]
 class Tournament
@@ -18,9 +19,18 @@ class Tournament
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom du tournoi est requis')]
+    #[Assert\Length(
+        min: 3,
+        max: 15,
+        minMessage: 'Le nom du tournoi doit comporter {{ limit }} caractères minimum.',
+        maxMessage: 'Le nom du tournoi doit comporter {{ limit }} caractères maximum.',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'Date de fin requise.')]
+    #[Assert\GreaterThan('today', message: 'La date de fin doit être supérieur à la date actuelle.')]
     private ?\DateTimeInterface $endAt = null;
 
     #[ORM\Column(length: 255)]
@@ -31,6 +41,7 @@ class Tournament
 
     #[ORM\ManyToOne(inversedBy: 'tournaments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: 'Choix de course requis.')]
     private ?Race $race = null;
 
     public function getId(): ?int
