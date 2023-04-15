@@ -9,13 +9,14 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection, data
 
         const min = (randomCup * 4) - 3;
         const max = randomCup * 4;
-        const randomRace = Math.floor(Math.random() * (max - min + 1 )) + min;
+        const randomRace = Math.floor(Math.random() * ( max - min + 1 )) + min;
 
         setCupSelection(randomCup);
         setRaceSelection(randomRace);
         setData({...data, race: randomRace });
     }
     
+
     return (
         <div className="w-1/5 mx-auto relative">
             <button 

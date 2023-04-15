@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CupSelection from "./CupSelect";
 import RaceSelect from "./RaceSelect";
 import DateSelect from "./DateSelect";
@@ -10,7 +10,17 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
     const [cupSelection, setCupSelection] = useState('');
     const [raceSelection, setRaceSelection] = useState('');
     const [dateValue, setDateValue] = useState('');
-    
+
+    const [currentPage, setCurrentPage] = useState(0);
+
+    useEffect(() => {
+        if (raceSelection > 12) {
+            setCurrentPage(1);
+        } else if (raceSelection <= 12) {
+            setCurrentPage(0);
+        }
+    }, [raceSelection]);
+   
     return (
         <div className="">
             {/* Messages d'erreurs */}
@@ -40,8 +50,10 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                     <CupSelection
                         races= { races } 
                         cupSelection= { cupSelection } 
-                        setCupSelection= { setCupSelection } />
-                    
+                        setCupSelection= { setCupSelection }
+                        currentPage= { currentPage } 
+                        setCurrentPage= { setCurrentPage } />
+                        
                     {/* Sélection des courses */}
                     <RaceSelect
                         races= {races} 
