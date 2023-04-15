@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         shell: '#015289',
         lite: '#9d9d9d',
-        mario: '#015289'
+        mario: '#FE0000'
       }
     },
   },
