@@ -68,7 +68,7 @@ export default function RaceFilter({ races, setSortList, sortList }) {
                     checked={sortList.race.includes(race.name)} // Vérifie le tableau pour coché/décoché les cases
                     onChange={handleInputChange} // Ajoute les check au tableau des courses sélectionnés
                   />
-                  <label htmlFor={`race-${index}-${i}`}>{race.name.charAt(0).toUpperCase() + race.name.slice(1)}</label>
+                  <label htmlFor={`race-${index}-${i}`}>{race.name.toUpperCase()}</label>
                 </div>
               ))}
             </div> 
