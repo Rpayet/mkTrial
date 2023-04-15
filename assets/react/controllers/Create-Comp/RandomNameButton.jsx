@@ -31,7 +31,7 @@ export default function RandomNameButton({ setEventName, data, setData }) {
     return (
         <div className="relative">
             <div className="flex items-center gap-4 py-2 px-4 rounded-lg 
-                            border-solid border-[1px] border-text text-text 
+                            border-solid border-[1px] border-silver text-silver 
                             hover:text-lumi hover:cursor-pointer"
                 onClick={handleRandomName}>
                 Nom aléatoire

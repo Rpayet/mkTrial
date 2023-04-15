@@ -39,9 +39,9 @@ export default function EventCard({ tournament, index }) {
 
                         <div className="absolute top-0 left-0 w-full z-10">
 
-                            <h5 className="my-2 text-xl font-bold leading-tight text-text">{ tournament.name.toUpperCase() }</h5>
-                            <p className="mb-2 text-base italic text-text">@{tournament.user.name}</p>
-                            <p className="mb-2 text-base text-text">{ tournament.endAt }</p>
+                            <h5 className="my-2 text-xl font-bold leading-tight text-silver">{ tournament.name.toUpperCase() }</h5>
+                            <p className="mb-2 text-base italic text-silver">@{tournament.user.name}</p>
+                            <p className="mb-2 text-base text-silver">{ tournament.endAt }</p>
 
                             <a className="block mx-auto my-12 w-fit bg-white py-1 px-8 rounded-3xl
                                 text-lite text-lg text-center border-solid border-[1px] border-lite

@@ -34,7 +34,7 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                     data= { data }
                     minDate= { minDate } />
 
-                <div className="w-full p-4 mt-4 border-solid border-[1px] border-text rounded-lg">
+                <div className="w-full p-4 mt-4 border-solid border-[1px] border-silver rounded-lg">
                     
                     {/* Sélection des coupes */}
                     <CupSelection

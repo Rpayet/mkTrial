@@ -3,7 +3,7 @@
 {% block title %}Tournois | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div 
+    <div class="mt-12"
         {{ react_component('TournamentPage', 
         { tournaments: tournaments, races: races, mode: app.request.get('id') }) }} ></div>
 

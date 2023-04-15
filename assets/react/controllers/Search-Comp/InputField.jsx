@@ -26,7 +26,7 @@ export default function InputField({ page, pageMode, sortList, setSortList, even
 
             <button
                 className="w-1/5 inline-block bg-white py-2 sm:py-1 sm:px-2 rounded-lg
-                text-text text-sm sm:text-lg text-center border-solid border-[1px] border-text
+                text-silver text-sm sm:text-lg text-center border-solid border-[1px] border-silver
                 hover:bg-lumi hover:text-white"
                 type={ pageMode.type }>
                 { pageMode.text }

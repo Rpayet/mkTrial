@@ -10,7 +10,7 @@ export default function TogglePage( {page, setPage} ) {
                 type="button"
                 onClick={ () => setPage('sort') }
                 >
-                <svg className={`w-8 h-8 ${page == 'sort' ? 'stroke-lumi' : 'stroke-text'} hover:stroke-lumi`}
+                <svg className={`w-8 h-8 ${page == 'sort' ? 'stroke-lumi' : 'stroke-silver'} hover:stroke-lumi`}
                     width="800px" 
                     height="800px" 
                     viewBox="0 0 24 24" 
@@ -28,7 +28,7 @@ export default function TogglePage( {page, setPage} ) {
                 type="button"
                 onClick={ () => setPage('create') }
                 >
-                <svg className={`w-8 h-8 ${page == 'create' ? 'stroke-lumi' : 'stroke-text'} hover:stroke-lumi`}
+                <svg className={`w-8 h-8 ${page == 'create' ? 'stroke-lumi' : 'stroke-silver'} hover:stroke-lumi`}
                     xmlns="http://www.w3.org/2000/svg" 
                     width="800px" 
                     height="800px" 

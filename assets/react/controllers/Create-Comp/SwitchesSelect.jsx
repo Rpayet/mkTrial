@@ -61,10 +61,10 @@ export default function SwitchesSelect ({ data, setData }) {
                     checked={ privacy }
                     onChange={ togglePrivacy }
                     uncheckedIcon={
-                        <div className="sm:hidden flex items-center text-sm text-text p-1">✔</div>
+                        <div className="sm:hidden flex items-center text-sm text-silver p-1">✔</div>
                         }
                     checkedIcon={
-                        <div className="sm:hidden flex items-center text-sm text-text p-1">✖</div>
+                        <div className="sm:hidden flex items-center text-sm text-silver p-1">✖</div>
                     } />
 
                 <span className="hidden sm:block">Privée</span>

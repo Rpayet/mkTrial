@@ -5,7 +5,7 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection, data
     {/* Randomizer pour sélectionner une coupe et une courses aléatoirement */}
     const randomRace = () => {
 
-        const randomCup = Math.floor(Math.random() * 12) + 1;
+        const randomCup = Math.floor(Math.random() * 20) + 1;
 
         const min = (randomCup * 4) - 3;
         const max = randomCup * 4;
@@ -20,7 +20,7 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection, data
         <div className="w-1/5 mx-auto relative">
             <button 
                 className="w-full mx-auto inline-block bg-white py-1 px-2 rounded-b-lg absolute -bottom-[45px] sm:-bottom-[53px]
-                text-text text-sm sm:text-lg text-center border-solid border-r-[1px] border-b-[1px] border-l-[1px] border-text
+                text-silver text-sm sm:text-lg text-center border-solid border-r-[1px] border-b-[1px] border-l-[1px] border-silver
                 hover:text-lumi"
                 type="button"
                 onClick={ randomRace }>
