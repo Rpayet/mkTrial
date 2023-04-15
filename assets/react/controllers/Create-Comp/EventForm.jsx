@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import CupSelection from "./CupSelect";
 import RaceSelect from "./RaceSelect";
 import DateSelect from "./DateSelect";
-import RaceRandomizer from "./RaceRandomizer";
 import SwitchesSelect from "./SwitchesSelect";
 
 export default function EventForm({ races, setData, data, errors, minDate }) {
@@ -48,24 +47,20 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                     
                     {/* Sélection des coupes */}
                     <CupSelection
+                        data= { data }
+                        setData= { setData }
                         races= { races } 
                         cupSelection= { cupSelection } 
                         setCupSelection= { setCupSelection }
                         currentPage= { currentPage } 
-                        setCurrentPage= { setCurrentPage } />
+                        setCurrentPage= { setCurrentPage }
+                        setRaceSelection= { setRaceSelection } />
                         
                     {/* Sélection des courses */}
                     <RaceSelect
                         races= {races} 
                         cupSelection= { cupSelection } 
                         raceSelection= { raceSelection } 
-                        setRaceSelection= { setRaceSelection }
-                        data= { data }
-                        setData= { setData } />
-
-                    {/* Randomizer de course */}
-                    <RaceRandomizer
-                        setCupSelection= { setCupSelection } 
                         setRaceSelection= { setRaceSelection }
                         data= { data }
                         setData= { setData } />

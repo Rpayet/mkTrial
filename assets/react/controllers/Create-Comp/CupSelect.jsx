@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
+import RaceRandomizer from "./RaceRandomizer";
 
-export default function CupSelect({ races, cupSelection, setCupSelection, currentPage, setCurrentPage }) {
+
+export default function CupSelect({ data, setData, races, cupSelection, setCupSelection, currentPage, setCurrentPage, setRaceSelection }) {
 
     const cups = races.filter((race, index) => index % 4 === 0).map((race) => race.cup);
     
@@ -49,19 +51,29 @@ export default function CupSelect({ races, cupSelection, setCupSelection, curren
                     />
             </div>
             
-            <div 
-                className="grid grid-cols-6 sm:gap-4">
-                {cupList.map((cup, index) => (
-                    <img
-                    id={cup.id}
-                    className={ `w-38 p-1 sm:p-2 rounded-full cursor-pointer
-                                ${ cupSelection === cup.id ? 'bg-lumi' : '' }` }
-                    key={ index }
-                    src={ `/assets/admin/img/cups/${ cup.picture }` }
-                    alt={`${ cup.name }`}
-                    onClick={ handleSelect }
-                    />
-                ))}
+            <div className="relative">
+                <div 
+                    className="grid grid-cols-6 sm:gap-4">
+                    {cupList.map((cup, index) => (
+                        <img
+                        id={cup.id}
+                        className={ `w-38 p-1 sm:p-2 rounded-full cursor-pointer
+                                    ${ cupSelection === cup.id ? 'bg-lumi' : '' }` }
+                        key={ index }
+                        src={ `/assets/admin/img/cups/${ cup.picture }` }
+                        alt={`${ cup.name }`}
+                        onClick={ handleSelect }
+                        />
+                    ))}
+                </div>
+
+                {/* Randomizer de course */}
+                <RaceRandomizer
+                        setCupSelection= { setCupSelection } 
+                        setRaceSelection= { setRaceSelection }
+                        data= { data }
+                        setData= { setData } />
+
             </div>
         </div>
     )
