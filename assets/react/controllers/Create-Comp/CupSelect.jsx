@@ -15,7 +15,7 @@ export default function CupSelect({ races, cupSelection, setCupSelection }) {
                 id={race.cup.id}
                 className={ `w-38 p-1 sm:p-2 rounded-full cursor-pointer ${ cupSelection === race.cup.id ? 'bg-lumi' : '' }` }
                 key={ index }
-                src={ `/assets/img/base/races/Cups/${ race.cup.picture }` }
+                src={ `/assets/admin/img/cups/${ race.cup.picture }` }
                 alt={`${ race.cup.name }`}
                 onClick={ handleSelect }
                 />

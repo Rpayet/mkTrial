@@ -38,7 +38,7 @@ export default function  CupFilter({ races, setSortList, sortList }) {
                             />
                                 
                             <label htmlFor={`cup-${index}`}>
-                                <img src={`/assets/img/base/races/Cups/${ race.cup.picture }`} alt={ race.cup.picture } />
+                                <img src={`/assets/admin/img/cups/${ race.cup.picture }`} alt={ race.cup.picture } />
                             </label>
 
                         </div>

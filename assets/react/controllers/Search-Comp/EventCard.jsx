@@ -20,13 +20,13 @@ export default function EventCard({ tournament, index }) {
                             <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-shell rounded-full w-10">
                                 <img 
                                     className="p-1"
-                                    src={`/assets/img/base/races/Cups/${tournament.race.cup.picture}`} 
+                                    src={`/assets/admin/img/cups/${tournament.race.cup.picture}`} 
                                     alt={`${tournament.race.cup.picture}`} />
                             </div>
                             <div className="rounded-lg px-6">
                                 <img 
                                     className="rounded-lg"
-                                    src={`/assets/img/base/races/${tournament.race.cup.picture.split('_')[0]}/${tournament.race.picture}`}
+                                    src={`/assets/admin/img/races/${tournament.race.slug.split('_')[0]}/${tournament.race.picture}`}
                                     alt={`${tournament.race.picture}`} />
                             </div>
                         </div>

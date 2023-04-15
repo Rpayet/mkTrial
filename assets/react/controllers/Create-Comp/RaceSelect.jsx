@@ -17,7 +17,7 @@ export default function RaceSelect({ races, cupSelection, data, setData }) {
                     key={index}
                     id={race.id}
                     className={`p-1 sm:p-2 m-1 w-48 rounded-lg cursor-pointer ${data.race === race.id ? 'bg-lumi' : ''}`}
-                    src={`/assets/img/base/races/${race.picture.split('_')[0]}/${race.picture}`} alt={`${race.picture}`}
+                    src={`/assets/admin/img/races/${race.slug.split('_')[0]}/${race.picture}`} alt={`${race.picture}`}
                     onClick={ handleSelect } />
             ))}
         </div>
