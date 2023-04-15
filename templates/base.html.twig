@@ -20,12 +20,24 @@
 
             <nav class="flex justify-around items-center py-4">
                 <div class="flex w-2/5 items-center gap-4">
-                    <img src="/assets/admin/img/icons/Logo.png" alt="logo">
-                    <a href="{{ path('app_home') }}" class="">Accueil</a>
-                    <a href="#" class="">Tournois</a>
+                    <img 
+                        src="/assets/admin/img/icons/Logo.png"
+                        alt="logo">
+                    <a 
+                        
+                        href="{{ path('app_home') }}" 
+                        class="">
+                        Accueil</a>
+                    <a 
+                        href="#" 
+                        class="">
+                        Tournois</a>
                 </div>
                 <div class="flex justify-end w-2/5 items-center gap-4">
-                    <img src="/assets/admin/img/icons/Default.png" alt="default" class="w-10 rounded-full border-solid border-2 border-white">
+                    <img 
+                        src="/assets/admin/img/icons/Default.png"
+                        alt="default" 
+                        class="w-10 rounded-full border-solid border-2 border-white">
                     <a href="#">Profil</a>
                 </div>
             </nav>
@@ -35,5 +47,12 @@
         <div class="max-w-4xl mx-auto">
             {% block body %}{% endblock %}
         </div>
+
+        <footer
+            class="max-w-6xl mx-auto rounded-t-3xl bg-shell text-center text-white">
+            <div class="p-4">
+                <p>2023 - MK Trial</p>
+            </div>
+        </footer>
     </body>
 </html>
