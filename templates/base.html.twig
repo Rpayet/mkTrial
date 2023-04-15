@@ -7,13 +7,52 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="bg-neutral-200">
+
+        <header class="max-w-6xl mx-auto bg-shell rounded-b-3xl text-white font-bold">
+
+            <nav class="flex justify-around items-center py-4">
+                <div class="flex w-2/5 items-center gap-4">
+                    <img 
+                        src="/assets/admin/img/icons/Logo.png"
+                        alt="logo">
+                    <a 
+                        
+                        href="{{ path('app_home') }}" 
+                        class="">
+                        Accueil</a>
+                    <a 
+                        href="#" 
+                        class="">
+                        Tournois</a>
+                </div>
+                <div class="flex justify-end w-2/5 items-center gap-4">
+                    <img 
+                        src="/assets/admin/img/icons/Default.png"
+                        alt="default" 
+                        class="w-10 rounded-full border-solid border-2 border-white">
+                    <a href="#">Profil</a>
+                </div>
+            </nav>
+        
+        </header>
+
+        <div class="max-w-4xl mx-auto">
+            {% block body %}{% endblock %}
+        </div>
+
+        <footer
+            class="max-w-6xl mx-auto rounded-t-3xl bg-shell text-center text-white">
+            <div class="p-4">
+                <p>2023 - MK Trial</p>
+            </div>
+        </footer>
     </body>
 </html>

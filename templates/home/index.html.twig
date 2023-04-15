@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="w-full bg-white flex rounded-lg my-6">
+        <div class="w-1/2">
+            <img 
+                src="/assets/admin/img/icons/Home_img_01.png"
+                alt="home01"
+                class="p-10">
+        </div>
+        <div class="flex flex-col justify-center w-1/2 p-10 gap-6">
+            <h2 class="text-3xl font-extrabold">Créez et personnalisez vos propres Tournoi.</h2>
+            <p>Affrontez vos amis ou des adversaires 
+                du monde entier sur des challenges personnalisés 
+                de course contre-la-montre.</p>
+            <a
+                href="#"
+                class="mx-auto inline-block w-2/5 rounded-3xl py-2 px-1
+                    bg-white bg-solid border-[1px] border-lite 
+                    text-lite text-center
+                    hover:bg-mario hover:text-white">
+                Guide</a>
+        </div>
+    </div>
+{% endblock %}
