@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
+import DateSelect from "./DateSelect";
 
-export default function SwitchesSelect ({ data, setData }) {
+export default function SwitchesSelect ({ data, setData, dateValue, setDateValue, minDate }) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
@@ -26,11 +27,11 @@ export default function SwitchesSelect ({ data, setData }) {
     }
 
     return (
-        <>
+        <div className="flex items-center justify-center my-6 gap-y-4">
             {/* Sélection de la vitesse */}
-            <div className="flex gap-4">
+            <div className="flex gap-4 w-full justify-center">
 
-                <span className="hidden sm:block">150CC</span>
+                <span className="hidden sm:block text-right">150 cc</span>
 
                 <Switch 
                     onColor="#EBEBEB"
@@ -46,13 +47,21 @@ export default function SwitchesSelect ({ data, setData }) {
                         <div className="sm:hidden flex items-center text-xs p-1">200</div>
                     } />
 
-                <span className="hidden sm:block">200CC</span>
+                <span className="hidden sm:block">200 cc</span>
 
             </div>
 
+            {/* Sélection date de fin de l'événement */}
+            <DateSelect
+                        data= { data }
+                        setData= { setData }
+                        dateValue= { dateValue } 
+                        setDateValue= { setDateValue }
+                        minDate= { minDate } />
+
             {/* Sélection de la confidentialité de l'événement */}
-            <div className="flex gap-4">
-                <span className="hidden sm:block">Public</span>
+            <div className="flex gap-4 w-full justify-center">
+                <span className="hidden sm:block text-right">Public</span>
                 <Switch 
                     onColor="#EBEBEB"
                     offColor="#EBEBEB"
@@ -69,7 +78,7 @@ export default function SwitchesSelect ({ data, setData }) {
 
                 <span className="hidden sm:block">Privée</span>
             </div>
-        </>
+        </div>
     )
 }
 

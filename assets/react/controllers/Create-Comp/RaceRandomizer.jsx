@@ -20,16 +20,17 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection, data
     return (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <button 
-                className="inline-block bg-white rounded-full 
-                text-silver text-sm sm:text-lg text-center border-solid border-[1px] border-silver hover:border-lumi hover:animate-spin"
+                className="inline-block bg-white rounded-full
+                        text-silver text-sm sm:text-lg text-center border-solid border-[1px] border-gray-400
+                        hover:border-lumi hover:animate-spin"
                 type="button"
                 onClick={ randomRace }>
                 <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
+                    xmlns="http://www.w3.org/2000/svg"
                     fill="#000000" 
-                    width="50px" height="50px" viewBox="0 0 32 32" 
+                    width="50px" viewBox="0 0 32 32" 
                     version="1.1"
-                    className="p-2 fill-silver hover:fill-lumi">
+                    className="w-10 sm:w-14 p-2 fill-gray-400 hover:fill-lumi">
                     <path d="M15.676 17.312h0.048c-0.114-0.273-0.263-0.539-0.436-0.78l-11.114-6.346c-0.37 
                     0.13-0.607 0.519-0.607 1.109v9.84c0 1.034 0.726 2.291 1.621 2.808l9.168 5.294c0.544 
                     0.314 1.026 0.282 1.32-0.023v-11.902h-0zM10.049 24.234l-1.83-1.057v-1.918l1.83 

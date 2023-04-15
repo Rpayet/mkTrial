@@ -82,7 +82,7 @@ export default function  CupFilter({ races, setSortList, sortList }) {
                     breakLabel="/"
                     containerClassName="flex justify-center gap-4 mt-2"
                     pageLinkClassName=""
-                    activeClassName="text-lumi border-solid border-b-2 border-lumi"
+                    activeClassName="text-lumi font-bold border-solid border-b-2 border-lumi"
                     onPageChange={handlePageClick}
                     forcePage={currentPage}
                 />

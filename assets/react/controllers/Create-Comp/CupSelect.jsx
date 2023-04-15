@@ -45,7 +45,7 @@ export default function CupSelect({ data, setData, races, cupSelection, setCupSe
                         breakLabel="/"
                         containerClassName="flex justify-center gap-4 mt-2"
                         pageLinkClassName=""
-                        activeClassName="text-lumi border-solid border-b-2 border-lumi"
+                        activeClassName="font-bold text-lumi border-solid border-b-2 border-lumi"
                         onPageChange={handlePageClick}
                         forcePage={currentPage}
                     />
@@ -57,7 +57,7 @@ export default function CupSelect({ data, setData, races, cupSelection, setCupSe
                     {cupList.map((cup, index) => (
                         <img
                         id={cup.id}
-                        className={ `w-38 p-1 sm:p-2 rounded-full cursor-pointer
+                        className={ `w-32 sm:w-38 p-2 rounded-full cursor-pointer
                                     ${ cupSelection === cup.id ? 'bg-lumi' : '' }` }
                         key={ index }
                         src={ `/assets/admin/img/cups/${ cup.picture }` }

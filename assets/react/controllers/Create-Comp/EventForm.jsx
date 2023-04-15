@@ -34,14 +34,18 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
             </div>
 
             <div className="mt-6 px-12 py-6 w-full justify-center bg-white rounded-lg">
-                
-                {/* Sélection date de fin de l'événement */}
-                <DateSelect
-                    setDateValue= { setDateValue }
-                    setData= { setData }
-                    dateValue= { dateValue } 
-                    data= { data }
-                    minDate= { minDate } />
+
+                <div className="">
+
+                    {/* Comp avec les switches Speed / Privacy */}
+                    <SwitchesSelect
+                        data= { data }
+                        setData= { setData }
+                        dateValue= { dateValue } 
+                        setDateValue= { setDateValue }
+                        minDate= { minDate } />
+
+                </div>
 
                 <div className="w-full p-4 mt-4 border-solid border-[1px] border-silver rounded-lg">
                     
@@ -64,15 +68,6 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                         setRaceSelection= { setRaceSelection }
                         data= { data }
                         setData= { setData } />
-
-                </div>
-
-                <div className="w-full flex justify-around mt-6">
-
-                    {/* Comp avec les switches Speed / Privacy */}
-                    <SwitchesSelect
-                            data= { data }
-                            setData= { setData } />
 
                 </div>
 

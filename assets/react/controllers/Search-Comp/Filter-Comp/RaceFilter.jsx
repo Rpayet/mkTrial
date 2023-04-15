@@ -54,7 +54,7 @@ export default function RaceFilter({ races, setSortList, sortList }) {
 
       {visibility && (
 
-        <div className="grid grid-cols-2 w-full justify-between">
+        <div className="grid grid-cols-2 w-full gap-4">
 
           {raceListGroup.map((group, index) => (
             <div key={`group-${index}`} className="text-xs mt-2">
@@ -88,7 +88,7 @@ export default function RaceFilter({ races, setSortList, sortList }) {
             breakLabel="/"
             containerClassName="flex justify-center gap-4 mt-2"
             pageLinkClassName=""
-            activeClassName="text-lumi border-solid border-b-2 border-lumi"
+            activeClassName="text-lumi font-bold border-solid border-b-2 border-lumi"
             onPageChange={handlePageClick}
             forcePage={currentPage}
           />
