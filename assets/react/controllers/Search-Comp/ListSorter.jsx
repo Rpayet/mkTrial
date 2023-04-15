@@ -59,7 +59,6 @@ export default function ListSorter({ tournaments, sortList }) {
     } else {
         filteredTournaments.sort((a, b) => new Date(a.endAt) < new Date(b.endAt));
     }
-    console.log(filteredTournaments);
 
     const tournamentCards = filteredTournaments.slice(0, endIndex).map((tournament, index) => (
         <EventCard tournament={tournament} index={index} />

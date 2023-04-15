@@ -11,7 +11,7 @@ export default function FilterMenu({ races, setVisibility, visibility, setSortLi
     return(
 
         <div 
-            className={`absolute z-10 top-0 -left-20 sm:left-0 w-96 px-1 py-4 flex flex-col space-y-4 
+            className={`absolute w-[500px] z-10 top-0 -left-28 sm:left-0 px-1 py-4 flex flex-col space-y-4 
             bg-white border-solid border-[1px] border-lite rounded-lg
             ${visibility ? 'block' : 'hidden'}`}>
 
