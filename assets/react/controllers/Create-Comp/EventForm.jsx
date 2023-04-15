@@ -14,12 +14,12 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
     const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
-        if (raceSelection > 12) {
+        if (cupSelection > 12) {
             setCurrentPage(1);
-        } else if (raceSelection <= 12) {
+        } else if (cupSelection <= 12) {
             setCurrentPage(0);
         }
-    }, [raceSelection]);
+    }, [cupSelection]);
    
     return (
         <div className="">
