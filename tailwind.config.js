@@ -11,7 +11,9 @@ module.exports = {
         'montserrat' : ['Montserrat', 'sans-serif'] 
       },
       colors: {
-        shell: '#015289'
+        shell: '#015289',
+        lite: '#9d9d9d',
+        mario: '#015289'
       }
     },
   },
