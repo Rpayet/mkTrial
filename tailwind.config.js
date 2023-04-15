@@ -13,7 +13,8 @@ module.exports = {
       colors: {
         shell: '#015289',
         lite: '#9d9d9d',
-        mario: '#FE0000'
+        mario: '#FE0000',
+        lumi: '#40C5EC'
       }
     },
   },
