@@ -21,7 +21,7 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection, data
             <button 
                 className="w-full mx-auto inline-block bg-white py-1 px-2 rounded-b-lg absolute -bottom-[45px] sm:-bottom-[53px]
                 text-text text-sm sm:text-lg text-center border-solid border-r-[1px] border-b-[1px] border-l-[1px] border-text
-                hover:text-buttonHoverStroke"
+                hover:text-lumi"
                 type="button"
                 onClick={ randomRace }>
                 Aléatoire

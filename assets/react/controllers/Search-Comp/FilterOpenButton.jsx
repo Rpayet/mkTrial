@@ -10,7 +10,7 @@ export default function FilterOpenButton({ races, setVisibility, visibility, set
     return (
         <div className="relative z-10">
             <div className="flex items-center gap-2 py-2 px-2 rounded-lg 
-                            border-solid border-[1px] border-text text-text hover:text-buttonHoverStroke hover:cursor-pointer"
+                            border-solid border-[1px] border-text text-text hover:text-lumi hover:cursor-pointer"
                 onClick={toggleVisibility}>
                 <img src="assets/img/base/filters.svg" alt="filters"/>
                 Filtres

@@ -11,7 +11,7 @@ export default function FilterResetButton({ setSortList }) {
             <div
                 className="inline-block bg-white py-1 px-2 rounded-lg
                 text-text text-lg text-center border-solid border-[1px] border-text
-                hover:bg-buttonHover hover:text-textWhite" 
+                hover:bg-mario hover:text-white" 
                 type="button"
                 onClick={resetClick}>
                 Réinitialiser

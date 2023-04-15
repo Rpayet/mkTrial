@@ -88,7 +88,7 @@ export default function RaceFilter({ races, setSortList, sortList }) {
             breakLabel="/"
             containerClassName="flex justify-center gap-4 mt-2"
             pageLinkClassName=""
-            activeClassName="text-buttonHoverStroke boder-solid border-b-2 border-buttonHoverStroke"
+            activeClassName="text-lumi border-solid border-b-2 border-lumi"
             onPageChange={handlePageClick}
             forcePage={currentPage}
           />

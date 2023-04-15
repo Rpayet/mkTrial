@@ -11,7 +11,7 @@ export default function ResetScroll() {
     return (
         <div className="bg-white rounded-full p-4 fixed 
                     bottom-20 right-10 cursor-pointer animate-bounce
-                    border-solid border-2 hover:border-buttonHoverStroke"
+                    border-solid border-2 hover:border-lumi"
             onClick={resetScrollY} >
 
             <svg width="15px" height="15px" viewBox="0 0 20 20" version="1.1">

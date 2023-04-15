@@ -12,7 +12,7 @@ export default function DateSelect({ setData, data, minDate }) {
             <span className="block text-center font-bold">Fin de l'événement</span>
             <input
                 name="endAt"
-                className="w-1/2 sm:w-1/4 block mx-auto p-4 border rounded-lg cursor-pointer focus:outline-none focus:border-buttonHoverStroke" 
+                className="w-1/2 sm:w-1/4 block mx-auto p-4 border rounded-lg cursor-pointer focus:outline-none focus:border-lumi" 
                 type="date"
                 min={minDate}
                 onChange={handleDateChange} 

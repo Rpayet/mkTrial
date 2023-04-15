@@ -9,7 +9,7 @@ export default function EventCard({ tournament, index }) {
                 <div className="block max-w-sm rounded-3xl bg-white">
 
                     {/* Card-Top */}
-                    <div className="relative text-center py-1 pb-3 rounded-t-3xl bg-blueBG z-20">
+                    <div className="relative text-center py-1 pb-3 rounded-t-3xl bg-shell z-20">
 
                         <div className="flex justify-around text-white pt-2">
                             <p>{`${tournament.speed}`}</p>
@@ -17,7 +17,7 @@ export default function EventCard({ tournament, index }) {
                         </div>
 
                         <div className="relative rounded-lg">
-                            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blueBG rounded-full w-10">
+                            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-shell rounded-full w-10">
                                 <img 
                                     className="p-1"
                                     src={`/assets/img/base/races/Cups/${tournament.race.cup.picture}`} 
@@ -31,7 +31,7 @@ export default function EventCard({ tournament, index }) {
                             </div>
                         </div>
                         
-                        <p className="text-base text-textWhite font-bold">{ tournament.race.name.toUpperCase() }</p>
+                        <p className="text-base text-white font-bold">{ tournament.race.name.toUpperCase() }</p>
                     </div>
 
                     {/* Card-Bottom */}
@@ -44,8 +44,8 @@ export default function EventCard({ tournament, index }) {
                             <p className="mb-2 text-base text-text">{ tournament.endAt }</p>
 
                             <a className="block mx-auto my-12 w-fit bg-white py-1 px-8 rounded-3xl
-                                text-stroke text-lg text-center border-solid border-[1px] border-stroke
-                                hover:bg-buttonHover hover:text-textWhite hover:border-buttonHover
+                                text-lite text-lg text-center border-solid border-[1px] border-lite
+                                hover:bg-mario hover:text-white hover:border-mario
                                 transition duration-300 ease-in-out" 
                                 href={`/event/${tournament.id}`}>Consulter</a>
                                 

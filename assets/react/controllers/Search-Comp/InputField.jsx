@@ -16,9 +16,9 @@ export default function InputField({ page, pageMode, sortList, setSortList, even
             
             <input 
                 type="text"
-                className="w-4/5 rounded border-solid border-[1px] border-stroke
-                            focus:outline-none focus:border-buttonHoverStroke 
-                            focus:ring-buttonHoverStroke focus:border-2"
+                className="w-4/5 rounded border-solid border-[1px] border-lite
+                            focus:outline-none focus:border-lumi 
+                            focus:ring-lumi focus:border-2"
                 placeholder={ pageMode.placeholder }
                 value={ pageMode.id == page ? eventName : sortList.input }  
                 onChange={ pageMode.id == page ? handleEventValue : handleSearchValue }
@@ -27,7 +27,7 @@ export default function InputField({ page, pageMode, sortList, setSortList, even
             <button
                 className="w-1/5 inline-block bg-white py-2 sm:py-1 sm:px-2 rounded-lg
                 text-text text-sm sm:text-lg text-center border-solid border-[1px] border-text
-                hover:bg-buttonHoverStroke hover:text-textWhite"
+                hover:bg-lumi hover:text-white"
                 type={ pageMode.type }>
                 { pageMode.text }
             </button>

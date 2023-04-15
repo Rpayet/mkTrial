@@ -9,7 +9,7 @@ export default function FilterToggleButton({ title, setVisibility, visibility })
     return (
         
         <div id="cup-opener" 
-            className="w-full gap-4 mb-2 hover:text-buttonHoverStroke hover:cursor-pointer"
+            className="w-full gap-4 mb-2 hover:text-lumi hover:cursor-pointer"
             onClick={toggleVisibility}>
 
                 <span className="w-full flex items-center border-t-[1px]">
