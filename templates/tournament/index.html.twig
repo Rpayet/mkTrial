@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournois | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="my-20"
+        {{ react_component('TournamentPage', 
+        { tournaments: tournaments, races: races, mode: app.request.get('id') }) }} ></div>
+
+{% endblock %}

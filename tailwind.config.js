@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./assets/**/*.js",
+    "./assets/**/*.jsx",
     "./templates/**/*.html.twig",
     "./vendor/**/*.html.twig",
   ],
@@ -14,7 +14,8 @@ module.exports = {
         shell: '#015289',
         lite: '#9d9d9d',
         mario: '#FE0000',
-        lumi: '#40C5EC'
+        lumi: '#40C5EC',
+        silver: '#292929'
       }
     },
   },
