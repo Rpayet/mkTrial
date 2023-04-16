@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.name }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div
+        class="my-20"
+        {{ react_component('EventPage', { event: event } )}}>
+    </div>
+
+{% endblock %}
