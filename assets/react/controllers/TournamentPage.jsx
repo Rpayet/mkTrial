@@ -10,7 +10,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
     const minDate = new Date().toISOString().substring(0, 10);
 
     {/* Pagination filtre courses */}
-    const pageSetup = mode ? mode : 'create';
+    const pageSetup = mode ? mode : 'sort';
     const [page, setPage] = useState(pageSetup);
 
     {/* Nom de l'évènement créé depuis le champ input, envoyé vers le formulaire */}
