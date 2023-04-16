@@ -18,7 +18,7 @@
 
         <header class="max-w-6xl mx-auto bg-shell rounded-b-3xl text-white font-bold">
 
-            <nav class="flex justify-around items-center py-4">
+            <nav class="flex justify-between items-center py-4 mx-20">
                 <div class="flex w-2/5 items-center gap-4">
                     <img 
                         src="/assets/admin/img/icons/Logo.png"
@@ -33,13 +33,24 @@
                         class="">
                         Tournois</a>
                 </div>
-                <div class="flex justify-end w-2/5 items-center gap-4">
-                    <img 
-                        src="/assets/admin/img/icons/Default.png"
-                        alt="default" 
-                        class="w-10 rounded-full border-solid border-2 border-white">
-                    <a href="#">Profil</a>
+
+                <div class="">
+                    {% if app.user %}
+                        <div class="flex w-2/5 items-center gap-4">
+                            <img 
+                                src="/assets/admin/img/icons/Default.png"
+                                alt="default" 
+                                class="w-10 rounded-full border-solid border-2 border-white">
+                            <a href="#">{{ app.user.name }}</a>
+                        </div>
+                    {% else %}
+                        <div class="">
+                            <a href="{{ path('app_login') }}">Connexion</a>
+                        </div>
+                        
+                    {% endif %}
                 </div>
+
             </nav>
         
         </header>
