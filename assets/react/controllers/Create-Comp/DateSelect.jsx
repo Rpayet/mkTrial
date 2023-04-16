@@ -9,10 +9,10 @@ export default function DateSelect({ setData, data, minDate }) {
     return (
 
         <div>
-            <span className="block text-sm text-center font-bold">Fin de l'événement</span>
+            <span className="block text-xs text-center text-gray-500 font-bold">Fin de l'événement</span>
             <input
                 name="endAt"
-                className="block mx-auto p-2 border rounded-lg cursor-pointer focus:outline-none focus:border-lumi" 
+                className="block mx-auto px-2 py-1 border rounded-lg cursor-pointer focus:outline-none focus:border-lumi" 
                 type="date"
                 min={minDate}
                 onChange={handleDateChange} 

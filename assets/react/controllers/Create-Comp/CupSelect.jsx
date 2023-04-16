@@ -43,7 +43,7 @@ export default function CupSelect({ data, setData, races, cupSelection, setCupSe
                         previousLabel="<"
                         nextLabel=">"
                         breakLabel="/"
-                        containerClassName="flex justify-center gap-4 mt-2"
+                        containerClassName="flex justify-center gap-4"
                         pageLinkClassName=""
                         activeClassName="font-bold text-lumi border-solid border-b-2 border-lumi"
                         onPageChange={handlePageClick}
