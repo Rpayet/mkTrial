@@ -29,6 +29,13 @@ class EventController extends AbstractController
             'endAt' => $event->getEndAt(),
             'speed' => $event->getSpeed(),
             'privacy' => $event->isPrivacy(),
+            'user' => [
+                'id' => $event->getUser()->getId(),
+                'name' => $event->getUser()->getName(),
+                'picture' => $event->getUser()->getPicture(),
+                'roles' => $event->getUser()->getRoles(),
+                'email' => $event->getUser()->getEmail(),   
+            ],
             'race' => [
                 'id' => $event->getRace()->getId(),
                 'name' => $event->getRace()->getName(),
