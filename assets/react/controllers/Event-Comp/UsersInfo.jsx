@@ -25,7 +25,9 @@ export default function Userinfo({ event }) {
 
                 <div className="flex justify-around">
                     <p className="block text-left text-xs text-silver">Participants</p>
-                    <p className="block text-right text-xs text-silver">9/12</p>
+                    
+                    {event.capacity && <p className="block text-right text-xs text-silver">1/{event.capacity}</p>}
+                    
                 </div>
 
                 <div
