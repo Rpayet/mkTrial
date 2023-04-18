@@ -2,8 +2,9 @@ import React from "react"
 
 export default function Userinfo({ event }) {
 
-    return (
 
+    return (
+    
         <div 
             id="users-info"
             className="flex flex-col justify-center items-center">
@@ -29,25 +30,29 @@ export default function Userinfo({ event }) {
                     {event.capacity && <p className="block text-right text-xs text-silver">1/{event.capacity}</p>}
                     
                 </div>
-
-                <div
-                    id="user-slide"
-                    className="w-4/5 mx-auto flex gap-2 overflow-hidden py-2 px-4 rounded-full
-                            bg-slate-100 border-solid border-[1px] border-lumi
-                            cursor-pointer">
-
-                    { Array.from({length: 9}).map((_, i) => (
-                        <img 
+                <div 
+                    className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
+                    bg-slate-100 border-solid border-[1px] border-lumi rounded-lg
+                     ">
+                    {Array.from({ length: 1 }).map((_, i) => (
+                        <img
                             key={i}
-                            src="/assets/admin/img/icons/Default.png" 
+                            src="/assets/admin/img/icons/Default.png"
                             alt="default"
-                            className="h-10 rounded-full" />
-                    )) }
-
+                            className="h-10 rounded-full"
+                        />
+                    ))}
+                    <img 
+                        src="/assets/admin/img/icons/UserAdd.svg"
+                        alt="useradd"
+                        className="h-10 p-1 bg-white border-solid border-[1px] border-silver rounded-full" />
                 </div>
+
             </div>
 
         </div>
-
+    
     )
 }
+
+// https://www.npmjs.com/package/react-slick
