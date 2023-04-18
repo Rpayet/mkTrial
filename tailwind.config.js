@@ -15,7 +15,15 @@ module.exports = {
         lite: '#9d9d9d',
         mario: '#FE0000',
         lumi: '#40C5EC',
-        silver: '#292929'
+        silver: '#292929',
+        fast: {
+          200: '#f79aa2',
+          400: '#ff5661'
+        },
+        slow: {
+          200: '#02affc',
+          400: '#0c3ffc'
+        }
       }
     },
   },

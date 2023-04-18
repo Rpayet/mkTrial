@@ -6,16 +6,16 @@ export default function Userinfo({ event }) {
 
         <div 
             id="users-info"
-            className="w-1/3 flex flex-col justify-center items-center">
+            className="flex flex-col justify-center items-center">
 
             <div 
                 id="moderator"
-                className="flex flex-col items-center">
+                className="flex items-center">
                 <img 
                     src={`${event.user.picture ? event.user.picture : '/assets/admin/img/icons/Default.png'}`}
                     alt={`${event.user.picture ? event.user.name : 'default'}`}
                     className="w-16 bg-lumi p-1 rounded-full" />
-                <div className="text-center">
+                <div className="ml-2">
                     <a href="#"><span className="font-bold">{`${event.user.name}`}</span></a>
                     <p className="text-sm">{`Créé le ${new Date(event.createdAt.date).toLocaleDateString()}`}</p>
                 </div>

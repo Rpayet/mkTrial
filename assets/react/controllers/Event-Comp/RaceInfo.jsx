@@ -6,12 +6,12 @@ export default function RaceInfo({ event }) {
 
         <div 
             id="event-info"
-            className="bg-shell flex flex-col items-center p-4 rounded-3xl">
+            className={`flex flex-col items-center p-4 rounded-3xl ${event.speed == '200cc' ? 'bg-gradient-to-b from-fast-200 to-fast-400' : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
                 <div 
                     id="event-img"
                     className="relative mx-auto">
                         <div 
-                        className="bg-shell absolute -top-2 left-1/2 transform -translate-x-1/2
+                        className="bg-gradient-to-b from-speed-200 to-speed-400 absolute -top-2 left-1/2 transform -translate-x-1/2
                                         rounded-full">
                             <img 
                                 className="w-10 p-1"
@@ -26,7 +26,7 @@ export default function RaceInfo({ event }) {
                                 alt={`${event.race.picture}`} />
                         </div>
                         <span 
-                            className="block text-white text-center font-bold text-lg">
+                            className="block text-white text-center font-bold text-sm">
                                 {`${event.race.name.toUpperCase()}`}
                         </span>
         

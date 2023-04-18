@@ -9,7 +9,11 @@ export default function EventCard({ tournament, index }) {
                 <div className="block max-w-sm rounded-3xl bg-white">
 
                     {/* Card-Top */}
-                    <div className="relative text-center py-1 pb-3 rounded-t-3xl bg-shell z-20">
+                    <div 
+                        className={`relative text-center py-1 pb-3 rounded-t-3xl z-20
+                        ${tournament.speed == '200cc' 
+                            ? 'bg-gradient-to-b from-fast-200 to-fast-400' 
+                            : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
 
                         <div className="flex justify-around text-white pt-2">
                             <p>{`${tournament.speed}`}</p>
@@ -17,7 +21,11 @@ export default function EventCard({ tournament, index }) {
                         </div>
 
                         <div className="relative rounded-lg">
-                            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-shell rounded-full w-10">
+                            <div 
+                                className={`absolute -top-5 left-1/2 transform -translate-x-1/2 rounded-full w-10
+                                ${tournament.speed == '200cc' 
+                                    ? 'bg-gradient-to-b from-fast-200 to-fast-400' 
+                                    : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
                                 <img 
                                     className="p-1"
                                     src={`/assets/admin/img/cups/${tournament.race.cup.picture}`} 
