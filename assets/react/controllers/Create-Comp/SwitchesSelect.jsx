@@ -26,6 +26,10 @@ export default function SwitchesSelect ({ data, setData, dateValue, setDateValue
         }
     }
 
+    const handleCapacity = (event) => {
+        setData({...data, capacity: parseInt(event.target.value)})
+    }
+
     return (
         <div className="flex items-center justify-center gap-10">
 
@@ -110,6 +114,18 @@ export default function SwitchesSelect ({ data, setData, dateValue, setDateValue
                 dateValue= { dateValue } 
                 setDateValue= { setDateValue }
                 minDate= { minDate } />
+
+            <div>
+                <span className="block text-xs text-center text-gray-500 font-bold">Places disponible</span>
+                <input 
+                    type="number"
+                    className="block mx-auto px-2 py-1 border rounded-lg 
+                    cursor-pointer focus:outline-none focus:border-lumi" 
+                    placeholder="Sans limite"
+                    min={3}
+                    onChange={handleCapacity}/>
+
+            </div>
 
         </div>
     )
