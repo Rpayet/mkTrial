@@ -17,8 +17,8 @@ module.exports = {
         lumi: '#40C5EC',
         silver: '#292929',
         fast: {
-          200: '#f79aa2',
-          400: '#ff5661'
+          200: '#ffe524',
+          400: '#efc900'
         },
         slow: {
           200: '#02affc',
