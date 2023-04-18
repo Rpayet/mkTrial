@@ -31,6 +31,7 @@ export default function Userinfo({ event }) {
                 </div>
 
                 <div
+                    id="user-slide"
                     className="w-4/5 mx-auto flex gap-2 overflow-hidden py-2 px-4 rounded-full
                             bg-slate-100 border-solid border-[1px] border-lumi
                             cursor-pointer">
