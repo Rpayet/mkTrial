@@ -90,23 +90,21 @@ class TournamentController extends AbstractController
     public function create(
         Request $request, 
         EntityManagerInterface $manager, 
-        Security $security,
-        UserRepository $userRepository): Response
+        Security $security): Response
     {
         $user = $security->getUser();
         
         $event = new Tournament();
         $event
             ->setUser($user)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->addRegistered($user);
         
         
         $data = json_decode($request->getContent(), true);
         $eventForm = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
         $eventForm->submit($data);
 
-        
-        
         if (!$eventForm->isValid()) {
             
             $errors = [];
