@@ -12,10 +12,10 @@ export default function OptionInfo({ event }) {
 
         } else if (days >= 1) {
           return <span className="text-xs">{days > 1 ? `${days} jours` : `${days} jour`}</span>;
-        } else if (days < 1) {
+        } else if (days < 1 && hours >= 1) {
             return <span className="text-xs">{hours > 1 ? `${hours} heures` : `${hours} heure`}</span>
-        } else if (hours < 1) {
-            return <span className="text-xs">{minutes}:{seconds}</span>
+        } else if (hours < 1 ) {
+            return <span className="text-xs">{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span>
         }
       };
 
@@ -25,15 +25,16 @@ export default function OptionInfo({ event }) {
             id="event-options"
             className="" >
                 <div className="flex gap-2 items-center">
+                    <Countdown 
+                        zeroPadTime={2}
+                        date= { endAtDate }
+                        daysInHours= {false}
+                        renderer= { renderer } />
+
                     <img 
                         src="/assets/admin/img/icons/clock.png" 
                         alt="clock"
                         className="h-4" />
-                    <Countdown date= { endAtDate }
-                                zeroPadTime={2}
-                                daysInHours= {false}
-                                renderer= { renderer } />
-
                 </div>
         </div>
     )
