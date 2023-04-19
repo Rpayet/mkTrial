@@ -4,6 +4,8 @@ import Userinfo from "./Event-Comp/UsersInfo";
 
 export default function EventPage({ event }) {
 
+    console.log(event)
+
     return (
         <div>
 

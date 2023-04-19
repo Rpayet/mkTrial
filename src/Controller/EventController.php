@@ -4,9 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Tournament;
 use App\Repository\TournamentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EventController extends AbstractController
 {
@@ -30,6 +34,15 @@ class EventController extends AbstractController
             'speed' => $event->getSpeed(),
             'privacy' => $event->isPrivacy(),
             'capacity' => $event->getCapacity(),
+            'registered' => $event->getRegistered()->map(function ($user) {
+                return [
+                    'id' => $user->getId(),
+                    'name' => $user->getName(),
+                    'picture' => $user->getPicture(),
+                    'roles' => $user->getRoles(),
+                    'email' => $user->getEmail(),
+                ];
+            })->toArray(),
             'user' => [
                 'id' => $event->getUser()->getId(),
                 'name' => $event->getUser()->getName(),
@@ -56,4 +69,17 @@ class EventController extends AbstractController
         ]);
     }
 
+    // #[Route('/api/event/register', name: 'app_event_register', methods: ['POST'])]
+    // #[IsGranted('ROLE_USER')]
+    // public function register(Request $request, EntityManagerInterface $manager, Security $security ){
+        
+    //     $user = $security->getUser();
+
+    //     $event = $request->ge
+
+
+    //     return $this->json();
+    // }
+
 }
+ 

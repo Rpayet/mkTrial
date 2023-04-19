@@ -34,8 +34,6 @@ export default function TournamentPage({ tournaments, races, mode }) {
         capacity: null,
     })
 
-    console.log(data);
-
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 

@@ -4,7 +4,7 @@ import Countdown from "react-countdown";
 export default function OptionInfo({ event }) {
 
     const endAtDate = new Date(event.endAt.date);
-    const Completionist = () => <span>Terminé</span>;
+    const Completionist = () => <span className="text-xs">Terminé</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
