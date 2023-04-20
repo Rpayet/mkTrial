@@ -80,17 +80,19 @@ class EventController extends AbstractController
         {
         
             $data = json_decode($request->getContent(), true);
-
             $event = $tournamentRepository->find($data['id']);
-
             $user = $security->getUser();
+
+            if ($event->getRegistered()->contains($user)) {
+                return $this->json(['error' => 'Vous êtes déjà inscrit']);
+            }
             
             $event->addRegistered($user);
 
             $manager->persist($event);
             $manager->flush();
 
-            return $this->json(['succes' => true]);
+            return $this->json(['success' => true]);
         }
 
 }
