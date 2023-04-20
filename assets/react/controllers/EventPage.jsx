@@ -6,7 +6,7 @@ import Register from "./Event-Comp/Register";
 
 export default function EventPage({ event }) {
 
-    console.log(event)
+    const [registration, setRegistration] = useState(false);
     
     return (
         <div>
@@ -17,18 +17,20 @@ export default function EventPage({ event }) {
                     className="w-1/3 h-fit bg-white rounded-xl flex flex-col gap-4 p-4">
 
                     <EventInfo event= {event} />
-
-                    <Userinfo event= {event} /> 
+                    <Userinfo 
+                        event= {event}
+                        setRegistration= {setRegistration} /> 
 
                 </div>
 
-                {/* <Ranking event= { event } /> */}
-
-                <Register event= {event} />
+                { !registration 
+                    ?<Ranking event= { event } />
+                    :<Register 
+                        event= { event }
+                        setRegistration= {setRegistration} />
+                }
 
             </div>
-
-            
 
         </div>
 
