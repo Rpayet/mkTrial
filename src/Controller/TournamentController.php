@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Tournament;
 use App\Form\EventType;
+use App\Form\UserType;
 use App\Repository\RaceRepository;
 use App\Repository\TournamentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -38,6 +40,7 @@ class TournamentController extends AbstractController
                 'endAt' => $tournament->getEndAt()->format('d/m/Y'),
                 'speed' => $tournament->getSpeed(),
                 'privacy' => $tournament->isPrivacy(),
+                'capacity' => $tournament->getCapacity(),
                 'race' => [
                     'id' => $tournament->getRace()->getId(),
                     'name' => $tournament->getRace()->getName(),
@@ -90,22 +93,23 @@ class TournamentController extends AbstractController
         Security $security): Response
     {
         $user = $security->getUser();
-
+        
         $event = new Tournament();
         $event
             ->setUser($user)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->addRegistered($user);
+        
         
         $data = json_decode($request->getContent(), true);
-        $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
-        $form->submit($data);
+        $eventForm = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
+        $eventForm->submit($data);
 
-        
-        if (!$form->isValid()) {
+        if (!$eventForm->isValid()) {
             
             $errors = [];
 
-            foreach ($form->getErrors(true) as $error) {
+            foreach ($eventForm->getErrors(true) as $error) {
                 // Méthode de FormError
                 $errors[$error->getOrigin()->getName()] = $error->getMessage();
             }

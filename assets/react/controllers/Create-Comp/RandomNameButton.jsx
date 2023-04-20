@@ -4,9 +4,9 @@ export default function RandomNameButton({ setEventName, data, setData }) {
 
     const firstWord = ['ultra', 'retro', 'star', 'banana', 'virtual',
                     'bonus', 'bobomb', 'jungle', 'slam', 'master',
-                    'super', 'club', 'power', 'warp',
-                    'pow', 'mega', 'luma', 'chomp',
-                    'comet', 'double', 'fuzzy', 'shroom',
+                    'super', 'club', 'power', 'warp', 'burning',
+                    'pow', 'mega', 'luma', 'chomp', 'hero',
+                    'comet', 'double', 'fuzzy', 'shroom', 
                     'crazy', 'jump', 'lucky', 'magic'];
 
     const secondWord = ['jam', 'team', 'bros', 'saga', 'world',

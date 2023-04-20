@@ -33,7 +33,7 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
 
             </div>
 
-            <div className="mt-6 px-12 py-6 w-full justify-center bg-white rounded-lg">
+            <div className="mt-10 px-12 py-6 w-full justify-center bg-white rounded-lg">
 
                 <div className="">
 

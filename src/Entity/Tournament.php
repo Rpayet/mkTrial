@@ -53,9 +53,16 @@ class Tournament
     #[ORM\OneToMany(mappedBy: 'tournament', targetEntity: Entry::class)]
     private Collection $entries;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $capacity = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $registered;
+
     public function __construct()
     {
         $this->entries = new ArrayCollection();
+        $this->registered = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +180,42 @@ class Tournament
                 $entry->setTournament(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCapacity(): ?int
+    {
+        return $this->capacity;
+    }
+
+    public function setCapacity(?int $capacity): self
+    {
+        $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getRegistered(): Collection
+    {
+        return $this->registered;
+    }
+
+    public function addRegistered(User $registered): self
+    {
+        if (!$this->registered->contains($registered)) {
+            $this->registered->add($registered);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistered(User $registered): self
+    {
+        $this->registered->removeElement($registered);
 
         return $this;
     }

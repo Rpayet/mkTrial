@@ -28,6 +28,7 @@ class EventType extends AbstractType
             ->add('privacy', null, [
                 'invalid_message' => 'Erreur',
             ])
+            ->add('capacity')
         ;
     }
 

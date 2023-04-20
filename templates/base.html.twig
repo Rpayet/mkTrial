@@ -37,10 +37,18 @@
                 <div class="">
                     {% if app.user %}
                         <div class="flex w-2/5 items-center gap-4">
-                            <img 
-                                src="/assets/admin/img/icons/Default.png"
-                                alt="default" 
+                            {% if app.user.picture %}
+                                <img 
+                                src="/assets/user/img/{{ app.user.picture }}"
+                                alt="{{ app.user.name }}" 
                                 class="w-10 rounded-full border-solid border-2 border-white">
+                            {% else %}
+                                <img 
+                                src="/assets/admin/img/icons/Default.png"
+                                alt="{{ app.user.name }}" 
+                                class="w-10 rounded-full border-solid border-2 border-white">
+                            {% endif %}
+                            
                             <a href="#">{{ app.user.name }}</a>
                         </div>
                     {% else %}

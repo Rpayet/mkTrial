@@ -31,6 +31,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
         race: '',
         speed: '150cc',
         privacy: false,
+        capacity: null,
     })
 
     {/* Requête POST */}
