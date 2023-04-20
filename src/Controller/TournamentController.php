@@ -53,10 +53,22 @@ class TournamentController extends AbstractController
                         'picture' => $tournament->getRace()->getCup()->getPicture(),
                     ],
                 ],
+                'registered' => $tournament->getRegistered()->map(function ($user) {
+                    return [
+                        'id' => $user->getId(),
+                        'name' => $user->getName(),
+                        'picture' => $user->getPicture(),
+                        'roles' => $user->getRoles(),
+                        'email' => $user->getEmail(),
+                    ];
+                })->toArray(),
                 'user' => [
                     'id' => $tournament->getUser()->getId(),
                     'name' => $tournament->getUser()->getName(),
-                ]
+                    'picture' => $tournament->getUser()->getPicture(),
+                    'roles' => $tournament->getUser()->getRoles(),
+                    'email' => $tournament->getUser()->getEmail(),   
+                ],
                 
             ];
         }

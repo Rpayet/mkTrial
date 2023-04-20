@@ -37,7 +37,7 @@ export default function Userinfo({ event }) {
                     {event.registered.map((user, i) => (
                         <img
                             key={i}
-                            src={`/assets/user/img/${user.picture}`}
+                            src={user.picture ? `/assets/user/img/${user.picture}` : `/assets/admin/img/icons/Default.png`}
                             alt="default"
                             className="h-10 rounded-full"
                         />

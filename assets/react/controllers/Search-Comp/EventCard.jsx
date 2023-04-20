@@ -58,7 +58,7 @@ export default function EventCard({ tournament, index }) {
 
                             <p className="text-center text-white">
                                 { tournament.capacity ? 
-                                    `1/${tournament.capacity}` 
+                                    `${tournament.registered.length}/${tournament.capacity}` 
                                     : 
                                     `Ouvert`}
                             </p>
