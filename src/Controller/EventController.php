@@ -104,6 +104,20 @@ class EventController extends AbstractController
 
             return $this->json(['success' => true]);
         }
+    
+    #[Route('/api/event/entry', name: 'app_event_entry', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function entry(Request $request,
+    EntityManagerInterface $manager, 
+    Security $security, 
+    TournamentRepository $tournamentRepository ) 
+        {
+            $data = json_decode($request->getContent(), true);
+            $event = $tournamentRepository->find($data['id']);
+            $user = $security->getUser();
 
+            
+            return $this->json(['success' => true]);
+        }
 }
  

@@ -14,7 +14,7 @@ export default function Userinfo({ event, user, setRegistration }) {
         <div 
             id="users-info"
             className="flex flex-col justify-center items-center">
-                
+
             <div className="w-full mt-4">
 
                 <div className="flex justify-around">
@@ -23,6 +23,7 @@ export default function Userinfo({ event, user, setRegistration }) {
                     {event.capacity && <p className="block text-right text-xs text-silver">{event.registered.length}/{event.capacity}</p>}
                     
                 </div>
+                
                 <div 
                     className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
                     bg-slate-100 border-solid border-[1px] border-lumi rounded-lg
