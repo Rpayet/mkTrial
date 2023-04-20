@@ -1,31 +1,20 @@
 import React from "react"
+import AddUser from "./AddUser"
 
-export default function Userinfo({ event, setRegistration }) {
+export default function Userinfo({ event, user, setRegistration }) {
 
-    const handleClick = () => {
-        setRegistration(true)
+    let isUserRegistered = null;
+
+    if ( user != null ) {
+        isUserRegistered = event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
     }
-
-
+    
     return (
     
         <div 
             id="users-info"
             className="flex flex-col justify-center items-center">
-
-            <div 
-                id="moderator"
-                className="flex items-center">
-                <img 
-                    src={event.user.picture ? `/assets/user/img/${event.user.picture}` : '/assets/admin/img/icons/Default.png'}
-                    alt={`${event.user.picture ? event.user.name : 'default'}`}
-                    className="w-16 bg-lumi p-1 rounded-full" />
-                <div className="ml-2">
-                    <a href="#"><span className="font-bold">{`${event.user.name}`}</span></a>
-                    <p className="text-sm">{`Créé le ${new Date(event.createdAt.date).toLocaleDateString()}`}</p>
-                </div>
-            </div>
-
+                
             <div className="w-full mt-4">
 
                 <div className="flex justify-around">
@@ -46,12 +35,9 @@ export default function Userinfo({ event, setRegistration }) {
                             className="h-10 rounded-full"
                         />
                     ))}
-                    <img 
-                        onClick={handleClick}
-                        src="/assets/admin/img/icons/UserAdd.svg"
-                        alt="useradd"
-                        className="h-10 p-1 bg-white cursor-pointer
-                        border-solid border-[1px] border-silver rounded-full" />
+
+                { !isUserRegistered && <AddUser setRegistration={ setRegistration } /> }
+
                 </div>
 
             </div>

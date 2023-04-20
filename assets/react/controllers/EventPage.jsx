@@ -4,7 +4,7 @@ import Userinfo from "./Event-Comp/UsersInfo";
 import Ranking from "./Event-Comp/Ranking";
 import Register from "./Event-Comp/Register";
 
-export default function EventPage({ event }) {
+export default function EventPage({ event, user }) {
 
     const [registration, setRegistration] = useState(false);
     
@@ -18,7 +18,8 @@ export default function EventPage({ event }) {
 
                     <EventInfo event= {event} />
                     <Userinfo 
-                        event= {event}
+                        event= { event }
+                        user= { user }
                         setRegistration= {setRegistration} /> 
 
                 </div>
