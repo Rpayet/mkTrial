@@ -1,6 +1,10 @@
 import React from "react"
 
-export default function Userinfo({ event }) {
+export default function Userinfo({ event, setRegistration }) {
+
+    const handleClick = () => {
+        setRegistration(true)
+    }
 
 
     return (
@@ -43,9 +47,11 @@ export default function Userinfo({ event }) {
                         />
                     ))}
                     <img 
+                        onClick={handleClick}
                         src="/assets/admin/img/icons/UserAdd.svg"
                         alt="useradd"
-                        className="h-10 p-1 bg-white border-solid border-[1px] border-silver rounded-full" />
+                        className="h-10 p-1 bg-white cursor-pointer
+                        border-solid border-[1px] border-silver rounded-full" />
                 </div>
 
             </div>
