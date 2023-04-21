@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Entry;
 use App\Entity\Tournament;
 use App\Form\EntryType;
+use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,10 +18,10 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class EventController extends AbstractController
 {
     #[Route('/event/{id}', name: 'app_event')]
-    public function index(TournamentRepository $repository, int $id, Security $security): Response
+    public function index(TournamentRepository $tournamentRepository, EntryRepository $entryRepository, int $id, Security $security): Response
     {
         // Récupère l'événement avec l'ID
-        $event = $repository->find($id);
+        $event = $tournamentRepository->find($id);
 
         // Si l'événement n'existe pas => 404.
         if (!$event) {
@@ -28,7 +29,7 @@ class EventController extends AbstractController
         }
 
         // Objet lisible pou React
-        $data = [
+        $eventData = [
             'id' => $event->getId(),
             'name' => $event->getName(),
             'createdAt' => $event->getCreatedAt(),
@@ -66,6 +67,21 @@ class EventController extends AbstractController
             ]
         ];
 
+        // Entries
+        $entries = $entryRepository->findBy(array('tournament' => $id));
+        $entryData = [];
+        foreach ($entries as $entry) {
+            $entryData[] = [
+                'id' => $entry->getId(), 
+                'user' => [
+                    'id' => $entry->getUser()->getId(),
+                    'name' => $entry->getUser()->getName(),
+                    'picture' => $entry->getUser()->getPicture()
+                ],
+                'time' => $entry->getTime(),
+            ];
+        }
+
         // Récupération de l'utilisateur connecté en objet Pour React
         if ($this->isGranted('ROLE_USER')) {
             $user = [
@@ -77,8 +93,9 @@ class EventController extends AbstractController
         }
 
         return $this->render('event/index.html.twig', [
-            'event' => $data,
+            'event' => $eventData,
             'user' => $user,
+            'entries' => $entryData,
         ]);
     }
 
