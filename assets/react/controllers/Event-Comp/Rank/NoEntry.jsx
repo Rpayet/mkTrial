@@ -7,10 +7,11 @@ export default function NoEntry({ isUserRegistered }) {
             {isUserRegistered
 
                 ? <div 
-                    className="w-full mt-2 py-4 px-10 flex 
+                    className="w-full mt-2 py-4 px-10 flex flex-col
                     justify-center rounded-lg text-center">
                     
-                    <p>Aucun temps enregistré. Soyez le premier.</p>
+                    <p>Aucun temps enregistré.</p>
+                    <p>Soyez le premier à partager votre score</p>
             
                 </div> 
 

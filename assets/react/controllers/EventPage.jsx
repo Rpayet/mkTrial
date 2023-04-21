@@ -24,6 +24,7 @@ export default function EventPage({ event, user, entries }) {
                     className="w-1/3 h-fit bg-white rounded-xl flex flex-col gap-4 p-4">
 
                     <EventInfo event= {event} />
+                    
                     <Userinfo 
                         event= { event }
                         user= { user }
@@ -33,13 +34,16 @@ export default function EventPage({ event, user, entries }) {
                 </div>
 
                 { !registration 
+
                     ?<Ranking 
                         event= { event }
                         entries= { entries }
                         isUserRegistered= { isUserRegistered } />
+
                     :<Register 
                         event= { event }
                         setRegistration= {setRegistration} />
+
                 }
 
             </div>

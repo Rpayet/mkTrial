@@ -13,8 +13,7 @@ export default function AddEntry() {
                 <img 
                     src="/assets/admin/img/icons/Add.svg" 
                     alt="add"
-                    className="w-6 border-solid border-[1px] border-silver rounded-full"
-                        />
+                    className="w-6 border-solid border-[1px] border-silver rounded-full" />
                 <p>Ajouter une entrée</p>
                 
             </div>
