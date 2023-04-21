@@ -1,13 +1,7 @@
 import React from "react"
 import AddUser from "./AddUser"
 
-export default function Userinfo({ event, user, setRegistration }) {
-
-    let isUserRegistered = null;
-
-    if ( user != null ) {
-        isUserRegistered = event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
-    }
+export default function Userinfo({ event, setRegistration, isUserRegistered }) {
     
     return (
     
@@ -31,6 +25,7 @@ export default function Userinfo({ event, user, setRegistration }) {
                     {event.registered.map((user, i) => (
                         <img
                             key={i}
+                            title={user.name}
                             src={user.picture ? `/assets/user/img/${user.picture}` : `/assets/admin/img/icons/Default.png`}
                             alt="default"
                             className="h-10 rounded-full"
