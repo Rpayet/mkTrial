@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Entry;
 use App\Entity\Tournament;
+use App\Form\EntryType;
 use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -116,7 +118,29 @@ class EventController extends AbstractController
             $event = $tournamentRepository->find($data['id']);
             $user = $security->getUser();
 
+            $entry = new Entry();
+            $entry
+            ->setUser($user)
+            ->setTournament($event)
+            ->setCreatedAt(new \DateTimeImmutable());
+
+            $form = $this->createForm(EntryType::class, $entry, ['csrf_ptotection' => false]);
+            $form->submit($data);
+
+            if (!$form->isValid()) {
             
+                $errors = [];
+    
+                foreach ($form->getErrors(true) as $error) {
+                    // Méthode de FormError
+                    $errors[$error->getOrigin()->getName()] = $error->getMessage();
+                }
+                return $this->json($errors, 422); // $data, status_code
+            }    
+            
+            $manager->persist($entry);
+            $manager->flush();
+
             return $this->json(['success' => true]);
         }
 }

@@ -114,14 +114,14 @@ class TournamentController extends AbstractController
         
         
         $data = json_decode($request->getContent(), true);
-        $eventForm = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
-        $eventForm->submit($data);
+        $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
+        $form->submit($data);
 
-        if (!$eventForm->isValid()) {
+        if (!$form->isValid()) {
             
             $errors = [];
 
-            foreach ($eventForm->getErrors(true) as $error) {
+            foreach ($form->getErrors(true) as $error) {
                 // Méthode de FormError
                 $errors[$error->getOrigin()->getName()] = $error->getMessage();
             }

@@ -12,11 +12,11 @@ class EntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt')
+            // ->add('createdAt')
             ->add('time')
             ->add('picture')
-            ->add('user')
-            ->add('tournament')
+            // ->add('user')
+            // ->add('tournament')
         ;
     }
 
