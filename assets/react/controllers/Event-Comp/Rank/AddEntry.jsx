@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default function AddEntry() {
+export default function AddEntry({ user, entries }) {
+
+    const [inputEntry, setInputEntry] = useState('');
+    const entryUsers = entries.map((entry) => entry.user)
+
+    useEffect(() => {
+        if ( entryUsers.some((u) => u.id === user.id)) {
+            setInputEntry('edit');
+        } else {
+            setInputEntry('new');
+        }
+    }, [entryUsers]);
 
     return (
         
