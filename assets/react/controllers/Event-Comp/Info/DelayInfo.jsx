@@ -1,7 +1,7 @@
 import React from "react";
 import Countdown from "react-countdown";
 
-export default function OptionInfo({ event }) {
+export default function DelayInfo({ event }) {
 
     const endAtDate = new Date(event.endAt.date);
     const Completionist = () => <span className="text-xs">Terminé</span>;

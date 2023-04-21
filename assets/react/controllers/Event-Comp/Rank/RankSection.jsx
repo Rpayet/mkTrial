@@ -1,12 +1,13 @@
 import React from "react";
 
-export default function Ranking({ event }) {
+export default function RankSection({ event }) {
 
     return (
         <div 
             id="rank-container"
             className="w-2/3 flex flex-col items-center">
 
+                
                 { Array.from({length: 1}).map((_, i) => (
                 <div className="w-full mt-2 py-4 px-10 bg-white flex justify-between rounded-lg">
                     <div className="flex w-1/3 gap-2">
