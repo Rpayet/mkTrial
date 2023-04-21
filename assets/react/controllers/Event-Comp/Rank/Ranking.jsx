@@ -1,6 +1,7 @@
 import React from "react";
+import NoEntry from "./NoEntry";
 
-export default function Ranking({ event, entries }) {
+export default function Ranking({ event, entries, isUserRegistered }) {
 
     function formatTime(timeInMs) {
         const date = new Date(timeInMs);
@@ -13,27 +14,32 @@ export default function Ranking({ event, entries }) {
 
     return(
         <>
-            {entries.sort((a,b) => a.time > b.time).map((entry, i) => (
+            {!entries.length == 0 
 
-                <div className="w-full mt-2 py-4 px-10 bg-white flex justify-between rounded-lg">
+                ?<>{entries.sort((a,b) => a.time > b.time).map((entry, i) => (
 
-                    <div className="flex w-1/3 gap-2">
+                    <div className="w-full mt-2 py-4 px-10 bg-white flex justify-between rounded-lg">
 
-                        <span>#{i+1}</span>
-                        <p>{entry.user.name}</p>
+                        <div className="flex w-1/3 gap-2">
 
-                    </div>
+                            <span>#{i+1}</span>
+                            <p>{entry.user.name}</p>
 
-                    <div>
-                        
-                        <span className="w-1/3">{formatTime(entry.time)}</span>
+                        </div>
 
-                    </div>
+                        <div>
+                            
+                            <span className="w-1/3">{formatTime(entry.time)}</span>
 
-                </div> 
+                        </div>
+
+                    </div> 
 
 
-            ))}
+                ))}</>
+                
+                : <NoEntry isUserRegistered= { isUserRegistered } />
+            }
         </>
         
 

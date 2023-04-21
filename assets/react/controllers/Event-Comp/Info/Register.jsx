@@ -46,8 +46,8 @@ export default function Ranking({ event, setRegistration }) {
             :
                 <div className="w-full text-center bg-white p-10 rounded-xl">
                     <p className="text-xl font-bold">Rappel des contraintes</p>
-                    <p className="">Vitesse : {event.speed}</p>
-                    <p className="">Capture d'écran obligatoire</p>
+                    <p className="text-mario">Vitesse : {event.speed}</p>
+                    <p className="text-mario">Capture d'écran obligatoire</p>
 
 
                     <div className="flex">

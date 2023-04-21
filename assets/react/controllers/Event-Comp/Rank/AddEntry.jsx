@@ -7,7 +7,7 @@ export default function AddEntry() {
         <div 
             className="w-full mt-2 py-4 px-10 bg-white flex 
             justify-center rounded-lg cursor-pointer
-            hover:border-solid hover:border-[1px] hover:border-lumi">
+            border-solid border-[1px] hover:border-lumi">
             <div className="flex gap-2">
                 
                 <img 

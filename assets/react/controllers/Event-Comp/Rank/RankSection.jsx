@@ -1,7 +1,6 @@
 import React from "react";
 import Ranking from "./Ranking";
 import AddEntry from "./AddEntry";
-import NoEntry from "./NoEntry";
 
 export default function RankSection({ event, entries, isUserRegistered }) {
 
@@ -10,14 +9,10 @@ export default function RankSection({ event, entries, isUserRegistered }) {
             id="rank-container"
             className="w-2/3 flex flex-col items-center">
                 
-                {!entries.length == 0 
-
-                    ?<Ranking 
+                <Ranking 
                         event= { event }
-                        entries= { entries } />
-
-                    :<NoEntry />
-                }
+                        entries= { entries }
+                        isUserRegistered= { isUserRegistered } />
 
                 { isUserRegistered && <AddEntry /> }
         </div>
