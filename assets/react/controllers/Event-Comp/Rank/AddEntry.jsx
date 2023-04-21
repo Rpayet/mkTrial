@@ -3,15 +3,19 @@ import React, { useEffect, useState } from "react";
 export default function AddEntry({ user, entries }) {
 
     const [inputEntry, setInputEntry] = useState('');
-    const entryUsers = entries.map((entry) => entry.user)
 
+    {/* Hook pour déterminer si l'utilisateur a déjà créer une entrée.  */}
     useEffect(() => {
-        if ( entryUsers.some((u) => u.id === user.id)) {
+
+        const userEntries = entries.filter((entry) => entry.user.id === user.id);
+
+        if ( (userEntries.length > 0) ) {
             setInputEntry('edit');
         } else {
             setInputEntry('new');
         }
-    }, [entryUsers]);
+
+    }, [entries, user.id]);
 
     return (
         
