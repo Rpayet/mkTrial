@@ -4,10 +4,17 @@ import Userinfo from "./Event-Comp/Info/UsersInfo";
 import Ranking from "./Event-Comp/Rank/RankSection";
 import Register from "./Event-Comp/Info/Register";
 
-export default function EventPage({ event, user }) {
+export default function EventPage({ event, user, entries }) {
 
     const [registration, setRegistration] = useState(false);
-    
+
+    let isUserRegistered = null;
+
+    {/* Si Pas d'utilisateur inscrit au tournoi, affiche le bouton d'inscription. */}
+    if ( user != null ) {
+        isUserRegistered = event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
+    }
+
     return (
         <div>
 
@@ -20,12 +27,16 @@ export default function EventPage({ event, user }) {
                     <Userinfo 
                         event= { event }
                         user= { user }
-                        setRegistration= {setRegistration} /> 
+                        setRegistration= { setRegistration }
+                        isUserRegistered= { isUserRegistered } /> 
 
                 </div>
 
                 { !registration 
-                    ?<Ranking event= { event } />
+                    ?<Ranking 
+                        event= { event }
+                        entries= { entries }
+                        isUserRegistered= { isUserRegistered } />
                     :<Register 
                         event= { event }
                         setRegistration= {setRegistration} />
