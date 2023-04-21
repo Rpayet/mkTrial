@@ -14,6 +14,7 @@ export default function EntryForm() {
             <UploadInput />
 
             <div className="flex">
+
                 <button
                     type="button" 
                     className="block mx-auto my-6 w-fit bg-white py-1 px-8 rounded-3xl
@@ -30,6 +31,7 @@ export default function EntryForm() {
                     hover:bg-lumi hover:text-white">
                         Valider
                 </button>
+                
             </div>
 
         </form>
