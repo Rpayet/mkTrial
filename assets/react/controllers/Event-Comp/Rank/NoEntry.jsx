@@ -10,8 +10,8 @@ export default function NoEntry({ isUserRegistered }) {
                     className="w-full mt-2 py-4 px-10 flex flex-col
                     justify-center rounded-lg text-center">
                     
-                    <p>Aucun temps enregistré.</p>
-                    <p>Soyez le premier à partager votre score</p>
+                    <p className="text-xl font-bold">Aucun temps enregistré.</p>
+                    <p className="text-xs">Soyez le premier à partager votre score</p>
             
                 </div> 
 
@@ -19,8 +19,8 @@ export default function NoEntry({ isUserRegistered }) {
                     className="w-full mt-2 py-4 px-10 flex flex-col 
                     items-center justify-center rounded-lg text-center">
 
-                    <p>Aucun temps enregistré.</p>
-                    <p>Connectez-vous pour entrer un score au tableau.</p>
+                    <p className="text-xl font-bold">Aucun temps enregistré.</p>
+                    <p className="text-xs">Connectez-vous et souscrivez à l'événément pour entrer un score au tableau.</p>
                 </div>
 
             }

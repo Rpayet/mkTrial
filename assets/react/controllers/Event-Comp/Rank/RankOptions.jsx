@@ -1,7 +1,7 @@
 import React from "react";
 import NoEntry from "./NoEntry";
 
-export default function Ranking({ event, entries, isUserRegistered }) {
+export default function RankOptions({ entries, isUserRegistered }) {
 
     {/* Formate le temps stocké dans la BDD au format "m:ss:fsfsfs" */}
     function formatTime(timeInMs) {
