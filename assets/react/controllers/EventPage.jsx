@@ -34,15 +34,16 @@ export default function EventPage({ event, user, entries }) {
 
                 </div>
 
+                {/* Vérifie si l'utilsateur est incrit */}
                 { !registration 
 
-                    ?<RankSection 
+                    ? <RankSection 
                         event= { event }
                         user= { user }
                         entries= { entries }
                         isUserRegistered= { isUserRegistered } />
 
-                    :<Register 
+                    : <Register 
                         event= { event }
                         setRegistration= {setRegistration} />
 

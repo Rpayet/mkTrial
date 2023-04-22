@@ -2,12 +2,16 @@ import React from "react";
 import TimerInput from "./TimerInput";
 import UploadInput from "./UploadInput";
 
-export default function EntryForm() {
+export default function EntryForm({ setToggleView }) {
+
+    const handleCancel = () => {
+        setToggleView(true);
+    }
     
     return (
         <form 
             id="entry-form"
-            className="bg-white w-2/3 h-fit flex rounded-lg py-4 justify-around">
+            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around">
 
             <TimerInput />
 
@@ -19,7 +23,8 @@ export default function EntryForm() {
                     type="button"
                     className="bg-white rounded-full block h-fit
                     border-solid border-[1px] border-silver
-                    hover:bg-mario hover:text-white">
+                    hover:bg-mario hover:text-white"
+                    onClick={handleCancel} >
 
                         <svg 
                             className="stroke-silver hover:stroke-white p-2" 
