@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import EventInfo from "./Event-Comp/Info/EventInfo";
 import Userinfo from "./Event-Comp/Info/UsersInfo";
-import Ranking from "./Event-Comp/Rank/RankSection";
+import RankSection from "./Event-Comp/Rank/RankSection";
 import Register from "./Event-Comp/Info/Register";
+import EntryForm from "./Event-Comp/Rank/EntryForm";
 
 export default function EventPage({ event, user, entries }) {
 
@@ -35,7 +36,7 @@ export default function EventPage({ event, user, entries }) {
 
                 { !registration 
 
-                    ?<Ranking 
+                    ?<RankSection 
                         event= { event }
                         user= { user }
                         entries= { entries }

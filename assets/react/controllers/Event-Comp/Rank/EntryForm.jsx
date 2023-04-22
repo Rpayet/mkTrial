@@ -7,29 +7,52 @@ export default function EntryForm() {
     return (
         <form 
             id="entry-form"
-            className="bg-white w-full px-2 pt-2 pb-6 flex flex-col gap-y-6 rounded-b-3xl">
+            className="bg-white w-2/3 h-fit flex rounded-lg py-4 justify-around">
 
             <TimerInput />
 
             <UploadInput />
 
-            <div className="flex">
+            <div className="flex gap-2 items-center">
 
                 <button
-                    type="button" 
-                    className="block mx-auto my-6 w-fit bg-white py-1 px-8 rounded-3xl
-                    text-lite text-lg text-center border-solid border-[1px] border-lite
-                    hover:bg-mario hover:text-white hover:border-mario
-                    transition duration-300 ease-in-out">
-                    Annuler
+                    type="button"
+                    className="bg-white rounded-full block h-fit
+                    border-solid border-[1px] border-silver
+                    hover:bg-mario hover:text-white">
+
+                        <svg 
+                            className="stroke-silver hover:stroke-white p-2" 
+                            width="30" 
+                            viewBox="0 0 22 21">
+                            <line 
+                                x1="2" y1="-2" x2="24.9022" y2="-2" 
+                                transform="matrix(-0.70795 -0.706262 0.70795 -0.706262 21.7283 19)" 
+                                strokeWidth="4" strokeLinecap="round"/>
+                            <line 
+                                x1="2" y1="-2" x2="24.9022" y2="-2" 
+                                transform="matrix(-0.70795 0.706262 -0.70795 -0.706262 19.7236 0)" 
+                                strokeWidth="4" strokeLinecap="round"/>
+                        </svg>
+
                 </button>
                 
                 <button
                     type="button"
-                    className="w-1/2 mx-auto inline-block bg-white py-2 sm:py-1 sm:px-2 rounded-lg
-                    text-silver text-sm sm:text-lg text-center border-solid border-[1px] border-silver
+                    className="bg-white rounded-full block h-fit
+                    border-solid border-[1px] border-silver
                     hover:bg-lumi hover:text-white">
-                        Valider
+                        <svg 
+                            className="fill-silver hover:fill-white p-2" 
+                            width="30" 
+                            viewBox="0 0 415.582 415.582" >
+                            <g>
+                                <path d="M411.47,96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853,0L152.348,243.058l-82.066-82.064   
+                                c-5.48-5.482-14.37-5.482-19.851,0l-46.319,46.32c-5.482,5.481-5.482,14.37,0,19.852l138.311,138.31   
+                                c2.741,2.742,6.334,4.112,9.926,4.112c3.593,0,7.186-1.37,9.926-4.112L411.47,116.277c2.633-2.632,4.111-6.203,4.111-9.925   
+                                C415.582,102.628,414.103,99.059,411.47,96.426z"/>
+                            </g>
+                        </svg>
                 </button>
                 
             </div>

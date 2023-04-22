@@ -24,14 +24,28 @@ export default function UploadInput() {
     }
 
     return (
-        <div className="flex flex-col justify-center">
-            <label 
-                htmlFor="timer"
-                className="font-bold text-xs text-center text-silver">Capture</label>
+        <div className="flex flex-col w-2/5">
+            <div className="flex justify-between">
+                <label 
+                    htmlFor="timer"
+                    className="font-bold text-xs text-silver">
+                        Capture
+                </label>
+                {image && 
+                    <span 
+                        className="flex items-center text-xs cursor-pointer">
+                            <img src="/assets/admin/img/icons/Cross.svg" 
+                                alt="cross"
+                                className="w-4 h-4 p-1 bg-red-600 rounded-full"
+                                onClick={handleDelete} />
+                            {fileName.substring(0, 5)+ '...' + fileName.substring(fileName.length - 4)}    
+                    </span>
+                }
+            </div>
 
             <div 
                 id="form-timer"
-                className="w-3/5 flex flex-col mx-auto justify-center items-center 
+                className="flex py-2 items-center 
                 border-dashed border-2 border-lumi rounded-lg
                 cursor-pointer"
                 onClick={handleInput}>
@@ -44,26 +58,22 @@ export default function UploadInput() {
                     hidden />
 
                 {image ? 
-                <img src={image} width={160} alt={fileName} />
-                :
-                <div className="my-6 border-solid border-[1px] border-lumi rounded-full hover:bg-slate-100">
                     <img 
-                        className="w-8 p-2"
-                        src="/assets/admin/img/icons/Upload.svg" 
-                        alt="upload" />
-                </div> }
+                        className="mx-auto"
+                        src={image} 
+                        width={120} 
+                        alt={fileName} />
+                    :
+                    <div className="mx-auto border-solid border-[1px] border-lumi rounded-full hover:bg-slate-100">
+                        <img 
+                            className="w-4 p-1"
+                            src="/assets/admin/img/icons/Upload.svg" 
+                            alt="upload" />
+                    </div>
+                }
 
             </div>
-            {image && 
-                <span 
-                    className="flex text-xs mx-auto cursor-pointer">
-                    {fileName.substring(0, 5)+ '...' + fileName.substring(fileName.length - 4)}
-                    <img src="/assets/admin/img/icons/Cross.svg" 
-                    alt="cross"
-                    className="w-4 p-1 bg-red-600 rounded-full"
-                    onClick={handleDelete} />
-                </span>
-            }
+            
         </div>
 
     )

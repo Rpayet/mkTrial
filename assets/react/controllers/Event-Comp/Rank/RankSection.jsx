@@ -4,6 +4,7 @@ import AddEntry from "./AddEntry";
 
 export default function RankSection({ event, user, entries, isUserRegistered }) {
 
+
     return (
         <div 
             id="rank-container"
@@ -17,7 +18,8 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                 { isUserRegistered && 
                     <AddEntry 
                         user= { user }
-                        entries= { entries } /> }
+                        entries= { entries } /> 
+                }
         </div>
 
     )
