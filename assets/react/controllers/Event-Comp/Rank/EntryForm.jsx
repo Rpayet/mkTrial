@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TimerInput from "./TimerInput";
 import UploadInput from "./UploadInput";
 import EntryFormButton from "./EntryFormButton";
+import axios from "axios";
 
 export default function EntryForm({ setToggleView }) {
 
@@ -11,7 +12,25 @@ export default function EntryForm({ setToggleView }) {
     const [entryInput, setEntryInput] = useState({
         time: 0,
         picture: '',
-    })
+    });
+    
+    console.log(entryInput);
+
+    const handleSubmit = (event) => {
+        
+        event.preventDefault();
+        setErrors({});
+
+        axios
+            .post("/api/event/entry/add", entryInput)
+            .then(response => {
+                console.log('kekchoz')
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
 
     return (
         <div
