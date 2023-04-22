@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Entry;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,9 @@ class EntryType extends AbstractType
         $builder
             // ->add('createdAt')
             ->add('time')
-            ->add('picture')
+            ->add('picture', FileType::class, [
+                'mapped' => false,
+            ])
             // ->add('user')
             // ->add('tournament')
         ;
@@ -27,3 +30,6 @@ class EntryType extends AbstractType
         ]);
     }
 }
+
+
+// https://symfony.com/doc/current/controller/upload_file.html

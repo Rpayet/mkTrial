@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function UploadInput() {
-
-    const [image, setImage] = useState(null);
-    const [fileName, setFileName] = useState('');
+export default function UploadInput({ entryInput, setEntryInput, image, setImage, fileName, setFileName }) {
 
     const handleInput = () => {
         const uploadInput = document.querySelector('#upload');
@@ -11,10 +8,15 @@ export default function UploadInput() {
         uploadInput.click(); 
     }
 
-    const handleChange = ({ target: {files}}) => {
-        files[0] && setFileName(files[0].name)
-        if (files) {
-            setImage(URL.createObjectURL(files[0]))
+    const handleChange = ({ target: { files } }) => {
+
+        const file = files[0];
+
+        file && setFileName(file.name)
+
+        if (file) {
+            setImage(URL.createObjectURL(file));
+            setEntryInput({ ...entryInput, picture: fileName });
         } 
     }
 
