@@ -124,9 +124,9 @@ class EventController extends AbstractController
             return $this->json(['success' => true]);
         }
     
-    #[Route('/api/event/entry', name: 'app_event_entry', methods: ['POST'])]
+    #[Route('/api/event/entry/new', name: 'app_event_entry_new', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
-    public function entry(Request $request,
+    public function newEntry(Request $request,
     EntityManagerInterface $manager, 
     Security $security, 
     TournamentRepository $tournamentRepository ) 
@@ -137,9 +137,9 @@ class EventController extends AbstractController
 
             $entry = new Entry();
             $entry
-            ->setUser($user)
-            ->setTournament($event)
-            ->setCreatedAt(new \DateTimeImmutable());
+                ->setUser($user)
+                ->setTournament($event)
+                ->setCreatedAt(new \DateTimeImmutable());
 
             $form = $this->createForm(EntryType::class, $entry, ['csrf_ptotection' => false]);
             $form->submit($data);

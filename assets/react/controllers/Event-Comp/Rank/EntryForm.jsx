@@ -13,7 +13,7 @@ export default function EntryForm({ setToggleView }) {
         time: 0,
         picture: '',
     });
-    
+
     console.log(entryInput);
 
     const handleSubmit = (event) => {
@@ -22,9 +22,9 @@ export default function EntryForm({ setToggleView }) {
         setErrors({});
 
         axios
-            .post("/api/event/entry/add", entryInput)
+            .post("/api/event/entry/new", entryInput)
             .then(response => {
-                console.log('kekchoz')
+                window.location.reload();
             })
             .catch(error => {
                 console.log(error);
