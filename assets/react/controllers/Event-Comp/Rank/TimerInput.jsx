@@ -55,8 +55,8 @@ export default function TimerInput({ entryInput, setEntryInput }) {
                     pattern="^[0-9]:[0-5][0-9].[0-9]{1,3}$"
                     placeholder="0:00.000"
                     className="py-2 rounded-lg"
-                    onKeyDown={handleKeyDown}
-                    onChange={handleTime} />
+                    onKeyDown={ handleKeyDown }
+                    onChange={ handleTime } />
 
         </div>
     )

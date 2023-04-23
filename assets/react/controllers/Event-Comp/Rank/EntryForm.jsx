@@ -4,36 +4,37 @@ import UploadInput from "./UploadInput";
 import EntryFormButton from "./EntryFormButton";
 import axios from "axios";
 
-export default function EntryForm({ setToggleView }) {
+export default function EntryForm({ event, setToggleView }) {
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
     
     const [entryInput, setEntryInput] = useState({
-        time: 0,
-        picture: '',
+        time: null,
+        picture: null,
     });
 
-    console.log(entryInput);
+    {/* Requête POST */}
+    const [errors, setErrors] = useState({});
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (e) => {
         
-        event.preventDefault();
+        e.preventDefault();
+
         setErrors({});
 
         axios
-            .post("/api/event/entry/new", entryInput)
+            .post(`/api/event/${event.id}/entry/new`, entryInput)
             .then(response => {
                 window.location.reload();
             })
-            .catch(error => {
-                console.log(error);
-            });
+            .catch(errors => setErrors(errors.response.data));
 
     }
 
     return (
         <form
+            onSubmit={handleSubmit}
             id="entry-form"
             className="bg-white w-full h-fit flex rounded-lg py-4 justify-around">
 

@@ -21,7 +21,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
             }
     
         }, [entries, user.id]);
-        
+
     }
 
     return (
@@ -36,7 +36,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                         inputEntry= { inputEntry } />
 
                 { inputEntry == 'new' && 
-                    <AddEntry /> 
+                    <AddEntry event= { event } /> 
                 }
         </div>
 

@@ -8,14 +8,14 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
         uploadInput.click(); 
     }
 
-    const handleChange = ({ target: { files } }) => {
+    const handleFile = ({ target: { files } }) => {
 
-        const file = files[0]
+        const file = files[0];
 
         if (file) {
             setFileName(file.name)
             setImage(URL.createObjectURL(file));
-            setEntryInput({ ...entryInput, picture: file.name });
+            setEntryInput({ ...entryInput, picture: file });
         } 
     }
 
@@ -55,7 +55,7 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
                     id="upload"
                     type="file"
                     accept="image/*"
-                    onChange={handleChange}
+                    onChange={handleFile}
                     multiple={false}
                     hidden />
 

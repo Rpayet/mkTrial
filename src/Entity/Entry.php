@@ -18,7 +18,6 @@ class Entry
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Assert\Length(max: 6)]
     #[Assert\NotBlank(message: 'Temps requis pour entrer au tableau')]
     private ?int $time = null;
 

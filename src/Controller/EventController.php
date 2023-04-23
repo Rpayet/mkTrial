@@ -10,6 +10,7 @@ use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -124,41 +125,65 @@ class EventController extends AbstractController
             return $this->json(['success' => true]);
         }
     
-    #[Route('/api/event/entry/new', name: 'app_event_entry_new', methods: ['POST'])]
+    #[Route('/api/event/{id}/entry/new', name: 'app_event_entry_new', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
-    public function newEntry(Request $request,
-    EntityManagerInterface $manager, 
-    Security $security, 
-    TournamentRepository $tournamentRepository ) 
-        {
-            $data = json_decode($request->getContent(), true);
-            $event = $tournamentRepository->find($data['id']);
-            $user = $security->getUser();
+    public function newEntry(
+        Request $request,
+        $id,
+        EntityManagerInterface $manager, 
+        Security $security, 
+        TournamentRepository $tournamentRepository ) 
+            {
+                $data = json_decode($request->getContent(), true);
+                $user = $security->getUser();
+                $event = $tournamentRepository->find($id);
 
-            $entry = new Entry();
-            $entry
-                ->setUser($user)
-                ->setTournament($event)
-                ->setCreatedAt(new \DateTimeImmutable());
+                $entry = new Entry();
+                $entry
+                    ->setUser($user)
+                    ->setCreatedAt(new \DateTimeImmutable())
+                    ->setTournament($event);
 
-            $form = $this->createForm(EntryType::class, $entry, ['csrf_ptotection' => false]);
-            $form->submit($data);
+                $form = $this->createForm(EntryType::class, $entry, ['csrf_protection' => false]);
+                $form->submit($data);
 
-            if (!$form->isValid()) {
-            
-                $errors = [];
-    
-                foreach ($form->getErrors(true) as $error) {
-                    // Méthode de FormError
-                    $errors[$error->getOrigin()->getName()] = $error->getMessage();
+                if (!$form->isValid()) {
+                
+                    $errors = [];
+        
+                    foreach ($form->getErrors(true) as $error) {
+                        // Méthode de FormError
+                        $errors[$error->getOrigin()->getName()] = $error->getMessage();
+                    }
+                    return $this->json($errors, 422); // $data, status_code
                 }
-                return $this->json($errors, 422); // $data, status_code
-            }    
-            
-            $manager->persist($entry);
-            $manager->flush();
+                
+                // Récupération du fichier uploadé
+                $imageFile = $form->get('picture')->getData();
 
-            return $this->json(['success' => true]);
-        }
+                if ($imageFile) {
+                    // Génération d'un nom unique pour le fichier
+                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+
+                    try {
+                        // Déplacement du fichier vers le répertoire public/uploads
+                        $imageFile->move(
+                            $this->getParameter('kernel.project_dir') . '/public/assets/user/entries',
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // Gestion des exceptions
+                        // ...
+                    }
+
+                    // Mise à jour de l'objet Entry avec le nom du fichier
+                    $entry->setPicture($newFilename);
+                }
+                
+                $manager->persist($entry);
+                $manager->flush();
+
+                return $this->json(['success' => true]);
+            }
 }
  
