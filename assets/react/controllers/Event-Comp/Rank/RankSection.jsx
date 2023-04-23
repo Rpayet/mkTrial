@@ -6,21 +6,23 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
 
     {/* Détermine comment afficher le formulaire */}
     const [inputEntry, setInputEntry] = useState('');
-    const [newEntry, setNewEntry] = useState(true);
 
     {/* Hook pour déterminer si l'utilisateur a déjà créer une entrée.  */}
-    useEffect(() => {
+    if ( user ) {
 
-        const userEntries = entries.filter((entry) => entry.user.id === user.id);
+        useEffect(() => {
 
-        if ( userEntries.length > 0 && isUserRegistered ) {
-            setInputEntry('edit');
-        } else {
-            setInputEntry('new');
-            setNewEntry(true);
-        }
-
-    }, [entries, user.id]);
+            const userEntries = entries.filter((entry) => entry.user.id === user.id);
+    
+            if ( userEntries.length > 0 && isUserRegistered ) {
+                setInputEntry('edit');
+            } else {
+                setInputEntry('new');
+            }
+    
+        }, [entries, user.id]);
+        
+    }
 
     return (
         <div 
@@ -33,11 +35,8 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                         isUserRegistered= { isUserRegistered }
                         inputEntry= { inputEntry } />
 
-                { newEntry && 
-                    <AddEntry 
-                        user= { user }
-                        entries= { entries }
-                        inputEntry= { inputEntry } /> 
+                { inputEntry == 'new' && 
+                    <AddEntry /> 
                 }
         </div>
 

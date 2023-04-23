@@ -3,7 +3,6 @@ import EventInfo from "./Event-Comp/Info/EventInfo";
 import Userinfo from "./Event-Comp/Info/UsersInfo";
 import RankSection from "./Event-Comp/Rank/RankSection";
 import Register from "./Event-Comp/Info/Register";
-import EntryForm from "./Event-Comp/Rank/EntryForm";
 
 export default function EventPage({ event, user, entries }) {
 
@@ -28,7 +27,6 @@ export default function EventPage({ event, user, entries }) {
 
                     <Userinfo 
                         event= { event }
-                        user= { user }
                         setRegistration= { setRegistration }
                         isUserRegistered= { isUserRegistered } /> 
 

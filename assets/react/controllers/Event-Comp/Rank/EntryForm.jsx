@@ -33,7 +33,7 @@ export default function EntryForm({ setToggleView }) {
     }
 
     return (
-        <div
+        <form
             id="entry-form"
             className="bg-white w-full h-fit flex rounded-lg py-4 justify-around">
 
@@ -56,6 +56,6 @@ export default function EntryForm({ setToggleView }) {
                 setFileName= { setFileName }
                 setImage= { setImage } />
 
-        </div>
+        </form>
     )
 }

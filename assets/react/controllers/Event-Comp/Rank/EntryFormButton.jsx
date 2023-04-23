@@ -37,7 +37,7 @@ export default function EntryFomButton({ setToggleView, entryInput, setEntryInpu
             </button>
             
             <button
-                type="button"
+                type="submit"
                 className="bg-white rounded-full block h-fit
                 border-solid border-[1px] border-silver
                 hover:bg-lumi hover:text-white">
