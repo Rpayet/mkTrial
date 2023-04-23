@@ -14,17 +14,24 @@ export default function EntryForm({ event, setToggleView }) {
         picture: null,
     });
 
+    let formData = new FormData();
+    formData.append('time', entryInput.time);
+    formData.append('picture', entryInput.picture);
+
+    console.log(formData);
+
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 
     const handleSubmit = (e) => {
+
         
         e.preventDefault();
 
         setErrors({});
 
         axios
-            .post(`/api/event/${event.id}/entry/new`, entryInput)
+            .post(`/api/event/${event.id}/entry`, formData)
             .then(response => {
                 window.location.reload();
             })
@@ -36,7 +43,7 @@ export default function EntryForm({ event, setToggleView }) {
         <form
             onSubmit={handleSubmit}
             id="entry-form"
-            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around">
+            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around my-4">
 
             <TimerInput 
                 entryInput={ entryInput }

@@ -59,7 +59,7 @@ export default function RaceFilter({ races, setSortList, sortList }) {
           {raceListGroup.map((group, index) => (
             <div key={`group-${index}`} className="text-xs mt-2">
               {group.map((race, i) => (  
-                <div key={`race-${index}-${i}`} className='flex gap-2'>
+                <div key={`race-${index}-${i}`} className='flex gap-2 mb-1'>
                   <input 
                     type="checkbox" 
                     name={`${race.name}`} 

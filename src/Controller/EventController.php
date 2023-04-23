@@ -125,7 +125,7 @@ class EventController extends AbstractController
             return $this->json(['success' => true]);
         }
     
-    #[Route('/api/event/{id}/entry/new', name: 'app_event_entry_new', methods: ['POST'])]
+    #[Route('/api/event/{id}/entry', name: 'app_event_entry_new', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function newEntry(
         Request $request,
@@ -135,31 +135,20 @@ class EventController extends AbstractController
         TournamentRepository $tournamentRepository ) 
             {
                 $data = json_decode($request->getContent(), true);
+
                 $user = $security->getUser();
                 $event = $tournamentRepository->find($id);
+
+                $time = $request->request->get('time');
+
+                $imageFile = $request->files->get('picture');
 
                 $entry = new Entry();
                 $entry
                     ->setUser($user)
                     ->setCreatedAt(new \DateTimeImmutable())
-                    ->setTournament($event);
-
-                $form = $this->createForm(EntryType::class, $entry, ['csrf_protection' => false]);
-                $form->submit($data);
-
-                if (!$form->isValid()) {
-                
-                    $errors = [];
-        
-                    foreach ($form->getErrors(true) as $error) {
-                        // Méthode de FormError
-                        $errors[$error->getOrigin()->getName()] = $error->getMessage();
-                    }
-                    return $this->json($errors, 422); // $data, status_code
-                }
-                
-                // Récupération du fichier uploadé
-                $imageFile = $form->get('picture')->getData();
+                    ->setTournament($event)
+                    ->setTime($time);
 
                 if ($imageFile) {
                     // Génération d'un nom unique pour le fichier

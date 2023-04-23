@@ -52,7 +52,7 @@ export default function  CupFilter({ races, setSortList, sortList }) {
 
                     {cupList.map((cup, index) => (
 
-                        <div key={index} className="flex">   
+                        <div key={index} className="flex gap-2 items-center">   
                             <input 
                                 type="checkbox" 
                                 name={`${cup.name}`}

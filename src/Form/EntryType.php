@@ -15,7 +15,9 @@ class EntryType extends AbstractType
         $builder
             // ->add('createdAt')
             ->add('time')
-            ->add('picture', FileType::class)
+            ->add('picture', FileType::class, [
+                'mapped' => false,
+            ])
             // ->add('user')
             // ->add('tournament')
         ;

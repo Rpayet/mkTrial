@@ -16,7 +16,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
     
             if ( userEntries.length > 0 && isUserRegistered ) {
                 setInputEntry('edit');
-            } else {
+            } else if ( userEntries.length == 0 && isUserRegistered ) {
                 setInputEntry('new');
             }
     
