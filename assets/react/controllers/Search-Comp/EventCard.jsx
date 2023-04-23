@@ -58,7 +58,7 @@ export default function EventCard({ tournament, index }) {
 
                             <p className="text-center text-white">
                                 { tournament.capacity ? 
-                                    `1/${tournament.capacity}` 
+                                    `${tournament.registered.length}/${tournament.capacity}` 
                                     : 
                                     `Ouvert`}
                             </p>
@@ -78,7 +78,7 @@ export default function EventCard({ tournament, index }) {
 
                             <a className="block mx-auto my-12 w-fit bg-white py-1 px-8 rounded-3xl
                                 text-lite text-lg text-center border-solid border-[1px] border-lite
-                                hover:bg-mario hover:text-white hover:border-mario
+                                hover:bg-lumi hover:text-white hover:border-lumi
                                 transition duration-300 ease-in-out" 
                                 href={`/event/${tournament.id}`}>Consulter</a>
                                 

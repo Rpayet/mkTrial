@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EntryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EntryRepository::class)]
 class Entry
@@ -17,9 +18,15 @@ class Entry
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Temps requis pour entrer au tableau')]
     private ?int $time = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Capture d\'écran obligatoire')]
+    #[Assert\File(
+        extensions: ['jpg', 'jpeg', 'png'],
+        extensionsMessage: 'Format accepté : jpeg, jpg, png'
+    )]
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'entries')]

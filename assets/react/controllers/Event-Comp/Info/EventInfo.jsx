@@ -1,6 +1,6 @@
 import React from "react";
 import RaceInfo from "./RaceInfo";
-import OptionInfo from "./OptionInfo";
+import DelayInfo from "./DelayInfo";
 
 export default function SubmissionCard({ event }) {
 
@@ -10,7 +10,7 @@ export default function SubmissionCard({ event }) {
 
             <div className="flex items-center justify-between px-4">
                 <h2 className="text-sm text-silver font-bold">{`${event.name}`}</h2>
-                <OptionInfo event= {event} />
+                <DelayInfo event= {event} />
             </div>
 
             <div 

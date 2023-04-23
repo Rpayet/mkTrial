@@ -53,10 +53,22 @@ class TournamentController extends AbstractController
                         'picture' => $tournament->getRace()->getCup()->getPicture(),
                     ],
                 ],
+                'registered' => $tournament->getRegistered()->map(function ($user) {
+                    return [
+                        'id' => $user->getId(),
+                        'name' => $user->getName(),
+                        'picture' => $user->getPicture(),
+                        'roles' => $user->getRoles(),
+                        'email' => $user->getEmail(),
+                    ];
+                })->toArray(),
                 'user' => [
                     'id' => $tournament->getUser()->getId(),
                     'name' => $tournament->getUser()->getName(),
-                ]
+                    'picture' => $tournament->getUser()->getPicture(),
+                    'roles' => $tournament->getUser()->getRoles(),
+                    'email' => $tournament->getUser()->getEmail(),   
+                ],
                 
             ];
         }
@@ -102,14 +114,14 @@ class TournamentController extends AbstractController
         
         
         $data = json_decode($request->getContent(), true);
-        $eventForm = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
-        $eventForm->submit($data);
+        $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
+        $form->submit($data);
 
-        if (!$eventForm->isValid()) {
+        if (!$form->isValid()) {
             
             $errors = [];
 
-            foreach ($eventForm->getErrors(true) as $error) {
+            foreach ($form->getErrors(true) as $error) {
                 // Méthode de FormError
                 $errors[$error->getOrigin()->getName()] = $error->getMessage();
             }

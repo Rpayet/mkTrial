@@ -4,11 +4,11 @@
 
 {% block body %}
 
-    {# <pre>{{dump(event)}}</pre> #}
+    {# <pre>{{dump(request)}}</pre> #}
 
     <div
         class="my-20"
-        {{ react_component('EventPage', { event: event } )}}>
+        {{ react_component('EventPage', { event: event, user: user, entries: entries } )}}>
     </div>
 
 {% endblock %}
