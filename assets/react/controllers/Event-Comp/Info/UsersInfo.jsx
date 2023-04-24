@@ -21,7 +21,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
             setShow(false);
         }
 
-    }, [isUserRegistered, event, user])
+    }, [isUserRegistered, event, user]);
 
     return (
     

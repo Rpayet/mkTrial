@@ -30,10 +30,11 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
             className="w-2/3 flex flex-col items-center">
                 
                 <RankOptions
-                        event= { event }
-                        entries= { entries }
-                        isUserRegistered= { isUserRegistered }
-                        inputEntry= { inputEntry } />
+                    user= { user }
+                    event= { event }
+                    entries= { entries }
+                    isUserRegistered= { isUserRegistered }
+                    inputEntry= { inputEntry } />
 
                 { inputEntry == 'new' && 
                     <AddEntry event= { event } /> 
