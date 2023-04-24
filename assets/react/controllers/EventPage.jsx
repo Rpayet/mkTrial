@@ -23,10 +23,11 @@ export default function EventPage({ event, user, entries }) {
                 <div 
                     className="w-1/3 h-fit bg-white rounded-xl flex flex-col gap-4 p-4">
 
-                    <EventInfo event= {event} />
+                    <EventInfo event= { event } />
 
-                    <Userinfo 
-                        event= { event }
+                    <Userinfo
+                        user= { user }
+                        event = { event }
                         setRegistration= { setRegistration }
                         isUserRegistered= { isUserRegistered } /> 
 

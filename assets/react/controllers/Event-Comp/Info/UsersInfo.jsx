@@ -1,8 +1,28 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import AddUser from "./AddUser"
 
-export default function Userinfo({ event, setRegistration, isUserRegistered }) {
-    
+export default function Userinfo({ user, event, setRegistration, isUserRegistered }) {
+
+    const [show, setShow] = useState(true);
+
+    useEffect(() => {
+        if ( event.capacity != null && user != null ) {
+
+            if ( isUserRegistered && event.registered.length < event.capacity ) {
+                setShow(true);
+
+            } else if ( isUserRegistered && event.capacity.length == event.capacity.registered ) {
+                setShow(false);
+            } 
+
+        } else if ( !isUserRegistered && user != null && event.capacity == null ) {
+            setShow(true);
+        } else {
+            setShow(false);
+        }
+
+    }, [isUserRegistered, event, user])
+
     return (
     
         <div 
@@ -22,17 +42,22 @@ export default function Userinfo({ event, setRegistration, isUserRegistered }) {
                     className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
                     bg-slate-100 border-solid border-[1px] border-lumi rounded-lg
                      ">
-                    {event.registered.map((user, i) => (
+                    {event.registered.map((u, i) => (
                         <img
                             key={i}
-                            title={user.name}
-                            src={user.picture ? `/assets/user/img/${user.picture}` : `/assets/admin/img/icons/Default.png`}
+                            title={u.name}
+                            src={u.picture ? `/assets/user/img/${u.picture}` : `/assets/admin/img/icons/Default.png`}
                             alt="default"
                             className="h-10 rounded-full"
                         />
                     ))}
 
-                { !isUserRegistered && <AddUser setRegistration={ setRegistration } /> }
+                { show 
+                    && <AddUser 
+                        user= { user }
+                        setRegistration= { setRegistration }
+                        isUserRegistered= { isUserRegistered } /> 
+                }
 
                 </div>
 
