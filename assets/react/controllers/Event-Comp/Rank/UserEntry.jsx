@@ -12,7 +12,7 @@ export default function UserEntry({ user, sortedEntries }) {
         return `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds}`;
     }
 
-        const [isHovered, setIsHovered] = useState(false);
+    const [hoveredEntryKey, setHoveredEntryKey] = useState(null);
 
     return (
         <>
@@ -20,17 +20,17 @@ export default function UserEntry({ user, sortedEntries }) {
                     <div
                         key={i}
                         id="userEntryInfo" 
-                        className="w-full mt-2 py-4 px-10 bg-white flex justify-between rounded-lg"
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}>
+                        className="w-full mt-2 py-4 px-10 bg-white flex justify-between 
+                                    rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]"
+                        onMouseEnter={() => setHoveredEntryKey(i)}
+                        onMouseLeave={() => setHoveredEntryKey(null)}>
 
                         <div className="flex w-1/3 gap-2">
                             <p>#<span className="font-bold">{i+1}</span></p>
                             <p>{entry.user.name}</p>
                         </div>
 
-                        { user.name === entry.user.name && isHovered && (
-
+                        { hoveredEntryKey === i &&
                             <div
                                 id="options"
                                 className="w-1/3 flex justify-end items-center" >
@@ -47,9 +47,8 @@ export default function UserEntry({ user, sortedEntries }) {
                                     </g>
                                 </svg>
                             </div>
+                        }
                             
-                        )}
-
                         <div>
                             <span className="w-1/3">{formatTime(entry.time)}</span>
                         </div>
@@ -57,7 +56,6 @@ export default function UserEntry({ user, sortedEntries }) {
                     </div> 
                 ))}
 
-            <AddEntry />
         </>
     )
 }
