@@ -18,8 +18,6 @@ export default function EntryForm({ event, setToggleView }) {
     formData.append('time', entryInput.time);
     formData.append('picture', entryInput.picture);
 
-    console.log(formData);
-
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 
