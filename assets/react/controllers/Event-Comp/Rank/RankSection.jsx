@@ -27,7 +27,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
     return (
         <div 
             id="rank-container"
-            className="w-2/3 flex flex-col items-center">
+            className="sm:w-2/3 flex flex-col items-center">
                 
                 <RankOptions
                     user= { user }

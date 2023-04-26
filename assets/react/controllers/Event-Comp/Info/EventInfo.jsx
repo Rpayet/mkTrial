@@ -6,7 +6,7 @@ export default function SubmissionCard({ event }) {
 
     return (
 
-        <div className="w-full text-center">
+        <div className="w-1/2 sm:w-full text-center">
 
             <div className="flex items-center justify-between px-4">
                 <h2 className="text-sm text-silver font-bold">{`${event.name}`}</h2>

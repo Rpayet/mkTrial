@@ -4,7 +4,7 @@ import UploadInput from "./UploadInput";
 import EntryFormButton from "./EntryFormButton";
 import axios from "axios";
 
-export default function EntryForm({ event, setToggleView }) {
+export default function EntryForm({ event, toggleView, setToggleView }) {
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -56,6 +56,7 @@ export default function EntryForm({ event, setToggleView }) {
                 setFileName= { setFileName } />
 
             <EntryFormButton 
+                toggleView= { toggleView }
                 setToggleView= { setToggleView }
                 entryInput= { entryInput}
                 setEntryInput= { setEntryInput }

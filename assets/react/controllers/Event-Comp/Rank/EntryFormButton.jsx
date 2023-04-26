@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function EntryFomButton({ setToggleView, entryInput, setEntryInput, setImage, setFileName }) {
+export default function EntryFomButton({ toggleView, setToggleView, entryInput, setEntryInput, setImage, setFileName }) {
 
     const handleCancel = () => {
-        setToggleView(true);
+        setToggleView(!toggleView);
         setEntryInput({ ...entryInput, time: 0 });
         setFileName('');
         setImage(null);
@@ -58,3 +58,6 @@ export default function EntryFomButton({ setToggleView, entryInput, setEntryInpu
 
     )
 }
+
+// En utilisant prevState => !prevState dans la fonction de rappel de setToggleView, 
+// l'état de setToggleView sera inversé quel que soit son état actuel. 

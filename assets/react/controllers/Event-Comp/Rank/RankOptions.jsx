@@ -1,8 +1,8 @@
 import React from "react";
 import NoEntry from "./NoEntry";
-import UserEntry from "./UserEntry";
+import UsersEntries from "./UsersEntries";
 
-export default function RankOptions({ user, entries, isUserRegistered }) {
+export default function RankOptions({ user, event, entries, isUserRegistered }) {
 
     {/* Récupère les temps les plus bas de chaque utilisateur */}
     const lowestEntries = entries.reduce((accumulator, current) => {
@@ -18,8 +18,9 @@ export default function RankOptions({ user, entries, isUserRegistered }) {
     return (
         <>
             {sortedEntries.length > 0 
-                ? <UserEntry
-                    user= { user } 
+                ? <UsersEntries
+                    user= { user }
+                    event= { event } 
                     sortedEntries= { sortedEntries } />
                 : <NoEntry isUserRegistered={isUserRegistered} />
             }

@@ -18,10 +18,10 @@ export default function EventPage({ event, user, entries }) {
     return (
         <div>
 
-            <div className="w-full flex gap-4 p-4">
+            <div className="w-full sm:flex gap-4 p-4">
 
                 <div 
-                    className="w-1/3 h-fit bg-white rounded-xl flex flex-col gap-4 p-4">
+                    className="sm:w-1/3 sm:h-fit bg-white rounded-xl flex sm:flex-col gap-4 p-4">
 
                     <EventInfo event= { event } />
 
