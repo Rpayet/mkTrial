@@ -8,7 +8,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
     useEffect(() => {
         if ( event.capacity != null && user != null ) {
 
-            if ( isUserRegistered && event.registered.length < event.capacity ) {
+            if ( !isUserRegistered && event.registered.length < event.capacity ) {
                 setShow(true);
 
             } else if ( isUserRegistered && event.capacity.length == event.capacity.registered ) {
