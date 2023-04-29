@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
-import { formatTime, formatDate } from "../../_Functions/FormatTime";
+import React, { useState } from "react";
+import { formatTime } from "../../_Functions/FormatTime";
 import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
-import ImageViewer from 'react-simple-image-viewer';
 
 
 export default function EntriesHighlight({ showUserEntries, setSection }) {
@@ -44,7 +43,9 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
 
                 <div className="flex items-center gap-4">
                     <img
-                        src="/assets/admin/img/icons/Default.png"
+                        src={ showUserEntries[0].user.picture 
+                                ? `/assets/user/img/${showUserEntries[0].user.picture}` 
+                                : '/assets/admin/img/icons/Default.png' }
                         alt="default"
                         className="h-24 rounded-full border-solid border-4 border-white"
                     />
@@ -77,6 +78,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                     <ul className="grid grid-cols-2 gap-4">
                         { showUserEntries.map((entry, i) => (
                             <li 
+                                key={i}
                                 className="bg-white p-1 rounded-lg 
                                         flex items-center justify-around
                                         hover:scale-[1.02]">
