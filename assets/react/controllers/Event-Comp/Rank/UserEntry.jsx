@@ -10,7 +10,8 @@ export default function UserEntry(
         i, 
         hoveredEntryKey,
         setHoveredEntryKey, 
-        setShowUser 
+        setShowUser,
+        setSection 
     }) {
 
     const [toggleView, setToggleView] = useState(false);
@@ -25,6 +26,7 @@ export default function UserEntry(
 
     const handleShowClick = () => {
         setShowUser(entry.user.id)
+        setSection('highlight')
     }
 
     return (

@@ -6,13 +6,17 @@ import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import ImageViewer from 'react-simple-image-viewer';
 
 
-export default function EntriesHighlight({ showUserEntries }) {
+export default function EntriesHighlight({ showUserEntries, setSection }) {
 
     const formatter = buildFormatter(frenchStrings);
     const [visibility, setVisibility] = useState(false);
 
     const handleClick = () => {
         setVisibility(!visibility);
+    }
+
+    const handleSection = () => {
+        setSection('ranking');
     }
 
     return (
@@ -29,7 +33,8 @@ export default function EntriesHighlight({ showUserEntries }) {
                     alt={showUserEntries[0].picture} />
             </div>
 
-            <p 
+            <p  
+                onClick={handleSection}
                 className="w-fit text-sm cursor-pointer
                 border-solid border-b-2 p-1 border-lumi hover:border-mario">
                 Retour

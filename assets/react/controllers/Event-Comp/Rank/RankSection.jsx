@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import RankOptions from "./RankOptions";
 import AddEntry from "./AddEntry";
+import EntriesHighlight from "../User/EntriesHighlight";
 
-export default function RankSection({ event, user, entries, isUserRegistered, setShowUser }) {
+export default function RankSection({ event, user, entries, isUserRegistered }) {
+
+    const [section, setSection] = useState('ranking');
+    const [showUser, setShowUser] = useState(null);
+    
+    const showUserEntries = entries.filter((entry) => entry.user.id === showUser).sort((a, b) => a.time - b.time);
 
     {/* Détermine comment afficher le formulaire */}
     const [inputEntry, setInputEntry] = useState('');
@@ -24,22 +30,37 @@ export default function RankSection({ event, user, entries, isUserRegistered, se
 
     }
     
-    return (
-        <div 
-            id="rank-container"
-            className="sm:w-2/3 flex flex-col items-center">
-                
-                <RankOptions
-                    user= { user }
-                    event= { event }
-                    entries= { entries }
-                    isUserRegistered= { isUserRegistered }
-                    setShowUser= { setShowUser } />
+    if (section === 'ranking') {
 
-                { inputEntry === 'new' && user != null &&
-                    <AddEntry event= { event } /> 
-                }
-        </div>
+        return (
+            <div 
+                id="rank-container"
+                className="sm:w-2/3 flex flex-col items-center">
+                    
+                    <RankOptions
+                        user= { user }
+                        event= { event }
+                        entries= { entries }
+                        isUserRegistered= { isUserRegistered }
+                        setShowUser= { setShowUser }
+                        setSection={ setSection } />
+    
+                    { inputEntry === 'new' && user != null &&
+                        <AddEntry event= { event } /> 
+                    }
+            </div>
+    
+        )
 
-    )
+    }
+
+    if (section === "highlight") {
+
+        return (
+            <EntriesHighlight
+                showUserEntries= { showUserEntries }
+                setSection= { setSection } />
+        )
+    }
 }
+
