@@ -77,9 +77,10 @@ class EventController extends AbstractController
                 'user' => [
                     'id' => $entry->getUser()->getId(),
                     'name' => $entry->getUser()->getName(),
-                    'picture' => $entry->getUser()->getPicture()
+                    'picture' => $entry->getUser()->getPicture(),
                 ],
                 'time' => $entry->getTime(),
+                'createdAt' => $entry->getCreatedAt()->format('Y-m-d'),
             ];
         }
 

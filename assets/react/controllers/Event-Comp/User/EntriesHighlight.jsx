@@ -1,5 +1,7 @@
 import React from "react";
-import { formatTime } from "../../_Functions/FormatTime";
+import { formatTime, formatDate } from "../../_Functions/FormatTime";
+import Countdown from "react-countdown";
+
 
 export default function EntriesHighlight({ event, showUserEntries }) {
 
@@ -24,9 +26,9 @@ export default function EntriesHighlight({ event, showUserEntries }) {
                         <a 
                             href="#"
                             className="font-bold text-lg hover:text-lumi">
-                                User_Name
+                                { showUserEntries[0].user.name }
                         </a>
-                        <p className="text-lg" >1:30.132</p>
+                        <p className="text-lg" >{ formatTime(showUserEntries[0].time) }</p>
                     </div>
                 </div>
 
@@ -48,8 +50,8 @@ export default function EntriesHighlight({ event, showUserEntries }) {
                                 className="bg-white p-1 rounded-lg 
                                         flex items-center justify-around
                                         hover:scale-[1.02]">
-                                    <p>{formatTime(entry.time)}</p>
-                                    <p className="text-xs">Il y a 3 jours</p>
+                                    <p>{ formatTime(entry.time) }</p>
+                                    
                             </li>
                         ))}
                     </ul>
