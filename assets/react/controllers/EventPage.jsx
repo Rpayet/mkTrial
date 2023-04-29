@@ -45,8 +45,7 @@ export default function EventPage({ event, user, entries }) {
                         setRegistration= {setRegistration} />
 
                 } */}
-                <EntriesHighlight 
-                    event= { event }
+                <EntriesHighlight
                     showUserEntries= { showUserEntries } />
 
             </div>

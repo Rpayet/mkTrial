@@ -81,6 +81,7 @@ class EventController extends AbstractController
                 ],
                 'time' => $entry->getTime(),
                 'createdAt' => $entry->getCreatedAt()->format('Y-m-d'),
+                'picture' => $entry->getPicture(),
             ];
         }
 

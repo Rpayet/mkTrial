@@ -5,7 +5,9 @@ import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 
 
-export default function EntriesHighlight({ event, showUserEntries }) {
+export default function EntriesHighlight({ showUserEntries }) {
+
+    console.log(showUserEntries[0])
 
     const formatter = buildFormatter(frenchStrings)
 
@@ -13,8 +15,8 @@ export default function EntriesHighlight({ event, showUserEntries }) {
         <div className="sm:w-2/3 flex flex-col">
 
             <p 
-                className="w-fit text-sm cursor-pointer rounded-lg 
-                border-solid border-y-2 p-1 border-lumi hover:border-mario">
+                className="w-fit text-sm cursor-pointer
+                border-solid border-b-2 p-1 border-lumi hover:border-mario">
                 Retour
             </p>
 
@@ -36,8 +38,11 @@ export default function EntriesHighlight({ event, showUserEntries }) {
                     </div>
                 </div>
 
-                <div className="bg-white w-48 h-24">
-                    <p>kekchoz</p>
+                <div className="w-1/2 cursor-pointer">
+                    <img 
+                        className="rounded-lg"
+                        src={`/assets/user/entries/${showUserEntries[0].picture}`} 
+                        alt={showUserEntries[0].picture} />
                 </div>
 
             </div>
@@ -55,7 +60,7 @@ export default function EntriesHighlight({ event, showUserEntries }) {
                                         flex items-center justify-around
                                         hover:scale-[1.02]">
                                     <p>{ formatTime(entry.time) }</p>
-                                    <TimeAgo date={entry.createdAt} formatter={formatter} />
+                                    <span className="text-xs"><TimeAgo date={entry.createdAt} formatter={formatter} /></span>
                                     
                             </li>
                         ))}
