@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import UserEntry from "./UserEntry";
-import { formatTime } from "../../_Functions/FormatTime";
 
 export default function UsersEntries({ user, event, sortedEntries, setShowUser }) {
 
@@ -16,7 +15,6 @@ export default function UsersEntries({ user, event, sortedEntries, setShowUser }
                     i= { i }
                     hoveredEntryKey= { hoveredEntryKey }
                     setHoveredEntryKey= { setHoveredEntryKey }
-                    formatTime= { formatTime }
                     setShowUser= { setShowUser }  />
             ))}
 

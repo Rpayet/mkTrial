@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EntryForm from "./EntryForm";
+import { formatTime } from "../../_Functions/FormatTime";
 
 export default function UserEntry(
     { 
@@ -9,7 +10,6 @@ export default function UserEntry(
         i, 
         hoveredEntryKey,
         setHoveredEntryKey, 
-        formatTime,
         setShowUser 
     }) {
 
