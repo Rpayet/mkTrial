@@ -16,6 +16,10 @@ export default function EventPage({ event, user, entries }) {
         isUserRegistered = event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
     }
 
+    const [showUser, setShowUser] = useState(11);
+
+    const showUserEntries = entries.filter((entry) => entry.user.id === showUser);
+
     return (
         <div>
 
@@ -35,20 +39,23 @@ export default function EventPage({ event, user, entries }) {
                 </div>
 
                 {/* Vérifie si l'utilsateur est incrit */}
-                {/* { !registration 
+                { !registration 
 
                     ? <RankSection 
                         event= { event }
                         user= { user }
                         entries= { entries }
-                        isUserRegistered= { isUserRegistered } />
+                        isUserRegistered= { isUserRegistered }
+                        setShowUser= { setShowUser } />
 
                     : <Register 
                         event= { event }
                         setRegistration= {setRegistration} />
 
-                } */}
-                <EntriesHighlight event= { event }/>
+                }
+                {/* <EntriesHighlight 
+                    event= { event }
+                    showUserEntries= { showUserEntries } /> */}
 
             </div>
 

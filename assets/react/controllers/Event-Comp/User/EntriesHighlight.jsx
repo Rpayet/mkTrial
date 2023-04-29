@@ -1,11 +1,16 @@
 import React from "react";
+import { formatTime } from "../../_Functions/FormatTime";
 
-export default function EntriesHighlight({ event }) {
+export default function EntriesHighlight({ event, showUserEntries }) {
 
     return (
         <div className="sm:w-2/3 flex flex-col">
 
-            <p className="cursor-pointer">Retour</p>
+            <p 
+                className="w-fit text-sm cursor-pointer rounded-lg 
+                border-solid border-y-2 p-1 border-lumi hover:border-mario">
+                Retour
+            </p>
 
             <div className="w-full flex justify-around p-6">
 
@@ -32,16 +37,23 @@ export default function EntriesHighlight({ event }) {
             </div>
 
             <div className="w-full text-center">
+
                 <h2 className="my-4">Liste des entrées</h2>
-                <div className="w-full grid grid-cols-2 gap-4">
-                    <div className="bg-white p-2 flex items-center justify-around  rounded-lg">
-                        <p>1:33.280</p>
-                        <p className="text-xs">Il y a 3 jours</p>
-                    </div>
-                    <div className="bg-white p-2 flex items-center justify-around  rounded-lg">
-                        <p>1:33.280</p>
-                        <p className="text-xs">Il y a 3 jours</p>
-                    </div>
+
+                <div className="w-full">
+
+                    <ul className="grid grid-cols-2 gap-4">
+                        { showUserEntries.map((entry, i) => (
+                            <li 
+                                className="bg-white p-1 rounded-lg 
+                                        flex items-center justify-around
+                                        hover:scale-[1.02]">
+                                    <p>{formatTime(entry.time)}</p>
+                                    <p className="text-xs">Il y a 3 jours</p>
+                            </li>
+                        ))}
+                    </ul>
+
                 </div>
             </div>
 

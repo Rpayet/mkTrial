@@ -9,7 +9,8 @@ export default function UserEntry(
         i, 
         hoveredEntryKey,
         setHoveredEntryKey, 
-        formatTime 
+        formatTime,
+        setShowUser 
     }) {
 
     const [toggleView, setToggleView] = useState(false);
@@ -20,6 +21,10 @@ export default function UserEntry(
 
     if (toggleView) {
         return <EntryForm event= { event } toggleView= {toggleView} setToggleView={ setToggleView } />;
+    }
+
+    const handleShowClick = () => {
+        setShowUser(entry.user.id)
     }
 
     return (
@@ -41,6 +46,7 @@ export default function UserEntry(
                 id="options"
                 className="w-1/3 flex justify-end items-center gap-2" >
                     <svg
+                    onClick={handleShowClick}
                         width="20px" height="20px" viewBox="0 0 24 24" fill="none"
                         className="fill-silver hover:fill-lumi cursor-pointer">
                         <path fillRule="evenodd" clipRule="evenodd" 

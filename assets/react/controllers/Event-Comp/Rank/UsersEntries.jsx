@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import UserEntry from "./UserEntry";
+import { formatTime } from "../../_Functions/FormatTime";
 
-export default function UsersEntries({ user, event, sortedEntries }) {
-
-    {/* Formate le temps stocké dans la BDD au format "m:ss:fsfsfs" */}
-    function formatTime(timeInMs) {
-        const date = new Date(timeInMs);
-        const minutes = date.getUTCMinutes();
-        const seconds = date.getUTCSeconds();
-        const milliseconds = date.getUTCMilliseconds().toString().padStart(3, "0");
-        return `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds}`;
-    }
+export default function UsersEntries({ user, event, sortedEntries, setShowUser }) {
 
     const [hoveredEntryKey, setHoveredEntryKey] = useState(null);
 
@@ -24,7 +16,8 @@ export default function UsersEntries({ user, event, sortedEntries }) {
                     i= { i }
                     hoveredEntryKey= { hoveredEntryKey }
                     setHoveredEntryKey= { setHoveredEntryKey }
-                    formatTime= { formatTime } />
+                    formatTime= { formatTime }
+                    setShowUser= { setShowUser }  />
             ))}
 
         </>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import RankOptions from "./RankOptions";
 import AddEntry from "./AddEntry";
 
-export default function RankSection({ event, user, entries, isUserRegistered }) {
+export default function RankSection({ event, user, entries, isUserRegistered, setShowUser }) {
 
     {/* Détermine comment afficher le formulaire */}
     const [inputEntry, setInputEntry] = useState('');
@@ -34,7 +34,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                     event= { event }
                     entries= { entries }
                     isUserRegistered= { isUserRegistered }
-                    inputEntry= { inputEntry } />
+                    setShowUser= { setShowUser } />
 
                 { inputEntry === 'new' && user != null &&
                     <AddEntry event= { event } /> 
