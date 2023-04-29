@@ -1,9 +1,13 @@
 import React from "react";
 import { formatTime, formatDate } from "../../_Functions/FormatTime";
-import Countdown from "react-countdown";
+import TimeAgo from 'react-timeago';
+import frenchStrings from 'react-timeago/lib/language-strings/fr';
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 
 
 export default function EntriesHighlight({ event, showUserEntries }) {
+
+    const formatter = buildFormatter(frenchStrings)
 
     return (
         <div className="sm:w-2/3 flex flex-col">
@@ -51,6 +55,7 @@ export default function EntriesHighlight({ event, showUserEntries }) {
                                         flex items-center justify-around
                                         hover:scale-[1.02]">
                                     <p>{ formatTime(entry.time) }</p>
+                                    <TimeAgo date={entry.createdAt} formatter={formatter} />
                                     
                             </li>
                         ))}
@@ -62,3 +67,5 @@ export default function EntriesHighlight({ event, showUserEntries }) {
         </div>
     )
 }
+
+// https://www.npmjs.com/package/react-timeago
