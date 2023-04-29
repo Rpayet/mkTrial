@@ -6,6 +6,8 @@ import axios from "axios";
 
 export default function TournamentPage({ tournaments, races, mode }) {
 
+    const [visibility, setVisibility] = useState(false);
+
     const today = new Date();
     const minDate = new Date().toISOString().substring(0, 10);
 
@@ -50,10 +52,11 @@ export default function TournamentPage({ tournaments, races, mode }) {
             })
             .catch(errors => setErrors(errors.response.data));
     }
-
+    
     return (
 
-        <form onSubmit={handleSubmit}> 
+        <form 
+            onSubmit={handleSubmit}> 
 
             <SearchBar 
                 races= { races } 
@@ -64,7 +67,9 @@ export default function TournamentPage({ tournaments, races, mode }) {
                 data= { data }
                 setData= { setData }
                 eventName= { eventName }
-                setEventName= { setEventName } />
+                setEventName= { setEventName }
+                visibility= { visibility }
+                setVisibility= { setVisibility } />
 
             { page === "sort" ? (
 
