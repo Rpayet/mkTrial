@@ -4,7 +4,7 @@ import UploadInput from "./UploadInput";
 import EntryFormButton from "./EntryFormButton";
 import axios from "axios";
 
-export default function EntryForm({ event, setToggleView }) {
+export default function EntryForm({ event, toggleView, setToggleView }) {
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -17,8 +17,6 @@ export default function EntryForm({ event, setToggleView }) {
     let formData = new FormData();
     formData.append('time', entryInput.time);
     formData.append('picture', entryInput.picture);
-
-    console.log(formData);
 
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
@@ -58,6 +56,7 @@ export default function EntryForm({ event, setToggleView }) {
                 setFileName= { setFileName } />
 
             <EntryFormButton 
+                toggleView= { toggleView }
                 setToggleView= { setToggleView }
                 entryInput= { entryInput}
                 setEntryInput= { setEntryInput }

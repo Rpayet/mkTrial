@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function EventCard({ tournament, index }) {
 
+    const [isHover, setIsHover] = useState(false);
+
     return (
         <>
-            <div key={index} className="flex h-80 justify-center mb-12 overflow-hidden">
+            <div 
+                key={index} 
+                onMouseEnter={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+                className="flex h-80 justify-center mb-12 overflow-hidden">
 
-                <div className="block max-w-sm rounded-3xl bg-white">
+                <div className="block min-w-sm rounded-3xl bg-white">
 
                     {/* Card-Top */}
                     <div 
-                        className={`relative text-center py-1 pb-3 rounded-t-3xl z-20
+                        className={`relative text-center pt-1 pb-3 rounded-t-3xl z-20
                         ${tournament.speed == '200cc' 
                             ? 'bg-gradient-to-b from-fast-200 to-fast-400' 
                             : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
@@ -26,9 +32,9 @@ export default function EventCard({ tournament, index }) {
                                     src={`/assets/admin/img/cups/${tournament.race.cup.picture}`} 
                                     alt={`${tournament.race.cup.picture}`} />
                             </div>
-                            <div className="rounded-lg px-6">
+                            <div className={`rounded-lg ${isHover ? 'px-[68px]' : 'px-[24px]'}`}>
                                 <img 
-                                    className="rounded-lg"
+                                    className={`rounded-lg mx-auto ${isHover && 'w-32'}`}
                                     src={`/assets/admin/img/races/${tournament.race.slug.split('_')[0]}/${tournament.race.picture}`}
                                     alt={`${tournament.race.picture}`} />
                             </div>
@@ -67,19 +73,21 @@ export default function EventCard({ tournament, index }) {
                     </div>
 
                     {/* Card-Bottom */}
-                    <div className="relative px-6 mt-2 text-center w-full top-0 duration-300 hover:-top-28">
+                    <div className={`relative px-6 mt-2 text-center w-full top-0`} >
 
                         <div className="absolute top-0 left-0 w-full z-10">
 
                             <h5 className="my-2 text-xl font-bold leading-tight text-silver">{ tournament.name.toUpperCase() }</h5>
-                            <p className="mb-2 text-base italic text-silver">@
-                            <a href="#">{tournament.user.name}</a></p>
+                            <p className="mb-2 text-base italic text-silver hover:text-lumi">@
+                                <a 
+                                    className=""
+                                    href="#">{tournament.user.name}</a>
+                            </p>
                             <p className="mb-2 text-base text-silver">{ tournament.endAt }</p>
 
-                            <a className="block mx-auto my-12 w-fit bg-white py-1 px-8 rounded-3xl
+                            <a className="block mx-auto w-fit bg-white py-1 px-8 rounded-3xl
                                 text-lite text-lg text-center border-solid border-[1px] border-lite
-                                hover:bg-lumi hover:text-white hover:border-lumi
-                                transition duration-300 ease-in-out" 
+                                hover:bg-lumi hover:text-white hover:border-lumi" 
                                 href={`/event/${tournament.id}`}>Consulter</a>
                                 
                         </div>

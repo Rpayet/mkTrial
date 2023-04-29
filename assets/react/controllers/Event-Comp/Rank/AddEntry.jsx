@@ -13,6 +13,7 @@ export default function AddEntry({ event }) {
                 ? <AddEntryButton setToggleView= { setToggleView } />
                 : <EntryForm 
                     event= { event }
+                    toggleView= { toggleView }
                     setToggleView= { setToggleView } />
             }
         </>

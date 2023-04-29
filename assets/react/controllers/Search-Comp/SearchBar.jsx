@@ -4,10 +4,8 @@ import InputField from "./InputField";
 import TogglePage from "./TogglePage";
 import RandomNameButton from "../Create-Comp/RandomNameButton";
 
-export default function SearchBar({ races, page, setPage, setSortList, sortList, eventName, setEventName, data, setData }) {
-
-    const [visibility, setVisibility] = useState(false);
-    
+export default function SearchBar({ races, page, setPage, setSortList, sortList, eventName, setEventName, data, setData, visibility, setVisibility }) {
+  
     const inputFields = {
         sort : {id: 'sort', placeholder : 'Rechercher un tournoi', type: 'button', text: 'Rechercher'},
         create : {id: 'create', placeholder : 'Entrer un nom de tournoi', type: 'submit', text: 'Créer'}
