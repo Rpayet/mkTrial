@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { formatTime, formatDate } from "../../_Functions/FormatTime";
 import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
+import ImageViewer from 'react-simple-image-viewer';
 
 
 export default function EntriesHighlight({ showUserEntries }) {
 
-    console.log(showUserEntries[0])
+    const formatter = buildFormatter(frenchStrings);
+    const [visibility, setVisibility] = useState(false);
 
-    const formatter = buildFormatter(frenchStrings)
+    const handleClick = () => {
+        setVisibility(!visibility);
+    }
 
     return (
-        <div className="sm:w-2/3 flex flex-col">
+        <div className="sm:w-2/3 flex flex-col relative">
+
+            <div 
+                onClick={handleClick}
+                className={`absolute w-[600px] p-20 
+                            left-1/2 transform -translate-x-1/2 z-50 
+                            backdrop-blur-sm ${!visibility && 'hidden'}`}>
+                <img 
+                    className="rounded-lg"
+                    src={`/assets/user/entries/${showUserEntries[0].picture}`} 
+                    alt={showUserEntries[0].picture} />
+            </div>
 
             <p 
                 className="w-fit text-sm cursor-pointer
@@ -40,6 +55,7 @@ export default function EntriesHighlight({ showUserEntries }) {
 
                 <div className="w-1/2 cursor-pointer">
                     <img 
+                        onClick={handleClick}
                         className="rounded-lg"
                         src={`/assets/user/entries/${showUserEntries[0].picture}`} 
                         alt={showUserEntries[0].picture} />
@@ -49,7 +65,7 @@ export default function EntriesHighlight({ showUserEntries }) {
 
             <div className="w-full text-center">
 
-                <h2 className="my-4">Liste des entrées</h2>
+                <h2 className="my-4">Temps enregistrés</h2>
 
                 <div className="w-full">
 
@@ -60,7 +76,9 @@ export default function EntriesHighlight({ showUserEntries }) {
                                         flex items-center justify-around
                                         hover:scale-[1.02]">
                                     <p>{ formatTime(entry.time) }</p>
-                                    <span className="text-xs"><TimeAgo date={entry.createdAt} formatter={formatter} /></span>
+                                    <span className="text-xs">
+                                        <TimeAgo date={entry.createdAt} formatter={formatter} />
+                                    </span>
                                     
                             </li>
                         ))}
@@ -74,3 +92,4 @@ export default function EntriesHighlight({ showUserEntries }) {
 }
 
 // https://www.npmjs.com/package/react-timeago
+
