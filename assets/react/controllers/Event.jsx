@@ -3,6 +3,7 @@ import EventInfo from "./Event-Comp/UI/Info/EventInfo";
 import Userinfo from "./Event-Comp/UI/Info/UsersInfo";
 import RankSection from "./Event-Comp/UI/Rank/RankSection";
 import Register from "./Event-Comp/UI/Info/Register";
+import TimeOver from "./Event-Comp/UI/TimeOver/TimeOver";
 
 export default function EventPage({ event, user, entries }) {
 
@@ -28,7 +29,7 @@ export default function EventPage({ event, user, entries }) {
                 </div>
 
                 {/* Vérifie si l'utilsateur est incrit */}
-                { !registration 
+                {/* { !registration 
 
                     ? <RankSection 
                         event= { event }
@@ -40,7 +41,11 @@ export default function EventPage({ event, user, entries }) {
                         event= { event }
                         setRegistration= {setRegistration} />
 
-                }
+                } */}
+
+                <TimeOver 
+                    event= { event }
+                    entries= { entries } />
                 
             </div>
 
