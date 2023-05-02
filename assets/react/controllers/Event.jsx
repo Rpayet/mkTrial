@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import EventInfo from "./Event-Comp/Info/EventInfo";
-import Userinfo from "./Event-Comp/Info/UsersInfo";
-import RankSection from "./Event-Comp/Rank/RankSection";
-import Register from "./Event-Comp/Info/Register";
-import EntriesHighlight from "./Event-Comp/User/EntriesHighlight";
+import EventInfo from "./Event-Comp/UI/Info/EventInfo";
+import Userinfo from "./Event-Comp/UI/Info/UsersInfo";
+import RankSection from "./Event-Comp/UI/Rank/RankSection";
+import Register from "./Event-Comp/UI/Info/Register";
 
 export default function EventPage({ event, user, entries }) {
 
