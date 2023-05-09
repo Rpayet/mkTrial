@@ -29,7 +29,7 @@ export default function EventPage({ event, user, entries }) {
                 </div>
 
                 {/* Vérifie si l'utilsateur est incrit */}
-                {/* { !registration 
+                { !registration 
 
                     ? <RankSection 
                         event= { event }
@@ -41,11 +41,11 @@ export default function EventPage({ event, user, entries }) {
                         event= { event }
                         setRegistration= {setRegistration} />
 
-                } */}
+                }
 
-                <TimeOver 
+                {/* <TimeOver 
                     event= { event }
-                    entries= { entries } />
+                    entries= { entries } /> */}
                 
             </div>
 
