@@ -8,7 +8,7 @@ export default function TimeOver({ event, entries }) {
     const rankList = rankService(entries);
 
     return(
-        <div className="bg-white rounded-lg py-2 px-12">
+        <div className="bg-white rounded-lg py-2 px-16">
             <div className="relative">
                 <RaceInfo event={ event } />
                 {rankList.map((entry, i) => (
