@@ -23,6 +23,18 @@ module.exports = {
         slow: {
           200: '#02affc',
           400: '#0c3ffc'
+        },
+        first: {
+          200: '#FAF500',
+          400: '#FF7A00'
+        },
+        second: {
+          200: '#869AB1',
+          400: '#DEEAF4'
+        },
+        third: {
+          200: '#F87600',
+          400: '#FDDDB1'
         }
       }
     },
