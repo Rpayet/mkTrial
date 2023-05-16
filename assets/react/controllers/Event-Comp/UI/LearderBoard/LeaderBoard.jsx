@@ -1,5 +1,5 @@
 import React from "react";
-import RaceInfo from "../Info/RaceInfo"
+import RaceInfo from "../OnGoing/Info/RaceInfo"
 import TopList from "./TopList";
 import { rankService } from "../../Services/RankService";
 import BottomList from "./BottomList";

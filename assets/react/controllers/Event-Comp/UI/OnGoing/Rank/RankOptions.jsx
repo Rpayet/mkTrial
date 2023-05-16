@@ -1,7 +1,7 @@
 import React from "react";
 import NoEntry from "./NoEntry";
 import UsersEntries from "./UsersEntries";
-import { rankService } from "../../Services/RankService";
+import { rankService } from "../../../Services/RankService";
 
 export default function RankOptions({ user, event, entries, isUserRegistered, setShowUser, setSection }) {
 
