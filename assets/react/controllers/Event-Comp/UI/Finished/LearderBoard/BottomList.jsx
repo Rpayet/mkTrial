@@ -1,5 +1,5 @@
 import React from "react";
-import { formatTime } from "../../../Services/FormatTime";
+import { formatTime } from "../../../_Services/FormatTime";
 
 export default function BottomList({entry, i}) {
 

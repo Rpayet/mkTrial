@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-import LeaderBoard from "./Event-Comp/UI/Finished/LearderBoard/LeaderBoard";
 import OnGoing from "./Event-Comp/Wrappers/OnGoing";
+import Finished from "./Event-Comp/Wrappers/Finished";
 
 export default function EventPage({ event, user, entries }) {
 
     return (
         <>
-            <OnGoing
+            {/* <OnGoing
                 user= { user }
                 event = { event }
-                entries= { entries } />
-
-
-            {/* <LeaderBoard 
-                event= { event }
                 entries= { entries } /> */}
+
+            <Finished 
+                event= { event }
+                entries= { entries } />
                 
         </>
 

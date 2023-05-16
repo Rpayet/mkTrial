@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formatTime } from "../../../Services/FormatTime";
+import { formatTime } from "../../../_Services/FormatTime";
 import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';

@@ -1,7 +1,7 @@
 import React from "react";
 import RaceInfo from "../../OnGoing/Info/RaceInfo"
 import TopList from "./TopList";
-import { rankService } from "../../../Services/RankService";
+import { rankService } from "../../../_Services/RankService";
 import BottomList from "./BottomList";
 
 export default function TimeOver({ event, entries }) {
@@ -9,21 +9,25 @@ export default function TimeOver({ event, entries }) {
     const rankList = rankService(entries);
 
     return(
-        <div className="bg-white rounded-lg py-2 px-16 m-auto">
-            <div className="w-1/2 m-auto">
-                <p className="text-center font-bold">{event.name}</p>
-                <div className="relative m-auto">
-                    <RaceInfo event={ event } />
-                    {rankList.map((entry, i) => (
-                        <TopList 
-                            entry = { entry }
-                            i = { i }
-                        />
-                    ))} 
+        <div className="bg-white rounded-lg py-2 m-auto">
+            <div className="w-full m-auto">
+                <div className="flex m-auto">
+                    <div className="w-1/3 px-10">
+                        <p className="text-center font-bold">{event.name}</p>
+                        <RaceInfo event={ event } />
+                    </div>
+                    <div className="relative w-2/3">
+                        {rankList.map((entry, i) => (
+                            <TopList 
+                                entry = { entry }
+                                i = { i }
+                            />
+                        ))} 
+                    </div>
                 </div>
                                   
             </div> 
-            <div className="w-full mt-40 flex flex-wrap justify-center">
+            <div className="w-full mt-28 flex flex-wrap justify-center">
                 {rankList.map((entry, i) => (
                     <BottomList
                         entry = { entry }
