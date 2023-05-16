@@ -13,9 +13,7 @@ export default function EventPage({ event, user, entries }) {
 
             <Finished 
                 event= { event }
-                entries= { entries } />
-                
+                entries= { entries } />            
         </>
-
     )
 }

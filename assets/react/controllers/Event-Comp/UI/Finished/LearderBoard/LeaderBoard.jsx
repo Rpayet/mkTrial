@@ -12,7 +12,7 @@ export default function TimeOver({ event, entries }) {
         <div className="bg-white rounded-lg py-2 m-auto">
             <div className="w-full">
                 <div className="flex">
-                    <div className="w-1/3 px-10">
+                    <div className="w-1/3 px-2">
                         <p className="text-center font-bold">{event.name}</p>
                         <RaceInfo event={ event } />
                     </div>
@@ -27,8 +27,8 @@ export default function TimeOver({ event, entries }) {
                 </div>
                                   
             </div> 
-            <div className="w-full mt-6 flex">
-                <div className="w-1/3 text-center">
+            <div className="w-full mt-12 flex">
+                <div className="w-1/3 text-center px-2">
                     <p>Recap</p>
                 </div>
                 <div className="w-2/3 flex flex-wrap justify-center">
