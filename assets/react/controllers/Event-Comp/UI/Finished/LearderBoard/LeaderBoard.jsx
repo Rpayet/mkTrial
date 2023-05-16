@@ -10,8 +10,8 @@ export default function TimeOver({ event, entries }) {
 
     return(
         <div className="bg-white rounded-lg py-2 m-auto">
-            <div className="w-full m-auto">
-                <div className="flex m-auto">
+            <div className="w-full">
+                <div className="flex">
                     <div className="w-1/3 px-10">
                         <p className="text-center font-bold">{event.name}</p>
                         <RaceInfo event={ event } />
@@ -27,13 +27,18 @@ export default function TimeOver({ event, entries }) {
                 </div>
                                   
             </div> 
-            <div className="w-full mt-28 flex flex-wrap justify-center">
-                {rankList.map((entry, i) => (
-                    <BottomList
-                        entry = { entry }
-                        i = { i }
-                    />
-                ))}
+            <div className="w-full mt-6 flex">
+                <div className="w-1/3 text-center">
+                    <p>Recap</p>
+                </div>
+                <div className="w-2/3 flex flex-wrap justify-center">
+                    {rankList.map((entry, i) => (
+                        <BottomList
+                            entry = { entry }
+                            i = { i }
+                        />
+                    ))}
+                </div>
             </div>
         </div> 
     )
