@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LeaderBoard from "./Event-Comp/UI/LearderBoard/LeaderBoard";
+import LeaderBoard from "./Event-Comp/UI/Finished/LearderBoard/LeaderBoard";
 import OnGoing from "./Event-Comp/Wrappers/OnGoing";
 
 export default function EventPage({ event, user, entries }) {
@@ -9,17 +9,13 @@ export default function EventPage({ event, user, entries }) {
             <OnGoing
                 user= { user }
                 event = { event }
-                entries= { entries }
- 
-            />
+                entries= { entries } />
 
 
             {/* <LeaderBoard 
                 event= { event }
                 entries= { entries } /> */}
                 
-            
-
         </>
 
     )
