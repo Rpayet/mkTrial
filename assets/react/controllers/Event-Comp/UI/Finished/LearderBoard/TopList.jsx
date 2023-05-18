@@ -8,7 +8,7 @@ export default function TopList({entry, i}) {
 
             <div 
                 key={i}
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2
+                className="absolute z-10 bottom-0 left-1/2 transform -translate-x-1/2
                             p-2 rounded-lg flex flex-col items-center gap-4">
             
                     <div className="w-36 relative p-1 rounded-full bg-gradient-to-t from-first-200 to-first-400">
@@ -21,8 +21,10 @@ export default function TopList({entry, i}) {
                             src="/assets/admin/img/icons/First-Icon.png"
                             alt="FirstIcon" />
                     </div>
-    
-                    <p>{formatTime(entry.time)}</p>
+                    <div>
+                        <p className="font-bold">{entry.user.name}</p>
+                        <p>{formatTime(entry.time)}</p>
+                    </div>
     
             </div>
     
@@ -32,7 +34,7 @@ export default function TopList({entry, i}) {
 
             <div 
                 key={i}
-                className="absolute -bottom-6 left-12
+                className="absolute bottom-0 left-12
                             p-2 rounded-lg flex flex-col items-center gap-4">
             
                     <div className="relative p-1 rounded-full bg-gradient-to-b from-second-200 to-second-400">
@@ -45,9 +47,12 @@ export default function TopList({entry, i}) {
                             src="/assets/admin/img/icons/Second-Icon.png"
                             alt="FirstIcon" />
                     </div>
-    
-                    <p>{formatTime(entry.time)}</p>
-    
+
+                    <div>
+                        <p className="font-bold">{entry.user.name}</p>
+                        <p>{formatTime(entry.time)}</p>
+                    </div>
+
             </div>
     
         )
@@ -56,7 +61,7 @@ export default function TopList({entry, i}) {
 
             <div 
                 key={i}
-                className="absolute -bottom-6 right-16
+                className="absolute bottom-0 right-16
                             p-2 rounded-lg flex flex-col items-center gap-4">
             
                     <div className="relative p-1 rounded-full bg-gradient-to-b from-third-200 to-third-400">
@@ -69,8 +74,12 @@ export default function TopList({entry, i}) {
                             src="/assets/admin/img/icons/Third-Icon.png"
                             alt="FirstIcon" />
                     </div>
-    
-                    <p>{formatTime(entry.time)}</p>
+
+                    <div>
+                        <p className="font-bold">{entry.user.name}</p>
+                        <p>{formatTime(entry.time)}</p>
+                    </div>
+
     
             </div>
         )
