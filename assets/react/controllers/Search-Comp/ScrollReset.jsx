@@ -9,7 +9,7 @@ export default function ResetScroll() {
     }
     
     return (
-        <div className="bg-white rounded-full p-4 fixed 
+        <div className="z-50 bg-white rounded-full p-4 fixed 
                     bottom-20 right-10 cursor-pointer animate-bounce
                     border-solid border-2 hover:border-lumi"
             onClick={resetScrollY} >
