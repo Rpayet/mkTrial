@@ -33,8 +33,8 @@ class EventController extends AbstractController
         $eventData = [
             'id' => $event->getId(),
             'name' => $event->getName(),
-            'createdAt' => $event->getCreatedAt()->format('d/m/Y'),
-            'endAt' => $event->getEndAt()->format('d/m/Y'),
+            'createdAt' => $event->getCreatedAt()->format('m/d/Y'),
+            'endAt' => $event->getEndAt()->format('m/d/Y'),
             'speed' => $event->getSpeed(),
             'privacy' => $event->isPrivacy(),
             'capacity' => $event->getCapacity(),
