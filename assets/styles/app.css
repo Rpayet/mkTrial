@@ -7,3 +7,12 @@
       font-family: 'Montserrat', sans-serif;
     }
 }
+
+@keyframes slideIn {
+  from {transform: translateY(-2em);} 
+  to {transform: translateY(0em);}
+}
+
+.animation {
+  animation: slideIn .5s ease-in-out;
+}
