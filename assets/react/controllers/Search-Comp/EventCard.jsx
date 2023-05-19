@@ -12,7 +12,7 @@ export default function EventCard({ tournament, index }) {
                 onMouseLeave={() => setIsHover(false)}
                 className="flex h-80 justify-center mb-12 overflow-hidden">
 
-                <div className="block min-w-sm rounded-3xl bg-white">
+                <div className="block rounded-3xl bg-white">
 
                     {/* Card-Top */}
                     <div 
@@ -21,20 +21,21 @@ export default function EventCard({ tournament, index }) {
                             ? 'bg-gradient-to-b from-fast-200 to-fast-400' 
                             : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
 
-                        <div className="relative rounded-lg mt-6">
+                        <div className={`relative rounded-lg mt-6 ${isHover ? 'px-20' : 'px-0'} duration-500`}>
                             <div 
                                 className={`absolute -top-5 left-1/2 transform -translate-x-1/2 rounded-full w-10
+                                
                                 ${tournament.speed == '200cc' 
                                     ? 'bg-gradient-to-b from-fast-200 to-fast-400' 
                                     : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
                                 <img 
-                                    className="p-1"
+                                    className="p-1" 
                                     src={`/assets/admin/img/cups/${tournament.race.cup.picture}`} 
                                     alt={`${tournament.race.cup.picture}`} />
                             </div>
-                            <div className={`rounded-lg ${isHover ? 'px-[68px]' : 'px-[24px]'}`}>
+                            <div className={`rounded-lg px-4`}>
                                 <img 
-                                    className={`rounded-lg mx-auto ${isHover && 'w-32'}`}
+                                    className={`rounded-lg mx-auto`}
                                     src={`/assets/admin/img/races/${tournament.race.slug.split('_')[0]}/${tournament.race.picture}`}
                                     alt={`${tournament.race.picture}`} />
                             </div>
@@ -87,7 +88,7 @@ export default function EventCard({ tournament, index }) {
 
                             <a className="block mx-auto w-fit bg-white py-1 px-8 rounded-3xl
                                 text-lite text-lg text-center border-solid border-[1px] border-lite
-                                hover:bg-lumi hover:text-white hover:border-lumi" 
+                                hover:bg-lumi hover:text-white hover:border-lumi transition ease-out delay-150" 
                                 href={`/event/${tournament.id}`}>Consulter</a>
                                 
                         </div>

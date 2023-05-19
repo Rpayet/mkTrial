@@ -13,6 +13,8 @@
   to {transform: translateY(0em);}
 }
 
-.animation {
-  animation: slideIn .5s ease-in-out;
+.finished {
+  animation: slideIn .35s ease-in-out;
 }
+
+

@@ -3,14 +3,13 @@ import RaceInfo from "../../OnGoing/Info/RaceInfo"
 import TopList from "./TopList";
 import { rankService } from "../../../_Services/RankService";
 import BottomList from "./BottomList";
-import { formatDate } from "../../../_Services/FormatTime"
 
 export default function TimeOver({ event, entries }) {
 
     const rankList = rankService(entries);
 
     return(
-        <div className="w-full flex justify-around bg-white rounded-lg gap-2 m-auto">
+        <div className="finished w-full flex justify-around bg-white rounded-lg gap-2 m-auto">
 
             <div className="w-1/3 p-4">
 
