@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import EventCard from "./Search-Comp/EventCard";
+import EventCard from "./Tournament-Comp/UI/Search/EventCard";
 
 export default function Slider( { tournaments }) {
     

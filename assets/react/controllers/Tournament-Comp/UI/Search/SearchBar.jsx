@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FilterOpenButton from "./FilterOpenButton";
 import InputField from "./InputField";
 import TogglePage from "./TogglePage";
-import RandomNameButton from "../Create-Comp/RandomNameButton";
+import RandomNameButton from "../Create/RandomNameButton";
 
 export default function SearchBar({ races, page, setPage, setSortList, sortList, eventName, setEventName, data, setData, visibility, setVisibility }) {
   

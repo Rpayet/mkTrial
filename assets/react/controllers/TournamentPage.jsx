@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import SearchBar from "./Search-Comp/SearchBar";
-import ListSorter from "./Search-Comp/ListSorter";
-import EventForm from "./Create-Comp/EventForm";
+import SearchBar from "./Tournament-Comp/UI/Search/SearchBar";
+import ListSorter from "./Tournament-Comp/Wrappers/ListSorter";
+import EventForm from "./Tournament-Comp/Wrappers/EventForm";
 import axios from "axios";
 
 export default function TournamentPage({ tournaments, races, mode }) {
 
     const [visibility, setVisibility] = useState(false);
 
-    const today = new Date();
     const minDate = new Date().toISOString().substring(0, 10);
 
     {/* Pagination filtre courses */}

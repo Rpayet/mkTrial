@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import EventCard from "./EventCard";
-import ScrollReset from "./ScrollReset";
+import EventCard from "../UI/Search/EventCard";
+import ScrollReset from "../UI/Search/ScrollReset";
 
 export default function ListSorter({ tournaments, sortList }) {
 
@@ -39,6 +39,7 @@ export default function ListSorter({ tournaments, sortList }) {
             sortList.input.toLowerCase().includes(tournament.user.name.toLowerCase())
         ));
     }
+    
     {/* Filtre par vitesse */}
     if ( sortList.speed != '') {
         filteredTournaments = filteredTournaments.filter((tournament) => (
