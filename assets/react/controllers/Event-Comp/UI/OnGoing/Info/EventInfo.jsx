@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
+import EventEditor from "./EditorButton";
 
-export default function SubmissionCard({ event }) {
+export default function SubmissionCard({ user, event }) {
+
+    const [editAuth, setEditAuth] = useState(false)
+
+    useEffect(() => {
+        if (user && user.name == event.user.name) {
+            setEditAuth(true)
+        }
+    }, [user, event])
 
     return (
 
@@ -14,12 +23,13 @@ export default function SubmissionCard({ event }) {
             </div>
 
             <div 
-                id="event-container"
                 className="w-full">
 
                 <RaceInfo event= {event} />
 
             </div>
+
+            { editAuth && <EventEditor />}
 
         </div>
 

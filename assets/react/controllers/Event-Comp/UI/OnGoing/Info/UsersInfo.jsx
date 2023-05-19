@@ -29,7 +29,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
             id="users-info"
             className="flex flex-col justify-center items-center">
 
-            <div className="w-full mt-4">
+            <div className="w-full">
 
                 <div className="flex justify-around">
                     <p className="block text-left text-xs text-silver">Participants</p>
