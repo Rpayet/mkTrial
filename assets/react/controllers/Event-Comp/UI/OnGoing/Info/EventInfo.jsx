@@ -3,7 +3,7 @@ import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
 import EventEditor from "./EditorButton";
 
-export default function SubmissionCard({ user, event }) {
+export default function SubmissionCard({ user, event, editor, setEditor }) {
 
     const [editAuth, setEditAuth] = useState(false)
 
@@ -18,7 +18,10 @@ export default function SubmissionCard({ user, event }) {
         <div className="w-1/2 sm:w-full text-center">
 
             <div className="flex items-center justify-between px-4">
-                <h2 className="text-sm text-silver font-bold">{`${event.name}`}</h2>
+                <div className="flex items-center gap-2">
+                    <h2 className="text-sm text-silver font-bold">{`${event.name}`}</h2>
+                    { editAuth && <EventEditor editor={ editor } setEditor= { setEditor } />}
+                </div>
                 <DelayInfo event= {event} />
             </div>
 
@@ -28,8 +31,6 @@ export default function SubmissionCard({ user, event }) {
                 <RaceInfo event= {event} />
 
             </div>
-
-            { editAuth && <EventEditor />}
 
         </div>
 

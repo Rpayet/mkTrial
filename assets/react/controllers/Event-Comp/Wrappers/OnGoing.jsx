@@ -24,7 +24,9 @@ export default function OnGoing({
 
                     <EventInfo 
                         user= { user }
-                        event= { event } />
+                        event= { event }
+                        setEditor= { setEditor }
+                        editor= { editor } />
 
                     <Userinfo
                         user= { user }
