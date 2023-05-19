@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EntryForm from "./EntryForm";
-import { formatTime } from "../../Services/FormatTime";
+import { formatTime } from "../../../_Services/FormatTime";
 
 export default function UserEntry(
     { 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import EventCard from "./EventCard";
-import ScrollReset from "./ScrollReset";
+import EventCard from "../UI/Search/EventCard";
+import ScrollReset from "../UI/Search/ScrollReset";
 
 export default function ListSorter({ tournaments, sortList }) {
 
@@ -30,18 +30,25 @@ export default function ListSorter({ tournaments, sortList }) {
     {/* Filtres avec les noms des checkboxes "race"/"cup" et le champ input */}
     let filteredTournaments = tournaments;
 
-    {/* Filtre par Utilisateur / Tournois / Date */}
-
-    if (sortList.cup != '' || sortList.race != '' || sortList.input != '' || sortList.speed != '') {
+    {/* Filtre par course / coupe */}
+    if (sortList.cup != '' || sortList.race != '' || sortList.input != '') {
         filteredTournaments = filteredTournaments.filter((tournament) => (
             sortList.cup.includes(tournament.race.cup.name) || 
             sortList.race.includes(tournament.race.name) ||
-            sortList.speed.includes(tournament.speed) ||
             sortList.input.toLowerCase().includes(tournament.name.toLowerCase()) ||
             sortList.input.toLowerCase().includes(tournament.user.name.toLowerCase())
         ));
     }
+    
+    {/* Filtre par vitesse */}
+    if ( sortList.speed != '') {
+        filteredTournaments = filteredTournaments.filter((tournament) => (
+            sortList.speed.includes(tournament.speed)
 
+        ));
+    }
+
+    {/* Filtre par Utilisateur / Tournois / Date */}
     const [sortBy, setSortBy] = useState("");
 
     if (sortBy === "asc-Date") {

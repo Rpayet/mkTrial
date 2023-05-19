@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import CupSelection from "./CupSelect";
-import RaceSelect from "./RaceSelect";
-import DateSelect from "./DateSelect";
-import SwitchesSelect from "./SwitchesSelect";
+import CupSelection from "../UI/Create/CupSelect";
+import RaceSelect from "../UI/Create/RaceSelect";
+import DateSelect from "../UI/Create/DateSelect";
+import SwitchesSelect from "../UI/Create/SwitchesSelect";
 
 export default function EventForm({ races, setData, data, errors, minDate }) {
 

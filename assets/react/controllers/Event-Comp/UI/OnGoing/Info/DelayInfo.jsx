@@ -3,7 +3,7 @@ import Countdown from "react-countdown";
 
 export default function DelayInfo({ event }) {
 
-    const endAtDate = new Date(event.endAt.date);
+    const endAtDate = new Date(event.endAt);
     const Completionist = () => <span className="text-xs">Terminé</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {

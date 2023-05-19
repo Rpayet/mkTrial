@@ -11,8 +11,9 @@ export default function RaceInfo({ event }) {
                     id="event-img"
                     className="relative mx-auto">
                         <div 
-                        className="bg-gradient-to-b from-speed-200 to-speed-400 absolute -top-2 left-1/2 transform -translate-x-1/2
-                                        rounded-full">
+                        className="bg-gradient-to-b from-speed-200 to-speed-400 absolute 
+                                    -top-2 left-1/2 transform -translate-x-1/2
+                                    rounded-full">
                             <img 
                                 className="w-10 p-1"
                                 src={`/assets/admin/img/cups/${event.race.cup.picture}`} 

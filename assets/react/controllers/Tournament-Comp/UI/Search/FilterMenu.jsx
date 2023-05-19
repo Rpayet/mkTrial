@@ -1,9 +1,9 @@
 import React from "react";
-import CupFilter from "./Filter-Comp/CupFilter";
-import FilterResetButton from "./Filter-Comp/FilterResetButton";
-import FilterMenuClosedButton from "./Filter-Comp/FilterMenuClosedButton";
-import RaceFilter from "./Filter-Comp/RaceFilter";
-import SpeedFilter from "./Filter-Comp/SpeedFilter";
+import CupFilter from "../FiltersOptions/CupFilter";
+import FilterResetButton from "../FiltersOptions/FilterResetButton";
+import FilterMenuClosedButton from "../FiltersOptions/FilterMenuClosedButton";
+import RaceFilter from "../FiltersOptions/RaceFilter";
+import SpeedFilter from "../FiltersOptions/SpeedFilter";
 
 
 export default function FilterMenu({ races, setVisibility, visibility, setSortList, sortList }) {

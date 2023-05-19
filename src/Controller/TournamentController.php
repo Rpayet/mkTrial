@@ -37,7 +37,7 @@ class TournamentController extends AbstractController
                 'id' => $tournament->getId(),
                 'name' => $tournament->getName(),
                 'createdAt' => $tournament->getCreatedAt(),
-                'endAt' => $tournament->getEndAt()->format('d/m/Y'),
+                'endAt' => $tournament->getEndAt()->format('m/d/Y'),
                 'speed' => $tournament->getSpeed(),
                 'privacy' => $tournament->isPrivacy(),
                 'capacity' => $tournament->getCapacity(),
@@ -67,7 +67,7 @@ class TournamentController extends AbstractController
                     'name' => $tournament->getUser()->getName(),
                     'picture' => $tournament->getUser()->getPicture(),
                     'roles' => $tournament->getUser()->getRoles(),
-                    'email' => $tournament->getUser()->getEmail(),   
+                    'email' => $tournament->getUser()->getEmail(),
                 ],
                 
             ];
