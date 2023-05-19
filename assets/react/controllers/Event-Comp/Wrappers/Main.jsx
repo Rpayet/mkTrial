@@ -4,7 +4,7 @@ import Register from "../UI/OnGoing/Info/Register";
 import EventEditor from "../UI/OnGoing/Info/EventEditor";
 
 export default function Main({
-    event, user, entries, editor,
+    event, user, entries, editor, setEditor,
     isUserRegistered, registration, setRegistration}) {
 
     if (!registration && !editor) {
@@ -28,7 +28,7 @@ export default function Main({
     } else if (editor && !registration) {
 
         return (
-            <EventEditor />
+            <EventEditor setEditor= { setEditor } />
         )
 
     }

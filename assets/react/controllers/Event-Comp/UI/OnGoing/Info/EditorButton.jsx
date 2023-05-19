@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function EditorButton({ editor, setEditor }) {
+export default function EditorButton({ setAuth, setEditor }) {
 
     const handleClick = () => {
-        setEditor(!editor)
+        setEditor(true);
+
     }
 
     return (

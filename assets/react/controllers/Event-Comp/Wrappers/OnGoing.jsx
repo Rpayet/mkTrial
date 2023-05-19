@@ -41,9 +41,11 @@ export default function OnGoing({
                     user= { user }
                     entries= { entries }
                     editor= { editor }
+                    setEditor={ setEditor }
                     isUserRegistered= { isUserRegistered }
                     registration= { registration }
                     setRegistration={ setRegistration } />
+                    
         </div>
     )
 
