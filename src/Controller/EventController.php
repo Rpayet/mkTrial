@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Entry;
-use App\Entity\Tournament;
-use App\Form\EntryType;
+use App\Entity\User;
+use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -176,5 +177,27 @@ class EventController extends AbstractController
 
                 return $this->json(['success' => true]);
             }
+
+    #[Route('/api/event/{id}/edit', name: 'app_event_edit', methods: ['POST'])]
+    #[isGranted('ROLE_USER')]
+    public function edit(
+        Request $request,
+        $id, 
+        TournamentRepository $tournamentRepository,
+        EntityManagerInterface $manager, 
+        )
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $event = $tournamentRepository->find($id);
+
+        $event
+            ->setName($data['name']);
+
+        $manager->persist($event);
+        $manager->flush();
+
+        return $this->json(['success' => true]);
+    }
 }
  

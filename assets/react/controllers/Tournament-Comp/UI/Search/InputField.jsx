@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function InputField({ page, pageMode, sortList, setSortList, eventName, setEventName, data, setData }) {
+export default function InputField({ pageMode, sortList, setSortList, eventName, setEventName, data, setData }) {
 
     const handleEventValue = (event) => {
         setEventName(event.target.value);
@@ -10,8 +10,6 @@ export default function InputField({ page, pageMode, sortList, setSortList, even
     const handleSearchValue = (event) => {
         setSortList({ ...sortList, input: event.target.value });
     }
-
-    
 
     return (
         <div className="w-full flex gap-2">

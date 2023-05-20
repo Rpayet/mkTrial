@@ -21,7 +21,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
     const [sortList, setSortList] = useState({
         cup: [],
         race: [],
-        input: [],
+        input: '',
         speed: [],
     });
 
