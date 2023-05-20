@@ -9,7 +9,9 @@ export default function TimeOver({ event, entries }) {
     const rankList = rankService(entries);
 
     return(
-        <div className="finished w-full flex justify-around bg-white rounded-lg gap-2 m-auto">
+        <div 
+            id="finished"
+            className="w-full flex justify-around bg-white rounded-lg gap-2 m-auto">
 
             <div className="w-1/3 p-4">
 

@@ -20,7 +20,7 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
     }, [cupSelection]);
    
     return (
-        <div className="">
+        <div id="create">
             {/* Messages d'erreurs */}
             <div className={`text-center bg-white rounded-lg w-1/2 my-2 mx-auto`}>
 

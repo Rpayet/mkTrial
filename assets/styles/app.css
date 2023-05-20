@@ -8,13 +8,39 @@
     }
 }
 
-@keyframes slideIn {
+@keyframes slideInTop {
   from {transform: translateY(-2em);} 
   to {transform: translateY(0em);}
 }
 
-.finished {
-  animation: slideIn .35s ease-in-out;
+@keyframes slideInLeft {
+  from {transform: translateX(2em);}
+  to {transform: translateX(0em);}
 }
+
+@keyframes slideInRight {
+  from {transform: translateX(-2em);}
+  to {transform: translateX(0em);}
+}
+
+@keyframes slideInBottom {
+  from {transform: translateY(2em);}
+  to {transform: translateY(0em);}
+}
+
+#finished {
+  animation: slideInTop .35s ease-in-out;
+}
+
+#create {
+  animation: slideInLeft .35s ease-out;
+}
+
+#sort {
+  animation: slideInRight .35s ease-out;
+}
+
+
+
 
 

@@ -7,6 +7,7 @@ export default function EventCard({ tournament, index }) {
     return (
         <>
             <div 
+                id="card"
                 key={index} 
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
