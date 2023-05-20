@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
-import RankSection from "../UI/OnGoing/Rank/RankSection";
-import Register from "../UI/OnGoing/Info/Register";
 import Main from "./Main";
 
 export default function OnGoing({ 
@@ -14,7 +12,7 @@ export default function OnGoing({
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
 
-    const [editor, setEditor] = useState(false);
+    const [editor, setEditor] = useState(true);
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
@@ -45,7 +43,7 @@ export default function OnGoing({
                     isUserRegistered= { isUserRegistered }
                     registration= { registration }
                     setRegistration={ setRegistration } />
-                    
+
         </div>
     )
 
