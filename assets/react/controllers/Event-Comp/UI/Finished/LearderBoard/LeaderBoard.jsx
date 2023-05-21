@@ -4,7 +4,7 @@ import TopList from "./TopList";
 import { rankService } from "../../../_Services/RankService";
 import BottomList from "./BottomList";
 
-export default function TimeOver({ event, entries }) {
+export default function LeaderBoard({ event, entries }) {
 
     const rankList = rankService(entries);
 

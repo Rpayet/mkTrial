@@ -187,12 +187,23 @@ class EventController extends AbstractController
         EntityManagerInterface $manager, 
         )
     {
+        $event = $tournamentRepository->find($id);
         $data = json_decode($request->getContent(), true);
 
-        $event = $tournamentRepository->find($id);
+        $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
+        $form->submit($data);
 
-        $event
-            ->setName($data['name']);
+        if (!$form->isValid()) {
+            
+            $errors = [];
+
+            foreach ($form->getErrors(true) as $error) {
+                // Méthode de FormError
+                $errors[$error->getOrigin()->getName()] = $error->getMessage();
+            }
+            return $this->json($errors, 422); // $data, status_code
+        }
+
 
         $manager->persist($event);
         $manager->flush();
