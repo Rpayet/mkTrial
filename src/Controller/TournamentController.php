@@ -19,7 +19,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class TournamentController extends AbstractController
 {
     #[Route('/tournament', name: 'app_tournament')]
-    public function index(TournamentRepository $tournamentRepository, RaceRepository $raceRepository): Response
+    public function index(TournamentRepository $tournamentRepository, 
+                            RaceRepository $raceRepository): Response
     {
         // Pour récupérer le tableau d'objet des Tournois.
         $tournaments = $tournamentRepository

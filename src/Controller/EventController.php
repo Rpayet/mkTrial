@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Entry;
-use App\Entity\Tournament;
-use App\Form\EntryType;
+use App\Entity\User;
+use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -176,5 +177,38 @@ class EventController extends AbstractController
 
                 return $this->json(['success' => true]);
             }
+
+    #[Route('/api/event/{id}/edit', name: 'app_event_edit', methods: ['POST'])]
+    #[isGranted('ROLE_USER')]
+    public function edit(
+        Request $request,
+        $id, 
+        TournamentRepository $tournamentRepository,
+        EntityManagerInterface $manager, 
+        )
+    {
+        $event = $tournamentRepository->find($id);
+        $data = json_decode($request->getContent(), true);
+
+        $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
+        $form->submit($data);
+
+        if (!$form->isValid()) {
+            
+            $errors = [];
+
+            foreach ($form->getErrors(true) as $error) {
+                // Méthode de FormError
+                $errors[$error->getOrigin()->getName()] = $error->getMessage();
+            }
+            return $this->json($errors, 422); // $data, status_code
+        }
+
+
+        $manager->persist($event);
+        $manager->flush();
+
+        return $this->json(['success' => true]);
+    }
 }
  

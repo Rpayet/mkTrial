@@ -33,7 +33,7 @@ export default function UserEntry(
         <div
         key={i}
         id="userEntryInfo" 
-        className="w-full mt-2 py-4 px-10 bg-white flex justify-between 
+        className="w-full mt-2 py-4 px-10 bg-white flex justify-between duration-500
                     rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]"
         onMouseEnter={() => setHoveredEntryKey(i)}
         onMouseLeave={() => setHoveredEntryKey(null)}>

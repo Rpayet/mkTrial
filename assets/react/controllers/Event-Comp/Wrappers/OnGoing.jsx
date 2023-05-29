@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
-import RankSection from "../UI/OnGoing/Rank/RankSection";
-import Register from "../UI/OnGoing/Info/Register";
+import Main from "./Main";
 
 export default function OnGoing({ 
     user, 
@@ -13,36 +12,38 @@ export default function OnGoing({
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
 
+    const [editor, setEditor] = useState(true);
+
     return (
         <div className="w-full sm:flex gap-4 p-4">
 
                 <div 
                     className="sm:w-1/3 sm:h-fit bg-white rounded-xl flex sm:flex-col gap-4 p-4">
 
-                    <EventInfo event= { event } />
+                    <EventInfo 
+                        user= { user }
+                        event= { event }
+                        setEditor= { setEditor }
+                        editor= { editor } />
 
                     <Userinfo
                         user= { user }
                         event = { event }
                         setRegistration= { setRegistration }
-                        isUserRegistered= { isUserRegistered } /> 
+                        isUserRegistered= { isUserRegistered } />
 
                 </div>
 
-                {/* Vérifie si l'utilsateur est incrit */}
-                { !registration 
+                <Main
+                    event= { event }
+                    user= { user }
+                    entries= { entries }
+                    editor= { editor }
+                    setEditor={ setEditor }
+                    isUserRegistered= { isUserRegistered }
+                    registration= { registration }
+                    setRegistration={ setRegistration } />
 
-                    ? <RankSection 
-                        event= { event }
-                        user= { user }
-                        entries= { entries }
-                        isUserRegistered= { isUserRegistered } />
-
-                    : <Register 
-                        event= { event }
-                        setRegistration= {setRegistration} />
-
-                }
         </div>
     )
 

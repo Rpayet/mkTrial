@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CupSelection from "../UI/Create/CupSelect";
 import RaceSelect from "../UI/Create/RaceSelect";
-import DateSelect from "../UI/Create/DateSelect";
-import SwitchesSelect from "../UI/Create/SwitchesSelect";
+import PrimaryOptions from "../UI/Create/PrimaryOptions";
 
 export default function EventForm({ races, setData, data, errors, minDate }) {
 
@@ -21,7 +20,7 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
     }, [cupSelection]);
    
     return (
-        <div className="">
+        <div id="create">
             {/* Messages d'erreurs */}
             <div className={`text-center bg-white rounded-lg w-1/2 my-2 mx-auto`}>
 
@@ -38,7 +37,7 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                 <div className="">
 
                     {/* Comp avec les switches Speed / Privacy */}
-                    <SwitchesSelect
+                    <PrimaryOptions
                         data= { data }
                         setData= { setData }
                         dateValue= { dateValue } 

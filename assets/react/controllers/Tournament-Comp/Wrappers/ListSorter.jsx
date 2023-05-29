@@ -72,7 +72,7 @@ export default function ListSorter({ tournaments, sortList }) {
     ));
 
     return (
-        <div>
+        <div id="sort"> 
             
             {showScrollReset && <ScrollReset />}
 

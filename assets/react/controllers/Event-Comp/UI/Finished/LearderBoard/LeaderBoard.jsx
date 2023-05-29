@@ -4,12 +4,14 @@ import TopList from "./TopList";
 import { rankService } from "../../../_Services/RankService";
 import BottomList from "./BottomList";
 
-export default function TimeOver({ event, entries }) {
+export default function LeaderBoard({ event, entries }) {
 
     const rankList = rankService(entries);
 
     return(
-        <div className="finished w-full flex justify-around bg-white rounded-lg gap-2 m-auto">
+        <div 
+            id="finished"
+            className="w-full flex justify-around bg-white rounded-lg gap-2 m-auto">
 
             <div className="w-1/3 p-4">
 
@@ -18,7 +20,9 @@ export default function TimeOver({ event, entries }) {
                     <RaceInfo event={ event } />
                 </div>
                 <div className="text-center px-2">
-                    <p>Du <span className="font-bold">{event.createdAt}</span> au <span className="font-bold">{event.endAt}</span></p>
+                    <p>Du <span className="font-bold">{event.createdAt}</span> 
+                    au 
+                    <span className="font-bold">{event.endAt}</span></p>
                     <p>Organisé par <span className="font-bold">{event.user.name}</span></p>
                 </div>
                                   

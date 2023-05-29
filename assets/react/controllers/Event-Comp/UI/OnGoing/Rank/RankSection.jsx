@@ -34,7 +34,6 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
 
         return (
             <div 
-                id="rank-container"
                 className="sm:w-2/3 flex flex-col items-center">
                     
                     <RankOptions

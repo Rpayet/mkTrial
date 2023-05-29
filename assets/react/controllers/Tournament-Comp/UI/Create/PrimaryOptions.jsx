@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Switch from "react-switch";
 import DateSelect from "./DateSelect";
 
-export default function SwitchesSelect ({ data, setData, dateValue, setDateValue, minDate }) {
+export default function PrimaryOptions ({ data, setData, dateValue, setDateValue, minDate, minCapacity }) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
@@ -66,6 +66,7 @@ export default function SwitchesSelect ({ data, setData, dateValue, setDateValue
                 setDateValue= { setDateValue }
                 minDate= { minDate } />
 
+            {/* Sélection du nombre de participants */}
             <div>
                 <span className="block text-xs text-center text-gray-500 font-bold">Places disponibles</span>
                 <input 
@@ -73,7 +74,7 @@ export default function SwitchesSelect ({ data, setData, dateValue, setDateValue
                     className="block w-36 mx-auto px-2 py-1 border rounded-lg 
                     cursor-pointer focus:outline-none focus:border-lumi" 
                     placeholder="Sans limite"
-                    min={3}
+                    min={ minCapacity === null ? '3' : minCapacity}
                     onChange={handleCapacity}/>
 
             </div>

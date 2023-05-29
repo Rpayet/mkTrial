@@ -9,7 +9,7 @@ export default function EventPage({ event, user, entries }) {
 
     const [isOngoing, setIsOngoing] = useState(false);
 
-    {/* Vérifie si la date est dépassé en temps réel */}
+    {/* Vérifie si la date de fin de l'event est dépassé*/}
     useEffect(() => {
         if (eventEndAt > date) {
             setIsOngoing(true);
@@ -19,12 +19,12 @@ export default function EventPage({ event, user, entries }) {
     }, [eventEndAt, date]);
 
     return (
-        <>
+        <div className="">
             {isOngoing ? (
                 <OnGoing user={user} event={event} entries={entries} />
             ) : (
                 <Finished event={event} entries={entries} />
             )}
-        </>
+        </div>
     );
 }

@@ -14,7 +14,6 @@ export default function SearchBar({ races, page, setPage, setSortList, sortList,
     return (
         <div className="bg-white py-6 px-2 sm:px-12 rounded-lg relative z-30">
             <InputField 
-                page = { page }
                 pageMode = { inputFields[page] } 
                 eventName= { eventName }
                 setEventName = { setEventName }

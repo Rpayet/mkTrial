@@ -29,7 +29,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
             id="users-info"
             className="flex flex-col justify-center items-center">
 
-            <div className="w-full mt-4">
+            <div className="w-full">
 
                 <div className="flex justify-around">
                     <p className="block text-left text-xs text-silver">Participants</p>
@@ -48,7 +48,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                             title={u.name}
                             src={u.picture ? `/assets/user/img/${u.picture}` : `/assets/admin/img/icons/Default.png`}
                             alt="default"
-                            className="h-10 rounded-full"
+                            className="w-10 rounded-full"
                         />
                     ))}
 
