@@ -12,7 +12,7 @@ export default function OnGoing({
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
 
-    const [editor, setEditor] = useState(true);
+    const [editor, setEditor] = useState(false);
 
     return (
         <div className="w-full sm:flex gap-4 p-4">

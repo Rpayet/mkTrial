@@ -19,7 +19,7 @@ export default function SubmissionCard({ user, event, editor, setEditor }) {
 
             <div className="flex items-center justify-between px-4">
                 <div className="flex items-center gap-2">
-                    <h2 className="text-sm text-silver font-bold">{`${event.name.toUpperCase()}`}</h2>
+                    <h2 className="text-sm text-silver font-bold">{`${event.name}`}</h2>
                     { editAuth && <EventEditor setEditor= { setEditor }  />}
                 </div>
                 <DelayInfo event= {event} />
