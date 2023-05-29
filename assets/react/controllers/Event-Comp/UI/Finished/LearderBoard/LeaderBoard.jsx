@@ -20,7 +20,9 @@ export default function LeaderBoard({ event, entries }) {
                     <RaceInfo event={ event } />
                 </div>
                 <div className="text-center px-2">
-                    <p>Du <span className="font-bold">{event.createdAt}</span> au <span className="font-bold">{event.endAt}</span></p>
+                    <p>Du <span className="font-bold">{event.createdAt}</span> 
+                    au 
+                    <span className="font-bold">{event.endAt}</span></p>
                     <p>Organisé par <span className="font-bold">{event.user.name}</span></p>
                 </div>
                                   

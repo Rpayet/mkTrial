@@ -100,9 +100,9 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setName($faker->firstName())
                 ->setEmail($faker->email())
-                ->setPassword('bateau')
+                ->setPassword('password')
                 ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-10 days', 'now')))
-                ->setPicture('https://www.gravatar.com/avatar/'.md5($user->getEmail()).'?d=identicon&r=g');
+                ->setPicture(null);
 
             $manager->persist($user);
             $users[] = $user;
@@ -118,6 +118,8 @@ class AppFixtures extends Fixture
             ->setEndAt($faker->dateTimeBetween(\DateTime::createFromImmutable($tournament->getCreatedAt()), '+30 days'))
             ->setRace($race)
             ->setUser($user)
+            ->addRegistered($user)
+            ->setCapacity(null)
             ->setSpeed(rand(0, 1) == 0 ? '150cc' : '200cc')
             ->setPrivacy(rand(0, 1) == 0 ? true : false);
                         
@@ -127,7 +129,7 @@ class AppFixtures extends Fixture
             
                 -> setTime($faker->numberBetween(50000, 120000))
                 -> setUser($users[array_rand($users)])
-                -> setPicture('https://i.servimg.com/u/f18/18/85/67/82/tm/wiiu_s30.jpg');
+                -> setPicture('6457bb70c3e8e.jpg');
 
                 $tournament ->addEntry($entry);
                 $manager ->persist($entry);

@@ -48,7 +48,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                             title={u.name}
                             src={u.picture ? `/assets/user/img/${u.picture}` : `/assets/admin/img/icons/Default.png`}
                             alt="default"
-                            className="h-10 rounded-full"
+                            className="w-10 rounded-full"
                         />
                     ))}
 

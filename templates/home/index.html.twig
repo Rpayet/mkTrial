@@ -3,7 +3,7 @@
 {% block title %}Accueil | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="w-full bg-white flex rounded-lg my-6">
+    <section class="w-full bg-white flex rounded-lg my-6">
         <div class="w-1/2">
             <img 
                 src="/assets/admin/img/icons/Home_img_01.png"
@@ -23,5 +23,16 @@
                     hover:bg-mario hover:text-white">
                 Guide</a>
         </div>
-    </div>
+    </section>
+    <section class="mt-20">
+        <div class="text-center">
+			<div class="flex flex-wrap justify-center text-3xl font-bold mb-6 hyphens-manual ">
+				<img src="/assets/admin/img/icons/Trophy-Color.png" alt="trophy">
+				<h2>Tournois en cours</h2>
+				<img src="/assets/admin/img/icons/Trophy-Color.png" alt="trophy">
+			</div>
+		</div>
+
+		<div {{ react_component('Slide', {tournaments: tournaments}) }}></div>
+    </section>
 {% endblock %}
