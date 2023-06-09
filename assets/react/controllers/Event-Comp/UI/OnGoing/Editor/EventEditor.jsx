@@ -34,6 +34,7 @@ export default function EventEditor({ event, setEditor }) {
             .post(`/api/event/${eventId}/edit`, data)
             .then(response => {
                 console.log(response.success)
+                setEditor(false)
             })
             .catch(errors => setErrors(errors.response.data));
     }
@@ -42,6 +43,16 @@ export default function EventEditor({ event, setEditor }) {
         <div className="sm:w-2/3 flex flex-col gap-4">
             
             <h2 className="w-fit font-bold border-solid border-b-2 border-lumi">Modifier les informations de l'événement</h2>
+            {/* Messages d'erreurs */}
+            <div className={`text-center bg-white rounded-lg w-1/2 my-2 mx-auto`}>
+
+                {errors.name && <p className="text-red-500" >{ errors.name }</p>}
+                {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
+                {errors.race && <p className="text-red-500" >{ errors.race }</p>}
+                {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
+                {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
+
+            </div>
 
             <form
                 className="flex flex-col gap-4" 
@@ -57,6 +68,7 @@ export default function EventEditor({ event, setEditor }) {
                 </div>
                 
                 <div>
+                    
                     <label className="font-bold">Options</label>
                     <div className="bg-white rounded-lg py-4">
                         <PrimaryOptions 
@@ -65,6 +77,7 @@ export default function EventEditor({ event, setEditor }) {
                             setData= { setData }
                             minDate= { minDate } />
                     </div>
+
                 </div>
 
                 <EditorValidation setEditor= { setEditor } />
