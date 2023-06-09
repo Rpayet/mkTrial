@@ -54,6 +54,8 @@ class Tournament
     private Collection $entries;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Positive]
+    #[Assert\GreaterThanOrEqual(value: 3, message: 'La capacité doit être supérieure ou égale à 3. Consultez la rubrique "En Savoir Plus"')]
     private ?int $capacity = null;
 
     #[ORM\ManyToMany(targetEntity: User::class)]

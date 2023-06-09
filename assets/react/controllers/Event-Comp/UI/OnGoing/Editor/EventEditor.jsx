@@ -6,7 +6,6 @@ import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions
 export default function EventEditor({ event, setEditor }) {
 
     const eventId = event.id;
-    const [dateValue, setDateValue] = useState('');
     const minDate = new Date().toISOString().substring(0, 10);
 
     const [data, setData] = useState({
@@ -17,9 +16,7 @@ export default function EventEditor({ event, setEditor }) {
         privacy: event.privacy,
         capacity: event.capacity,
     }) 
-
-    console.log(event.registered.length)
-    
+   
     const handleName = (event) => {
         setData({...data, name: event.target.value})
     }
@@ -63,12 +60,10 @@ export default function EventEditor({ event, setEditor }) {
                     <label className="font-bold">Options</label>
                     <div className="bg-white rounded-lg py-4">
                         <PrimaryOptions 
+                            event= { event }
                             data= { data }
                             setData= { setData }
-                            dateValue= { dateValue } 
-                            setDateValue= { setDateValue }
-                            minDate= { minDate } 
-                            minCapacity= { event.registered.length }/>
+                            minDate= { minDate } />
                     </div>
                 </div>
 
