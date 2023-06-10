@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
+use App\Utils\DataUtils;
 use App\Entity\Entry;
-use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -31,70 +31,15 @@ class EventController extends AbstractController
         }
 
         // Objet lisible pou React
-        $eventData = [
-            'id' => $event->getId(),
-            'name' => $event->getName(),
-            'createdAt' => $event->getCreatedAt()->format('m/d/Y'),
-            'endAt' => $event->getEndAt()->format('m/d/Y'),
-            'speed' => $event->getSpeed(),
-            'privacy' => $event->isPrivacy(),
-            'capacity' => $event->getCapacity(),
-            'registered' => $event->getRegistered()->map(function ($user) {
-                return [
-                    'id' => $user->getId(),
-                    'name' => $user->getName(),
-                    'picture' => $user->getPicture(),
-                    'roles' => $user->getRoles(),
-                    'email' => $user->getEmail(),
-                ];
-            })->toArray(),
-            'user' => [
-                'id' => $event->getUser()->getId(),
-                'name' => $event->getUser()->getName(),
-                'picture' => $event->getUser()->getPicture(),
-                'roles' => $event->getUser()->getRoles(),
-                'email' => $event->getUser()->getEmail(),   
-            ],
-            'race' => [
-                'id' => $event->getRace()->getId(),
-                'name' => $event->getRace()->getName(),
-                'slug' => $event->getRace()->getSlug(),
-                'picture' => $event->getRace()->getPicture(),
-                'cup' => [
-                    'id' => $event->getRace()->getCup()->getId(),
-                    'name' => $event->getRace()->getCup()->getName(),
-                    'slug' => $event->getRace()->getCup()->getSlug(),
-                    'picture' => $event->getRace()->getCup()->getPicture(),
-                ],
-            ]
-        ];
+        $eventData = DataUtils::getEventData($event);
 
         // Entries
         $entries = $entryRepository->findBy(array('tournament' => $id));
-        $entryData = [];
-        foreach ($entries as $entry) {
-            $entryData[] = [
-                'id' => $entry->getId(), 
-                'user' => [
-                    'id' => $entry->getUser()->getId(),
-                    'name' => $entry->getUser()->getName(),
-                    'picture' => $entry->getUser()->getPicture(),
-                ],
-                'time' => $entry->getTime(),
-                'createdAt' => $entry->getCreatedAt()->format('Y-m-d'),
-                'picture' => $entry->getPicture(),
-            ];
-        }
+        $entryData = array_map([DataUtils::class, 'getEntryData'], $entries);
+        
 
-        // Récupération de l'utilisateur connecté en objet Pour React
-        if ($this->isGranted('ROLE_USER')) {
-            $user = [
-                'id' => $this->getUser()->getId(),
-                'name' => $this->getUser()->getName(),
-            ];
-        } else {
-            $user = null;
-        }
+        // Récupération de l'utilisateur connecté en objet pour React
+        $user = $this->isGranted('ROLE_USER') ? DataUtils::getUserData($this->getUser()) : null;
 
         return $this->render('event/index.html.twig', [
             'event' => $eventData,
@@ -210,5 +155,6 @@ class EventController extends AbstractController
 
         return $this->json(['success' => true]);
     }
+
 }
  
