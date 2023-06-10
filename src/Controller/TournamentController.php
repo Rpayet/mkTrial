@@ -8,6 +8,7 @@ use App\Form\UserType;
 use App\Repository\RaceRepository;
 use App\Repository\TournamentRepository;
 use App\Repository\UserRepository;
+use App\Utils\DataUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -32,65 +33,11 @@ class TournamentController extends AbstractController
                     ->getResult();
 
         // Récupère la liste des tournois
-        $eventsData = [];
-        foreach ($tournaments as $tournament) {
-            $eventsData[] = [
-                'id' => $tournament->getId(),
-                'name' => $tournament->getName(),
-                'createdAt' => $tournament->getCreatedAt(),
-                'endAt' => $tournament->getEndAt()->format('m/d/Y'),
-                'speed' => $tournament->getSpeed(),
-                'privacy' => $tournament->isPrivacy(),
-                'capacity' => $tournament->getCapacity(),
-                'race' => [
-                    'id' => $tournament->getRace()->getId(),
-                    'name' => $tournament->getRace()->getName(),
-                    'slug' => $tournament->getRace()->getSlug(),
-                    'picture' => $tournament->getRace()->getPicture(),
-                    'cup' => [
-                        'id' => $tournament->getRace()->getCup()->getId(),
-                        'name' => $tournament->getRace()->getCup()->getName(),
-                        'slug' => $tournament->getRace()->getCup()->getSlug(),
-                        'picture' => $tournament->getRace()->getCup()->getPicture(),
-                    ],
-                ],
-                'registered' => $tournament->getRegistered()->map(function ($user) {
-                    return [
-                        'id' => $user->getId(),
-                        'name' => $user->getName(),
-                        'picture' => $user->getPicture(),
-                        'roles' => $user->getRoles(),
-                        'email' => $user->getEmail(),
-                    ];
-                })->toArray(),
-                'user' => [
-                    'id' => $tournament->getUser()->getId(),
-                    'name' => $tournament->getUser()->getName(),
-                    'picture' => $tournament->getUser()->getPicture(),
-                    'roles' => $tournament->getUser()->getRoles(),
-                    'email' => $tournament->getUser()->getEmail(),
-                ],
-                
-            ];
-        }
+        $eventsData = array_map([DataUtils::class, 'getEventData'], $tournaments);
         
         // Récupère la liste des courses/coupes
         $races = $raceRepository->findAll();
-        $racesData = [];
-        foreach ($races as $race) {
-            $racesData[] = [
-                'id' => $race->getId(),
-                'name' => $race->getName(),
-                'slug' => $race->getSlug(),
-                'picture' => $race->getPicture(),
-                'cup' => [
-                    'id' => $race->getCup()->getId(),
-                    'name' => $race->getCup()->getName(),
-                    'slug' => $race->getCup()->getSlug(),
-                    'picture' => $race->getCup()->getPicture(),
-                ],
-            ];
-        }
+        $racesData = array_map([DataUtils::class, 'getRaceData'], $races);
 
         return $this->render('tournament/index.html.twig', [
             'tournaments' => $eventsData, // Retourne le tableau d'objet des tournois

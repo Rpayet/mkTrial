@@ -30,7 +30,7 @@ class EventController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        // Objet lisible pou React
+        // Infos générales de l'événement
         $eventData = DataUtils::getEventData($event);
 
         // Entries
@@ -82,8 +82,6 @@ class EventController extends AbstractController
         Security $security, 
         TournamentRepository $tournamentRepository ) 
             {
-                $data = json_decode($request->getContent(), true);
-
                 $user = $security->getUser();
                 $event = $tournamentRepository->find($id);
 

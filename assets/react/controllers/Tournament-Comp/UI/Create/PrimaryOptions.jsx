@@ -6,7 +6,7 @@ export default function PrimaryOptions ({ event, data, setData, minDate}) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
-    const [capacity, setCapacity] = useState(event.capacity);
+    const [capacity, setCapacity] = useState(event?.capacity || '');
 
     const toggleSpeed = () => {
         setSpeed(!speed);
@@ -34,11 +34,11 @@ export default function PrimaryOptions ({ event, data, setData, minDate}) {
 
     useEffect(() => {
         
-        if (event.speed === '200cc') {
+        if (event?.speed === '200cc') {
             setSpeed(true);
         }
 
-        if (event.privacy === true) {
+        if (event?.privacy === true) {
             setPrivacy(true);
         }
 

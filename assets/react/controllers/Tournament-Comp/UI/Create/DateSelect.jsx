@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function DateSelect({ event, setData, data, minDate }) {
 
-    const[endAt, setEndAt] = useState(new Date(event.endAt).toISOString().substring(0, 10));
+    const[endAt, setEndAt] = useState(event?.endAt ? new Date(event.endAt).toISOString().substring(0, 10) : '');
 
     const handleDateChange = (event) => {
         setData({ ...data, endAt: event.target.value });

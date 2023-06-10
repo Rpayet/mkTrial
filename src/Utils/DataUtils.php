@@ -2,13 +2,36 @@
 
 namespace App\Utils;
 
+use App\Entity\Cup;
 use App\Entity\User;
 use App\Entity\Entry;
+use App\Entity\Race;
 use App\Entity\Tournament;
 
 class DataUtils
 {
-    public static function getUserData(User$user): array
+    public static function getRaceData(Race $race): array
+    {
+        return [
+            'id' => $race->getId(),
+            'name' => $race->getName(),
+            'slug' => $race->getSlug(),
+            'picture' => $race->getPicture(),
+            'cup' => self::getCupData($race->getCup()),
+        ];
+    }
+
+    public static function getCupData(Cup $cup): array
+    {
+        return [
+            'id' => $cup->getId(),
+            'name' => $cup->getName(),
+            'slug' => $cup->getSlug(),
+            'picture' => $cup->getPicture(),
+        ];
+    }
+    
+    public static function getUserData(User $user): array
     {
         return [
             'id' => $user->getId(),
@@ -44,18 +67,8 @@ class DataUtils
                 return self::getUserData($user);
             })->toArray(),
             'user' => self::getUserData($event->getUser()),
-            'race' => [
-                'id' => $event->getRace()->getId(),
-                'name' => $event->getRace()->getName(),
-                'slug' => $event->getRace()->getSlug(),
-                'picture' => $event->getRace()->getPicture(),
-                'cup' => [
-                    'id' => $event->getRace()->getCup()->getId(),
-                    'name' => $event->getRace()->getCup()->getName(),
-                    'slug' => $event->getRace()->getCup()->getSlug(),
-                    'picture' => $event->getRace()->getCup()->getPicture(),
-                ],
-            ],
+            'race' => self::getRaceData($event->getRace()),
         ];
     }
+
 }
