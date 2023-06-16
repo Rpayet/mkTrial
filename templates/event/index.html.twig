@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ event.name }} | {{ parent() }}{% endblock %}
+{% block title %}kekchoz | {{ parent() }}{% endblock %}
 
 {% block body %}
 
-    {# <pre>{{dump(request)}}</pre> #}
-
     <div
         class="my-20"
-        {{ react_component('Event', { event: event, user: user, entries: entries } )}}>
+        {{ react_component('Event', { eventId: app.request.get('id') } )}}>
     </div>
 
 {% endblock %}

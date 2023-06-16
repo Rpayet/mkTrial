@@ -20,7 +20,7 @@ export default function Main({
     } else if(registration && !editor) {
 
         return (
-            <Register 
+            <Register
             event= { event }
             setRegistration= {setRegistration} />
         )

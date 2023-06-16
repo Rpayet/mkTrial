@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function DateSelect({ event, setData, data, minDate }) {
+export default function DateSelect({ event, minDate }) {
 
     const[endAt, setEndAt] = useState(event?.endAt ? new Date(event.endAt).toISOString().substring(0, 10) : '');
 

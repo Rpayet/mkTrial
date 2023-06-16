@@ -21,7 +21,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
             setShow(false);
         }
 
-    }, [isUserRegistered, event, user]);
+    }, [isUserRegistered, event, user, event]);
 
     return (
     
@@ -34,7 +34,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                 <div className="flex justify-around">
                     <p className="block text-left text-xs text-silver">Participants</p>
                     
-                    {event.capacity && <p className="block text-right text-xs text-silver">{event.registered.length}/{event.capacity}</p>}
+                    {event.capacity >= 3 && <p className="block text-right text-xs text-silver">{event.registered.length}/{event.capacity}</p>}
                     
                 </div>
                 

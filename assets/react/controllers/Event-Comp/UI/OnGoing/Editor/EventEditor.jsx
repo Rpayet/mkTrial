@@ -10,16 +10,20 @@ export default function EventEditor({ event, setEditor }) {
 
     const [data, setData] = useState({
         name: event.name,
-        endAt: new Date(event.endAt),
-        race: event.race.id,
         speed: event.speed,
-        privacy: event.privacy,
+        endAt: event.endAt,
         capacity: event.capacity,
-    }) 
+        privacy: event.privacy
+    });
+    console.log(data);
    
     const handleName = (event) => {
-        setData({...data, name: event.target.value})
-    }
+        const inputValue = event.target.value;
+
+        if (inputValue.length <= 15) {
+            setData({...data, name: event.target.value})
+        }
+    };
 
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
@@ -31,9 +35,8 @@ export default function EventEditor({ event, setEditor }) {
         setErrors({});
 
         axios
-            .post(`/api/event/${eventId}/edit`, data)
+            .post(`/api/event/${eventId}/edit`, data) // Mis à jour des champs de l'événement
             .then(response => {
-                console.log(response.success)
                 setEditor(false)
             })
             .catch(errors => setErrors(errors.response.data));
@@ -73,14 +76,12 @@ export default function EventEditor({ event, setEditor }) {
                     <div className="bg-white rounded-lg py-4">
                         <PrimaryOptions 
                             event= { event }
-                            data= { data }
-                            setData= { setData }
                             minDate= { minDate } />
                     </div>
 
                 </div>
 
-                <EditorValidation setEditor= { setEditor } />
+                <EditorValidation event= { event } setEditor= { setEditor } />
 
             </form>
 

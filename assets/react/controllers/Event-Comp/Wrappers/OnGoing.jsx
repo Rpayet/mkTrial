@@ -3,11 +3,7 @@ import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import Main from "./Main";
 
-export default function OnGoing({ 
-    user, 
-    event,
-    entries,
-}) {
+export default function OnGoing({ user, entries, event }) {
 
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
@@ -22,13 +18,13 @@ export default function OnGoing({
 
                     <EventInfo 
                         user= { user }
-                        event= { event }
+                        event={ event }
                         setEditor= { setEditor }
                         editor= { editor } />
 
                     <Userinfo
                         user= { user }
-                        event = { event }
+                        event= { event }
                         setRegistration= { setRegistration }
                         isUserRegistered= { isUserRegistered } />
 

@@ -19,8 +19,16 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EventController extends AbstractController
 {
-    #[Route('/event/{id}', name: 'app_event')]
-    public function index(TournamentRepository $tournamentRepository, EntryRepository $entryRepository, int $id, Security $security): Response
+    #[Route('event/{id}', name: 'app_event')]
+    public function index($id): Response
+    {
+        return $this->render('event/index.html.twig', [
+            'id' => $id
+        ]);
+    }
+
+    #[Route('api/event/{id}', name: 'api_event', methods: ['GET'])]
+    public function event(TournamentRepository $tournamentRepository, EntryRepository $entryRepository, int $id, Security $security)
     {
         // Récupère l'événement avec l'ID
         $event = $tournamentRepository->find($id);
@@ -41,7 +49,7 @@ class EventController extends AbstractController
         // Récupération de l'utilisateur connecté en objet pour React
         $user = $this->isGranted('ROLE_USER') ? DataUtils::getUserData($this->getUser()) : null;
 
-        return $this->render('event/index.html.twig', [
+        return $this->json([
             'event' => $eventData,
             'user' => $user,
             'entries' => $entryData,
@@ -151,7 +159,7 @@ class EventController extends AbstractController
         $manager->persist($event);
         $manager->flush();
 
-        return $this->json(['success' => true]);
+        return $this->json(['data' => $data]);
     }
 
 }

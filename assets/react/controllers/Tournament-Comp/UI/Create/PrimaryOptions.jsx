@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
 import DateSelect from "./DateSelect";
 
-export default function PrimaryOptions ({ event, data, setData, minDate}) {
+export default function PrimaryOptions ({ event, minDate}) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
@@ -74,8 +74,6 @@ export default function PrimaryOptions ({ event, data, setData, minDate}) {
             {/* Sélection date de fin de l'événement */}
             <DateSelect
                 event= { event }
-                data= { data }
-                setData= { setData }
                 minDate= { minDate } />
 
             {/* Sélection du nombre de participants */}
