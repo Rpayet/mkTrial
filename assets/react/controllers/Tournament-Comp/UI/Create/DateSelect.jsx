@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-export default function DateSelect({ event, minDate }) {
+export default function DateSelect({ setData, data, event }) {
 
-    const[endAt, setEndAt] = useState(event?.endAt ? new Date(event.endAt).toISOString().substring(0, 10) : '');
+    const minDate = new Date().toISOString().substring(0, 10);
 
     const handleDateChange = (event) => {
         setData({ ...data, endAt: event.target.value });
-        setEndAt(event.target.value);
     }
 
     return (
@@ -20,7 +19,7 @@ export default function DateSelect({ event, minDate }) {
                             focus:border-lumi" 
                 type="date"
                 min={minDate}
-                value={endAt}
+                value={new Date(data.endAt).toISOString().substring(0, 10)}
                 onChange={handleDateChange}
                 />
         </div>

@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\Utils\DataUtils;
-use App\Entity\Entry;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +25,10 @@ class EventController extends AbstractController
     }
 
     #[Route('api/event/{id}', name: 'api_event', methods: ['GET'])]
-    public function event(TournamentRepository $tournamentRepository, EntryRepository $entryRepository, int $id, Security $security)
+    public function event(
+        TournamentRepository $tournamentRepository, 
+        int $id,
+        EntryRepository $entryRepository)
     {
         // Récupère l'événement avec l'ID
         $event = $tournamentRepository->find($id);
@@ -44,15 +44,15 @@ class EventController extends AbstractController
         // Entries
         $entries = $entryRepository->findBy(array('tournament' => $id));
         $entryData = array_map([DataUtils::class, 'getEntryData'], $entries);
-        
 
         // Récupération de l'utilisateur connecté en objet pour React
         $user = $this->isGranted('ROLE_USER') ? DataUtils::getUserData($this->getUser()) : null;
 
+
         return $this->json([
             'event' => $eventData,
-            'user' => $user,
             'entries' => $entryData,
+            'user' => $user
         ]);
     }
 
@@ -81,54 +81,6 @@ class EventController extends AbstractController
             return $this->json(['success' => true]);
         }
     
-    #[Route('/api/event/{id}/entry', name: 'app_event_entry_new', methods: ['POST'])]
-    #[IsGranted('ROLE_USER')]
-    public function newEntry(
-        Request $request,
-        $id,
-        EntityManagerInterface $manager, 
-        Security $security, 
-        TournamentRepository $tournamentRepository ) 
-            {
-                $user = $security->getUser();
-                $event = $tournamentRepository->find($id);
-
-                $time = $request->request->get('time');
-
-                $imageFile = $request->files->get('picture');
-
-                $entry = new Entry();
-                $entry
-                    ->setUser($user)
-                    ->setCreatedAt(new \DateTimeImmutable())
-                    ->setTournament($event)
-                    ->setTime($time);
-
-                if ($imageFile) {
-                    // Génération d'un nom unique pour le fichier
-                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
-
-                    try {
-                        // Déplacement du fichier vers le répertoire public/uploads
-                        $imageFile->move(
-                            $this->getParameter('kernel.project_dir') . '/public/assets/user/entries',
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                        // Gestion des exceptions
-                        // ...
-                    }
-
-                    // Mise à jour de l'objet Entry avec le nom du fichier
-                    $entry->setPicture($newFilename);
-                }
-                
-                $manager->persist($entry);
-                $manager->flush();
-
-                return $this->json(['success' => true]);
-            }
-
     #[Route('/api/event/{id}/edit', name: 'app_event_edit', methods: ['POST'])]
     #[isGranted('ROLE_USER')]
     public function edit(

@@ -3,19 +3,18 @@ import EditorValidation from "./EditorValidation";
 import axios from "axios";
 import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions";
 
-export default function EventEditor({ event, setEditor }) {
+export default function EventEditor({ setEventData, event, setEditor }) {
 
     const eventId = event.id;
-    const minDate = new Date().toISOString().substring(0, 10);
 
     const [data, setData] = useState({
         name: event.name,
+        race: event.race.id,
         speed: event.speed,
         endAt: event.endAt,
         capacity: event.capacity,
         privacy: event.privacy
     });
-    console.log(data);
    
     const handleName = (event) => {
         const inputValue = event.target.value;
@@ -35,9 +34,16 @@ export default function EventEditor({ event, setEditor }) {
         setErrors({});
 
         axios
-            .post(`/api/event/${eventId}/edit`, data) // Mis à jour des champs de l'événement
+            .post(`/api/event/${eventId}/edit`, data) 
             .then(response => {
-                setEditor(false)
+                axios.get(`/api/event/${eventId}`)
+                .then(response => {
+                    setEventData(response.data); 
+                    setEditor(false);
+                })
+                .catch(error => {
+                    console.error(error);
+                });  
             })
             .catch(errors => setErrors(errors.response.data));
     }
@@ -75,13 +81,14 @@ export default function EventEditor({ event, setEditor }) {
                     <label className="font-bold">Options</label>
                     <div className="bg-white rounded-lg py-4">
                         <PrimaryOptions 
-                            event= { event }
-                            minDate= { minDate } />
+                            setData= { setData }
+                            data= {data}
+                            event= { event } />
                     </div>
 
                 </div>
 
-                <EditorValidation event= { event } setEditor= { setEditor } />
+                <EditorValidation setData= { setData } data= { data } event= { event } setEditor= { setEditor } />
 
             </form>
 

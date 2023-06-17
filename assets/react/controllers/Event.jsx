@@ -14,16 +14,16 @@ export default function EventPage({ eventId }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await axios.get(`/api/event/${eventId}`);
-                setEventData(response.data);
-                setIsLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setIsLoading(false);
-            }
+          try {
+            const response = await axios.get(`/api/event/${eventId}`);
+            setEventData(response.data);
+            setIsLoading(false);
+          } catch (error) {
+            setError(error.message);
+            setIsLoading(false);
+          }
         };
-
+    
         fetchData();
     }, [eventId]);
 
@@ -44,20 +44,17 @@ export default function EventPage({ eventId }) {
 
     const { event, user, entries } = eventData;
 
-    {/* Vérifie si la date de fin de l'event est dépassé*/}
-    // useEffect(() => {
-    //     if (event.EndAt > date) {
-    //         setIsOngoing(true);
-    //     } else {
-    //         setIsOngoing(false);
-    //     }
-    // }, [event.EndAt, date]);
-    
+    console.log(eventData)
+
     return (
         <div className="">
-            {event && user && entries ? (
+            {event && entries ? (
                 isOngoing ? (
-                    <OnGoing user={user} event={event} entries={entries} />
+                    <OnGoing 
+                        user={user}
+                        event={event}
+                        entries={entries}
+                        setEventData= { setEventData } />
                 ) : (
                     <Finished event={event} entries={entries} />
                 )

@@ -1,7 +1,7 @@
 import { setDate } from "date-fns";
 import React from "react";
 
-export default function EditorValidation({ event, setEditor }) {
+export default function EditorValidation({ setData, data, event, setEditor }) {
 
     const handleCancel = () => {
         setEditor(false)

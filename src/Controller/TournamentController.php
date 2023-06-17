@@ -60,7 +60,6 @@ class TournamentController extends AbstractController
             ->setCreatedAt(new \DateTimeImmutable())
             ->addRegistered($user);
         
-        
         $data = json_decode($request->getContent(), true);
         $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
         $form->submit($data);
