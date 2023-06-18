@@ -7,6 +7,8 @@ export default function EventEditor({ setEventData, event, setEditor }) {
 
     const eventId = event.id;
 
+    console.log(event.endAt)
+
     const [data, setData] = useState({
         name: event.name,
         race: event.race.id,
@@ -15,6 +17,8 @@ export default function EventEditor({ setEventData, event, setEditor }) {
         capacity: event.capacity,
         privacy: event.privacy
     });
+
+    console.log(data);
    
     const handleName = (event) => {
         const inputValue = event.target.value;

@@ -58,8 +58,8 @@ class DataUtils
         return [
             'id' => $event->getId(),
             'name' => $event->getName(),
-            'createdAt' => $event->getCreatedAt()->format('m/d/Y'),
-            'endAt' => $event->getEndAt()->format('m/d/Y'),
+            'createdAt' => $event->getCreatedAt()->format('Y-m-d'),
+            'endAt' => $event->getEndAt()->format('Y-m-d'),
             'speed' => $event->getSpeed(),
             'privacy' => $event->isPrivacy(),
             'capacity' => $event->getCapacity(),

@@ -28,6 +28,13 @@ export default function Main({ eventId }) {
         fetchData();
     }, [eventId]);
 
+    useEffect(() => {
+        if (eventData && eventData.event && eventData.event.endAt) {
+            const eventEndAt = new Date(eventData.event.endAt);
+            setIsOngoing(eventEndAt > date);
+        }
+      }, [eventData, date]);
+
     if (isLoading) {
         return (
             <div>
@@ -43,7 +50,7 @@ export default function Main({ eventId }) {
         return <div>Error: {error}</div>;
     }
 
-    const { event, user, entries } = eventData;
+    const { event, user, entries } = eventData; 
 
     return (
         <div className="">

@@ -21,7 +21,7 @@ class EventType extends AbstractType
             ->add('endAt', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-                'invalid_message' => 'La date de l\'évènement doit être supérieur à la date en cours.',
+                'invalid_message' => 'Le format de la date est non-conforme',
             ])
             ->add('race', null, [
                 'choice_label' => 'name',
