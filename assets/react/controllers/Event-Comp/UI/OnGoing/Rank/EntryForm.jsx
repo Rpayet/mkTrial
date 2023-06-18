@@ -31,7 +31,14 @@ export default function EntryForm({ event, toggleView, setToggleView }) {
         axios
             .post(`/api/event/${event.id}/entry`, formData)
             .then(response => {
-                window.location.reload();
+                axios.get(`/api/event/${event.id}/entry`)
+                .then(response => {
+                    setToggleView(false);
+                    setEventData({...eventData, entries: response.data}); 
+                })
+                .catch(error => {
+                    console.error(error);
+                });
             })
             .catch(errors => setErrors(errors.response.data));
 

@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EntryController extends AbstractController
 {
-    #[Route('api/event/{id}/entry/', name: 'api_entry', methods: ['GET'])]
+    #[Route('api/event/{id}/entry', name: 'api_entry', methods: ['GET'])]
     public function entry(EntryRepository $entryRepository, int $id)
     {
         // Entries

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
-import Main from "./Main";
+import EventRegistration from "./EventRegistration";
 
 export default function OnGoing({ user, entries, event, setEventData }) {
 
@@ -30,7 +30,7 @@ export default function OnGoing({ user, entries, event, setEventData }) {
 
                 </div>
 
-                <Main
+                <EventRegistration
                     setEventData= { setEventData }
                     event= { event }
                     user= { user }

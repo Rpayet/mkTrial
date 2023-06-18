@@ -28,8 +28,10 @@ export default function PrimaryOptions ({ setData, data, event }) {
     }
 
     const handleCapacity = (event) => {
+    
         setData({...data, capacity: parseInt(event.target.value)});
         setCapacity(event.target.value);
+        
     }
 
     useEffect(() => {
