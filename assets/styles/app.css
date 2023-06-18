@@ -14,8 +14,13 @@
 }
 
 @keyframes slideInLeft {
-  from {transform: translateX(2em);}
+  from {transform: translateX(4em);}
   to {transform: translateX(0em);}
+}
+
+@keyframes slideInScaleLeft {
+  from {transform: translateX(4em) scaleX(.5);}
+  to {transform: translateX(0em) scaleX(1);}
 }
 
 @keyframes slideInRight {
@@ -28,16 +33,31 @@
   to {transform: translateY(0em);}
 }
 
+@keyframes zoomIn {
+  from {transform: scale(0);}
+  to {transform: scale(1);}
+}
+
 #finished {
   animation: slideInTop .35s ease-in-out;
 }
 
-#create {
+.slideLeft {
   animation: slideInLeft .35s ease-out;
+  transform-origin: 100% 50%;
+}
+
+.slideScaleLeft {
+  animation: slideInScaleLeft .35s ease-out;
+  transform-origin: 100% 50%;
 }
 
 #sort {
   animation: slideInRight .35s ease-out;
+}
+
+#zoomIn {
+  animation: zoomIn .35s ease-out;
 }
 
 

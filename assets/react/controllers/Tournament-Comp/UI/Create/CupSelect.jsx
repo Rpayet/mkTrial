@@ -5,7 +5,6 @@ import RaceRandomizer from "./RaceRandomizer";
 
 export default function CupSelect({ data, setData, races, cupSelection, setCupSelection, currentPage, setCurrentPage, setRaceSelection }) {
 
-    console.log(races)
     const cups = races.filter((race, index) => index % 4 === 0).map((race) => race.cup);
     
     const cupsPerPage = 12;

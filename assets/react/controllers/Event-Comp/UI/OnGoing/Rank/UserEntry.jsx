@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EntryForm from "./EntryForm";
 import { formatTime } from "../../../_Services/FormatTime";
 
@@ -13,6 +13,8 @@ export default function UserEntry(
         setShowUser,
         setSection 
     }) {
+
+    const [hideDelay, setHideDelay] = useState('hidden');
 
     const [toggleView, setToggleView] = useState(false);
 
@@ -29,12 +31,20 @@ export default function UserEntry(
         setSection('highlight')
     }
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+          setHideDelay('');
+        }, (i + 1) * 100);
+    
+        return () => clearTimeout(timeout);
+      }, []);
+
     return (
         <div
         key={i}
-        id="userEntryInfo" 
-        className="w-full mt-2 py-4 px-10 bg-white flex justify-between duration-500
-                    rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]"
+        className={`w-full mt-2 py-4 px-10 bg-white flex justify-between duration-100
+                    rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]
+                    ${hideDelay} slideScaleLeft`}
         onMouseEnter={() => setHoveredEntryKey(i)}
         onMouseLeave={() => setHoveredEntryKey(null)}>
 

@@ -10,7 +10,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
 
     const { eventData, setEventData } = useContext(EventContext);
 
-    const { event, user, entries } = eventData; 
+    const { event } = eventData;
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -36,10 +36,10 @@ export default function EntryForm({ toggleView, setToggleView }) {
         axios
             .post(`/api/event/${event.id}/entry`, formData)
             .then(response => {
-                axios.get(`/api/event/${event.id}/entry`)
+                axios.get(`/api/event/${event.id}`)
                 .then(response => {
                     setToggleView(false);
-                    setEventData({...eventData, entries: response.data}); 
+                    setEventData(response.data);
                 })
                 .catch(error => {
                     console.error(error);

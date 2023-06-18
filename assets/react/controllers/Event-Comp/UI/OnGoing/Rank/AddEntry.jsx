@@ -3,7 +3,7 @@ import AddEntryButton from "./AddEntryButton";
 import EntryForm from "./EntryForm";
 import { EventProvider } from "../../../../_Provider/EventContext";
 
-export default function AddEntry({ event }) {
+export default function AddEntry() {
 
     const [toggleView, setToggleView] = useState(true);
 
@@ -15,9 +15,8 @@ export default function AddEntry({ event }) {
                 : 
                 <EventProvider>
                     <EntryForm 
-                    event= { event }
-                    toggleView= { toggleView }
-                    setToggleView= { setToggleView } />
+                        toggleView= { toggleView }
+                        setToggleView= { setToggleView } />
                 </EventProvider>
             }
         </>

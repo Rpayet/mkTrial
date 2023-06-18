@@ -14,6 +14,7 @@ export default function OnGoing({ user, entries, event, setEventData }) {
         <div className="w-full sm:flex gap-4 p-4">
 
                 <div 
+                    id="zoomIn"
                     className="sm:w-1/3 sm:h-fit bg-white rounded-xl flex sm:flex-col gap-4 p-4">
 
                     <EventInfo 

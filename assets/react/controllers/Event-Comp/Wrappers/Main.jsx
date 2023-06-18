@@ -12,7 +12,7 @@ export default function Main({ eventId }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isOngoing, setIsOngoing] = useState(true);
-
+    
     useEffect(() => {
         const fetchData = async () => {
           try {
