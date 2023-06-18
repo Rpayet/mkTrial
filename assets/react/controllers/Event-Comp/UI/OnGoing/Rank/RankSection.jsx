@@ -7,6 +7,8 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
 
     const [section, setSection] = useState('ranking');
     const [showUser, setShowUser] = useState(null);
+
+    console.log(entries)
     
     const showUserEntries = entries.filter((entry) => entry.user.id === showUser).sort((a, b) => a.time - b.time);
 

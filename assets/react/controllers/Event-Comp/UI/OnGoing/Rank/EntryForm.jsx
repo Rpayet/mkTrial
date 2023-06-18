@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TimerInput from "./TimerInput";
 import UploadInput from "./UploadInput";
 import EntryFormButton from "./EntryFormButton";
 import axios from "axios";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EntryForm({ event, toggleView, setToggleView }) {
+
+export default function EntryForm({ toggleView, setToggleView }) {
+
+    const { eventData, setEventData } = useContext(EventContext);
+
+    const { event, user, entries } = eventData; 
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -23,7 +29,6 @@ export default function EntryForm({ event, toggleView, setToggleView }) {
 
     const handleSubmit = (e) => {
 
-        
         e.preventDefault();
 
         setErrors({});
