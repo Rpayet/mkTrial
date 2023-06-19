@@ -13,7 +13,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
     {/* Détermine comment afficher le formulaire */}
     const [inputEntry, setInputEntry] = useState('');
 
-    {/* Hook pour déterminer si l'utilisateur a déjà créer une entrée.  */}
+    {/* Hook pour déterminer si l'utilisateur a déjà créer une entrée. */}
     if ( user ) {
 
         useEffect(() => {
