@@ -11,8 +11,6 @@ export default function AddEntryButton({ setToggleView }) {
 
     const rankList = rankService(entries);
 
-    console.log(rankList.length);
-
     const handleToggle = () => {
         setToggleView(false);
     }
