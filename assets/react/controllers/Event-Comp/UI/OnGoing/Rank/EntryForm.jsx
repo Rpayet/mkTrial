@@ -53,7 +53,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
         <form
             onSubmit={handleSubmit}
             id="entry-form"
-            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around my-4">
+            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around my-4 zoomIn">
 
             <TimerInput 
                 entryInput={ entryInput }
