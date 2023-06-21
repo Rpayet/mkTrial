@@ -1,8 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function Ranking({ event, setRegistration }) {
+export default function Register({ event, setRegistration, setLoadingProgress }) {
 
+    const { eventData, setEventData } = useContext(EventContext);
     const [error, setError] = useState(null);
 
     const handleCancel = () => {
@@ -20,8 +22,23 @@ export default function Ranking({ event, setRegistration }) {
         axios
             .post("/api/event/register", data)
             .then(response => {
-                if (response.data.success) {
-                    window.location.reload();
+                if (response.data) {
+                    axios.get(`/api/event/${event.id}`, {
+                        onDownloadProgress: progressEvent => {
+                          const progress = Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                          );
+                          setLoadingProgress(progress);
+                        }
+                      })
+                        .then(response => {
+                            setRegistration(false);
+                            setEventData(response.data);
+                            setLoadingProgress(0);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
                 } else {
                     setError(response.data.error);
                 }

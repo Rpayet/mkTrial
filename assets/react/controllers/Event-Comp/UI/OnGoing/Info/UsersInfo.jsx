@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
 import AddUser from "./AddUser"
 
-export default function Userinfo({ user, event, setRegistration, isUserRegistered }) {
+export default function Userinfo({ user, event, setRegistration, isUserRegistered, loadingProgress }) {
 
     const [show, setShow] = useState(true);
+
+    console.log(loadingProgress);
 
     useEffect(() => {
         if ( event.capacity != null && user != null ) {
@@ -39,9 +41,11 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                 </div>
                 
                 <div 
+                    id="Users"
                     className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
                     bg-slate-100 border-solid border-[1px] border-lumi rounded-lg
-                     ">
+                     "
+                    style={{ backgroundSize: `100% ${100 - loadingProgress}%` }}>
                     {event.registered.map((u, i) => (
                         <img
                             key={i}

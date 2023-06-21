@@ -5,7 +5,7 @@ import EventEditor from "../UI/OnGoing/Editor/EventEditor";
 
 export default function EventRegistration({
     setEventData, event, user, entries, editor, setEditor,
-    isUserRegistered, registration, setRegistration}) {
+    isUserRegistered, registration, setRegistration, setLoadingProgress}) {
 
     if (!registration && !editor) {
 
@@ -22,14 +22,14 @@ export default function EventRegistration({
         return (
             <Register
             event= { event }
-            setRegistration= {setRegistration} />
+            setRegistration= {setRegistration}
+            setLoadingProgress= { setLoadingProgress } />
         )
 
     } else if (editor && !registration) {
 
         return (
             <EventEditor 
-                setEventData= { setEventData }
                 event= { event }
                 setEditor= { setEditor } />
         )

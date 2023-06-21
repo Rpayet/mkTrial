@@ -10,6 +10,8 @@ export default function OnGoing({ user, entries, event, setEventData }) {
 
     const [editor, setEditor] = useState(false);
 
+    const [loadingProgress, setLoadingProgress] = useState(0);
+
     return (
         <div className="w-full sm:flex gap-4 p-4">
 
@@ -28,7 +30,8 @@ export default function OnGoing({ user, entries, event, setEventData }) {
                         user= { user }
                         event= { event }
                         setRegistration= { setRegistration }
-                        isUserRegistered= { isUserRegistered } />
+                        isUserRegistered= { isUserRegistered }
+                        loadingProgress= { loadingProgress } />
 
                 </div>
 
@@ -41,7 +44,8 @@ export default function OnGoing({ user, entries, event, setEventData }) {
                     setEditor={ setEditor }
                     isUserRegistered= { isUserRegistered }
                     registration= { registration }
-                    setRegistration={ setRegistration } />
+                    setRegistration={ setRegistration } 
+                    setLoadingProgress= { setLoadingProgress } />
 
         </div>
     )
