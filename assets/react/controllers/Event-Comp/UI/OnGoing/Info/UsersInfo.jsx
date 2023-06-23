@@ -5,8 +5,6 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
 
     const [show, setShow] = useState(true);
 
-    console.log(loadingProgress);
-
     useEffect(() => {
         if ( event.capacity != null && user != null ) {
 

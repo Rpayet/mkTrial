@@ -30,6 +30,7 @@ export default function EventRegistration({
 
         return (
             <EventEditor 
+                setEventData= { setEventData }
                 event= { event }
                 setEditor= { setEditor } />
         )

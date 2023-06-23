@@ -6,6 +6,7 @@ use App\Utils\DataUtils;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -112,6 +113,25 @@ class EventController extends AbstractController
         $manager->flush();
 
         return $this->json(['data' => $data]);
+    }
+
+    #[Route('/api/event/{id}/delete', name: 'app_event_delete', methods: ['DELETE'])]
+    #[isGranted('ROLE_USER')]
+    public function delete(TournamentRepository $tournamentRepository, int $id, EntityManagerInterface $manager)
+    {
+        // Récupère l'événement avec l'ID
+        $event = $tournamentRepository->find($id);
+
+        // Si l'événement n'existe pas => 404.
+        if (!$event) {
+            throw $this->createNotFoundException();
+        }
+
+        // Supprimer l'événement de la base de données
+        $manager->remove($event);
+        $manager->flush();
+
+        return $this->json(['data' => 'data']);
     }
 
 }

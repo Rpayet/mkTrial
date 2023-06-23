@@ -8,7 +8,7 @@ export default function OnGoing({ user, entries, event, setEventData }) {
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
 
-    const [editor, setEditor] = useState(false);
+    const [editor, setEditor] = useState(true);
 
     const [loadingProgress, setLoadingProgress] = useState(0);
 
