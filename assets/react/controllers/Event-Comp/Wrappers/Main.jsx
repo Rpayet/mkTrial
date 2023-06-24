@@ -4,7 +4,9 @@ import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
 
-export default function Main({ eventId }) {
+export default function Main({ id }) {
+
+    const eventId = id;
 
     const date = new Date();
 
@@ -57,6 +59,7 @@ export default function Main({ eventId }) {
             {event && entries ? (
                 isOngoing ? (
                     <OnGoing 
+                        eventId= {eventId}
                         user={user}
                         event={event}
                         entries={entries}

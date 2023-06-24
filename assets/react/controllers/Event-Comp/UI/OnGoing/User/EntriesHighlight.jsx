@@ -3,7 +3,7 @@ import { formatTime } from "../../../_Services/FormatTime";
 import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
-
+import { BackButton } from "../../../../_GlobalUi/Buttons";
 
 export default function EntriesHighlight({ showUserEntries, setSection }) {
 
@@ -20,7 +20,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
 
     return (
         <div className="sm:w-2/3 flex flex-col relative">
-
+            {/** Image Focus */}
             <div 
                 onClick={handleClick}
                 className={`absolute w-[600px] p-20 
@@ -32,25 +32,9 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                     alt={showUserEntries[0].picture} />
             </div>
 
-            <div 
-                onClick={handleSection}
-                className="flex gap-2 w-fit text-sm border-solid border-b-2 p-1 border-lumi hover:border-mario cursor-pointer">
-                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" 
-                        d="M11.7071 4.29289C12.0976 4.68342 12.0976 5.31658 11.7071 5.70711L6.41421 
-                        11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H6.41421L11.7071 
-                        18.2929C12.0976 18.6834 12.0976 19.3166 11.7071 19.7071C11.3166 20.0976 10.6834 
-                        20.0976 10.2929 19.7071L3.29289 12.7071C3.10536 12.5196 3 12.2652 3 12C3 11.7348 
-                        3.10536 11.4804 3.29289 11.2929L10.2929 4.29289C10.6834 3.90237 11.3166 3.90237 
-                        11.7071 4.29289Z" 
-                        fill="#000000"/>
-                </svg>
-
-                <p  
-                    
-                    className="">
-                    Retour
-                </p>
+            <div className="flex gap-2 items-center justify-between">
+                <BackButton onClick={ handleSection } />
+                <h2 className="font-bold">Consulter les temps enregistrés</h2>
             </div>
 
             <div className="w-full flex justify-around p-6">
@@ -70,6 +54,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                                 { showUserEntries[0].user.name }
                         </a>
                         <p className="text-lg" >{ formatTime(showUserEntries[0].time) }</p>
+                        <p className="text-xs"><TimeAgo date={showUserEntries[0].createdAt} formatter={formatter} /></p>
                     </div>
                 </div>
 
@@ -85,7 +70,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
 
             <div className="w-full text-center">
 
-                <h2 className="my-4">Temps enregistrés</h2>
+                <h2 className="my-4">Historique</h2>
 
                 <div className="w-full">
 

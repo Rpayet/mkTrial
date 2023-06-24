@@ -46,6 +46,14 @@
   to {transform: scale(1);}
 }
 
+@keyframes shake {
+  0% {transform: translateX(0);}
+  25% {transform: translateX(.5em);}
+  50% {transform: translateX(-.75em);}
+  75% {transform: translateX(.5em);}
+  100% {transform: translateX(0);}
+}
+
 #finished {
   animation: slideInTop .35s ease-in-out;
 }
@@ -64,6 +72,10 @@
 
 .zoomIn {
   animation: zoomIn .35s ease-out;
+}
+
+.denied {
+  animation: shake .5s ease-in-out
 }
 
 

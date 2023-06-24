@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
+import { DataProvider } from "../../_Provider/EventContext";
 
-export default function OnGoing({ user, entries, event, setEventData }) {
+
+export default function OnGoing({ user, eventId, event, setEventData }) {
 
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
 
-    const [editor, setEditor] = useState(true);
+    const [editor, setEditor] = useState(false);
 
     const [loadingProgress, setLoadingProgress] = useState(0);
 
@@ -35,17 +37,17 @@ export default function OnGoing({ user, entries, event, setEventData }) {
 
                 </div>
 
-                <EventRegistration
-                    setEventData= { setEventData }
-                    event= { event }
-                    user= { user }
-                    entries= { entries }
-                    editor= { editor }
-                    setEditor={ setEditor }
-                    isUserRegistered= { isUserRegistered }
-                    registration= { registration }
-                    setRegistration={ setRegistration } 
-                    setLoadingProgress= { setLoadingProgress } />
+                <DataProvider>
+                    <EventRegistration
+                        eventId = { eventId }
+                        setEventData= { setEventData }
+                        editor= { editor }
+                        setEditor={ setEditor }
+                        isUserRegistered= { isUserRegistered }
+                        registration= { registration }
+                        setRegistration={ setRegistration } 
+                        setLoadingProgress= { setLoadingProgress } />
+                </DataProvider>
 
         </div>
     )

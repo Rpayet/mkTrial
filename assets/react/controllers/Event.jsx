@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Main from "./Event-Comp/Wrappers/Main";
 import { EventProvider } from "../controllers/_Provider/EventContext";
 
-export default function EventPage({eventId}) {
+export default function EventPage({ id }) {
+
   return (
     <EventProvider>
-      <Main eventId={ eventId } />
+      <Main id={ id } />
     </EventProvider>
   );
 }

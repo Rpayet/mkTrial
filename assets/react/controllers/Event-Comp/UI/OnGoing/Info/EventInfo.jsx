@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
-import EventEditor from "./EditorButton";
+import EditorButton from "./EditorButton";
 
-export default function EventInfo({ user, event, setEditor }) {
+export default function EventInfo({ user, event, setEditor, editor }) {
 
     const [editAuth, setEditAuth] = useState(false);
     const [color, setColor] = useState(false);
@@ -29,7 +29,7 @@ export default function EventInfo({ user, event, setEditor }) {
             <div className="flex items-center justify-between px-4">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
-                    { editAuth && <EventEditor setEditor= { setEditor }  />}
+                    { editAuth && <EditorButton setEditor= { setEditor } editor= { editor } />}
                 </div>
                 <DelayInfo event= { event } />
             </div>

@@ -18,7 +18,6 @@ export default function UsersEntries({ user, event, rankList, setShowUser, setSe
                     setShowUser= { setShowUser } 
                     setSection= { setSection } />
             ))}
-
         </>
     )
 }

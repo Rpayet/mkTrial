@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
 import DateSelect from "./DateSelect";
 
-export default function PrimaryOptions ({ setData, data, event }) {
+export default function PrimaryOptions ({ setData, data, eventData }) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
-    const [capacity, setCapacity] = useState(event?.capacity || '');
+    const [capacity, setCapacity] = useState(data?.capacity || '');
 
     const toggleSpeed = () => {
+
         setSpeed(!speed);
+
         if (speed === false) {
             setData({ ...data, speed: '200cc' });
         } else {
@@ -18,8 +20,9 @@ export default function PrimaryOptions ({ setData, data, event }) {
     }
 
     const togglePrivacy = () => {
-        setPrivacy(!privacy);
 
+        setPrivacy(!privacy);
+    
         if (privacy == false) {
             setData({ ...data, privacy: true })
         } else {
@@ -36,15 +39,15 @@ export default function PrimaryOptions ({ setData, data, event }) {
 
     useEffect(() => {
         
-        if (event?.speed === '200cc') {
+        if (data?.speed === '200cc') {
             setSpeed(true);
         }
 
-        if (event?.privacy === true) {
+        if (data?.privacy === true) {
             setPrivacy(true);
         }
 
-    }, [event])
+    }, [eventData])
 
     return (
         <div className="flex items-center justify-center gap-10">
@@ -76,8 +79,7 @@ export default function PrimaryOptions ({ setData, data, event }) {
             {/* Sélection date de fin de l'événement */}
             <DateSelect
                 setData= { setData }
-                data= { data }
-                event= { event } />
+                data= { data } />
 
             {/* Sélection du nombre de participants */}
             <div>
