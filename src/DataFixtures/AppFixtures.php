@@ -84,8 +84,7 @@ class AppFixtures extends Fixture
                 $race = new Race();
                 $race->setName($raceName)
                     ->setSlug($enCupName.'_0'.($indexRace + 1))
-                    ->setPicture($enCupName.'_0'.($indexRace + 1).'.jpg')
-                ;
+                    ->setPicture($enCupName.'_0'.($indexRace + 1).'.jpg');
                 $cup->addRace($race);
                 $races[]= $race;
                 $manager->persist($race);
@@ -123,7 +122,7 @@ class AppFixtures extends Fixture
             ->setSpeed(rand(0, 1) == 0 ? '150cc' : '200cc')
             ->setPrivacy(rand(0, 1) == 0 ? true : false);
                         
-            for ($j=0; $j < rand(1,12) ; $j++) { 
+            for ($j=0; $j < rand(6,12) ; $j++) { 
                 $entry = new Entry();
                 $entry ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween(\DateTime::createFromImmutable($tournament->getCreatedAt()), $tournament->getEndAt())))
             
