@@ -3,7 +3,7 @@ import { formatTime } from "../../../_Services/FormatTime";
 import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
-
+import { BackButton } from "../../../../_GlobalUi/Buttons";
 
 export default function EntriesHighlight({ showUserEntries, setSection }) {
 
@@ -20,7 +20,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
 
     return (
         <div className="sm:w-2/3 flex flex-col relative">
-
+            {/** Image Focus */}
             <div 
                 onClick={handleClick}
                 className={`absolute w-[600px] p-20 
@@ -32,12 +32,10 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                     alt={showUserEntries[0].picture} />
             </div>
 
-            <p  
-                onClick={handleSection}
-                className="w-fit text-sm cursor-pointer
-                border-solid border-b-2 p-1 border-lumi hover:border-mario">
-                Retour
-            </p>
+            <div className="flex gap-2 items-center justify-between">
+                <BackButton onClick={ handleSection } />
+                <h2 className="font-bold">Consulter les temps enregistrés</h2>
+            </div>
 
             <div className="w-full flex justify-around p-6">
 
@@ -56,6 +54,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                                 { showUserEntries[0].user.name }
                         </a>
                         <p className="text-lg" >{ formatTime(showUserEntries[0].time) }</p>
+                        <p className="text-xs"><TimeAgo date={showUserEntries[0].createdAt} formatter={formatter} /></p>
                     </div>
                 </div>
 
@@ -71,7 +70,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
 
             <div className="w-full text-center">
 
-                <h2 className="my-4">Temps enregistrés</h2>
+                <h2 className="my-4">Historique</h2>
 
                 <div className="w-full">
 

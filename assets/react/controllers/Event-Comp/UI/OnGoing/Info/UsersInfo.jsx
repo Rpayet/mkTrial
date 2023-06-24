@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import AddUser from "./AddUser"
 
-export default function Userinfo({ user, event, setRegistration, isUserRegistered }) {
+export default function Userinfo({ user, event, setRegistration, isUserRegistered, loadingProgress }) {
 
     const [show, setShow] = useState(true);
 
@@ -21,7 +21,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
             setShow(false);
         }
 
-    }, [isUserRegistered, event, user]);
+    }, [isUserRegistered, event, user, event]);
 
     return (
     
@@ -34,14 +34,16 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                 <div className="flex justify-around">
                     <p className="block text-left text-xs text-silver">Participants</p>
                     
-                    {event.capacity && <p className="block text-right text-xs text-silver">{event.registered.length}/{event.capacity}</p>}
+                    {event.capacity >= 3 && <p className="block text-right text-xs text-silver">{event.registered.length}/{event.capacity}</p>}
                     
                 </div>
                 
                 <div 
+                    id="Users"
                     className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
                     bg-slate-100 border-solid border-[1px] border-lumi rounded-lg
-                     ">
+                     "
+                    style={{ backgroundSize: `100% ${100 - loadingProgress}%` }}>
                     {event.registered.map((u, i) => (
                         <img
                             key={i}

@@ -1,82 +1,138 @@
-import React, { useState } from "react";
-import EditorValidation from "./EditorValidation";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import EditorRequestOptions from "./EditorRequestOptions";
 import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions";
+import { BackButton }from "../../../../_GlobalUi/Buttons";
+import { DataContext } from "../../../../_Provider/EventContext";
+import EditorValidation from "./EditorValidation";
 
-export default function EventEditor({ event, setEditor }) {
+export default function EventEditor({ setEditor, eventData }) {
 
-    const eventId = event.id;
-    const [dateValue, setDateValue] = useState('');
-    const minDate = new Date().toISOString().substring(0, 10);
+    const [disabled, setDisabled] = useState(true);
+    const {data, setData} = useContext(DataContext);
+    const [editValidation, setEditValidation] = useState(false);
 
-    const [data, setData] = useState({
-        name: event.name,
-        endAt: new Date(event.endAt),
-        race: event.race.id,
-        speed: event.speed,
-        privacy: event.privacy,
-        capacity: event.capacity,
-    }) 
+    {/* Charge l'état de Data avec la BDD */}
+    useEffect(() => {
+        if (!data) {
+            setData({...data, 
+                name: eventData.event.name,
+                speed: eventData.event.speed,
+                endAt: eventData.event.endAt,
+                capacity: eventData.event.capacity,
+                privacy: eventData.event.privacy,
+                race: eventData.event.race.id,
+            })
+        }
+    }, [data, eventData]);
 
-    console.log(event.registered.length)
-    
+    {/* Met à jour le nom de data */}
     const handleName = (event) => {
-        setData({...data, name: event.target.value})
-    }
+        const inputValue = event.target.value;
 
-    {/* Requête POST */}
+        if (inputValue.length <= 15) {
+            setData({...data, name: event.target.value})
+        }
+    };
+
+    {/* Ferme le composant*/}
+    const handleCancel = () => {
+        setEditor(false)
+        setData({...data, 
+            name: eventData.event.name,
+            speed: eventData.event.speed,
+            endAt: eventData.event.endAt,
+            capacity: eventData.event.capacity,
+            privacy: eventData.event.privacy,
+            race: eventData.event.race.id,
+        })
+    } 
+
+    {/* Erreurs POST */}
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = (event) => {
+    {/* Vérifie Si l'état de Data a été modifié */}
+    useEffect(() => {
+        const { name, speed, endAt, capacity, privacy } = eventData.event;
         
-        event.preventDefault();
+        if (data?.name === name && data?.speed === speed && data?.endAt === endAt &&
+            data?.capacity === capacity && data?.privacy === privacy) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [data, eventData]);
 
-        setErrors({});
+    console.log(data);
 
-        axios
-            .post(`/api/event/${eventId}/edit`, data)
-            .then(response => {
-                console.log(response.success)
-            })
-            .catch(errors => setErrors(errors.response.data));
-    }
+    if (editValidation) {
 
-    return (
-        <div className="sm:w-2/3 flex flex-col gap-4">
-            
-            <h2 className="w-fit font-bold border-solid border-b-2 border-lumi">Modifier les informations de l'événement</h2>
+        return (
+            <EditorValidation 
+                setEditor= { setEditor }
+                setErrors= { setErrors }
+                setEditValidation= { setEditValidation } />
+        )
 
-            <form
-                className="flex flex-col gap-4" 
-                onSubmit={handleSubmit}>
+    } else {
 
-                <div className="flex flex-col"> 
-                    <label className="font-bold">Nom</label>
-                    <input 
-                        value={data.name}
-                        onChange={handleName}
-                        className="rounded py-1"
-                        type="text" />
-                </div>
+        return (
+            <div className="sm:w-2/3 flex flex-col gap-4">
                 
-                <div>
-                    <label className="font-bold">Options</label>
-                    <div className="bg-white rounded-lg py-4">
-                        <PrimaryOptions 
-                            data= { data }
-                            setData= { setData }
-                            dateValue= { dateValue } 
-                            setDateValue= { setDateValue }
-                            minDate= { minDate } 
-                            minCapacity= { event.registered.length }/>
-                    </div>
+                <div className="flex gap-2 items-center justify-between">
+    
+                    <BackButton onClick= { handleCancel } />
+    
+                    <h2 className="font-bold">Modifier les informations de l'événement</h2>
+    
                 </div>
-
-                <EditorValidation setEditor= { setEditor } />
-
-            </form>
-
-
-        </div>
-    )
+    
+                {/* Messages d'erreurs */}
+                <div className={`text-center bg-white rounded-lg w-1/2 my-2 mx-auto`}>
+    
+                    {errors.name && <p className="text-red-500" >{ errors.name }</p>}
+                    {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
+                    {errors.race && <p className="text-red-500" >{ errors.race }</p>}
+                    {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
+                    {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
+    
+                </div>
+    
+                {data && (
+                    <form
+                        className="flex flex-col gap-4">
+    
+                        <div className="flex flex-col"> 
+                            <label className="font-bold">Nom</label>
+                            <input 
+                                value={data.name}
+                                onChange={handleName}
+                                className="rounded py-1"
+                                type="text" />
+                        </div>
+                        
+                        <div>
+                            
+                            <label className="font-bold">Options</label>
+                            <div className="bg-white rounded-lg py-4">
+                                <PrimaryOptions 
+                                    setData= { setData }
+                                    data= { data }
+                                    eventData= { eventData } />
+                            </div>
+    
+                        </div>
+    
+                        <EditorRequestOptions 
+                            disabled= { disabled }
+                            setEditor= { setEditor } 
+                            setEditValidation= { setEditValidation } />
+    
+                    </form>
+                )}
+    
+    
+            </div>
+        )
+    
+    }
 }

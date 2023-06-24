@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
 import DateSelect from "./DateSelect";
 
-export default function PrimaryOptions ({ data, setData, dateValue, setDateValue, minDate, minCapacity }) {
+export default function PrimaryOptions ({ setData, data, eventData }) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
+    const [capacity, setCapacity] = useState(data?.capacity || '');
 
     const toggleSpeed = () => {
+
         setSpeed(!speed);
+
         if (speed === false) {
             setData({ ...data, speed: '200cc' });
         } else {
@@ -17,8 +20,9 @@ export default function PrimaryOptions ({ data, setData, dateValue, setDateValue
     }
 
     const togglePrivacy = () => {
-        setPrivacy(!privacy);
 
+        setPrivacy(!privacy);
+    
         if (privacy == false) {
             setData({ ...data, privacy: true })
         } else {
@@ -27,28 +31,42 @@ export default function PrimaryOptions ({ data, setData, dateValue, setDateValue
     }
 
     const handleCapacity = (event) => {
-        setData({...data, capacity: parseInt(event.target.value)})
+    
+        setData({...data, capacity: parseInt(event.target.value)});
+        setCapacity(event.target.value);
+        
     }
+
+    useEffect(() => {
+        
+        if (data?.speed === '200cc') {
+            setSpeed(true);
+        }
+
+        if (data?.privacy === true) {
+            setPrivacy(true);
+        }
+
+    }, [eventData])
 
     return (
         <div className="flex items-center justify-center gap-10">
-
 
             {/* Sélection de la vitesse */}
             <div>
                 <span className="block text-xs text-center text-gray-500 font-bold">Vitesse</span>
                 <Switch 
-                    width={40}
-                    height={20}
+                    width={ 40 }
+                    height={ 20 }
                     onColor="#EBEBEB"
                     offColor="#EBEBEB"
-                    onHandleColor="#40C5EC"
-                    offHandleColor="#40C5EC"
+                    onHandleColor="#efc900"
+                    offHandleColor="#02affc"
                     checked={ speed }
                     onChange={ toggleSpeed }
-                    handleDiameter={30}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
+                    handleDiameter={ 30 }
+                    uncheckedIcon={ false }
+                    checkedIcon={ false }
                     uncheckedHandleIcon={
                         <div className="flex items-center text-xs font-bold text-white p-1.5">150</div>
                         }
@@ -60,11 +78,8 @@ export default function PrimaryOptions ({ data, setData, dateValue, setDateValue
 
             {/* Sélection date de fin de l'événement */}
             <DateSelect
-                data= { data }
                 setData= { setData }
-                dateValue= { dateValue } 
-                setDateValue= { setDateValue }
-                minDate= { minDate } />
+                data= { data } />
 
             {/* Sélection du nombre de participants */}
             <div>
@@ -74,8 +89,9 @@ export default function PrimaryOptions ({ data, setData, dateValue, setDateValue
                     className="block w-36 mx-auto px-2 py-1 border rounded-lg 
                     cursor-pointer focus:outline-none focus:border-lumi" 
                     placeholder="Sans limite"
-                    min={ minCapacity === null ? '3' : minCapacity}
-                    onChange={handleCapacity}/>
+                    min={ 3 }
+                    value={ capacity }
+                    onChange={ handleCapacity }/>
 
             </div>
 
@@ -84,20 +100,20 @@ export default function PrimaryOptions ({ data, setData, dateValue, setDateValue
                     
                 <span className="block text-xs text-center text-gray-500 font-bold">Visibilité</span>
                 <Switch 
-                    width={40}
-                    height={20}
+                    width={ 40 }
+                    height={ 20 }
                     onColor="#EBEBEB"
                     offColor="#EBEBEB"
-                    onHandleColor="#40C5EC"
-                    offHandleColor="#40C5EC"
+                    onHandleColor="#9F9F9F"
+                    offHandleColor="#9F9F9F"
                     checked={ privacy }
                     onChange={ togglePrivacy }
-                    handleDiameter={30}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
+                    handleDiameter={ 30 }
+                    uncheckedIcon={ false }
+                    checkedIcon={ false }
                     uncheckedHandleIcon={
                         <div className="flex items-center p-1.5">
-                            <svg fill="#ffffff" width="20px" viewBox="0 0 32 32">
+                            <svg fill="#000000" width="20px" viewBox="0 0 32 32">
                                 <path d="M25 12.034l-14.28 0-0.518-2.321c-0.883-3.293 0.65-6.576 4.159-7.516 3.473-0.93 6.534 
                                 1.061 7.432 4.41l0.425 1.686c0.143 0.534 0.691 0.85 
                                 1.225 0.707s0.85-0.691 0.707-1.225l-0.425-1.687c-1.187-4.433-5.325-7.045-9.881-5.824-4.574 

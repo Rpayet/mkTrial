@@ -1,30 +1,12 @@
-import React, { useEffect, useState} from "react";
-import OnGoing from "./Event-Comp/Wrappers/OnGoing";
-import Finished from "./Event-Comp/Wrappers/Finished";
+import React, { useContext } from "react";
+import Main from "./Event-Comp/Wrappers/Main";
+import { EventProvider } from "../controllers/_Provider/EventContext";
 
-export default function EventPage({ event, user, entries }) {
+export default function EventPage({ id }) {
 
-    const date = new Date();
-    const eventEndAt = new Date(event.endAt);
-
-    const [isOngoing, setIsOngoing] = useState(false);
-
-    {/* Vérifie si la date de fin de l'event est dépassé*/}
-    useEffect(() => {
-        if (eventEndAt > date) {
-            setIsOngoing(true);
-        } else {
-            setIsOngoing(false);
-        }
-    }, [eventEndAt, date]);
-
-    return (
-        <div className="">
-            {isOngoing ? (
-                <OnGoing user={user} event={event} entries={entries} />
-            ) : (
-                <Finished event={event} entries={entries} />
-            )}
-        </div>
-    );
+  return (
+    <EventProvider>
+      <Main id={ id } />
+    </EventProvider>
+  );
 }

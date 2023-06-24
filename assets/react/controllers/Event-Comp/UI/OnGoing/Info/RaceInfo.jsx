@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function RaceInfo({ event }) {
+export default function RaceInfo({ event, color }) {
 
     return (
 
         <div 
             id="event-info"
-            className={`flex flex-col items-center p-4 rounded-3xl ${event.speed == '200cc' ? 'bg-gradient-to-b from-fast-200 to-fast-400' : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
+            className={`flex flex-col items-center p-4 rounded-3xl ${color ? 'bg-gradient-to-b from-fast-200 to-fast-400' : 'bg-gradient-to-b from-slow-200 to-slow-400'}`}>
                 <div 
                     id="event-img"
                     className="relative mx-auto">

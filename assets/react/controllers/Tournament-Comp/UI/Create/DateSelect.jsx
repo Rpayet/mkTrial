@@ -1,22 +1,29 @@
 import React from "react";
 
-export default function DateSelect({ setData, data, minDate }) {
+export default function DateSelect({ setData, data }) {
+  const minDate = new Date().toISOString().substring(0, 10);
 
-    const handleDateChange = (event) => {
-        setData({ ...data, endAt: event.target.value });
-    }
+  const handleDateChange = (event) => {
+    setData({ ...data, endAt: event.target.value });
+  };
 
-    return (
+  // todo : Problème de date un jour de retard
 
-        <div>
-            <span className="block text-xs text-center text-gray-500 font-bold">Fin de l'événement</span>
-            <input
-                name="endAt"
-                className="block mx-auto px-2 py-1 border-solid border-[1px] rounded-lg cursor-pointer focus:outline-none focus:border-lumi" 
-                type="date"
-                min={minDate}
-                onChange={handleDateChange} 
-                 />
-        </div>
-    )
+  return (
+    <div>
+      <span className="block text-xs text-center text-gray-500 font-bold">
+        Fin de l'événement
+      </span>
+      <input
+        name="endAt"
+        className="block mx-auto px-2 py-1 border-solid border-[1px] 
+                            rounded-lg cursor-pointer focus:outline-none 
+                            focus:border-lumi"
+        type="date"
+        min={minDate}
+        value={data.endAt}
+        onChange={handleDateChange}
+      />
+    </div>
+  );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddEntryButton from "./AddEntryButton";
 import EntryForm from "./EntryForm";
 
-export default function AddEntry({ event }) {
+export default function AddEntry() {
 
     const [toggleView, setToggleView] = useState(true);
 
@@ -11,10 +11,10 @@ export default function AddEntry({ event }) {
         <>
             { toggleView 
                 ? <AddEntryButton setToggleView= { setToggleView } />
-                : <EntryForm 
-                    event= { event }
-                    toggleView= { toggleView }
-                    setToggleView= { setToggleView } />
+                : 
+                    <EntryForm 
+                        toggleView= { toggleView }
+                        setToggleView= { setToggleView } />
             }
         </>
 

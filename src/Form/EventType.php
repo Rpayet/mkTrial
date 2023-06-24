@@ -15,20 +15,28 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'invalid_message' => 'Le nom de l\'événement doit être compris entre 3 et 15 caractères.',
+            ])
             ->add('endAt', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'invalid_message' => 'Le format de la date est non-conforme',
             ])
             ->add('race', null, [
                 'choice_label' => 'name',
-                'invalid_message' => 'Erreur de la sélection de course',
+                'invalid_message' => 'Erreur de la sélection de course.',
             ])
-            ->add('speed')
+            ->add('speed', null, [
+                'invalid_message' => 'Erreur dans la sélection de la vitesse.',
+
+            ])
             ->add('privacy', null, [
-                'invalid_message' => 'Erreur',
+                'invalid_message' => 'Erreur dans la sélection de la confidentialités.',
             ])
-            ->add('capacity')
+            ->add('capacity', null, [
+                'invalid_message' => 'La sélection doit être supérieur ou égale à 3.',
+            ])
         ;
     }
 

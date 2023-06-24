@@ -1,16 +1,15 @@
 import React from "react";
 
-export default function EditorButton({ setAuth, setEditor }) {
+export default function EditorButton({ setEditor, editor }) {
 
     const handleClick = () => {
         setEditor(true);
-
     }
 
     return (
         <svg
             onClick={handleClick} 
-            className="stroke-silver hover:stroke-lumi cursor-pointer" 
+            className={`stroke-silver hover:stroke-lumi cursor-pointer ${editor ? 'hidden' : ''}`} 
             width="15px" height="15px" viewBox="0 0 24 24" fill="none">
             <g id="Edit / Edit_Pencil_01" >
                 <path id="Vector" d="M12 8.00012L4 16.0001V20.0001L8 20.0001L16 12.0001M12 8.00012L14.8686 

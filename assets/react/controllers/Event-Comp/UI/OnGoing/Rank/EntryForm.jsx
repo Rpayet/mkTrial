@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TimerInput from "./TimerInput";
 import UploadInput from "./UploadInput";
 import EntryFormButton from "./EntryFormButton";
 import axios from "axios";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EntryForm({ event, toggleView, setToggleView }) {
+
+export default function EntryForm({ toggleView, setToggleView }) {
+
+    const { eventData, setEventData } = useContext(EventContext);
+
+    const { event } = eventData;
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -23,7 +29,6 @@ export default function EntryForm({ event, toggleView, setToggleView }) {
 
     const handleSubmit = (e) => {
 
-        
         e.preventDefault();
 
         setErrors({});
@@ -31,7 +36,14 @@ export default function EntryForm({ event, toggleView, setToggleView }) {
         axios
             .post(`/api/event/${event.id}/entry`, formData)
             .then(response => {
-                window.location.reload();
+                axios.get(`/api/event/${event.id}`)
+                .then(response => {
+                    setToggleView(false);
+                    setEventData(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
             })
             .catch(errors => setErrors(errors.response.data));
 
@@ -41,7 +53,7 @@ export default function EntryForm({ event, toggleView, setToggleView }) {
         <form
             onSubmit={handleSubmit}
             id="entry-form"
-            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around my-4">
+            className="bg-white w-full h-fit flex rounded-lg py-4 justify-around my-4 zoomIn">
 
             <TimerInput 
                 entryInput={ entryInput }
