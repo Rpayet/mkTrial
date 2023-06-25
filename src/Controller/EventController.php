@@ -6,6 +6,7 @@ use App\Utils\DataUtils;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -117,8 +118,13 @@ class EventController extends AbstractController
 
     #[Route('/api/event/{id}/delete', name: 'app_event_delete', methods: ['DELETE'])]
     #[isGranted('ROLE_USER')]
-    public function delete(TournamentRepository $tournamentRepository, int $id, EntityManagerInterface $manager)
-    {
+    public function delete(
+        TournamentRepository $tournamentRepository,
+        EntryRepository $entryRepository,
+        int $id,
+        EntityManagerInterface $manager
+    ) {
+    
         // Récupère l'événement avec l'ID
         $event = $tournamentRepository->find($id);
 
@@ -127,12 +133,43 @@ class EventController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        // Supprimer l'événement de la base de données
+        // Entries
+        $entries = $entryRepository->findBy(['tournament' => $event]);
+
+        foreach ($entries as $entry) {
+            $user = $entry->getUser();
+            $event->removeEntry($entry); // Supprimer l'entrée de l'événement
+            $user->removeEntry($entry); // Supprimer l'entrée de l'utilisateur
+            $manager->remove($entry); // Supprimer l'entrée de la base de données
+        }
+
+        // Retirer l'événement de la liste des tournois de chaque utilisateur inscrit
+        $users = $event->getRegistered();
+        foreach ($users as $user) {
+            $user->removeTournament($event);
+        }
+
+        // Supprimer toutes les données liées à l'événement de la base de données
         $manager->remove($event);
         $manager->flush();
 
-        return $this->json(['data' => 'data']);
+        // Supprimer l'image associée à chaque entrée
+        foreach ($entries as $entry) {
+            $imageFilename = $entry->getPicture();
+
+            if ($imageFilename) {
+                $imagePath = $this->getParameter('kernel.project_dir') . '/public/assets/user/entries/' . $imageFilename;
+
+                // Vérifier si le fichier existe avant de le supprimer
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+        }
+    
+        return $this->json(['data' => 'success']);
     }
+    
 
 }
  

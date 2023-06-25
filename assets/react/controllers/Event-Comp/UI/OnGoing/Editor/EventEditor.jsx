@@ -4,12 +4,14 @@ import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions
 import { BackButton }from "../../../../_GlobalUi/Buttons";
 import { DataContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
+import EventStop from "./EventStop";
 
 export default function EventEditor({ setEditor, eventData }) {
 
     const [disabled, setDisabled] = useState(true);
     const {data, setData} = useContext(DataContext);
     const [editValidation, setEditValidation] = useState(false);
+    const [eventStop, setEventStop] = useState(false);
 
     {/* Charge l'état de Data avec la BDD */}
     useEffect(() => {
@@ -50,6 +52,8 @@ export default function EventEditor({ setEditor, eventData }) {
     {/* Erreurs POST */}
     const [errors, setErrors] = useState({});
 
+    // console.log(errors) todo
+
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
         const { name, speed, endAt, capacity, privacy } = eventData.event;
@@ -62,8 +66,6 @@ export default function EventEditor({ setEditor, eventData }) {
         }
     }, [data, eventData]);
 
-    console.log(data);
-
     if (editValidation) {
 
         return (
@@ -71,6 +73,14 @@ export default function EventEditor({ setEditor, eventData }) {
                 setEditor= { setEditor }
                 setErrors= { setErrors }
                 setEditValidation= { setEditValidation } />
+        )
+
+    } else if (eventStop) {
+
+        return (
+            <EventStop 
+                eventData= { eventData }
+                setEventStop= { setEventStop } />
         )
 
     } else {
@@ -125,7 +135,8 @@ export default function EventEditor({ setEditor, eventData }) {
                         <EditorRequestOptions 
                             disabled= { disabled }
                             setEditor= { setEditor } 
-                            setEditValidation= { setEditValidation } />
+                            setEditValidation= { setEditValidation }
+                            setEventStop= { setEventStop } />
     
                     </form>
                 )}

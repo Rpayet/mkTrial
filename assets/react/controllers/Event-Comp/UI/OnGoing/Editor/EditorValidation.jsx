@@ -9,8 +9,6 @@ export default function EditorValidation({ setEditValidation, setErrors, setEdit
     const {data, setData} = useContext(DataContext);
     const {eventData, setEventData} = useContext(EventContext);
 
-    console.log(data);
-
     {/* Ferme le composant */}
     const handleCancel = () => {
         setEditValidation(false);
@@ -21,7 +19,8 @@ export default function EditorValidation({ setEditValidation, setErrors, setEdit
     const handleSubmit = (event) => {
         
         event.preventDefault();
-
+        
+        setEditValidation(false);
         setErrors({});
 
         axios
