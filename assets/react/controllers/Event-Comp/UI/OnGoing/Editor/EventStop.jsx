@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { Button, BackButton }from "../../../../_GlobalUi/Buttons";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EventStop({ setEventStop ,eventData }) {
+export default function EventStop({ setEditor, setEventStop }) {
+
+    const { eventData, setEventData } = useContext(EventContext);
 
     const handleCancel = () => {
         setEventStop(false);
@@ -21,7 +24,27 @@ export default function EventStop({ setEventStop ,eventData }) {
             .catch(errors => console.log('error'));
     }
     
+    {/* Requête POST Interruption */}
+        const handleInterruption = (event) => {
 
+        event.preventDefault();
+
+        axios
+            .post(`/api/event/${eventData.event.id}/interruption`) 
+            .then(response => {
+                axios.get(`/api/event/${eventData.event.id}`)
+                .then(response => {
+                    setEventStop(false);
+                    setEditor(false);
+                    setEventData(response.data); 
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+                
+            })
+            .catch(errors => console.log('error'));
+    }
     return (
         <div 
             className="sm:w-2/3 flex flex-col gap-4 text-center">
@@ -49,7 +72,7 @@ export default function EventStop({ setEventStop ,eventData }) {
                 <div className="flex flex-col justify-between gap-2 w-1/2 rounded-lg border-solid border-2 border-silver p-2">
                     <p className="text-sm">Cette action interrompt les modifications et archive l'événement.</p>
                     <Button 
-                        // onClick={ handleInterruption } 
+                        onClick={ handleInterruption } 
                         text= {'INTERROMPRE'}
                         type= { false } />
                 </div>

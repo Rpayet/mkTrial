@@ -79,7 +79,7 @@ export default function EventEditor({ setEditor, eventData }) {
 
         return (
             <EventStop 
-                eventData= { eventData }
+                setEditor= { setEditor }
                 setEventStop= { setEventStop } />
         )
 
