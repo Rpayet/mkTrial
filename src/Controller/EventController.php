@@ -6,8 +6,6 @@ use App\Utils\DataUtils;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -169,6 +167,24 @@ class EventController extends AbstractController
     
         return $this->json(['data' => 'success']);
     }
+
+    #[Route('/api/event/{id}/interruption', name: 'app_event_interruption', methods: ['POST'])]
+    #[isGranted('ROLE_USER')]
+    public function interruption(
+        TournamentRepository $tournamentRepository,
+        int $id,
+        EntityManagerInterface $manager
+    ) {
+        $event = $tournamentRepository->find($id);
+
+        $event->setEndAt(new \DateTimeImmutable());
+
+        $manager->persist($event);
+        $manager->flush();
+    
+        return $this->json(['data' => 'success']);
+    }
+
     
 
 }
