@@ -76,4 +76,33 @@ class EntryController extends AbstractController
                 return $this->json(['success' => true]);
             }
 
+    #[Route('api/entry/{id}/delete', name: 'api_entry', methods: ['DELETE'])]
+    public function update(
+        EntryRepository $entryRepository,
+        int $id,
+        EntityManagerInterface $manager
+        )
+            {               
+                // Récupère l'entrée avec l'ID
+                $entry = $entryRepository->find($id);
+                
+                // Supprimer l'image associée à l'entrée
+                $imageFilename = $entry->getPicture();
+                if ($imageFilename) {
+                    $imagePath = $this->getParameter('kernel.project_dir') . '/public/assets/user/entries/' . $imageFilename;
+
+                    // Vérifier si le fichier existe avant de le supprimer
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+
+                // Supprimer l'entrée
+                $manager->remove($entry);
+                $manager->flush();
+
+                return $this->json(['data' => 'success']);
+            }
+
+
 }

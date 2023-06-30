@@ -53,7 +53,7 @@ export default function Main({ id }) {
     }
 
     const { event, user, entries } = eventData; 
-
+    
     return (
         <div className="">
             {event && entries ? (

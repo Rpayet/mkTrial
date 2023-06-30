@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Tournament;
 use App\Form\EventType;
-use App\Form\UserType;
 use App\Repository\RaceRepository;
 use App\Repository\TournamentRepository;
-use App\Repository\UserRepository;
 use App\Utils\DataUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

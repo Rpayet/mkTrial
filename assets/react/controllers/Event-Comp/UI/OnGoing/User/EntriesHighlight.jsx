@@ -1,12 +1,59 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useContext } from "react";
 import { formatTime } from "../../../_Services/FormatTime";
 import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { BackButton } from "../../../../_GlobalUi/Buttons";
+import { RxCross2 } from 'react-icons/rx';
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EntriesHighlight({ showUserEntries, setSection }) {
+export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
 
+    const { eventData, setEventData } = useContext(EventContext);
+
+    const [hoveredEntry, setHoveredEntry] = useState(
+        {
+            id: null,
+            key: null,
+        }
+    );
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+        axios
+            .delete(`/api/entry/${hoveredEntry.id}/delete`)
+            .then(response => {
+                axios.get(`/api/event/${event.id}`)
+                .then(response => {
+                    setEventData(response.data);
+                    // Trouve si l'utilisateur a encore des entries
+                    const userEntries = response.data.entries.filter(entry => {
+                        return entry.user.id === user.id;
+                    });
+                    if (userEntries.length === 0) {
+                        setSection('ranking');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+                    
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    }
+
+    const userAuth = () => {
+        if (user.id === showUserEntries[0].user.id || user.id === event.user.id) {
+            return true;
+        }
+    }
+    
     const formatter = buildFormatter(frenchStrings);
     const [visibility, setVisibility] = useState(false);
 
@@ -78,8 +125,9 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
 
                     <ul className="grid grid-cols-2 gap-4">
                         { showUserEntries.map((entry, i) => (
-                            <li 
-                                key={i}
+                            <li key={i}
+                                onMouseEnter={() => setHoveredEntry( {id: entry.id, key: i} )}
+                                onMouseLeave={() => setHoveredEntry( {id: null, key: null} )}
                                 className="bg-white p-1 rounded-lg 
                                         flex items-center justify-around
                                         hover:scale-[1.02]">
@@ -87,6 +135,13 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                                     <span className="text-xs">
                                         <TimeAgo date={entry.createdAt} formatter={formatter} />
                                     </span>
+                                    { (hoveredEntry.key === i && userAuth() ) && 
+                                        <RxCross2 
+                                            onClick={handleSubmit}
+                                            className="w-4 h-4 bg-white rounded-full block
+                                                        border-solid border-[1px] border-silver
+                                                        hover:bg-mario hover:text-white"
+                                    /> }
                                     
                             </li>
                         ))}

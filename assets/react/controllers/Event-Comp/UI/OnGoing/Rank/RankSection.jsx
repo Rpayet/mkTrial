@@ -27,7 +27,6 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
             }
     
         }, [entries, user.id]);
-
     }
     
     if (section === 'ranking') {
@@ -57,6 +56,8 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
 
         return (
             <EntriesHighlight
+                event= { event }
+                user= { user }
                 showUserEntries= { showUserEntries }
                 setSection= { setSection } />
         )
