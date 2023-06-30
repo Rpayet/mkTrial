@@ -31,6 +31,7 @@ export default function EventInfo({ user, event, setEditor, editor }) {
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
                     { editAuth &&         
                         <BiEditAlt 
+                            title="Éditer les informations de l'évènement"
                             onClick={() => {setEditor(true)}}
                             className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${editor ? 'hidden' : ''}`}/>
 }

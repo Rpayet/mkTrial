@@ -41,8 +41,7 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                 <div 
                     id="Users"
                     className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
-                    bg-slate-100 border-solid border-[1px] border-lumi rounded-lg
-                     "
+                    bg-slate-100 border-solid border-[1px] border-lumi rounded-lg"
                     style={{ backgroundSize: `100% ${100 - loadingProgress}%` }}>
                     {event.registered.map((u, i) => (
                         <img

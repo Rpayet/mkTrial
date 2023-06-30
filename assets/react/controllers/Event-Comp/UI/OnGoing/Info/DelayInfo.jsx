@@ -1,5 +1,6 @@
 import React from "react";
 import Countdown from "react-countdown";
+import { AiOutlineClockCircle } from 'react-icons/ai';
 
 export default function DelayInfo({ event }) {
 
@@ -24,17 +25,15 @@ export default function DelayInfo({ event }) {
         <div 
             id="event-options"
             className="" >
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-1 items-center">
                     <Countdown 
                         zeroPadTime={2}
                         date= { endAtDate }
                         daysInHours= {false}
                         renderer= { renderer } />
-
-                    <img 
-                        src="/assets/admin/img/icons/clock.png" 
-                        alt="clock"
-                        className="h-4" />
+                    <AiOutlineClockCircle 
+                        title="Temps restant"
+                        className="w-5 h-5" />
                 </div>
         </div>
     )

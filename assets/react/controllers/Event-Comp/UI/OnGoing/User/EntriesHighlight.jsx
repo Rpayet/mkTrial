@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
 import { formatTime } from "../../../_Services/FormatTime";
-import TimeAgo from 'react-timeago';
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { BackButton } from "../../../../_GlobalUi/Buttons";
-import { RxCross2 } from 'react-icons/rx';
+import EntriesHistoryList from "./EntriesHistoryList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
@@ -13,10 +12,7 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
     const { eventData, setEventData } = useContext(EventContext);
 
     const [hoveredEntry, setHoveredEntry] = useState(
-        {
-            id: null,
-            key: null,
-        }
+        { id: null, key: null }
     );
 
     const handleSubmit = (e) => {
@@ -119,31 +115,22 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
 
             <div className="w-full text-center">
 
-                <h2 className="my-4">Historique</h2>
+                <p className="my-4">Historique</p>
 
                 <div className="w-full">
 
                     <ul className="grid grid-cols-2 gap-4">
                         { showUserEntries.map((entry, i) => (
-                            <li key={i}
-                                onMouseEnter={() => setHoveredEntry( {id: entry.id, key: i} )}
-                                onMouseLeave={() => setHoveredEntry( {id: null, key: null} )}
-                                className="bg-white p-1 rounded-lg 
-                                        flex items-center justify-around
-                                        hover:scale-[1.02]">
-                                    <p>{ formatTime(entry.time) }</p>
-                                    <span className="text-xs">
-                                        <TimeAgo date={entry.createdAt} formatter={formatter} />
-                                    </span>
-                                    { (hoveredEntry.key === i && userAuth() ) && 
-                                        <RxCross2 
-                                            onClick={handleSubmit}
-                                            className="w-4 h-4 bg-white rounded-full block
-                                                        border-solid border-[1px] border-silver
-                                                        hover:bg-mario hover:text-white"
-                                    /> }
-                                    
-                            </li>
+                            <EntriesHistoryList
+                                key={i}
+                                i={i}
+                                entry={entry}
+                                hoveredEntry={hoveredEntry}
+                                setHoveredEntry={setHoveredEntry}
+                                formatter={formatter}
+                                userAuth={userAuth}
+                                handleSubmit={handleSubmit} 
+                            />
                         ))}
                     </ul>
 
