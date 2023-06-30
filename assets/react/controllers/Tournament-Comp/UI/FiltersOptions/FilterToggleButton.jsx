@@ -1,4 +1,6 @@
 import React from "react";
+import { IoIosArrowDown } from 'react-icons/io';
+import { AiOutlineMinus } from 'react-icons/ai';
 
 export default function FilterToggleButton({ title, setVisibility, visibility }) {
 
@@ -15,17 +17,9 @@ export default function FilterToggleButton({ title, setVisibility, visibility })
                 <span className="w-full flex items-center border-t-[1px]">
                     {title}
                     {!visibility ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24" fill="none">
-                            <g id="Arrow / Caret_Down_MD">
-                                <path id="Vector" d="M16 10L12 14L8 10" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </g>
-                        </svg>
+                        <IoIosArrowDown />
                     ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
-                            <g id="Edit / Remove_Minus">
-                                <path id="Vector" d="M6 12H18" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </g>
-                        </svg>
+                        <AiOutlineMinus/>
                     )}
                 </span>
             

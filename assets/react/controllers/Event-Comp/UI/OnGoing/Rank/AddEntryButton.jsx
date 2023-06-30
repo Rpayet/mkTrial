@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { rankService } from "../../../_Services/RankService";
+import { GrAddCircle } from 'react-icons/gr';
 
 export default function AddEntryButton({ setToggleView }) {
 
@@ -32,10 +33,7 @@ export default function AddEntryButton({ setToggleView }) {
             onClick={handleToggle}>
             <div className="flex gap-2">
                 
-                <img 
-                    src="/assets/admin/img/icons/Add.svg" 
-                    alt="add"
-                    className="w-6 border-solid border-[1px] border-silver rounded-full" />
+                <GrAddCircle className="w-6 h-6"/>
                 <p>Ajouter une entrée</p>
                 
             </div>

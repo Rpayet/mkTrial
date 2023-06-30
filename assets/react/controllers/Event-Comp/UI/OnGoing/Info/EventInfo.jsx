@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
-import EditorButton from "./EditorButton";
+import { BiEditAlt } from 'react-icons/bi';
 
 export default function EventInfo({ user, event, setEditor, editor }) {
 
@@ -29,13 +29,16 @@ export default function EventInfo({ user, event, setEditor, editor }) {
             <div className="flex items-center justify-between px-4">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
-                    { editAuth && <EditorButton setEditor= { setEditor } editor= { editor } />}
+                    { editAuth &&         
+                        <BiEditAlt 
+                            onClick={() => {setEditor(true)}}
+                            className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${editor ? 'hidden' : ''}`}/>
+}
                 </div>
                 <DelayInfo event= { event } />
             </div>
 
-            <div 
-                className="w-full">
+            <div className="w-full">
 
                 <RaceInfo event= { event } color= { color } />
 

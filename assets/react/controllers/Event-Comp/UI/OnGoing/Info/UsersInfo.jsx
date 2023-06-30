@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import AddUser from "./AddUser"
+import { AiOutlineUserAdd } from 'react-icons/ai';
 
 export default function Userinfo({ user, event, setRegistration, isUserRegistered, loadingProgress }) {
 
@@ -54,11 +54,10 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                         />
                     ))}
 
-                { show 
-                    && <AddUser 
-                        user= { user }
-                        setRegistration= { setRegistration }
-                        isUserRegistered= { isUserRegistered } /> 
+                { show &&
+                    <AiOutlineUserAdd 
+                        onClick={() => {setRegistration(true)}}
+                        className="h-10 w-10 p-1 bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver" />
                 }
 
                 </div>

@@ -9,10 +9,11 @@ export default function UsersEntries({ user, event, rankList, setShowUser, setSe
         <>
             {rankList.map((entry, i) => (
                 <UserEntry 
+                    key= { i }
+                    rank= { i }
                     user= { user }
                     event= { event }
                     entry= { entry } 
-                    i= { i }
                     hoveredEntryKey= { hoveredEntryKey }
                     setHoveredEntryKey= { setHoveredEntryKey }
                     setShowUser= { setShowUser } 

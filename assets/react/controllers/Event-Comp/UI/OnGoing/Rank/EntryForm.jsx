@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
 import TimerInput from "./TimerInput";
 import UploadInput from "./UploadInput";
-import EntryFormButton from "./EntryFormButton";
 import axios from "axios";
 import { EventContext } from "../../../../_Provider/EventContext";
-
+import { RxCross2, RxCheck } from 'react-icons/rx';
 
 export default function EntryForm({ toggleView, setToggleView }) {
 
@@ -20,6 +19,13 @@ export default function EntryForm({ toggleView, setToggleView }) {
         picture: null,
     });
 
+    const handleCancel = () => {
+        setToggleView(!toggleView);
+        setEntryInput({ ...entryInput, time: 0 });
+        setFileName('');
+        setImage(null);
+    }
+
     let formData = new FormData();
     formData.append('time', entryInput.time);
     formData.append('picture', entryInput.picture);
@@ -34,7 +40,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
         setErrors({});
 
         axios
-            .post(`/api/event/${event.id}/entry`, formData)
+            .post(`/api/event/${event.id}/addEntry`, formData)
             .then(response => {
                 axios.get(`/api/event/${event.id}`)
                 .then(response => {
@@ -51,7 +57,6 @@ export default function EntryForm({ toggleView, setToggleView }) {
 
     return (
         <form
-            onSubmit={handleSubmit}
             id="entry-form"
             className="bg-white w-full h-fit flex rounded-lg py-4 justify-around my-4 zoomIn">
 
@@ -67,13 +72,18 @@ export default function EntryForm({ toggleView, setToggleView }) {
                 fileName= { fileName }
                 setFileName= { setFileName } />
 
-            <EntryFormButton 
-                toggleView= { toggleView }
-                setToggleView= { setToggleView }
-                entryInput= { entryInput}
-                setEntryInput= { setEntryInput }
-                setFileName= { setFileName }
-                setImage= { setImage } />
+            <div className="flex gap-2 items-center">
+                <RxCross2 
+                    className="w-8 h-8 bg-white rounded-full block
+                    border-solid border-[1px] border-silver
+                    hover:bg-mario hover:text-white"
+                    onClick={handleCancel} />
+                <RxCheck
+                    className="w-8 h-8 bg-white rounded-full block
+                    border-solid border-[1px] border-silver
+                    hover:bg-lumi hover:text-white"
+                    onClick={handleSubmit} />
+            </div>
 
         </form>
     )

@@ -70,7 +70,7 @@ export default function EventStop({ setEditor, setEventStop }) {
                 </div>
 
                 <div className="flex flex-col justify-between gap-2 w-1/2 rounded-lg border-solid border-2 border-silver p-2">
-                    <p className="text-sm">Cette action interrompt les modifications et archive l'événement.</p>
+                    <p className="text-sm">Cette action interrompt les modifications et archive l'événement. Donne accès immédiatement au tableau final.</p>
                     <Button 
                         onClick={ handleInterruption } 
                         text= {'INTERROMPRE'}

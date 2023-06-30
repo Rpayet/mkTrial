@@ -11,8 +11,7 @@ export default function AddEntry() {
         <>
             { toggleView 
                 ? <AddEntryButton setToggleView= { setToggleView } />
-                : 
-                    <EntryForm 
+                : <EntryForm 
                         toggleView= { toggleView }
                         setToggleView= { setToggleView } />
             }

@@ -42,19 +42,21 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                 <div className="flex items-center gap-4">
                     <img
                         src={ showUserEntries[0].user.picture 
-                                ? `/assets/user/img/${showUserEntries[0].user.picture}` 
+                                ? `/assets/user/img/${ showUserEntries[0].user.picture }` 
                                 : '/assets/admin/img/icons/Default.png' }
                         alt="default"
                         className="h-24 rounded-full border-solid border-4 border-white"
                     />
-                    <div>
+                    <div className="h-24 flex flex-col justify-around">
                         <a 
                             href="#"
                             className="font-bold text-lg hover:text-lumi">
                                 { showUserEntries[0].user.name }
                         </a>
-                        <p className="text-lg" >{ formatTime(showUserEntries[0].time) }</p>
-                        <p className="text-xs"><TimeAgo date={showUserEntries[0].createdAt} formatter={formatter} /></p>
+                        <div>
+                            <p className='text-xs border-b-2 border-solid border-lumi'>Meilleur temps</p>
+                            <p className="text-lg font-bold" >{ formatTime(showUserEntries[0].time) }</p>
+                        </div>
                     </div>
                 </div>
 

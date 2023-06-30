@@ -28,9 +28,9 @@ class EntryController extends AbstractController
         ]);
     }
 
-    #[Route('/api/event/{id}/entry', name: 'app_event_entry_new', methods: ['POST'])]
+    #[Route('/api/event/{id}/addEntry', name: 'app_event_entry_add', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
-    public function newEntry(
+    public function addEntry(
         Request $request,
         $id,
         EntityManagerInterface $manager, 
