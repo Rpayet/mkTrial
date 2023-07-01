@@ -54,6 +54,18 @@
   100% {transform: translateX(0);}
 }
 
+@keyframes newEntryIn {
+  from {
+    transform: translateX(4em) scale(0);
+    transform-origin: 100% 50%;
+  }
+  to {
+    transform: translateX(0em) scale(1);
+    transform-origin: center;
+  }
+}
+
+
 #finished {
   animation: slideInTop .35s ease-in-out;
 }
@@ -64,6 +76,10 @@
 
 .slideScaleLeft {
   animation: slideInScaleLeft .35s ease-out;
+}
+
+.newEntry {
+  animation: newEntryIn .35s ease-out;
 }
 
 #sort {

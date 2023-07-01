@@ -13,13 +13,11 @@ export default function EntryCard({ rank, entry, user, hoveredEntryKey, setHover
         let timeout;
 
         if (newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time) {
+            setNewEntryAnimation('newEntry')
+            setNewEntry(null);
             timeout = setTimeout(() => {
-                setNewEntryAnimation('slideLeft')
-                setNewEntry(null);
-                setTimeout(() => {
-                    setNewEntryAnimation('')
-                }, 1000);
-            }, 500);
+                setNewEntryAnimation('')
+            }, 1000);
         }
 
         return () => clearTimeout(timeout);
