@@ -3,11 +3,11 @@ import EntryForm from "./EntryForm";
 import { formatTime } from "../../../_Services/FormatTime";
 import { EventContext } from "../../../../_Provider/EventContext";
 import EntryCard from "./EntryCard";
+import { rankService } from "../../../_Services/RankService";
 
 export default function UserEntry(
     { 
         user,
-        showUserEntries,
         event,
         entry, 
         rank, 
@@ -18,10 +18,13 @@ export default function UserEntry(
     }) {
 
         const [toggleView, setToggleView] = useState(false);
-
-        const { newEntry, setNewEntry } = useContext(EventContext);
-
+        const { newEntry, setNewEntry, animation, setAnimation, eventData } = useContext(EventContext);
         const [hideDelay, setHideDelay] = useState('hidden');
+
+        const { entries } = eventData;
+        const rankList = rankService(entries);
+        const totalEntries = rankList.length;
+
 
         const handleEditClick = () => {
             setToggleView(true);
@@ -36,19 +39,20 @@ export default function UserEntry(
         useEffect(() => {
             let timeout;
         
-            if (newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time) {
+            if (animation.rankAnimation) {
                 timeout = setTimeout(() => {
-                    setHideDelay('');
-                    setNewEntry({user: null, time: null, isNew: null})
-                }, (showUserEntries.length) * 100);
-            } else {
-                timeout = setTimeout(() => {
-                    setHideDelay('');
-                }, (rank + 1) * 100);
-            }
-                
+                    setHideDelay('visible');
+                    if (rank === totalEntries - 1) {
+                        setTimeout(() => {
+                            setAnimation({ rankAnimation: false });
+                        }, totalEntries * 100);
+                    }
+                }, (rank+1) * 100);
+            }   
+
             return () => clearTimeout(timeout);
-        }, [newEntry, showUserEntries, rank, user.id, entry.time]);
+            
+        }, [rank, totalEntries, animation ]);
 
         if (toggleView) {
 
@@ -57,19 +61,16 @@ export default function UserEntry(
 
         return (
             <div className="w-full">
-                { newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time
-                    ? <></>
-                    : <EntryCard
-                        user= { user }      
-                        entry= { entry }
-                        rank= { rank }
-                        hoveredEntryKey= { hoveredEntryKey }
-                        setHoveredEntryKey= { setHoveredEntryKey }
-                        handleEditClick= { handleEditClick }
-                        handleShowClick= { handleShowClick }
-                        hideDelay= { hideDelay }
-                        formatTime={ formatTime} />
-                }
+                <EntryCard
+                    user= { user }      
+                    entry= { entry }
+                    rank= { rank }
+                    hoveredEntryKey= { hoveredEntryKey }
+                    setHoveredEntryKey= { setHoveredEntryKey }
+                    handleEditClick= { handleEditClick }
+                    handleShowClick= { handleShowClick }
+                    hideDelay= { hideDelay }
+                    formatTime={ formatTime} />
                 
             </div>
         )

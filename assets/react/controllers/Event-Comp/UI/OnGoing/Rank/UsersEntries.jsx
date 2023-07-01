@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UserEntry from "./UserEntry";
 
-export default function UsersEntries({ showUserEntries, user, event, rankList, setShowUser, setSection }) {
+export default function UsersEntries({ user, event, rankList, setShowUser, setSection }) {
 
     const [hoveredEntryKey, setHoveredEntryKey] = useState(null);
 
@@ -11,7 +11,6 @@ export default function UsersEntries({ showUserEntries, user, event, rankList, s
                 <UserEntry 
                     key= { i }
                     rank= { i }
-                    showUserEntries= { showUserEntries }
                     user= { user }
                     event= { event }
                     entry= { entry } 

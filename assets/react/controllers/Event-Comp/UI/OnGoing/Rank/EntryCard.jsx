@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BiEditAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
+import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function EntryCard({ rank, entry, user, hoveredEntryKey, setHoveredEntryKey, hideDelay, handleShowClick, handleEditClick, formatTime }) {
+
+    const { newEntry, setNewEntry, animation } = useContext(EventContext);
+
+    const [newEntryAnimation, setNewEntryAnimation] = useState('');
+
+    useEffect(() => {
+        let timeout;
+
+        if (newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time) {
+            timeout = setTimeout(() => {
+                setNewEntryAnimation('slideLeft')
+                setNewEntry(null);
+                setTimeout(() => {
+                    setNewEntryAnimation('')
+                }, 1000);
+            }, 500);
+        }
+
+        return () => clearTimeout(timeout);
+
+    }, [newEntry, setNewEntry, user, entry]);
+
+    if (newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time) {
+        return <></>;
+    }
 
     return(
         <div
             className={`w-full mt-2 py-4 px-10 bg-white flex justify-between duration-100
                         rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]
-                        ${hideDelay} zoomIn`}
+                        ${animation.rankAnimation ? hideDelay + ' zoomIn' : 'visible'} ${newEntryAnimation}`}
             onMouseEnter={() => setHoveredEntryKey(rank)}
             onMouseLeave={() => setHoveredEntryKey(null)}>
 

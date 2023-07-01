@@ -41,7 +41,6 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                         user= { user }
                         event= { event }
                         entries= { entries }
-                        showUserEntries= { showUserEntries }
                         isUserRegistered= { isUserRegistered }
                         setShowUser= { setShowUser }
                         setSection={ setSection } />
