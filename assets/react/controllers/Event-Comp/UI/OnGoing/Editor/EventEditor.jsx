@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import EditorRequestOptions from "./EditorRequestOptions";
 import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions";
 import { BackButton }from "../../../../_GlobalUi/Buttons";
-import { DataContext } from "../../../../_Provider/EventContext";
+import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 
 export default function EventEditor({ setEditor, eventData }) {
 
     const [disabled, setDisabled] = useState(true);
-    const {data, setData} = useContext(DataContext);
+    const {data, setData} = useContext(EventContext);
     const [editValidation, setEditValidation] = useState(false);
     const [eventStop, setEventStop] = useState(false);
 

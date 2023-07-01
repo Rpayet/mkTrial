@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "../../../../_GlobalUi/Buttons";
-import { DataContext, EventContext } from "../../../../_Provider/EventContext";
+import { EventContext } from "../../../../_Provider/EventContext";
 import { getFormattedDate } from "../../../_Services/FormatTime";
 
 export default function EditorValidation({ setEditValidation, setErrors, setEditor }) {
 
-    const {data, setData} = useContext(DataContext);
+    const {data, setData} = useContext(EventContext);
     const {eventData, setEventData} = useContext(EventContext);
 
     {/* Ferme le composant */}

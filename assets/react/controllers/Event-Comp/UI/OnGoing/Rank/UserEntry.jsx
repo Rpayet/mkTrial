@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import EntryForm from "./EntryForm";
 import { formatTime } from "../../../_Services/FormatTime";
-import { BiEditAlt } from 'react-icons/bi';
-import { AiOutlineEye } from 'react-icons/ai';
+import { EventContext } from "../../../../_Provider/EventContext";
+import EntryCard from "./EntryCard";
 
 export default function UserEntry(
     { 
         user,
+        showUserEntries,
         event,
         entry, 
         rank, 
@@ -16,72 +17,61 @@ export default function UserEntry(
         setSection 
     }) {
 
-    const [hideDelay, setHideDelay] = useState('hidden');
+        const [toggleView, setToggleView] = useState(false);
 
-    const [toggleView, setToggleView] = useState(false);
+        const { newEntry, setNewEntry } = useContext(EventContext);
 
-    const handleEditClick = () => {
-        setToggleView(true);
-    };
+        const [hideDelay, setHideDelay] = useState('hidden');
 
-    
-    const handleShowClick = () => {
-        setShowUser(entry.user.id)
-        setSection('highlight')
-    }
-    
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setHideDelay('');
-        }, (rank + 1) * 100);
+        const handleEditClick = () => {
+            setToggleView(true);
+        };
+
         
-        return () => clearTimeout(timeout);
-    }, []);
-
-    if (toggleView) {
-        return <EntryForm event= { event } toggleView= {toggleView} setToggleView={ setToggleView } />;
-    } else {
-        return (
-            <div
-            className={`w-full mt-2 py-4 px-10 bg-white flex justify-between duration-100
-                        rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]
-                        ${hideDelay} slideScaleLeft`}
-            onMouseEnter={() => setHoveredEntryKey(rank)}
-            onMouseLeave={() => setHoveredEntryKey(null)}>
-    
-            <div className="flex w-1/3 gap-2">
-                <p>#<span className="font-bold">{rank+1}</span></p>
-                <p>{entry.user.name}</p>
-            </div>
-    
-            { hoveredEntryKey === rank &&
-                <div
-                    id="options"
-                    className="w-1/3 flex justify-end items-center gap-2" >
-                        <AiOutlineEye 
-                            title="Consulter les temps enregistrés"
-                            onClick={handleShowClick}
-                            className="text-silver hover:text-lumi cursor-pointer w-5 h-5" />
-
-                    { user !== null && entry.user.name === user.name &&
-                        
-                        <BiEditAlt 
-                            title="Ajouter un nouveau temps"
-                            onClick={handleEditClick} 
-                            className="text-silver hover:text-lumi cursor-pointer w-5 h-5"/>
-                    }
-                    
-                </div>
+        const handleShowClick = () => {
+            setShowUser(entry.user.id)
+            setSection('highlight')
+        }
+        
+        useEffect(() => {
+            let timeout;
+        
+            if (newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time) {
+                timeout = setTimeout(() => {
+                    setHideDelay('');
+                    setNewEntry({user: null, time: null, isNew: null})
+                }, (showUserEntries.length) * 100);
+            } else {
+                timeout = setTimeout(() => {
+                    setHideDelay('');
+                }, (rank + 1) * 100);
             }
                 
-            <div>
-                <span className="w-1/3">{formatTime(entry.time)}</span>
-            </div>
-    
-        </div> 
-    
-        )
-    
-    }
+            return () => clearTimeout(timeout);
+        }, [newEntry, showUserEntries, rank, user.id, entry.time]);
 
-}
+        if (toggleView) {
+
+            return <EntryForm event= { event } toggleView= {toggleView} setToggleView={ setToggleView } />;
+        } 
+
+        return (
+            <div className="w-full">
+                { newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time
+                    ? <></>
+                    : <EntryCard
+                        user= { user }      
+                        entry= { entry }
+                        rank= { rank }
+                        hoveredEntryKey= { hoveredEntryKey }
+                        setHoveredEntryKey= { setHoveredEntryKey }
+                        handleEditClick= { handleEditClick }
+                        handleShowClick= { handleShowClick }
+                        hideDelay= { hideDelay }
+                        formatTime={ formatTime} />
+                }
+                
+            </div>
+        )
+
+    }

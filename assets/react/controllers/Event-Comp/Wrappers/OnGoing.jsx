@@ -37,17 +37,15 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
 
                 </div>
 
-                <DataProvider>
-                    <EventRegistration
-                        eventId = { eventId }
-                        setEventData= { setEventData }
-                        editor= { editor }
-                        setEditor={ setEditor }
-                        isUserRegistered= { isUserRegistered }
-                        registration= { registration }
-                        setRegistration={ setRegistration } 
-                        setLoadingProgress= { setLoadingProgress } />
-                </DataProvider>
+                <EventRegistration
+                    eventId = { eventId }
+                    setEventData= { setEventData }
+                    editor= { editor }
+                    setEditor={ setEditor }
+                    isUserRegistered= { isUserRegistered }
+                    registration= { registration }
+                    setRegistration={ setRegistration } 
+                    setLoadingProgress= { setLoadingProgress } />
 
         </div>
     )

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RankOptions from "./RankOptions";
 import AddEntry from "./AddEntry";
 import EntriesHighlight from "../User/EntriesHighlight";
+import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function RankSection({ event, user, entries, isUserRegistered }) {
 
     const [section, setSection] = useState('ranking');
     const [showUser, setShowUser] = useState(null);
+    
+    const {newEntry, setNewEntry} = useContext(EventContext);
     
     const showUserEntries = entries.filter((entry) => entry.user.id === showUser).sort((a, b) => a.time - b.time);
 
@@ -32,13 +35,13 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
     if (section === 'ranking') {
 
         return (
-            <div 
-                className="sm:w-2/3 flex flex-col items-center">
+            <div className="sm:w-2/3 flex flex-col items-center">
                     
                     <RankOptions
                         user= { user }
                         event= { event }
                         entries= { entries }
+                        showUserEntries= { showUserEntries }
                         isUserRegistered= { isUserRegistered }
                         setShowUser= { setShowUser }
                         setSection={ setSection } />
@@ -46,6 +49,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                     { inputEntry === 'new' && user != null &&
                         <AddEntry /> 
                     }
+                    
             </div>
     
         )

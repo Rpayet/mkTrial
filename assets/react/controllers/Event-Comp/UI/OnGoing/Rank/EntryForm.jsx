@@ -8,8 +8,9 @@ import { RxCross2, RxCheck } from 'react-icons/rx';
 export default function EntryForm({ toggleView, setToggleView }) {
 
     const { eventData, setEventData } = useContext(EventContext);
+    const { newEntry, setNewEntry } = useContext(EventContext);
 
-    const { event } = eventData;
+    const { user, event } = eventData;
 
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -42,6 +43,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
         axios
             .post(`/api/event/${event.id}/addEntry`, formData)
             .then(response => {
+                setNewEntry({user: user.id, time: entryInput.time, isNew: true})
                 axios.get(`/api/event/${event.id}`)
                 .then(response => {
                     setToggleView(false);
@@ -74,11 +76,13 @@ export default function EntryForm({ toggleView, setToggleView }) {
 
             <div className="flex gap-2 items-center">
                 <RxCross2 
+                    title="Annuler"
                     className="w-8 h-8 bg-white rounded-full block
                     border-solid border-[1px] border-silver
                     hover:bg-mario hover:text-white"
                     onClick={handleCancel} />
                 <RxCheck
+                    title="Valider"
                     className="w-8 h-8 bg-white rounded-full block
                     border-solid border-[1px] border-silver
                     hover:bg-lumi hover:text-white"

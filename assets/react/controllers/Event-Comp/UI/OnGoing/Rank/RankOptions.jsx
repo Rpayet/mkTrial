@@ -3,7 +3,7 @@ import NoEntry from "./NoEntry";
 import UsersEntries from "./UsersEntries";
 import { rankService } from "../../../_Services/RankService";
 
-export default function RankOptions({ user, event, entries, isUserRegistered, setShowUser, setSection }) {
+export default function RankOptions({ showUserEntries, user, event, entries, isUserRegistered, setShowUser, setSection }) {
 
     const rankList = rankService(entries);
 
@@ -12,6 +12,7 @@ export default function RankOptions({ user, event, entries, isUserRegistered, se
             {rankList.length > 0 
             
                 ? <UsersEntries
+                    showUserEntries= { showUserEntries }
                     user= { user }
                     event= { event } 
                     rankList= { rankList }
