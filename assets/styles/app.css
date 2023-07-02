@@ -57,7 +57,7 @@
 @keyframes newEntryIn {
   from {
     transform: translateX(4em) scale(0);
-    transform-origin: 100% 50%;
+    transform-origin: right top;
   }
   to {
     transform: translateX(0em) scale(1);

@@ -4,7 +4,7 @@ import { formatTime } from "../../../_Services/FormatTime";
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { BackButton } from "../../../../_GlobalUi/Buttons";
-import EntriesHistoryList from "./EntriesHistoryList";
+import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
