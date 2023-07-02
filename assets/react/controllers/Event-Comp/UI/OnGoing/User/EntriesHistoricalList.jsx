@@ -10,7 +10,7 @@ export default function EntriesHistoricalList({ entry, i, setHoveredEntry, hover
         <li 
             onMouseEnter={() => setHoveredEntry( {id: entry.id, key: i} )}
             onMouseLeave={() => setHoveredEntry( {id: null, key: null} )}
-            className="bg-white px-1 py-3 rounded-lg 
+            className="relative bg-white px-1 py-3 rounded-lg 
                     hover:scale-[1.02]">
 
                 {visibility 
