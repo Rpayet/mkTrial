@@ -1,10 +1,14 @@
 import React from "react";
 import { RxCross2, RxCheck  } from 'react-icons/rx';
 
-export default function EntryHistoricalDeletion({ setVisibility, handleSubmit, hoveredEntry }) {
+export default function EntryHistoricalDeletion({ filled, setVisibility, handleSubmit }) {
+
+    if (filled >= 100) {
+        setVisibility(true);
+    }
 
     return (
-        <div className="relative w-full flex items-center justify-around">
+        <div className="w-full flex items-center justify-around">
 
             <p className="text-xs">Confirmer la supression ?</p>
 
@@ -23,9 +27,11 @@ export default function EntryHistoricalDeletion({ setVisibility, handleSubmit, h
                     hover:bg-lumi hover:text-white" />
             </div>
             <div 
-                className="bg-red-500 absolute w-1/2
-                top-0 bottom-0 left-0 right-0 opacity-25 rounded-lg">
+                style={{width: `${filled}%`}}
+                className={`bg-red-500 absolute
+                top-0 bottom-0 left-0 right-0 opacity-25 rounded-lg`}>
             </div>
+            
         </div>
     )
 }

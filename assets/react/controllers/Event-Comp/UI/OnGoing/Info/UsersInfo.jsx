@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { AiOutlineUserAdd } from 'react-icons/ai';
 
-export default function Userinfo({ user, event, setRegistration, isUserRegistered, loadingProgress }) {
+export default function Userinfo({ user, event, setRegistration, isUserRegistered, filled }) {
 
     const [show, setShow] = useState(true);
 
@@ -40,9 +40,8 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                 
                 <div 
                     id="Users"
-                    className="w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
-                    bg-slate-100 border-solid border-[1px] border-lumi rounded-lg"
-                    style={{ backgroundSize: `100% ${100 - loadingProgress}%` }}>
+                    className="relative w-4/5 p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
+                    bg-slate-100 border-solid border-[1px] border-lumi rounded-lg">
                     {event.registered.map((u, i) => (
                         <img
                             key={i}
@@ -53,11 +52,17 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                         />
                     ))}
 
-                { show &&
-                    <AiOutlineUserAdd 
-                        onClick={() => {setRegistration(true)}}
-                        className="h-10 w-10 p-1 bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver" />
-                }
+                    { show &&
+                        <AiOutlineUserAdd 
+                            onClick={() => {setRegistration(true)}}
+                            className="h-10 w-10 p-1 bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver" />
+                    }
+
+                    <div 
+                        style={{height: `${filled}%`}}
+                        className={`bg-lumi absolute
+                        bottom-0 left-0 right-0 opacity-25 rounded-lg`}>
+                    </div>
 
                 </div>
 

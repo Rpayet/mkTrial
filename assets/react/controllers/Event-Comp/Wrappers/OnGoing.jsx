@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
-import { DataProvider } from "../../_Provider/EventContext";
-
 
 export default function OnGoing({ user, eventId, event, setEventData }) {
 
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
-
+    const [filled, setFilled] = useState(0);
     const [editor, setEditor] = useState(false);
-
-    const [loadingProgress, setLoadingProgress] = useState(0);
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
@@ -33,7 +29,7 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
                         event= { event }
                         setRegistration= { setRegistration }
                         isUserRegistered= { isUserRegistered }
-                        loadingProgress= { loadingProgress } />
+                        filled={filled} />
 
                 </div>
 
@@ -44,8 +40,8 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
                     setEditor={ setEditor }
                     isUserRegistered= { isUserRegistered }
                     registration= { registration }
-                    setRegistration={ setRegistration } 
-                    setLoadingProgress= { setLoadingProgress } />
+                    setRegistration={ setRegistration }
+                    setFilled={setFilled} />
 
         </div>
     )

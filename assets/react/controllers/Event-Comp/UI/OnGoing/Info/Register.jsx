@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
+import { updateProgress } from "../../../../_Service/Loading";
 
-export default function Register({ event, setRegistration, setLoadingProgress }) {
+export default function Register({ event, setRegistration, setFilled }) {
 
     const { eventData, setEventData } = useContext(EventContext);
     const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ export default function Register({ event, setRegistration, setLoadingProgress })
     const handleSubmit = (e) => {
 
         e.preventDefault();
-
+        const startTime = performance.now();
         const data = {
             id: event.id
         };
@@ -23,18 +24,18 @@ export default function Register({ event, setRegistration, setLoadingProgress })
             .post("/api/event/register", data)
             .then(response => {
                 if (response.data) {
-                    axios.get(`/api/event/${event.id}`, {
-                        onDownloadProgress: progressEvent => {
-                          const progress = Math.round(
-                            (progressEvent.loaded * 100) / progressEvent.total
-                          );
-                          setLoadingProgress(progress);
-                        }
-                      })
+                    const endTime = performance.now();
+                    const loadTime = endTime - startTime;
+        
+                    updateProgress((loadTime/2), (progress) => {
+                        setFilled(progress);
+                    });
+        
+                    axios.get(`/api/event/${event.id}`)
                         .then(response => {
                             setRegistration(false);
                             setEventData(response.data);
-                            setLoadingProgress(0);
+                            setFilled(0);
                         })
                         .catch(error => {
                             console.error(error);
@@ -61,7 +62,7 @@ export default function Register({ event, setRegistration, setLoadingProgress })
                     <p>{error}</p>
                 </div>
             :
-                <div className="w-full text-center bg-white p-10 rounded-xl">
+                <div className="relative w-full text-center bg-white p-10 rounded-xl">
                     <p className="text-xl font-bold">Rappel des contraintes</p>
                     <p className="text-mario">Vitesse : {event.speed}</p>
                     <p className="text-mario">Capture d'écran obligatoire</p>
@@ -90,6 +91,7 @@ export default function Register({ event, setRegistration, setLoadingProgress })
                         </button>
 
                     </div>
+                    
                 </div>
             }
                 

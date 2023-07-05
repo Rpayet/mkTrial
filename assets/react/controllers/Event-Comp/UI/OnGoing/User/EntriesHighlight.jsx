@@ -6,53 +6,62 @@ import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { BackButton } from "../../../../_GlobalUi/Buttons";
 import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
+import { updateProgress } from "../../../../_Service/Loading";
 
 export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
 
     const { eventData, setEventData } = useContext(EventContext);
+    const [filled, setFilled] = useState(0);
+    const formatter = buildFormatter(frenchStrings);
+    const [visibility, setVisibility] = useState(false);
 
     const [hoveredEntry, setHoveredEntry] = useState(
         { id: null, key: null }
     );
 
+
     const handleSubmit = (e) => {
-
         e.preventDefault();
-
+      
+        const startTime = performance.now();
+      
         axios
-            .delete(`/api/entry/${hoveredEntry.id}/delete`)
-            .then(response => {
-                axios.get(`/api/event/${event.id}`)
+          .delete(`/api/entry/${hoveredEntry.id}/delete`)
+          .then(response => {
+            const endTime = performance.now();
+            const loadTime = endTime - startTime;
+
+            updateProgress((loadTime/2), (progress) => {
+                setFilled(progress);
+            });
+            
+            axios.get(`/api/event/${event.id}`)
                 .then(response => {
                     setEventData(response.data);
-                    // Trouve si l'utilisateur a encore des entries
                     const userEntries = response.data.entries.filter(entry => {
                         return entry.user.id === user.id;
                     });
+                    setFilled(0);
+
                     if (userEntries.length === 0) {
-                        setSection('ranking');
+                    setSection('ranking');
                     }
                 })
                 .catch(error => {
                     console.error(error);
                 });
-                    
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-    }
-
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      };
+      
     const userAuth = () => {
         if (user.id === showUserEntries[0].user.id || user.id === event.user.id) {
             return true;
         }
     }
     
-    const formatter = buildFormatter(frenchStrings);
-    const [visibility, setVisibility] = useState(false);
-
     const handleClick = () => {
         setVisibility(!visibility);
     }
@@ -130,6 +139,7 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
                                 formatter={formatter}
                                 userAuth={userAuth}
                                 handleSubmit={handleSubmit} 
+                                filled={filled}
                             />
                         ))}
                     </ul>

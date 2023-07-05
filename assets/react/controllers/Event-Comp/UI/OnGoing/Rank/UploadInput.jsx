@@ -64,7 +64,7 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
                         src={image} 
                         width={120} 
                         alt={fileName} />
-                    : <RxUpload className="m-auto text-lumi" />
+                    : <RxUpload className="m-auto text-lumi w-5 h-5" />
                     
                 }
 

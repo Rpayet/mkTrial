@@ -6,7 +6,7 @@ import { EventContext } from "../../_Provider/EventContext";
 
 export default function EventRegistration({
     editor, setEditor, eventId,isUserRegistered, 
-    registration, setRegistration, setLoadingProgress}) {
+    registration, setRegistration, setFilled }) {
 
     const { eventData, setEventData } = useContext(EventContext);
     const { event, user, entries } = eventData; 
@@ -27,7 +27,7 @@ export default function EventRegistration({
             <Register
                 event= { event }
                 setRegistration= {setRegistration}
-                setLoadingProgress= { setLoadingProgress } />
+                setFilled={setFilled} />
         )
 
     } else if (editor && !registration) {

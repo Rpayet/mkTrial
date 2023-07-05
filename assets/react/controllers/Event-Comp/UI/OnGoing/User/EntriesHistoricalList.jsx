@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import EntryHistoryCard from "./EntryHistoricalCard";
 import EntryHistoricalDeletion from "./EntryHistoricalDeletion";
 
-export default function EntriesHistoricalList({ entry, i, setHoveredEntry, hoveredEntry, handleSubmit, userAuth, formatter}) {
+export default function EntriesHistoricalList({ 
+    entry, i, setHoveredEntry, hoveredEntry, 
+    handleSubmit, userAuth, formatter, filled
+}) {
 
     const [visibility, setVisibility] = useState(true);
 
@@ -15,18 +18,20 @@ export default function EntriesHistoricalList({ entry, i, setHoveredEntry, hover
 
                 {visibility 
                     ? <EntryHistoryCard
-                            i={i}
-                            entry={entry}
-                            formatter={formatter}
-                            hoveredEntry={hoveredEntry}
-                            userAuth={userAuth}
-                            setVisibility={setVisibility} />
+                        i={i}
+                        entry={entry}
+                        formatter={formatter}
+                        hoveredEntry={hoveredEntry}
+                        userAuth={userAuth}
+                        setVisibility={setVisibility} />
 
                     : <EntryHistoricalDeletion
-                            setVisibility={setVisibility}
-                            handleSubmit={handleSubmit}
-                            hoveredEntry={hoveredEntry} />
+                        filled={filled}
+                        setVisibility={setVisibility}
+                        handleSubmit={handleSubmit}
+                        hoveredEntry={hoveredEntry} />
                 }
+            
 
         </li>
     )
