@@ -3,6 +3,7 @@ import axios from "axios";
 import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
+import { EventService } from "../../_Service/EventService";
 
 export default function Main({ id }) {
 
@@ -18,8 +19,7 @@ export default function Main({ id }) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`/api/event/${eventId}`);
-            setEventData(response.data);
+            await EventService().getEvent(eventId, setEventData);
             setIsLoading(false);
           } catch (error) {
             setError(error.message);

@@ -35,7 +35,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
     if (section === 'ranking') {
 
         return (
-            <div className="sm:w-2/3 flex flex-col items-center">
+            <div className="sm:w-2/3 flex flex-col items-center" >
                     
                     <RankOptions
                         user= { user }
@@ -45,9 +45,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                         setShowUser= { setShowUser }
                         setSection={ setSection } />
     
-                    { inputEntry === 'new' && user != null &&
-                        <AddEntry /> 
-                    }
+                    { inputEntry === 'new' && user != null && <AddEntry /> }
                     
             </div>
     

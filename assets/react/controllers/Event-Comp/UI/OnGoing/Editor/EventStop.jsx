@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { Button, BackButton }from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
+import { EventService } from "../../../../_Service/EventService";
 
 export default function EventStop({ setEditor, setEventStop }) {
 
@@ -12,39 +13,17 @@ export default function EventStop({ setEditor, setEventStop }) {
     }
 
     {/* Requête POST Suppression */}
-    const handleDeletion = (event) => {
-    
-        event.preventDefault();
-
-        axios
-            .delete(`/api/event/${eventData.event.id}/delete`) 
-            .then(response => {
-                location = "/" ;
-            })
-            .catch(errors => console.log('error'));
+    const handleDeletion = (e) => {
+        e.preventDefault();
+        EventService().deleteEvent(eventData.event.id);
     }
     
     {/* Requête POST Interruption */}
-        const handleInterruption = (event) => {
-
-        event.preventDefault();
-
-        axios
-            .post(`/api/event/${eventData.event.id}/interruption`) 
-            .then(response => {
-                axios.get(`/api/event/${eventData.event.id}`)
-                .then(response => {
-                    setEventStop(false);
-                    setEditor(false);
-                    setEventData(response.data); 
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-                
-            })
-            .catch(errors => console.log('error'));
+    const handleInterruption = (e) => {
+        e.preventDefault();
+        EventService().postInterruption(eventData.event.id, setEventStop, setEditor, setEventData);
     }
+
     return (
         <div 
             className="sm:w-2/3 flex flex-col gap-4 text-center">

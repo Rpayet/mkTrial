@@ -56,17 +56,15 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/api/event/register', name: 'app_event_register', methods: ['POST'])]
+    #[Route('/api/event/{id}/register', name: 'app_event_register', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function register(
-        Request $request, 
+        int $id,
         EntityManagerInterface $manager, 
         Security $security, 
         TournamentRepository $tournamentRepository) 
         {
-        
-            $data = json_decode($request->getContent(), true);
-            $event = $tournamentRepository->find($data['id']);
+            $event = $tournamentRepository->find($id);
             $user = $security->getUser();
 
             if ($event->getRegistered()->contains($user)) {
@@ -185,7 +183,38 @@ class EventController extends AbstractController
         return $this->json(['data' => 'success']);
     }
 
-    
+    // Route for unregistering from an event
+    #[Route('/api/event/{id}/unregister', name: 'app_event_unregister', methods: ['DELETE'])]
+    #[isGranted('ROLE_USER')]
+    public function unregister(
+        $id, 
+        TournamentRepository $tournamentRepository,
+        EntityManagerInterface $manager, 
+        Security $security
+        )
+    {
+        $event = $tournamentRepository->find($id);
+        $user = $security->getUser();
+
+        if (!$event->getRegistered()->contains($user)) {
+            return $this->json(['error' => 'Vous n\'êtes pas inscrit']);
+        }
+
+        $entries = $event->getEntries();
+        foreach ($entries as $entry) {
+            if ($entry->getUser() === $user) {
+                $event->removeEntry($entry);
+                $manager->remove($entry);
+            }
+        }
+
+        $event->removeRegistered($user);
+
+        $manager->persist($event);
+        $manager->flush();
+
+        return $this->json(['success' => true]);
+    }
 
 }
  

@@ -7,6 +7,7 @@ import { BackButton } from "../../../../_GlobalUi/Buttons";
 import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { updateProgress } from "../../../../_Service/Loading";
+import RemoveRegistration from "./RemoveRegistration";
 
 export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
 
@@ -14,6 +15,7 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
     const [filled, setFilled] = useState(0);
     const formatter = buildFormatter(frenchStrings);
     const [visibility, setVisibility] = useState(false);
+    const [removeRegistration, setRemoveRegistration] = useState(false);
 
     const [hoveredEntry, setHoveredEntry] = useState(
         { id: null, key: null }
@@ -26,10 +28,10 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
         const startTime = performance.now();
       
         axios
-          .delete(`/api/entry/${hoveredEntry.id}/delete`)
-          .then(response => {
-            const endTime = performance.now();
-            const loadTime = endTime - startTime;
+            .delete(`/api/entry/${hoveredEntry.id}/delete`)
+            .then(response => {
+                const endTime = performance.now();
+                const loadTime = endTime - startTime;
 
             updateProgress((loadTime/2), (progress) => {
                 setFilled(progress);
@@ -57,7 +59,7 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
       };
       
     const userAuth = () => {
-        if (user.id === showUserEntries[0].user.id || user.id === event.user.id) {
+        if (user.id === showUserEntries[0].user.id ) {
             return true;
         }
     }
@@ -68,6 +70,10 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
 
     const handleSection = () => {
         setSection('ranking');
+    }
+
+    if (removeRegistration) {
+        return ( <RemoveRegistration setRemoveRegistration={setRemoveRegistration} /> )
     }
 
     return (
@@ -109,6 +115,14 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
                             <p className='text-xs border-b-2 border-solid border-lumi'>Meilleur temps</p>
                             <p className="text-lg font-bold" >{ formatTime(showUserEntries[0].time) }</p>
                         </div>
+                        { userAuth() && (
+                            <div
+                                className="text-xs p-1 border-solid border-[1px] border-silver rounded-lg
+                                hover:bg-mario hover:text-white cursor-pointer" 
+                                onClick={() => setRemoveRegistration(true)}>
+                                <p>Se désinscrire</p>
+                            </div>
+                        )}
                     </div>
                 </div>
 

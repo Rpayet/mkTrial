@@ -52,8 +52,6 @@ export default function EventEditor({ setEditor, eventData }) {
     {/* Erreurs POST */}
     const [errors, setErrors] = useState({});
 
-    // console.log(errors) todo
-
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
         const { name, speed, endAt, capacity, privacy } = eventData.event;
@@ -71,6 +69,7 @@ export default function EventEditor({ setEditor, eventData }) {
         return (
             <EditorValidation 
                 setEditor= { setEditor }
+                errors={ errors }
                 setErrors= { setErrors }
                 setEditValidation= { setEditValidation } />
         )

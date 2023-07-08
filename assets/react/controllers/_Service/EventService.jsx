@@ -1,23 +1,86 @@
 import axios from "axios";
+import { updateProgress } from "./Loading";
 
-const ApiService = {
-  async get(url) {
+export function EventService () {
+
+  // Requête GET
+  const getEvent = async (eventId, setEventData) => {
     try {
-      const response = await axios.get(url);
-      return response.data;
+      const response = await axios.get(`/api/event/${eventId}`);
+      setEventData(response.data);
     } catch (error) {
-      throw new Error(error.message);
+      console.error(error);
     }
-  },
-  async post(url, data) {
+  };
+
+  // Requête POST
+  const updateEvent = async (eventId, data, setEventData, setErrors) => {
     try {
-      const response = await axios.post(url, data);
-      return response.data;
+      await axios.post(`/api/event/${eventId}/edit`, data);
+      const response = await axios.get(`/api/event/${eventId}`);
+      setEventData(response.data);
     } catch (error) {
-      throw new Error(error.message);
+      if (error.response && error.response.status === 422) {
+        setErrors(error.response.data);
+      } else {
+        console.error(error);
+      }
     }
-  },
-  // Autres méthodes (put, delete, etc.)
+  };
+
+  // Requête DELETE
+  const deleteEvent = async (eventId) => {
+    try {
+      const response = await axios.delete(`/api/event/${eventId}/delete`);
+      location = "/";
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
+  // Requête POST
+  const postInterruption = async (eventId, setEventStop, setEditor, setEventData) => {
+    try {
+      const response = await axios.post(`/api/event/${eventId}/interruption`);
+      const eventResponse = await axios.get(`/api/event/${eventId}`);
+      setEventStop(false);
+      setEditor(false);
+      setEventData(eventResponse.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Requête POST
+  const eventRegister = async (eventId, setEventData, setErrors, startTime, setFilled) => {
+
+    try {
+      
+      await axios.post(`/api/event/${eventId}/register`);
+
+      const endTime = performance.now();
+      const loadTime = endTime - startTime;
+
+      updateProgress((loadTime/2), (progress) => {
+          setFilled(progress);
+      });
+
+      const eventResponse = await axios.get(`/api/event/${eventId}`);
+      setEventData(eventResponse.data);
+
+      setFilled(0);
+
+    } catch (error) {
+      console.error(error);
+      setErrors(error.response.data.errors);
+    }
+  };
+
+  return {
+    getEvent,
+    updateEvent,
+    deleteEvent,
+    postInterruption,
+    eventRegister,
+  };
 };
-
-export default ApiService;

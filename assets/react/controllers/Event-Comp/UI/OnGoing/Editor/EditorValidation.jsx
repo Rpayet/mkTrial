@@ -3,8 +3,9 @@ import axios from "axios";
 import { Button } from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { getFormattedDate } from "../../../_Services/FormatTime";
+import { EventService } from "../../../../_Service/EventService";
 
-export default function EditorValidation({ setEditValidation, setErrors, setEditor }) {
+export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor }) {
 
     const {data, setData} = useContext(EventContext);
     const {eventData, setEventData} = useContext(EventContext);
@@ -17,25 +18,13 @@ export default function EditorValidation({ setEditValidation, setErrors, setEdit
 
     {/* Requête POST */}
     const handleSubmit = (event) => {
-        
         event.preventDefault();
-        
+        EventService().updateEvent(eventData.event.id, data, setEventData, setErrors);
         setEditValidation(false);
-        setErrors({});
 
-        axios
-            .post(`/api/event/${eventData.event.id}/edit`, data) 
-            .then(response => {
-                axios.get(`/api/event/${eventData.event.id}`)
-                .then(response => {
-                    setEventData(response.data); 
-                    setEditor(false);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            })
-            .catch(errors => setErrors(errors.response.data));
+        if (Object.keys(errors).length === 0) {
+            setEditor(false);
+        }
     }
 
     
