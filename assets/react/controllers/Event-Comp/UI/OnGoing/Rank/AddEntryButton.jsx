@@ -26,7 +26,7 @@ export default function AddEntryButton({ setToggleView }) {
 
     return (
         <div 
-            className={`w-full mt-2 py-4 px-10 bg-white flex 
+            className={`w-full mb-2 py-4 px-10 bg-white flex 
             justify-center rounded-lg cursor-pointer
             border-solid border-[1px] hover:border-lumi
             zoomIn ${hideDelay}`}

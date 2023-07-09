@@ -76,11 +76,40 @@ export function EventService () {
     }
   };
 
+  // Requête DELETE
+  const deleteEntry = 
+    async (entryId, setEventData, setFilled, 
+      eventId, showUserEntries, setSection, setEntryDelete) => {
+        try {
+          const startTime = performance.now();
+          await axios.delete(`/api/entry/${entryId}/delete`);
+          const endTime = performance.now();
+          const loadTime = endTime - startTime;
+
+          updateProgress((loadTime/2), (progress) => {
+              setFilled(progress);
+          });
+
+          const eventResponse = await axios.get(`/api/event/${eventId}`);
+          setEventData(eventResponse.data);
+
+          if (showUserEntries.length === 0) {
+            setSection("ranking");
+          }
+          setFilled(0);
+          setEntryDelete({id: null, visibility : false});
+
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
   return {
     getEvent,
     updateEvent,
     deleteEvent,
     postInterruption,
     eventRegister,
+    deleteEntry,
   };
 };

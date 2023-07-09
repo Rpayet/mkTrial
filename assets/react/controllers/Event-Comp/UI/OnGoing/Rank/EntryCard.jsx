@@ -30,7 +30,7 @@ export default function EntryCard({ rank, entry, user, hoveredEntryKey, setHover
 
     return(
         <div
-            className={`w-full mt-2 py-4 px-10 bg-white flex justify-between duration-100
+            className={`w-full mb-2 py-4 px-10 bg-white flex justify-between duration-100
                         rounded-lg border-solid border-[1px] hover:border-lumi hover:scale-[1.02]
                         ${animation.rankAnimation ? hideDelay + ' zoomIn' : 'visible'} ${newEntryAnimation}`}
             onMouseEnter={() => setHoveredEntryKey(rank)}

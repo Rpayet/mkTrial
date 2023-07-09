@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
