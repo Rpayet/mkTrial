@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Utils\DataUtils;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -190,12 +192,13 @@ class EventController extends AbstractController
         int $eventId,
         int $userId,
         TournamentRepository $tournamentRepository,
+        UserRepository $userRepository,
         EntityManagerInterface $manager, 
         Security $security
         )
     {
         $event = $tournamentRepository->find($eventId);
-        $user = $event->getRegistered()->contains($userId); // Reprendre ici
+        $user = $userRepository->find($userId); 
 
         if (!$event->getRegistered()->contains($user)) {
             return $this->json(['error' => 'Vous n\'êtes pas inscrit']);
