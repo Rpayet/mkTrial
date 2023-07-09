@@ -26,7 +26,7 @@ export default function EventInfo({ user, event, setEditor, editor }) {
 
         <div className="w-1/2 sm:w-full text-center">
 
-            <div className="flex items-center justify-between px-4">
+            <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
                     { editAuth &&         

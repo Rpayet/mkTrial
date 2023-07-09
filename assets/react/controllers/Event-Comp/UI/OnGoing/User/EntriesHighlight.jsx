@@ -7,7 +7,6 @@ import { BackButton } from "../../../../_GlobalUi/Buttons";
 import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { updateProgress } from "../../../../_Service/Loading";
-import RemoveRegistration from "./RemoveRegistration";
 
 export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
 
@@ -15,7 +14,6 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
     const [filled, setFilled] = useState(0);
     const formatter = buildFormatter(frenchStrings);
     const [visibility, setVisibility] = useState(false);
-    const [removeRegistration, setRemoveRegistration] = useState(false);
 
     const [hoveredEntry, setHoveredEntry] = useState(
         { id: null, key: null }
@@ -72,10 +70,6 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
         setSection('ranking');
     }
 
-    if (removeRegistration) {
-        return ( <RemoveRegistration setRemoveRegistration={setRemoveRegistration} /> )
-    }
-
     return (
         <div className="sm:w-2/3 flex flex-col relative">
             {/** Image Focus */}
@@ -91,7 +85,9 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
             </div>
 
             <div className="flex gap-2 items-center justify-between">
-                <BackButton onClick={ handleSection } />
+                <BackButton 
+                    textTitle='Retour au classement'
+                    onClick={ handleSection } />
                 <h2 className="font-bold">Consulter les temps enregistrés</h2>
             </div>
 

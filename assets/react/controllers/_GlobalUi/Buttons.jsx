@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowBarLeft } from 'react-icons/bs';
 
-export function BackButton({ onClick }) {
+export function BackButton({ textTitle, onClick }) {
 
     return (
         <div 
+            title={textTitle ? textTitle : ''}
             onClick={onClick}
             className="flex w-fit text-sm rounded-lg bg-white hover:bg-gray-400 border-solid border-2 p-1 cursor-pointer">
             <BsArrowBarLeft className="text-silver w-5 h-5"/>

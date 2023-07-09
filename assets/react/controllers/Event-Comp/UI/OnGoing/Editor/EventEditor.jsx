@@ -89,7 +89,9 @@ export default function EventEditor({ setEditor, eventData }) {
                 
                 <div className="flex gap-2 items-center justify-between">
     
-                    <BackButton onClick= { handleCancel } />
+                    <BackButton 
+                        textTitle="Annuler les modifications"
+                        onClick= { handleCancel } />
     
                     <h2 className="font-bold">Modifier les informations de l'événement</h2>
     

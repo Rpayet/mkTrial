@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { updateProgress } from "../../../../_Service/Loading";
 
-export default function RemoveRegistration({ setRemoveRegistration }) {
+export default function RemoveRegistration({ setUnregister }) {
 
     const { eventData, setEventData } = useContext(EventContext);
     const { event } = eventData;
@@ -30,7 +30,7 @@ export default function RemoveRegistration({ setRemoveRegistration }) {
                     .then(response => {
                         setEventData(response.data);
                         setFilled(0);
-                        setRemoveRegistration(false);
+                        setUnregister(false);
                         
                     })
                     .catch(error => {
@@ -44,15 +44,15 @@ export default function RemoveRegistration({ setRemoveRegistration }) {
 
 
     return (
-        <div className="relative sm:w-2/3 flex flex-col gap-2 items-center justify-center">
-            <h2 className="text-xl text-silver font-bold">Supprimer l'inscription</h2>
-            <p className="text-sm text-silver">Êtes-vous sûr de vouloir quitter l'événement ?</p>
+        <div className="relative flex flex-col gap-2 items-center justify-center text-center">
+            <h2 className="text-sm text-silver font-bold">Supprimer l'inscription</h2>
+            <p className="text-xs text-silver">Êtes-vous sûr de vouloir quitter l'événement ?</p>
             <div className="flex gap-4">
                 <button 
                     onClick={handleRegistrationRemoval}
                     className="text-sm border-[1px] border-solid border-silver hover:text-white hover:bg-mario px-4 py-2 rounded-lg">Oui</button>
                 <button 
-                    onClick={() => setRemoveRegistration(false)}
+                    onClick={() => setUnregister(false)}
                     className="text-sm border-[1px] border-solid border-silver hover:text-white hover:bg-lumi px-4 py-2 rounded-lg">Non</button>
             </div>
             <div 

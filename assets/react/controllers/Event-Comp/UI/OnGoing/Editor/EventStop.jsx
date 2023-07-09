@@ -28,7 +28,9 @@ export default function EventStop({ setEditor, setEventStop }) {
         <div 
             className="sm:w-2/3 flex flex-col gap-4 text-center">
 
-            <BackButton onClick= { handleCancel } />
+            <BackButton 
+                textTitle="Revenir aux modifications"
+                onClick= { handleCancel } />
 
             <div className="bg-white border-solid border-2 border-mario rounded-lg p-2">
                 <div className="margin-auto text-mario">
