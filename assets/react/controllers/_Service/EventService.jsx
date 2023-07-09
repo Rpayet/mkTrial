@@ -77,6 +77,31 @@ export function EventService () {
   };
 
   // Requête DELETE
+  const eventUnregister = async (eventId, userId, setEventData, setFilled, setUnregister) => {
+    try {
+      const startTime = performance.now();
+
+      await axios.delete(`/api/event/${eventId}/unregister/${userId}`);
+
+      const endTime = performance.now();
+      const loadTime = endTime - startTime;
+      updateProgress((loadTime/2), (progress) => {
+        setFilled(progress);
+      });
+
+      const eventResponse = await axios.get(`/api/event/${eventId}`);
+      setEventData(eventResponse.data);
+
+      setFilled(0);
+      setUnregister(false);
+
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Requête DELETE
   const deleteEntry = 
     async (entryId, setEventData, setFilled, 
       eventId, showUserEntries, setSection, setEntryDelete) => {
@@ -110,6 +135,7 @@ export function EventService () {
     deleteEvent,
     postInterruption,
     eventRegister,
+    eventUnregister,
     deleteEntry,
   };
 };

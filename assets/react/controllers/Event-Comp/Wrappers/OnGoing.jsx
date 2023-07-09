@@ -25,8 +25,6 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
                         editor= { editor } />
 
                     <Userinfo
-                        user= { user }
-                        event= { event }
                         setRegistration= { setRegistration }
                         isUserRegistered= { isUserRegistered }
                         filled={filled} />

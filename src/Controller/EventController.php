@@ -184,17 +184,18 @@ class EventController extends AbstractController
     }
 
     // Route for unregistering from an event
-    #[Route('/api/event/{id}/unregister', name: 'app_event_unregister', methods: ['DELETE'])]
+    #[Route('/api/event/{eventId}/unregister/{userId}', name: 'app_event_unregister', methods: ['DELETE'])]
     #[isGranted('ROLE_USER')]
     public function unregister(
-        $id, 
+        int $eventId,
+        int $userId,
         TournamentRepository $tournamentRepository,
         EntityManagerInterface $manager, 
         Security $security
         )
     {
-        $event = $tournamentRepository->find($id);
-        $user = $security->getUser();
+        $event = $tournamentRepository->find($eventId);
+        $user = $event->getRegistered()->contains($userId); // Reprendre ici
 
         if (!$event->getRegistered()->contains($user)) {
             return $this->json(['error' => 'Vous n\'êtes pas inscrit']);
@@ -203,10 +204,21 @@ class EventController extends AbstractController
         $entries = $event->getEntries();
         foreach ($entries as $entry) {
             if ($entry->getUser() === $user) {
+                $imageFilename = $entry->getPicture();
+        
+                if ($imageFilename) {
+                    $imagePath = $this->getParameter('kernel.project_dir') . '/public/assets/user/entries/' . $imageFilename;
+
+                    // Vérifier si le fichier existe avant de le supprimer
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+
                 $event->removeEntry($entry);
                 $manager->remove($entry);
             }
-        }
+        }        
 
         $event->removeRegistered($user);
 

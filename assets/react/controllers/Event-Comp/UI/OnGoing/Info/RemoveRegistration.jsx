@@ -1,9 +1,8 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
-import { updateProgress } from "../../../../_Service/Loading";
+import { EventService } from "../../../../_Service/EventService";
 
-export default function RemoveRegistration({ setUnregister }) {
+export default function RemoveRegistration({ userId, setUnregister }) {
 
     const { eventData, setEventData } = useContext(EventContext);
     const { event } = eventData;
@@ -11,40 +10,14 @@ export default function RemoveRegistration({ setUnregister }) {
     const [filled, setFilled] = useState(0);
 
     const handleRegistrationRemoval = (e) => {
-
         e.preventDefault();
-      
-        const startTime = performance.now();
-
-        axios
-            .delete(`/api/event/${event.id}/unregister`)
-            .then(response => {
-                const endTime = performance.now();
-                const loadTime = endTime - startTime;
-
-                updateProgress((loadTime/2), (progress) => {
-                    setFilled(progress);
-                });
-
-                axios.get(`/api/event/${event.id}`)
-                    .then(response => {
-                        setEventData(response.data);
-                        setFilled(0);
-                        setUnregister(false);
-                        
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        EventService().eventUnregister(event.id, userId, setEventData, setFilled, setUnregister);
     }
 
+    console.log(userId)
 
     return (
-        <div className="relative flex flex-col gap-2 items-center justify-center text-center">
+        <div className="flex flex-col gap-2 items-center justify-center text-center">
             <h2 className="text-sm text-silver font-bold">Supprimer l'inscription</h2>
             <p className="text-xs text-silver">Êtes-vous sûr de vouloir quitter l'événement ?</p>
             <div className="flex gap-4">

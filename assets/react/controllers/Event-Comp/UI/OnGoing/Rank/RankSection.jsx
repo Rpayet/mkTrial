@@ -42,7 +42,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                         setShowUser= { setShowUser }
                         setSection={ setSection } />
     
-                    { inputEntry === 'new' && user != null && <AddEntry /> }
+                    { (inputEntry === 'new' && user != null && isUserRegistered) && <AddEntry /> }
                     
             </div>
     

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { BiEditAlt } from 'react-icons/bi';
 import UsersList from "./UsersList";
-import RemoveRegistration from "../Info/RemoveRegistration";
+import { EventContext } from "../../../../_Provider/EventContext";
 
 
-export default function Userinfo({ user, event, setRegistration, isUserRegistered, filled }) {
+export default function Userinfo({ setRegistration, isUserRegistered, filled }) {
+
+    const { eventData, setEventData } = useContext(EventContext);
+    const { user, event } = eventData;
 
     const [userAdd, setUserAdd] = useState(false);
     const [unregister, setUnregister] = useState(false);
@@ -38,10 +41,10 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                 <div className="flex justify-between px-1">
                     <div className="flex gap-1">
                         <p className="block text-left text-xs text-silver">Participants</p>
-                        { !unregister && 
+                        { (isUserRegistered) && 
                             <BiEditAlt 
                                 title="Gérer les participants"
-                                onClick={() => {setUnregister(true)}}
+                                onClick={() => {setUnregister(!unregister)}}
                                 className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 `}/>
                         }
                     </div>
@@ -54,14 +57,12 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
                     id="Users"
                     className="relative p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
                     bg-slate-100 border-solid border-[1px] border-lumi rounded-lg">
-                        { unregister 
-                            ? <RemoveRegistration setUnregister={setUnregister} />
-                            : <UsersList
-                                event={event}
-                                userAdd={userAdd}
-                                setRegistration={setRegistration}
-                                filled={filled} />
-                        }
+                        <UsersList
+                            unregister={unregister}
+                            setUnregister={setUnregister}
+                            userAdd={userAdd}
+                            setRegistration={setRegistration}
+                            filled={filled} />
                         
                         
                 </div>
@@ -72,5 +73,3 @@ export default function Userinfo({ user, event, setRegistration, isUserRegistere
     
     )
 }
-
-// https://www.npmjs.com/package/react-slick
