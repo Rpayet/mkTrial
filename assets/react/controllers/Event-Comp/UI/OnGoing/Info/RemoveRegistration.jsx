@@ -14,8 +14,6 @@ export default function RemoveRegistration({ userId, setUnregister }) {
         EventService().eventUnregister(event.id, userId, setEventData, setFilled, setUnregister);
     }
 
-    console.log(userId)
-
     return (
         <div className="flex flex-col gap-2 items-center justify-center text-center">
             <h2 className="text-sm text-silver font-bold">Supprimer l'inscription</h2>

@@ -185,7 +185,6 @@ class EventController extends AbstractController
         return $this->json(['data' => 'success']);
     }
 
-    // Route for unregistering from an event
     #[Route('/api/event/{eventId}/unregister/{userId}', name: 'app_event_unregister', methods: ['DELETE'])]
     #[isGranted('ROLE_USER')]
     public function unregister(
@@ -194,7 +193,6 @@ class EventController extends AbstractController
         TournamentRepository $tournamentRepository,
         UserRepository $userRepository,
         EntityManagerInterface $manager, 
-        Security $security
         )
     {
         $event = $tournamentRepository->find($eventId);
