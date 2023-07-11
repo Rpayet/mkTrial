@@ -6,7 +6,7 @@ import { EventContext } from "../../_Provider/EventContext";
 
 export default function EventRegistration({
     editor, setEditor, eventId,isUserRegistered, 
-    registration, setRegistration, setFilled }) {
+    registration, setRegistration, setFilled, setLoading }) {
 
     const { eventData, setEventData } = useContext(EventContext);
     const { event, user, entries } = eventData; 
@@ -34,10 +34,9 @@ export default function EventRegistration({
 
         return (
             <EventEditor 
-                eventId = { eventId }
-                setEventData= { setEventData }
                 eventData= { eventData }
-                setEditor= { setEditor } />
+                setEditor= { setEditor }
+                setLoading={ setLoading } />
         )
 
     }

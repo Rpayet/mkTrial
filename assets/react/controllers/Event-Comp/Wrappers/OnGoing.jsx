@@ -9,13 +9,14 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
     const [filled, setFilled] = useState(0);
     const [editor, setEditor] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
 
                 <div 
-                    className="sm:w-1/3 sm:h-fit bg-white 
-                    rounded-xl flex sm:flex-col gap-4 p-4
+                    className="relative sm:w-1/3 sm:h-fit bg-white 
+                    rounded-xl flex sm:flex-col gap-4 p-4 mb-2
                     zoomIn">
 
                     <EventInfo 
@@ -29,6 +30,13 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
                         isUserRegistered= { isUserRegistered }
                         filled={filled} />
 
+                    { loading &&
+                        <img 
+                            className="w-44 absolute -top-44 right-0 z-10 origin-bottom"
+                            src="/assets/admin/img/gif/Lakitu---Hammer.gif" 
+                            alt="Loading" />
+                    }
+
                 </div>
 
                 <EventRegistration
@@ -39,7 +47,8 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
                     isUserRegistered= { isUserRegistered }
                     registration= { registration }
                     setRegistration={ setRegistration }
-                    setFilled={setFilled} />
+                    setFilled={setFilled}
+                    setLoading={setLoading} />
 
         </div>
     )

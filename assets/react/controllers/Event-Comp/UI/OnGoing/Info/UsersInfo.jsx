@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react"
-import { BiEditAlt } from 'react-icons/bi';
+import React, { useContext, useEffect, useState } from "react";
+import { BiEditAlt, BiArrowToLeft } from 'react-icons/bi';
 import UsersList from "./UsersList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
@@ -14,20 +14,16 @@ export default function Userinfo({ setRegistration, isUserRegistered, filled }) 
 
     useEffect(() => {
         if ( event.capacity != null && user != null ) {
-
             if ( !isUserRegistered && event.registered.length < event.capacity ) {
                 setUserAdd(true);
-
             } else if ( isUserRegistered && event.capacity.length == event.capacity.registered ) {
                 setUserAdd(false);
             } 
-
         } else if ( !isUserRegistered && user != null && event.capacity == null ) {
             setUserAdd(true);
         } else {
             setUserAdd(false);
         }
-
     }, [isUserRegistered, event, user, event]);
 
     return (
@@ -40,12 +36,20 @@ export default function Userinfo({ setRegistration, isUserRegistered, filled }) 
 
                 <div className="flex justify-between px-1">
                     <div className="flex gap-1">
-                        <p className="block text-left text-xs text-silver">Participants</p>
-                        { (isUserRegistered) && 
+                        <p className="block text-left text-xs text-silver duration-500">Participants</p>
+                        
+                        { (isUserRegistered && !unregister) && 
                             <BiEditAlt 
                                 title="Gérer les participants"
                                 onClick={() => {setUnregister(!unregister)}}
-                                className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 `}/>
+                                className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`}/>
+                        }
+                        { (isUserRegistered && unregister && (event.user.id === user.id)) &&
+                            <BiArrowToLeft
+                                title="Revenir à la liste des participants"
+                                onClick={() => {setUnregister(!unregister)}}
+                                className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`} />
+
                         }
                     </div>
                     

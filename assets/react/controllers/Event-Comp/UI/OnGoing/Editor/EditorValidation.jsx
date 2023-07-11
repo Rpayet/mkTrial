@@ -5,7 +5,7 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import { getFormattedDate } from "../../../_Services/FormatTime";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor }) {
+export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor, setLoading }) {
 
     const {data, setData} = useContext(EventContext);
     const {eventData, setEventData} = useContext(EventContext);
@@ -19,9 +19,7 @@ export default function EditorValidation({ setEditValidation, setErrors, errors,
     {/* Requête POST */}
     const handleSubmit = (event) => {
         event.preventDefault();
-        EventService().updateEvent(eventData.event.id, data, setEventData, setErrors);
-        setEditValidation(false);
-
+        EventService().updateEvent(eventData.event.id, data, setEventData, setErrors, setEditValidation, setLoading);
         if (Object.keys(errors).length === 0) {
             setEditor(false);
         }

@@ -6,7 +6,7 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 
-export default function EventEditor({ setEditor, eventData }) {
+export default function EventEditor({ setEditor, eventData, setLoading }) {
 
     const [disabled, setDisabled] = useState(true);
     const {data, setData} = useContext(EventContext);
@@ -71,7 +71,8 @@ export default function EventEditor({ setEditor, eventData }) {
                 setEditor= { setEditor }
                 errors={ errors }
                 setErrors= { setErrors }
-                setEditValidation= { setEditValidation } />
+                setEditValidation= { setEditValidation }
+                setLoading={ setLoading } />
         )
 
     } else if (eventStop) {
