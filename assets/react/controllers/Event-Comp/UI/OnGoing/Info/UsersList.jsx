@@ -12,8 +12,8 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
     const [removeConfirmation, setRemoveConfimation] = useState(false);
 
     useEffect(() => {
-        if (event.user.id != user.id) {
-            setSelectedUser(user.id);
+        if (event.user.id != user?.id) {
+            setSelectedUser(user?.id);
             setRemoveConfimation(true);
         }
     }, [event, user]);
@@ -44,7 +44,7 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
                         alt="default"
                         className="w-10 rounded-full"
                     />
-                    { (unregister && (user.id === event.user.id) && (u.id != event.user.id) ) &&
+                    { (unregister && (user?.id === event.user.id) && (u.id != event.user.id) ) &&
                         <RxCrossCircled 
                             onClick={() => handleUser(u.id)}
                             title="Supprimer l'inscription"

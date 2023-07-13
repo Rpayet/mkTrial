@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
+import { EventContext } from "../../_Provider/EventContext";
 
 export default function OnGoing({ user, eventId, event, setEventData }) {
 
+    const { animation } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
     const [filled, setFilled] = useState(0);
@@ -15,9 +17,9 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
         <div className="w-full sm:flex gap-4 p-4">
 
                 <div 
-                    className="relative sm:w-1/3 sm:h-fit bg-white 
+                    className={`relative sm:w-1/3 sm:h-fit bg-white 
                     rounded-xl flex sm:flex-col gap-4 p-4 mb-2
-                    zoomIn">
+                    ${animation.firstAnimation && 'zoomIn'} ${loading && 'shake'}`}>
 
                     <EventInfo 
                         user= { user }

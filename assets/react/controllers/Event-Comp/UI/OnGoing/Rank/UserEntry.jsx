@@ -39,12 +39,12 @@ export default function UserEntry(
         useEffect(() => {
             let timeout;
         
-            if (animation.rankAnimation) {
+            if (animation.firstAnimation) {
                 timeout = setTimeout(() => {
                     setHideDelay('visible');
                     if (rank === totalEntries - 1) {
                         setTimeout(() => {
-                            setAnimation({ rankAnimation: false });
+                            setAnimation({ firstAnimation: false });
                         }, totalEntries * 100);
                     }
                 }, (rank+1) * 100);

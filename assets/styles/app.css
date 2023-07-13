@@ -47,11 +47,28 @@
 }
 
 @keyframes shake {
-  0% {transform: translateX(0);}
-  25% {transform: translateX(.5em);}
-  50% {transform: translateX(-.75em);}
-  75% {transform: translateX(.5em);}
-  100% {transform: translateX(0);}
+  0% {transform: rotateZ(0deg);}
+  21% {transform: rotateZ(0deg);}
+  25% {transform: rotateZ(1deg);}
+  29% {transform: rotateZ(0deg);}
+  33% {transform: rotateZ(1deg);}
+  37% {transform: rotateZ(0deg);}
+  41% {transform: rotateZ(1deg);}
+  45% {transform: rotateZ(0deg);}
+  49% {transform: rotateZ(1deg);}
+  53% {transform: rotateZ(0deg);}
+  57% {transform: rotateZ(1deg);}
+  61% {transform: rotateZ(0deg);}
+  65% {transform: rotateZ(1deg);}
+  69% {transform: rotateZ(0deg);}
+  73% {transform: rotateZ(1deg);}
+  77% {transform: rotateZ(0deg);}
+  81% {transform: rotateZ(1deg);}
+  85% {transform: rotateZ(0deg);}
+  89% {transform: rotateZ(1deg);}
+  93% {transform: rotateZ(0deg);}
+  97% {transform: rotateZ(1deg);}
+  100% {transform: rotateZ(0deg);}
 }
 
 @keyframes newEntryIn {
@@ -92,6 +109,10 @@
 
 .denied {
   animation: shake .5s ease-in-out
+}
+
+.shake{
+  animation: shake 5s ease-in-out
 }
 
 

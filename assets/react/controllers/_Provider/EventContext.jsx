@@ -9,7 +9,7 @@ export const EventProvider = ({ children }) => {
   const [data, setData] = useState(null);
 
   const [animation, setAnimation] = useState({
-    rankAnimation: true,
+    firstAnimation: true,
   });
 
   return (
