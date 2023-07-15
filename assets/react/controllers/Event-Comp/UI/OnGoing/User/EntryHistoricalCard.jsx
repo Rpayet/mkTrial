@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { formatTime } from "../../../_Services/FormatTime";
 import ReactTimeago from "react-timeago";
 import { BsTrash  } from 'react-icons/bs';
 import { RxCross2, RxCheck  } from 'react-icons/rx';
+import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i, userAuth, entryDelete, setEntryDelete, filled, handleSubmit}) {
 
+    const { isLoading } = useContext(EventContext);
+
     return (
-        <div>
+        <>
             { entryDelete.visibility && hoveredEntry?.key === i && userAuth()
             
             ?   <div className="w-full flex items-center justify-around">
@@ -15,18 +18,24 @@ export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i,
                     <p className="text-xs">Confirmer la supression ?</p>
 
                     <div className="flex items-center gap-2">
-                        <RxCross2
-                            title="Annuler"
-                            onClick={() => {setEntryDelete({...entryDelete, visibility: false})}}
-                            className="w-6 h-6 bg-white rounded-full block
-                            border-solid border-[1px] border-silver 
-                            hover:bg-mario hover:text-white" />
-                        <RxCheck
-                            title="Confirmer"
-                            onClick={handleSubmit}
-                            className="w-6 h-6 bg-white rounded-full block
-                            border-solid border-[1px] border-silver
-                            hover:bg-lumi hover:text-white" />
+                        <button
+                            disabled={isLoading}
+                            onClick={() => {setEntryDelete({...entryDelete, visibility: false})}} >
+                                <RxCross2
+                                    title="Annuler"
+                                    className="w-6 h-6 bg-white rounded-full block
+                                    border-solid border-[1px] border-silver 
+                                    hover:bg-mario hover:text-white" />
+                        </button>
+                        <button
+                            disabled={isLoading}
+                            onClick={handleSubmit}>
+                                <RxCheck
+                                    title="Confirmer"
+                                    className="w-6 h-6 bg-white rounded-full block
+                                    border-solid border-[1px] border-silver
+                                    hover:bg-lumi hover:text-white" />
+                        </button>
                     </div>
                     
                 </div>
@@ -37,13 +46,16 @@ export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i,
                         <ReactTimeago date={entry.createdAt} formatter={formatter} />
                     </span>
                     { (hoveredEntry?.key === i && userAuth() ) && 
-                        <BsTrash 
-                            title="Supprimer l'entrée"
-                            onClick={() => {setEntryDelete({id: hoveredEntry?.key, visibility : true})}}
-                            className="w-6 h-6 p-1 bg-white rounded-full block
-                                        border-solid border-[1px] border-silver
-                                        hover:bg-mario hover:text-white"
-                    /> }
+                        <button
+                            disabled={isLoading}
+                            onClick={() => {setEntryDelete({id: hoveredEntry?.key, visibility : true})}}>
+                                <BsTrash 
+                                    title="Supprimer l'entrée"
+                                    className={`w-6 h-6 p-1 bg-white rounded-full block
+                                                border-solid border-[1px] border-silver
+                                                ${isLoading ? 'hover:bg-lite' : 'hover:bg-mario'} hover:text-white`}/>
+                        </button>     
+                    }
                 </div>
             }
             { entryDelete?.id === i &&
@@ -54,7 +66,7 @@ export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i,
                 </div>
             }
 
-        </div>
+        </>
     )
 }
 

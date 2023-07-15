@@ -4,31 +4,32 @@ import { RxCrossCircled } from 'react-icons/rx';
 import RemoveRegistration from "./RemoveRegistration";
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function UsersList({userAdd, unregister, setUnregister, setRegistration, filled}) {
+export default function UsersList({userAdd, unregister, setUnregister, setRegistration, 
+    filled, selectedUser, setSelectedUser, removeConfirmation, setRemoveConfirmation}) {
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { eventData, isLoading } = useContext(EventContext);
     const { user, event } = eventData;
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [removeConfirmation, setRemoveConfimation] = useState(false);
 
     useEffect(() => {
         if (event.user.id != user?.id) {
             setSelectedUser(user?.id);
-            setRemoveConfimation(true);
+            setRemoveConfirmation(true);
         }
     }, [event, user]);
 
     const handleUser = (e) => {
         setSelectedUser(e);
         setUnregister(true);
-        setRemoveConfimation(true);
+        setRemoveConfirmation(true);
     }
 
     if (unregister && removeConfirmation) {
         return(
             <RemoveRegistration 
                 userId={selectedUser}
-                setUnregister={setUnregister} />
+                setUnregister={setUnregister}
+                setSelectedUser={setSelectedUser}
+                setRemoveConfirmation={setRemoveConfirmation} />
         )
     }
 
@@ -53,11 +54,14 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
                     }
                 </div>
             ))}
-
             {( userAdd && !unregister )&&
-                <AiOutlineUserAdd 
-                    onClick={() => {setRegistration(true)}}
-                    className="h-10 w-10 p-1 bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver" />
+                <button
+                    disabled={isLoading}
+                    onClick={() => {setRegistration(true)}}>
+                    <AiOutlineUserAdd 
+                        className={`${isLoading ? 'bg-black' : 'bg-white'  }duration-500 h-10 w-10 p-1 bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver`} />
+
+                </button>
             }
             <div 
                 style={{height: `${filled}%`}}

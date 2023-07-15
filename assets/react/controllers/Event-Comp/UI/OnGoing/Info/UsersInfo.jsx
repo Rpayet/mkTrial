@@ -4,13 +4,15 @@ import UsersList from "./UsersList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
 
-export default function Userinfo({ setRegistration, isUserRegistered, filled }) {
+export default function Userinfo({ unregister, setUnregister, setRegistration, isUserRegistered, filled, editor }) {
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { eventData} = useContext(EventContext);
     const { user, event } = eventData;
 
     const [userAdd, setUserAdd] = useState(false);
-    const [unregister, setUnregister] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [removeConfirmation, setRemoveConfirmation] = useState(false);
+
 
     useEffect(() => {
         if ( event.capacity != null && user != null ) {
@@ -26,6 +28,14 @@ export default function Userinfo({ setRegistration, isUserRegistered, filled }) 
         }
     }, [isUserRegistered, event, user, event]);
 
+    const handleCancel = () => {
+        setUnregister(false);
+        setSelectedUser(null);
+        if (event.user.id != user.id) {
+            setRemoveConfirmation(true);
+        }
+    }
+    
     return (
     
         <div 
@@ -38,16 +48,16 @@ export default function Userinfo({ setRegistration, isUserRegistered, filled }) 
                     <div className="flex gap-1">
                         <p className="block text-left text-xs text-silver duration-500">Participants</p>
                         
-                        { (isUserRegistered && !unregister) && 
+                        { (isUserRegistered && !unregister && !editor) && 
                             <BiEditAlt 
                                 title="Gérer les participants"
                                 onClick={() => {setUnregister(!unregister)}}
                                 className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`}/>
                         }
-                        { (isUserRegistered && unregister && (event.user.id === user.id)) &&
+                        { (isUserRegistered && unregister && (event.user.id === user.id) && !removeConfirmation && !editor)  &&
                             <BiArrowToLeft
                                 title="Revenir à la liste des participants"
-                                onClick={() => {setUnregister(!unregister)}}
+                                onClick={handleCancel}
                                 className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`} />
 
                         }
@@ -66,7 +76,12 @@ export default function Userinfo({ setRegistration, isUserRegistered, filled }) 
                             setUnregister={setUnregister}
                             userAdd={userAdd}
                             setRegistration={setRegistration}
-                            filled={filled} />
+                            filled={filled}
+                            selectedUser={selectedUser}
+                            setSelectedUser={setSelectedUser}
+                            removeConfirmation={removeConfirmation}
+                            setRemoveConfirmation={setRemoveConfirmation}
+                             />
                         
                         
                 </div>

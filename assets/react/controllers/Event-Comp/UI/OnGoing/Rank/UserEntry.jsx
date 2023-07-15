@@ -18,7 +18,7 @@ export default function UserEntry(
     }) {
 
         const [toggleView, setToggleView] = useState(false);
-        const { newEntry, setNewEntry, animation, setAnimation, eventData } = useContext(EventContext);
+        const { animation, setAnimation, eventData } = useContext(EventContext);
         const [hideDelay, setHideDelay] = useState('hidden');
 
         const { entries } = eventData;

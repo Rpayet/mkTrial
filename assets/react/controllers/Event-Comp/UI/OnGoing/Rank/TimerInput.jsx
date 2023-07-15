@@ -6,6 +6,8 @@ export default function TimerInput({ entryInput, setEntryInput }) {
 
         const { value, selectionStart } = e.target;
 
+        console.log(e.target)
+
         if (e.key === "Backspace" || e.key === "Delete") {
             if (selectionStart === 3 || selectionStart === 6) {
                 e.preventDefault();
@@ -13,11 +15,11 @@ export default function TimerInput({ entryInput, setEntryInput }) {
                 e.target.setSelectionRange(selectionStart - 1, selectionStart - 1);
             }
         } else if (value.length === 1) {
-        e.target.value += ":";
-        e.target.setSelectionRange(2, 2);
+            e.target.value += ":";
+            e.target.setSelectionRange(2, 2);
         } else if (value.length === 4) {
-        e.target.value += ".";
-        e.target.setSelectionRange(5, 5);
+            e.target.value += ".";
+            e.target.setSelectionRange(5, 5);
         } 
     }
 
@@ -40,9 +42,7 @@ export default function TimerInput({ entryInput, setEntryInput }) {
     }
 
     return (
-        <div 
-            id="form-timer"
-            className="flex flex-col w-2/5">
+        <>
 
                 <label 
                     htmlFor="timer"
@@ -58,6 +58,6 @@ export default function TimerInput({ entryInput, setEntryInput }) {
                     onKeyDown={ handleKeyDown }
                     onChange={ handleTime } />
 
-        </div>
+        </>
     )
 }

@@ -16,7 +16,7 @@ export default function EntriesHistoricalList({
         <li 
             onMouseEnter={() => setHoveredEntry( {id: entry.id, key: i} )}
             onMouseLeave={handleMouseLeave}
-            className="relative bg-white px-1 py-3 rounded-lg 
+            className="relative bg-white px-1 py-3 rounded-lg overflow-hidden
                     hover:scale-[1.02]">
 
             <EntryHistoryCard

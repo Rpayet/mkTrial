@@ -9,7 +9,7 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { setEventData, setIsLoading } = useContext(EventContext);
     const [filled, setFilled] = useState(0);
     const formatter = buildFormatter(frenchStrings);
     const [imgFocus, setImgFocus] = useState(false);
@@ -26,14 +26,15 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
         setSection('ranking');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        EventService()
+        setIsLoading(true);
+        await EventService()  
             .deleteEntry(
                 hoveredEntry.id, setEventData, setFilled, 
                 event.id, showUserEntries, setSection,
                 setEntryDelete);
+        setIsLoading(false);
     };
       
     const userAuth = () => {

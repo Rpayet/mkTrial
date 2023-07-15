@@ -7,6 +7,7 @@ export const EventProvider = ({ children }) => {
   const [eventData, setEventData] = useState(null);
   const [newEntry, setNewEntry] = useState(null);
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [animation, setAnimation] = useState({
     firstAnimation: true,
@@ -16,7 +17,8 @@ export const EventProvider = ({ children }) => {
     <EventContext.Provider value={{ 
       eventData, setEventData, 
       newEntry, setNewEntry, animation, setAnimation,
-      data, setData }}>
+      data, setData,
+      isLoading, setIsLoading }}>
       {children}
     </EventContext.Provider>
   );

@@ -37,7 +37,7 @@ export function EventService () {
       const response = await axios.delete(`/api/event/${eventId}/delete`);
       location = "/";
     } catch (error) {
-      console.log("error");
+      console.error("error");
     }
   };
 
@@ -104,6 +104,41 @@ export function EventService () {
     }
   };
 
+  // Requête POST
+  const postEntry = async (eventId, formData, setEventData, setToggleView, setErrors, setFilled, setNewEntry, user, entryInput, setIsLoading) => {
+      try {
+        const startTime = performance.now();
+        
+        await axios.post(`/api/event/${eventId}/addEntry`, formData)
+                    .then((response) => {
+                      const endTime = performance.now();
+                      const loadTime = endTime - startTime;
+                      updateProgress((loadTime/2), (progress) => {
+                        setFilled(progress);
+                      });
+                      console.log(response.data)
+
+                      setNewEntry({user: user.id, time: entryInput.time, isNew: true});
+                      axios.get(`/api/event/${eventId}`)
+                        .then((response) => {
+                          setToggleView(false);
+                          setEventData(response.data);
+                          setFilled(0);
+                          setIsLoading(false);
+                        })
+                        .catch((errors) => {
+                          setErrors(errors.response.data);
+                        });
+                    })
+                    .catch((errors) => {
+                      setErrors(errors.response.data);
+                    });
+      } catch (error) {
+        console.error(error);
+    };
+  };
+
+
   // Requête DELETE
   const deleteEntry = 
     async (entryId, setEventData, setFilled, 
@@ -139,6 +174,7 @@ export function EventService () {
     postInterruption,
     eventRegister,
     eventUnregister,
+    postEntry,
     deleteEntry,
   };
 };

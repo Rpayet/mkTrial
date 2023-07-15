@@ -9,9 +9,10 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
     const { animation } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
-    const [filled, setFilled] = useState(0);
-    const [editor, setEditor] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [filled, setFilled] = useState(0); // provider
+    const [editor, setEditor] = useState(false); // provider
+    const [unregister, setUnregister] = useState(false); // provider
+    const [loading, setLoading] = useState(false); // provider
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
@@ -25,12 +26,16 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
                         user= { user }
                         event={ event }
                         setEditor= { setEditor }
-                        editor= { editor } />
+                        editor= { editor }
+                        unregister={ unregister } />
 
                     <Userinfo
+                        editor= { editor }
                         setRegistration= { setRegistration }
                         isUserRegistered= { isUserRegistered }
-                        filled={filled} />
+                        filled={filled}
+                        unregister={ unregister }
+                        setUnregister={ setUnregister } />
 
                     { loading &&
                         <img 

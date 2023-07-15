@@ -3,7 +3,7 @@ import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
 import { BiEditAlt } from 'react-icons/bi';
 
-export default function EventInfo({ user, event, setEditor, editor }) {
+export default function EventInfo({ user, event, setEditor, editor, unregister }) {
 
     const [editAuth, setEditAuth] = useState(false);
     const [color, setColor] = useState(false);
@@ -29,7 +29,7 @@ export default function EventInfo({ user, event, setEditor, editor }) {
             <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
-                    { editAuth &&         
+                    { (editAuth && !unregister) &&         
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
                             onClick={() => {setEditor(true)}}

@@ -73,7 +73,10 @@ class EntryController extends AbstractController
                 $manager->persist($entry);
                 $manager->flush();
 
+                // $imageFile = $request->files->get('picture'); retourner le nom de l'image stocker dans la variable $imageFile
                 return $this->json(['success' => true]);
+
+                
             }
 
     #[Route('api/entry/{id}/delete', name: 'api_entry', methods: ['DELETE'])]

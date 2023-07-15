@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import axios from "axios";
+import React, { useContext, useState } from "react";
 import { Button, BackButton }from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
@@ -7,21 +6,24 @@ import { EventService } from "../../../../_Service/EventService";
 export default function EventStop({ setEditor, setEventStop }) {
 
     const { eventData, setEventData } = useContext(EventContext);
+    const [loading, setLoading] = useState(false);
 
     const handleCancel = () => {
         setEventStop(false);
     }
 
     {/* Requête POST Suppression */}
-    const handleDeletion = (e) => {
+    const handleDeletion = async (e) => {
         e.preventDefault();
-        EventService().deleteEvent(eventData.event.id);
+        setLoading(true);
+        await EventService().deleteEvent(eventData.event.id);
     }
     
     {/* Requête POST Interruption */}
-    const handleInterruption = (e) => {
+    const handleInterruption = async (e) => {
         e.preventDefault();
-        EventService().postInterruption(eventData.event.id, setEventStop, setEditor, setEventData);
+        setLoading(true);
+        await EventService().postInterruption(eventData.event.id, setEventStop, setEditor, setEventData);
     }
 
     return (
@@ -45,6 +47,7 @@ export default function EventStop({ setEditor, setEventStop }) {
                 <div className="flex flex-col justify-between gap-2 w-1/2 rounded-lg border-solid border-2 border-silver p-2">
                     <p className="text-sm">Cette action supprime l'événement. Celui-ci ne sera plus visible et ne sera pas archivé.</p>
                     <Button 
+                        disabled={loading}
                         onClick={ handleDeletion } 
                         text= {'SUPPRIMER'}
                         type= { false } />
@@ -53,6 +56,7 @@ export default function EventStop({ setEditor, setEventStop }) {
                 <div className="flex flex-col justify-between gap-2 w-1/2 rounded-lg border-solid border-2 border-silver p-2">
                     <p className="text-sm">Cette action interrompt les modifications et archive l'événement. Donne accès immédiatement au tableau final.</p>
                     <Button 
+                        disabled={loading}
                         onClick={ handleInterruption } 
                         text= {'INTERROMPRE'}
                         type= { false } />

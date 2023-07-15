@@ -13,6 +13,8 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
 
         const file = files[0];
 
+        console.log(file)
+
         if (file) {
             setFileName(file.name)
             setImage(URL.createObjectURL(file));
@@ -24,9 +26,10 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
         setFileName('');
         setImage(null);
     }
+    
 
     return (
-        <div className="flex flex-col w-2/5">
+        <>
             <div className="flex justify-between">
                 <label 
                     htmlFor="timer"
@@ -70,7 +73,7 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
 
             </div>
             
-        </div>
+        </>
 
     )
 }

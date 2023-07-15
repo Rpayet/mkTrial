@@ -4,14 +4,16 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function Register({ event, setRegistration, setFilled }) {
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { setIsLoading, setEventData } = useContext(EventContext);
     const [errors, setErrors] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const startTime = performance.now();
-        EventService().eventRegister(event.id, setEventData, setErrors, startTime, setFilled);
+        setIsLoading(true);
         setRegistration(false);
+        const startTime = performance.now(); // todo : Vire moi ça 
+        await EventService().eventRegister(event.id, setEventData, setErrors, startTime, setFilled);
+        setIsLoading(false);
     }
 
     return (
