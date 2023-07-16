@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaUsers } from 'react-icons/fa';
 
-export default function EventCard({ tournament, index }) {
+export default function EventCard({ tournament }) {
 
     const [isHover, setIsHover] = useState(false);
 
@@ -9,7 +9,6 @@ export default function EventCard({ tournament, index }) {
         <>
             <div 
                 id="card"
-                key={index} 
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
                 className="flex h-80 justify-center mb-12 overflow-hidden">

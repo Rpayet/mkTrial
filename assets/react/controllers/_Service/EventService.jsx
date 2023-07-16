@@ -116,8 +116,7 @@ export function EventService () {
                       updateProgress((loadTime/2), (progress) => {
                         setFilled(progress);
                       });
-                      console.log(response.data)
-
+                      
                       setNewEntry({user: user.id, time: entryInput.time, isNew: true});
                       axios.get(`/api/event/${eventId}`)
                         .then((response) => {

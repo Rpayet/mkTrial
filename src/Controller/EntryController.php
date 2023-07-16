@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entry;
+use App\Form\EntryType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
 use App\Utils\DataUtils;
@@ -39,17 +40,15 @@ class EntryController extends AbstractController
             {
                 $user = $security->getUser();
                 $event = $tournamentRepository->find($id);
-
                 $time = $request->request->get('time');
-
                 $imageFile = $request->files->get('picture');
+                $newFilename = null;
 
                 $entry = new Entry();
                 $entry
                     ->setUser($user)
-                    ->setCreatedAt(new \DateTimeImmutable())
-                    ->setTournament($event)
-                    ->setTime($time);
+                    ->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')))
+                    ->setTournament($event);
 
                 if ($imageFile) {
                     // Génération d'un nom unique pour le fichier
@@ -69,6 +68,23 @@ class EntryController extends AbstractController
                     // Mise à jour de l'objet Entry avec le nom du fichier
                     $entry->setPicture($newFilename);
                 }
+
+                $data = [
+                    'time' => $time ? $time : null,
+                    'picture' => $newFilename ? $newFilename : null,
+                ];
+                $form = $this->createForm(EntryType::class, $entry, ['csrf_protection' => false]);
+                $form->submit($data);
+
+                if (!$form->isValid()) {
+                    $errors = [];
+                    foreach ($form->getErrors(true) as $error) {
+                        $errors[$error->getOrigin()->getName()] = $error->getMessage();
+                    }
+                    return $this->json($errors, 422);
+                }
+                
+                
                 
                 $manager->persist($entry);
                 $manager->flush();

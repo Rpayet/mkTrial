@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import RankOptions from "./RankOptions";
 import AddEntry from "./AddEntry";
 import EntriesHighlight from "../User/EntriesHighlight";
+import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function RankSection({ event, user, entries, isUserRegistered }) {
 
+    const { animation } = useContext(EventContext);
     const [section, setSection] = useState('ranking');
     const [showUser, setShowUser] = useState(null);
         
@@ -33,7 +35,7 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
 
         return (
             <div className="sm:w-2/3 flex flex-col items-center" >
-                    
+                    { entries.length != 0 && <p className={`w-full text-left text-xs font-bold ${animation.firstAnimation ? 'zoomIn' : 'visible'}`}>#Classement</p>}
                     <RankOptions
                         user= { user }
                         event= { event }

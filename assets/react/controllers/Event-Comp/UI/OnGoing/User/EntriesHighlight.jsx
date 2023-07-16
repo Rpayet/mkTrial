@@ -38,7 +38,7 @@ export default function EntriesHighlight({ user, event, showUserEntries, setSect
     };
       
     const userAuth = () => {
-        if (user.id === showUserEntries[0]?.user.id ) {
+        if (user?.id === showUserEntries[0]?.user.id ) {
             return true;
         }
     }

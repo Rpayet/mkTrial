@@ -13,8 +13,6 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
 
         const file = files[0];
 
-        console.log(file)
-
         if (file) {
             setFileName(file.name)
             setImage(URL.createObjectURL(file));

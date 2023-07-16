@@ -6,8 +6,6 @@ export default function TimerInput({ entryInput, setEntryInput }) {
 
         const { value, selectionStart } = e.target;
 
-        console.log(e.target)
-
         if (e.key === "Backspace" || e.key === "Delete") {
             if (selectionStart === 3 || selectionStart === 6) {
                 e.preventDefault();

@@ -114,7 +114,15 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
                         className="flex flex-col gap-4">
     
                         <div className="flex flex-col"> 
-                            <label className="font-bold">Nom</label>
+                            <div className="flex justify-between">
+                                <div className="flex gap-1 items-center">
+                                    <label className="font-bold">Nom</label>
+                                    <p className="text-xs text-mario" >{data.name.length < 3 && 'Le nom du tournoi doit comporter 3 caractères minimum.'}</p>
+                                </div>
+                                <p className={`text-sm ${(data.name.length == 15 || data.name.length < 3) && 'text-mario'}`} >
+                                    {data.name.length}/15
+                                </p>
+                            </div>
                             <input 
                                 value={data.name}
                                 onChange={handleName}

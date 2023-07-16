@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { formatTime } from "../../../_Services/FormatTime";
-import ReactTimeago from "react-timeago";
 import { BsTrash  } from 'react-icons/bs';
 import { RxCross2, RxCheck  } from 'react-icons/rx';
 import { EventContext } from "../../../../_Provider/EventContext";
+import ElapsedTime from "../../../../_GlobalUi/ElapsedTime";
 
 export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i, userAuth, entryDelete, setEntryDelete, filled, handleSubmit}) {
 
@@ -43,7 +43,7 @@ export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i,
             :   <div className="flex items-center justify-around">
                     <p>{ formatTime(entry.time) }</p>
                     <span className="text-xs">
-                        <ReactTimeago date={entry.createdAt} formatter={formatter} />
+                        <ElapsedTime date={entry.createdAt} />
                     </span>
                     { (hoveredEntry?.key === i && userAuth() ) && 
                         <button

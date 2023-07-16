@@ -24,10 +24,6 @@ class Entry
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Capture d\'écran obligatoire')]
-    #[Assert\File(
-        extensions: ['jpg', 'jpeg', 'png'],
-        extensionsMessage: 'Format accepté : jpeg, jpg, png'
-    )]
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'entries')]

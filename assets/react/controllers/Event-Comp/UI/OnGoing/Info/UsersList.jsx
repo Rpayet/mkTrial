@@ -26,7 +26,7 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
     if (unregister && removeConfirmation) {
         return(
             <RemoveRegistration 
-                userId={selectedUser}
+                selectedUser={selectedUser}
                 setUnregister={setUnregister}
                 setSelectedUser={setSelectedUser}
                 setRemoveConfirmation={setRemoveConfirmation} />
@@ -47,7 +47,7 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
                     />
                     { (unregister && (user?.id === event.user.id) && (u.id != event.user.id) ) &&
                         <RxCrossCircled 
-                            onClick={() => handleUser(u.id)}
+                            onClick={() => handleUser(u)}
                             title="Supprimer l'inscription"
                             className="absolute top-0 right-0 w-5 h-5 text-silver bg-white opacity-70 rounded-full cursor-pointer transition-all
                             duration-500 hover:text-white hover:bg-mario hover:opacity-100 hover:w-10 hover:h-10"/>

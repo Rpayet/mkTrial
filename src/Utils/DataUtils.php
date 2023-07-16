@@ -48,7 +48,7 @@ class DataUtils
             'id' => $entry->getId(),
             'user' => self::getUserData($entry->getUser()),
             'time' => $entry->getTime(),
-            'createdAt' => $entry->getCreatedAt()->format('Y-m-d'),
+            'createdAt' => $entry->getCreatedAt(),
             'picture' => $entry->getPicture(),
         ];
     }

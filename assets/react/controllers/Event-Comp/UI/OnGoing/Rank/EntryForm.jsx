@@ -13,7 +13,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
     const [fileName, setFileName] = useState('');
     const [filled, setFilled] = useState(0);
     const [entryInput, setEntryInput] = useState({
-        time: null,
+        time: 0,
         picture: null,
     });
 
@@ -37,19 +37,20 @@ export default function EntryForm({ toggleView, setToggleView }) {
         setIsLoading(true);
         await EventService().postEntry(event.id, formData, setEventData, 
             setToggleView, setErrors, setFilled, setNewEntry, user, entryInput, setIsLoading);
+        if (errors) {
+            setIsLoading(false);
+        }
     }
 
     return (
-        <div className="bg-white w-full py-4 relative rounded-lg overflow-hidden">
-            <form
-                id="entry-form"
-                className="w-full h-fit flex rounded-lg justify-around my-4 zoomIn">
+        <div className="bg-white w-full py-4 relative rounded-lg overflow-hidden zoomIn">
+            <form className="w-full h-fit flex rounded-lg justify-around my-4">
 
                 <div className="flex flex-col w-2/5">
                     <TimerInput 
                         entryInput={ entryInput }
                         setEntryInput= { setEntryInput } />
-                    {errors.time && <p className="text-red-500" >{ errors.time }</p>}
+                    {errors.time && <p className="text-red-500 text-xs" >{ errors.time }</p>}
                 </div>
 
                 <div className="flex flex-col w-2/5">
@@ -60,7 +61,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
                         setImage= { setImage }
                         fileName= { fileName }
                         setFileName= { setFileName } />
-                    {errors.picture && <p className="text-red-500" >{ errors.picture }</p>}
+                    {errors.picture && <p className="text-red-500 text-xs" >{ errors.picture }</p>}
                 </div>
 
 
