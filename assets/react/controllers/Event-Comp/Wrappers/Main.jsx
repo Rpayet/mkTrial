@@ -30,8 +30,8 @@ export default function Main({ id }) {
     }, [eventId]);
 
     useEffect(() => {
-        if (eventData && eventData.event && eventData.event.endAt) {
-            const eventEndAt = new Date(eventData.event.endAt);
+        if (eventData && eventData?.event && eventData?.event.endAt) {
+            const eventEndAt = new Date(eventData?.event.endAt);
             setIsOngoing(eventEndAt > date);
         }
       }, [eventData, date]);

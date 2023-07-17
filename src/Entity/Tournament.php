@@ -61,6 +61,9 @@ class Tournament
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $registered;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $hourEnd = null;
+
     public function __construct()
     {
         $this->entries = new ArrayCollection();
@@ -218,6 +221,18 @@ class Tournament
     public function removeRegistered(User $registered): self
     {
         $this->registered->removeElement($registered);
+
+        return $this;
+    }
+
+    public function getHourEnd(): ?\DateTimeInterface
+    {
+        return $this->hourEnd;
+    }
+
+    public function setHourEnd(?\DateTimeInterface $hourEnd): self
+    {
+        $this->hourEnd = $hourEnd;
 
         return $this;
     }

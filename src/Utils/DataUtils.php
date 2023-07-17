@@ -55,7 +55,7 @@ class DataUtils
 
     public static function getEventData(Tournament $event): array
     {
-        return [
+        $data = [
             'id' => $event->getId(),
             'name' => $event->getName(),
             'createdAt' => $event->getCreatedAt()->format('Y-m-d'),
@@ -69,6 +69,15 @@ class DataUtils
             'user' => self::getUserData($event->getUser()),
             'race' => self::getRaceData($event->getRace()),
         ];
+    
+        // Vérifie si hourEnd est null avant de l'ajouter au tableau
+        if ($event->getHourEnd() !== null) {
+            $data['hourEnd'] = $event->getHourEnd()->format('H:i');
+        } else {
+            $data['hourEnd'] = null;
+        }
+    
+        return $data;
     }
 
 }
