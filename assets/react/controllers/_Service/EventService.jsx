@@ -14,20 +14,14 @@ export function EventService () {
   };
 
   // Requête POST
-  const updateEvent = async (eventId, data, setEventData, setErrors, setEditValidation, setLoading) => {
-    try {
-      setLoading(true);
+  const updateEvent = async (eventId, data, setErrors) => {
+    try {  
       await axios.post(`/api/event/${eventId}/edit`, data);
-      const response = await axios.get(`/api/event/${eventId}`);
-      setEventData(response.data);
-      setEditValidation(false);
-      setLoading(false);
-    } catch (error) {
-      if (error.response && error.response.status === 422) {
-        setErrors(error.response.data);
-      } else {
-        console.error(error);
-      }
+      return false;
+    } 
+    catch (errors) {
+      setErrors(errors.response.data);
+      return true;
     }
   };
 

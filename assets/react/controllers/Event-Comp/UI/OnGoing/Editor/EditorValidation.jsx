@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { Button } from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { getFormattedDate } from "../../../_Services/FormatTime";
@@ -7,8 +6,7 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor, setLoading }) {
 
-    const {data, setData} = useContext(EventContext);
-    const {eventData, setEventData} = useContext(EventContext);
+    const {data, setData, eventData, setEventData} = useContext(EventContext);
 
     {/* Ferme le composant */}
     const handleCancel = () => {
@@ -17,14 +15,17 @@ export default function EditorValidation({ setEditValidation, setErrors, errors,
     }
 
     {/* Requête POST */}
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        EventService().updateEvent(eventData.event.id, data, setEventData, setErrors, setEditValidation, setLoading);
-        if (Object.keys(errors).length === 0) {
+        setEditValidation(false);
+        const clear = await EventService().updateEvent(eventData.event.id, data, setErrors, errors);
+        if (!clear) {
             setEditor(false);
+            setLoading(true);
+            await EventService().getEvent(eventData.event.id, setEventData);
+            setLoading(false);
         }
     }
-
     
     return (
 

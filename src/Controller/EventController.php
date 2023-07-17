@@ -93,6 +93,11 @@ class EventController extends AbstractController
         $event = $tournamentRepository->find($id);
         $data = json_decode($request->getContent(), true);
 
+        if ($data['capacity'] < $event->getRegistered()->count()) {
+            $errors = ['capacity' => 'Le nombre de place disponible ne peut être inférieur au nombre d\'inscrits.'];
+            return $this->json($errors, 422);
+        }
+
         $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
         $form->submit($data);
 

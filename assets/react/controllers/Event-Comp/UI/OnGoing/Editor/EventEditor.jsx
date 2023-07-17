@@ -15,7 +15,7 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
 
     {/* Charge l'état de Data avec la BDD */}
     useEffect(() => {
-        if (!data) {
+        if (!data && eventData) {
             setData({...data, 
                 name: eventData.event.name,
                 speed: eventData.event.speed,
@@ -99,13 +99,13 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
                 </div>
     
                 {/* Messages d'erreurs */}
-                <div className={`text-center bg-white rounded-lg w-1/2 my-2 mx-auto`}>
+                <div className={`text-center bg-white rounded-lg w-full my-2 mx-auto`}>
     
                     {errors.name && <p className="text-red-500" >{ errors.name }</p>}
                     {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
-                    {errors.race && <p className="text-red-500" >{ errors.race }</p>}
                     {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
                     {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
+                    {errors.capacity && <p className="text-red-500" >{ errors.capacity }</p>}
     
                 </div>
     
