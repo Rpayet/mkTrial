@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
 import DateSelect from "./DateSelect";
 import { BiSolidLockOpen, BiSolidLock } from 'react-icons/bi';
+import HourSelect from "./HourSelect";
 
 export default function PrimaryOptions ({ setData, data, eventData }) {
 
@@ -81,6 +82,8 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
                 <DateSelect
                     setData= { setData }
                     data= { data } />
+
+                <HourSelect setData={ setData} data={ data } />
 
                 {/* Sélection du nombre de participants */}
                 <div>
