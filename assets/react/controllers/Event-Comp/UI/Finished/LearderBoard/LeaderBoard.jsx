@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import RaceInfo from "../../OnGoing/Info/RaceInfo"
 import TopList from "./TopList";
 import { rankService } from "../../../_Services/RankService";
 import BottomList from "./BottomList";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function LeaderBoard({ event, entries }) {
+export default function LeaderBoard() {
+
+    const { event, entries} = useContext(EventContext)
 
     const rankList = rankService(entries);
 

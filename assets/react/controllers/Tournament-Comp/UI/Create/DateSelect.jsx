@@ -7,8 +7,6 @@ export default function DateSelect({ setData, data }) {
     setData({ ...data, endAt: event.target.value });
   };
 
-  // todo : Problème de date un jour de retard
-
   return (
     <div>
       <span className="block text-xs text-center text-gray-500 font-bold">

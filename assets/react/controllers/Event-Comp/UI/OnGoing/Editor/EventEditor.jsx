@@ -20,6 +20,7 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
                 name: eventData.event.name,
                 speed: eventData.event.speed,
                 endAt: eventData.event.endAt,
+                hourEnd: eventData.event.hourEnd,
                 capacity: eventData.event.capacity,
                 privacy: eventData.event.privacy,
                 race: eventData.event.race.id,

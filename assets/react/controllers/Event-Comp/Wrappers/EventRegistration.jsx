@@ -5,7 +5,7 @@ import EventEditor from "../UI/OnGoing/Editor/EventEditor";
 import { EventContext } from "../../_Provider/EventContext";
 
 export default function EventRegistration({
-    editor, setEditor, eventId,isUserRegistered, 
+    editor, setEditor, isUserRegistered, 
     registration, setRegistration, setFilled, setLoading }) {
 
     const { eventData, setEventData } = useContext(EventContext);

@@ -6,27 +6,32 @@ import { EventService } from "../../_Service/EventService";
 
 export default function Main({ id }) {
 
-    const eventId = id;
-
     const date = new Date();
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { eventData, setEventData, eventId, 
+        setEventId, event, entries } = useContext(EventContext);
+   
+    useEffect(() => {
+        setEventId(id);
+    }, [id]);
+
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isOngoing, setIsOngoing] = useState(true);
     
     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            await EventService().getEvent(eventId, setEventData);
-            setIsLoading(false);
-          } catch (error) {
-            setError(error.message);
-            setIsLoading(false);
-          }
-        };
-    
-        fetchData();
+        if (eventId) {
+            const fetchData = async () => {
+                try {
+                  await EventService().getEvent(eventId, setEventData);
+                  setIsLoading(false);
+                } catch (error) {
+                  setError(error.message);
+                  setIsLoading(false);
+                }
+              };
+              fetchData();
+            }
     }, [eventId]);
 
     useEffect(() => {
@@ -47,28 +52,15 @@ export default function Main({ id }) {
         )
     }
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-    const { event, user, entries } = eventData; 
+    if (error) { return (<div>Error: {error}</div>)}
     
     return (
-        <div className="">
-            {event && entries ? (
-                isOngoing ? (
-                    <OnGoing 
-                        eventId= {eventId}
-                        user={user}
-                        event={event}
-                        entries={entries}
-                        setEventData= { setEventData } />
-                ) : (
-                    <Finished event={event} entries={entries} />
-                )
-            ) : (
-                <div>No data available</div>
-            )}
-        </div>
+        <>
+            {(event && entries)
+                ? (isOngoing 
+                    ? (<OnGoing />) 
+                    : (<Finished /> )) 
+                : (<div>No data available</div>)}
+        </>
     );
 }

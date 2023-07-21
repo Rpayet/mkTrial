@@ -52,7 +52,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
     return (
         <>
-            <div className="flex items-center justify-center gap-10">
+            <div className="flex flex-wrap items-center justify-center gap-4">
 
                 {/* Sélection de la vitesse */}
                 <div>

@@ -4,9 +4,9 @@ import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
 import { EventContext } from "../../_Provider/EventContext";
 
-export default function OnGoing({ user, eventId, event, setEventData }) {
+export default function OnGoing() {
 
-    const { animation } = useContext(EventContext);
+    const { animation, event, user, eventId } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
     const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
     const [filled, setFilled] = useState(0); // provider
@@ -48,7 +48,6 @@ export default function OnGoing({ user, eventId, event, setEventData }) {
 
                 <EventRegistration
                     eventId = { eventId }
-                    setEventData= { setEventData }
                     editor= { editor }
                     setEditor={ setEditor }
                     isUserRegistered= { isUserRegistered }
