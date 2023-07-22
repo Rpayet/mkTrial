@@ -37,7 +37,7 @@ export default function EditorValidation({ setEditValidation, setErrors, errors,
 
             </div>
 
-            <div className="">
+            <div>
 
                 {data.name != event.name && <p>Nom :<span className="font-bold"> {data.name}</span></p>}
                 {data.speed != event.speed && <p>Vitesse :<span className="font-bold"> {data.speed}</span></p>}

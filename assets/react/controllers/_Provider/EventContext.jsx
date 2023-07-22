@@ -5,8 +5,6 @@ export const EventContext = createContext();
 
 export const EventProvider = ({ children }) => {
 
-  const date = new Date();
-
   const [eventData, setEventData] = useState(null);
   const [event, setEvent] = useState(null);
   const [user, setUser] = useState(null);

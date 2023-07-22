@@ -7,9 +7,9 @@ import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function EntriesHighlight({ user, event, showUserEntries, setSection }) {
+export default function EntriesHighlight({ showUserEntries, setSection }) {
 
-    const { setEventData, setIsLoading } = useContext(EventContext);
+    const { setEventData, setIsLoading, event, user } = useContext(EventContext);
     const [filled, setFilled] = useState(0);
     const formatter = buildFormatter(frenchStrings);
     const [imgFocus, setImgFocus] = useState(false);

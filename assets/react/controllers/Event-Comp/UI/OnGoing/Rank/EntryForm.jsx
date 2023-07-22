@@ -7,8 +7,7 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function EntryForm({ toggleView, setToggleView }) {
 
-    const { eventData, setEventData, setNewEntry, isLoading, setIsLoading } = useContext(EventContext);
-    const { user, event } = eventData;
+    const { event, user, setEventData, setNewEntry, isLoading, setIsLoading } = useContext(EventContext);
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState('');
     const [filled, setFilled] = useState(0);

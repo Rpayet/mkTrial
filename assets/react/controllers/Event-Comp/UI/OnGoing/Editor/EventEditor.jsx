@@ -6,27 +6,27 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 
-export default function EventEditor({ setEditor, eventData, setLoading }) {
+export default function EventEditor({ setEditor, setLoading }) {
 
     const [disabled, setDisabled] = useState(true);
-    const {data, setData} = useContext(EventContext);
+    const {data, setData, event, eventData} = useContext(EventContext);
     const [editValidation, setEditValidation] = useState(false);
     const [eventStop, setEventStop] = useState(false);
 
     {/* Charge l'état de Data avec la BDD */}
     useEffect(() => {
-        if (!data && eventData) {
+        if (!data && event) {
             setData({...data, 
-                name: eventData.event.name,
-                speed: eventData.event.speed,
-                endAt: eventData.event.endAt,
-                hourEnd: eventData.event.hourEnd,
-                capacity: eventData.event.capacity,
-                privacy: eventData.event.privacy,
-                race: eventData.event.race.id,
+                name: event.name,
+                speed: event.speed,
+                endAt: event.endAt,
+                hourEnd: event.hourEnd,
+                capacity: event.capacity,
+                privacy: event.privacy,
+                race: event.race.id,
             })
         }
-    }, [data, eventData]);
+    }, [data, event]);
 
     {/* Met à jour le nom de data */}
     const handleName = (event) => {
@@ -41,12 +41,12 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
     const handleCancel = () => {
         setEditor(false)
         setData({...data, 
-            name: eventData.event.name,
-            speed: eventData.event.speed,
-            endAt: eventData.event.endAt,
-            capacity: eventData.event.capacity,
-            privacy: eventData.event.privacy,
-            race: eventData.event.race.id,
+            name: event.name,
+            speed: event.speed,
+            endAt: event.endAt,
+            capacity: event.capacity,
+            privacy: event.privacy,
+            race: event.race.id,
         })
     } 
 
@@ -55,7 +55,7 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
 
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
-        const { name, speed, endAt, capacity, privacy, hourEnd } = eventData.event;
+        const { name, speed, endAt, capacity, privacy, hourEnd } = event;
         
         if (data?.name === name && data?.speed === speed && data?.endAt === endAt &&
             data?.capacity === capacity && data?.privacy === privacy && data?.hourEnd === hourEnd) {
@@ -63,7 +63,7 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
         } else {
             setDisabled(false);
         }
-    }, [data, eventData]);
+    }, [data, event]);
 
     if (editValidation) {
 
@@ -136,9 +136,9 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
                             <label className="font-bold">Options</label>
                             <div className="bg-white rounded-lg py-4">
                                 <PrimaryOptions 
+                                    eventData={ eventData }
                                     setData= { setData }
-                                    data= { data }
-                                    eventData= { eventData } />
+                                    data= { data } />
                             </div>
     
                         </div>

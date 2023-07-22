@@ -6,7 +6,7 @@ import { EventContext } from "../../_Provider/EventContext";
 
 export default function OnGoing() {
 
-    const { animation, event, user, eventId } = useContext(EventContext);
+    const { animation, eventId } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
     const [filled, setFilled] = useState(0); // provider
     const [editor, setEditor] = useState(false); // provider
@@ -16,40 +16,40 @@ export default function OnGoing() {
     return (
         <div className="w-full sm:flex gap-4 p-4">
 
-                <div 
-                    className={`relative sm:w-1/3 sm:h-fit bg-white 
-                    rounded-xl flex sm:flex-col gap-4 p-4 mb-2
-                    ${animation.firstAnimation && 'zoomIn'} ${loading && 'shake'}`}>
+            <div 
+                className={`relative sm:w-1/3 sm:h-fit bg-white 
+                rounded-xl flex sm:flex-col gap-4 p-4 mb-2
+                ${animation.firstAnimation && 'zoomIn'} ${loading && 'shake'}`}>
 
-                    <EventInfo 
-                        setEditor= { setEditor }
-                        editor= { editor }
-                        unregister={ unregister } />
-
-                    <Userinfo
-                        editor= { editor }
-                        setRegistration= { setRegistration }
-                        filled={filled}
-                        unregister={ unregister }
-                        setUnregister={ setUnregister } />
-
-                    { loading &&
-                        <img 
-                            className="w-44 absolute -top-44 right-0 z-10 origin-bottom"
-                            src="/assets/admin/img/gif/Lakitu---Hammer.gif" 
-                            alt="Loading" />
-                    }
-
-                </div>
-
-                <EventRegistration
-                    eventId = { eventId }
+                <EventInfo 
+                    setEditor= { setEditor }
                     editor= { editor }
-                    setEditor={ setEditor }
-                    registration= { registration }
-                    setRegistration={ setRegistration }
-                    setFilled={setFilled}
-                    setLoading={setLoading} />
+                    unregister={ unregister } />
+
+                <Userinfo
+                    editor= { editor }
+                    setRegistration= { setRegistration }
+                    filled={filled}
+                    unregister={ unregister }
+                    setUnregister={ setUnregister } />
+
+                { loading &&
+                    <img 
+                        className="w-44 absolute -top-44 right-0 z-10 origin-bottom"
+                        src="/assets/admin/img/gif/Lakitu---Hammer.gif" 
+                        alt="Loading" />
+                }
+
+            </div>
+
+            <EventRegistration
+                eventId = { eventId }
+                editor= { editor }
+                setEditor={ setEditor }
+                registration= { registration }
+                setRegistration={ setRegistration }
+                setFilled={setFilled}
+                setLoading={setLoading} />
 
         </div>
     )

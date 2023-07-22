@@ -3,9 +3,9 @@ import { BiEditAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EntryCard({ rank, entry, user, hoveredEntryKey, setHoveredEntryKey, hideDelay, handleShowClick, handleEditClick, formatTime }) {
+export default function EntryCard({ rank, entry, hoveredEntryKey, setHoveredEntryKey, hideDelay, handleShowClick, handleEditClick, formatTime }) {
 
-    const { newEntry, setNewEntry, animation } = useContext(EventContext);
+    const { newEntry, setNewEntry, animation, user } = useContext(EventContext);
 
     const [newEntryAnimation, setNewEntryAnimation] = useState('');
 
