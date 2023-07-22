@@ -6,7 +6,7 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor, setLoading }) {
 
-    const {data, setData, eventData, setEventData} = useContext(EventContext);
+    const {data, setData, event, setEventData} = useContext(EventContext);
 
     {/* Ferme le composant */}
     const handleCancel = () => {
@@ -15,14 +15,14 @@ export default function EditorValidation({ setEditValidation, setErrors, errors,
     }
 
     {/* Requête POST */}
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         setEditValidation(false);
-        const clear = await EventService().updateEvent(eventData.event.id, data, setErrors, errors);
+        const clear = await EventService().updateEvent(event.id, data, setErrors, errors);
         if (!clear) {
             setEditor(false);
             setLoading(true);
-            await EventService().getEvent(eventData.event.id, setEventData);
+            await EventService().getEvent(event.id, setEventData);
             setLoading(false);
         }
     }
@@ -39,11 +39,12 @@ export default function EditorValidation({ setEditValidation, setErrors, errors,
 
             <div className="">
 
-                {data.name != eventData.event.name && <p>Nom :<span className="font-bold"> {data.name}</span></p>}
-                {data.speed != eventData.event.speed && <p>Vitesse :<span className="font-bold"> {data.speed}</span></p>}
-                {data.endAt != eventData.event.endAt && <p>Fin de l'événement :<span className="font-bold"> {getFormattedDate(data.endAt)}</span></p>}
-                {data.capacity != eventData.event.capacity && <p>Place disponible :<span className="font-bold"> {data.capacity ? data.capacity : 'Ouvert'}</span></p>}
-                {data.privacy != eventData.event.privacy && <p>Confidentialité :<span className="font-bold"> {data.privacy ? 'Privée' : 'Public'}</span></p>}              
+                {data.name != event.name && <p>Nom :<span className="font-bold"> {data.name}</span></p>}
+                {data.speed != event.speed && <p>Vitesse :<span className="font-bold"> {data.speed}</span></p>}
+                {data.endAt != event.endAt && <p>Fin de l'événement :<span className="font-bold"> {getFormattedDate(data.endAt)}</span></p>}
+                {data.capacity != event.capacity && <p>Place disponible :<span className="font-bold"> {data.capacity ? data.capacity : 'Ouvert'}</span></p>}
+                {data.privacy != event.privacy && <p>Confidentialité :<span className="font-bold"> {data.privacy ? 'Privée' : 'Public'}</span></p>}
+                {data.hourEnd != event.hourEnd && <p>Heure de fin :<span className="font-bold"> {data.hourEnd}</span></p>}          
 
             </div> 
             

@@ -8,7 +8,6 @@ export default function OnGoing() {
 
     const { animation, event, user, eventId } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
-    const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
     const [filled, setFilled] = useState(0); // provider
     const [editor, setEditor] = useState(false); // provider
     const [unregister, setUnregister] = useState(false); // provider
@@ -23,8 +22,6 @@ export default function OnGoing() {
                     ${animation.firstAnimation && 'zoomIn'} ${loading && 'shake'}`}>
 
                     <EventInfo 
-                        user= { user }
-                        event={ event }
                         setEditor= { setEditor }
                         editor= { editor }
                         unregister={ unregister } />
@@ -32,7 +29,6 @@ export default function OnGoing() {
                     <Userinfo
                         editor= { editor }
                         setRegistration= { setRegistration }
-                        isUserRegistered= { isUserRegistered }
                         filled={filled}
                         unregister={ unregister }
                         setUnregister={ setUnregister } />
@@ -50,7 +46,6 @@ export default function OnGoing() {
                     eventId = { eventId }
                     editor= { editor }
                     setEditor={ setEditor }
-                    isUserRegistered= { isUserRegistered }
                     registration= { registration }
                     setRegistration={ setRegistration }
                     setFilled={setFilled}

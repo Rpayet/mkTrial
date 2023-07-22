@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Countdown from "react-countdown";
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { createDateTimeObject } from "../../../_Services/FormatTime";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function DelayInfo({ event }) {
+export default function DelayInfo() {
 
-    const endAtDate = new Date(event.endAt);
+    const { countdown } = useContext(EventContext);
+
     const Completionist = () => <span className="text-xs">Terminé</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -28,7 +31,7 @@ export default function DelayInfo({ event }) {
                 <div className="flex gap-1 items-center">
                     <Countdown 
                         zeroPadTime={2}
-                        date= { endAtDate }
+                        date= { countdown }
                         daysInHours= {false}
                         renderer= { renderer } />
                     <AiOutlineClockCircle 

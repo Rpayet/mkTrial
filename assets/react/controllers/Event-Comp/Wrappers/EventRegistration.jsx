@@ -5,10 +5,10 @@ import EventEditor from "../UI/OnGoing/Editor/EventEditor";
 import { EventContext } from "../../_Provider/EventContext";
 
 export default function EventRegistration({
-    editor, setEditor, isUserRegistered, 
+    editor, setEditor, 
     registration, setRegistration, setFilled, setLoading }) {
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { eventData } = useContext(EventContext);
     const { event, user, entries } = eventData; 
 
     if (!registration && !editor) {
@@ -17,8 +17,7 @@ export default function EventRegistration({
             <RankSection 
                 event= { event }
                 user= { user }
-                entries= { entries }
-                isUserRegistered= { isUserRegistered } />
+                entries= { entries } />
         )
 
     } else if(registration && !editor) {

@@ -55,10 +55,10 @@ export default function EventEditor({ setEditor, eventData, setLoading }) {
 
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
-        const { name, speed, endAt, capacity, privacy } = eventData.event;
+        const { name, speed, endAt, capacity, privacy, hourEnd } = eventData.event;
         
         if (data?.name === name && data?.speed === speed && data?.endAt === endAt &&
-            data?.capacity === capacity && data?.privacy === privacy) {
+            data?.capacity === capacity && data?.privacy === privacy && data?.hourEnd === hourEnd) {
             setDisabled(true);
         } else {
             setDisabled(false);

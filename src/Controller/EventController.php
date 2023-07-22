@@ -85,7 +85,7 @@ class EventController extends AbstractController
     #[isGranted('ROLE_USER')]
     public function edit(
         Request $request,
-        $id, 
+        int $id, 
         TournamentRepository $tournamentRepository,
         EntityManagerInterface $manager, 
         )

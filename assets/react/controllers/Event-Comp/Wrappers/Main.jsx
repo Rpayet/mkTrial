@@ -8,15 +8,13 @@ export default function Main({ id }) {
 
     const date = new Date();
 
-    const { eventData, setEventData, eventId, 
-        setEventId, event, entries } = useContext(EventContext);
-   
+    const { setEventData, eventId, isLoading, setIsLoading,
+        setEventId, event, entries, countdown } = useContext(EventContext);
+       
     useEffect(() => {
         setEventId(id);
     }, [id]);
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [isOngoing, setIsOngoing] = useState(true);
     
     useEffect(() => {
@@ -26,7 +24,6 @@ export default function Main({ id }) {
                   await EventService().getEvent(eventId, setEventData);
                   setIsLoading(false);
                 } catch (error) {
-                  setError(error.message);
                   setIsLoading(false);
                 }
               };
@@ -35,12 +32,16 @@ export default function Main({ id }) {
     }, [eventId]);
 
     useEffect(() => {
-        if (eventData && eventData?.event && eventData?.event.endAt) {
-            const eventEndAt = new Date(eventData?.event.endAt);
-            setIsOngoing(eventEndAt > date);
+        const isCountdownOngoing = countdown > date;
+        setIsOngoing(isCountdownOngoing);
+        if (isCountdownOngoing) {
+            const timer = setTimeout(() => {
+                setIsOngoing(false);
+            }, countdown - date);
+            return () => clearTimeout(timer);
         }
-      }, [eventData, date]);
-
+    }, [date, countdown]);
+    
     if (isLoading) {
         return (
             <div>
@@ -51,8 +52,6 @@ export default function Main({ id }) {
             </div>
         )
     }
-
-    if (error) { return (<div>Error: {error}</div>)}
     
     return (
         <>

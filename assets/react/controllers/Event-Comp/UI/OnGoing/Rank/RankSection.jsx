@@ -4,9 +4,9 @@ import AddEntry from "./AddEntry";
 import EntriesHighlight from "../User/EntriesHighlight";
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function RankSection({ event, user, entries, isUserRegistered }) {
+export default function RankSection({ event, user, entries }) {
 
-    const { animation } = useContext(EventContext);
+    const { animation, isUserRegistered } = useContext(EventContext);
     const [section, setSection] = useState('ranking');
     const [showUser, setShowUser] = useState(null);
         
@@ -40,7 +40,6 @@ export default function RankSection({ event, user, entries, isUserRegistered }) 
                         user= { user }
                         event= { event }
                         entries= { entries }
-                        isUserRegistered= { isUserRegistered }
                         setShowUser= { setShowUser }
                         setSection={ setSection } />
     

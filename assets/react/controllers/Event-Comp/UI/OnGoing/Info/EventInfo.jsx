@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
 import { BiEditAlt } from 'react-icons/bi';
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EventInfo({ user, event, setEditor, editor, unregister }) {
+export default function EventInfo({ setEditor, editor, unregister }) {
+
+    const { event, user } = useContext(EventContext);
 
     const [editAuth, setEditAuth] = useState(false);
-    const [color, setColor] = useState(false);
 
     useEffect(() => {
         if (user && user.name == event.user.name) {
             setEditAuth(true)
         }
     }, [user, event]);
-
-    useEffect(() => {
-        if (event.speed === '200cc') {
-            setColor(true);
-        } else if (event.speed === '150cc') {
-            setColor(false);
-        }
-    }, [event]);
 
     return (
 
@@ -36,12 +30,12 @@ export default function EventInfo({ user, event, setEditor, editor, unregister }
                             className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${editor ? 'hidden' : ''}`}/>
 }
                 </div>
-                <DelayInfo event= { event } />
+                <DelayInfo />
             </div>
 
             <div className="w-full">
 
-                <RaceInfo event= { event } color= { color } />
+                <RaceInfo />
 
             </div>
 

@@ -37,6 +37,7 @@ export default function LeaderBoard() {
                     {rankList.map((entry, i) => (
                         <TopList 
                             entry = { entry }
+                            key={i}
                             i = { i }
                         />
                     ))} 
@@ -46,6 +47,7 @@ export default function LeaderBoard() {
                     {rankList.map((entry, i) => (
                         <BottomList
                             entry = { entry }
+                            key={i}
                             i = { i }
                         />
                     ))}
