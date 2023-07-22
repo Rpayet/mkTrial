@@ -3,7 +3,7 @@ import EntryHistoryCard from "./EntryHistoricalCard";
 
 export default function EntriesHistoricalList({ 
     entry, i, setHoveredEntry, hoveredEntry, 
-    handleSubmit, userAuth, formatter, filled,
+    handleSubmit, userAuth, formatter,
     entryDelete, setEntryDelete
 }) {
 
@@ -27,7 +27,6 @@ export default function EntriesHistoricalList({
                 userAuth={userAuth}
                 entryDelete={entryDelete}
                 setEntryDelete={setEntryDelete}
-                filled={filled}
                 handleSubmit={handleSubmit} />
 
         </li>

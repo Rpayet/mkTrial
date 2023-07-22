@@ -6,12 +6,10 @@ import { EventContext } from "../../_Provider/EventContext";
 
 export default function OnGoing() {
 
-    const { animation, eventId } = useContext(EventContext);
+    const { animation, eventId, isLoading } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
-    const [filled, setFilled] = useState(0); // provider
     const [editor, setEditor] = useState(false); // provider
     const [unregister, setUnregister] = useState(false); // provider
-    const [loading, setLoading] = useState(false); // provider
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
@@ -19,7 +17,7 @@ export default function OnGoing() {
             <div 
                 className={`relative sm:w-1/3 sm:h-fit bg-white 
                 rounded-xl flex sm:flex-col gap-4 p-4 mb-2
-                ${animation.firstAnimation && 'zoomIn'} ${loading && 'shake'}`}>
+                ${animation.firstAnimation && 'zoomIn'} ${isLoading && 'shake'}`}>
 
                 <EventInfo 
                     setEditor= { setEditor }
@@ -29,11 +27,10 @@ export default function OnGoing() {
                 <Userinfo
                     editor= { editor }
                     setRegistration= { setRegistration }
-                    filled={filled}
                     unregister={ unregister }
                     setUnregister={ setUnregister } />
 
-                { loading &&
+                { isLoading &&
                     <img 
                         className="w-44 absolute -top-44 right-0 z-10 origin-bottom"
                         src="/assets/admin/img/gif/Lakitu---Hammer.gif" 
@@ -47,9 +44,7 @@ export default function OnGoing() {
                 editor= { editor }
                 setEditor={ setEditor }
                 registration= { registration }
-                setRegistration={ setRegistration }
-                setFilled={setFilled}
-                setLoading={setLoading} />
+                setRegistration={ setRegistration } />
 
         </div>
     )

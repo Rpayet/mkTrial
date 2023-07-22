@@ -5,10 +5,10 @@ import RemoveRegistration from "./RemoveRegistration";
 import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function UsersList({userAdd, unregister, setUnregister, setRegistration, 
-    filled, selectedUser, setSelectedUser, removeConfirmation, setRemoveConfirmation}) {
+    selectedUser, setSelectedUser, removeConfirmation, setRemoveConfirmation}) {
 
     const { eventData, isLoading } = useContext(EventContext);
-    const { user, event } = eventData;
+    const { user, event, filled } = eventData;
 
     useEffect(() => {
         if (event.user.id != user?.id) {

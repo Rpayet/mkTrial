@@ -5,9 +5,9 @@ import { RxCross2, RxCheck  } from 'react-icons/rx';
 import { EventContext } from "../../../../_Provider/EventContext";
 import ElapsedTime from "../../../../_GlobalUi/ElapsedTime";
 
-export default function EntryHistoricalCard({ entry, formatter, hoveredEntry, i, userAuth, entryDelete, setEntryDelete, filled, handleSubmit}) {
+export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, entryDelete, setEntryDelete, handleSubmit}) {
 
-    const { isLoading } = useContext(EventContext);
+    const { isLoading, filled } = useContext(EventContext);
 
     return (
         <>

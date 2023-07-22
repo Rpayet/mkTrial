@@ -4,9 +4,9 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import { getFormattedDate } from "../../../_Services/FormatTime";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor, setLoading }) {
+export default function EditorValidation({ setEditValidation, setErrors, errors, setEditor }) {
 
-    const {data, setData, event, setEventData} = useContext(EventContext);
+    const {data, setData, event, setEventData, setIsLoading} = useContext(EventContext);
 
     {/* Ferme le composant */}
     const handleCancel = () => {
@@ -21,9 +21,9 @@ export default function EditorValidation({ setEditValidation, setErrors, errors,
         const clear = await EventService().updateEvent(event.id, data, setErrors, errors);
         if (!clear) {
             setEditor(false);
-            setLoading(true);
+            setIsLoading(true);
             await EventService().getEvent(event.id, setEventData);
-            setLoading(false);
+            setIsLoading(false);
         }
     }
     

@@ -32,28 +32,22 @@ export default function RankSection() {
     }
     
     if (section === 'ranking') {
-
         return (
             <div className="sm:w-2/3 flex flex-col items-center" >
-                    { entries.length != 0 && <p className={`w-full text-left text-xs font-bold ${animation.firstAnimation ? 'zoomIn' : 'visible'}`}>#Classement</p>}
-                    <RankOptions
-                        setShowUser= { setShowUser }
-                        setSection={ setSection } />
-    
-                    { (inputEntry === 'new' && user != null && isUserRegistered) && <AddEntry /> }
+
+                { entries.length != 0 && <p className={`w-full text-left text-xs font-bold ${animation.firstAnimation ? 'zoomIn' : 'visible'}`}>#Classement</p>}
+                
+                <RankOptions setShowUser= { setShowUser } setSection={ setSection } />
+
+                { (inputEntry === 'new' && user != null && isUserRegistered) && <AddEntry /> }
                     
             </div>
-    
         )
-
     }
 
     if (section === "highlight") {
-
         return (
-            <EntriesHighlight
-                showUserEntries= { showUserEntries }
-                setSection= { setSection } />
+            <EntriesHighlight showUserEntries= { showUserEntries } setSection= { setSection } />
         )
     }
 }

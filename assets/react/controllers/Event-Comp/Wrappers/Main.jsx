@@ -7,9 +7,9 @@ import { EventService } from "../../_Service/EventService";
 export default function Main({ id }) {
 
     const date = new Date();
-
-    const { setEventData, eventId, isLoading, setIsLoading,
-        setEventId, event, entries, countdown } = useContext(EventContext);
+    
+    const [isLoading, setIsLoading] = useState(true);
+    const { setEventData, setEventId, event, entries, countdown } = useContext(EventContext);
        
     useEffect(() => {
         setEventId(id);
@@ -18,10 +18,10 @@ export default function Main({ id }) {
     const [isOngoing, setIsOngoing] = useState(true);
     
     useEffect(() => {
-        if (eventId) {
+        if (id) {
             const fetchData = async () => {
                 try {
-                  await EventService().getEvent(eventId, setEventData);
+                  await EventService().getEvent(id, setEventData);
                   setIsLoading(false);
                 } catch (error) {
                   setIsLoading(false);
@@ -29,7 +29,7 @@ export default function Main({ id }) {
               };
               fetchData();
             }
-    }, [eventId]);
+    }, []);
 
     useEffect(() => {
         const isCountdownOngoing = countdown > date;

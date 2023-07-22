@@ -9,8 +9,7 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function EntriesHighlight({ showUserEntries, setSection }) {
 
-    const { setEventData, setIsLoading, event, user } = useContext(EventContext);
-    const [filled, setFilled] = useState(0);
+    const { setEventData, setIsLoading, event, user, setFilled } = useContext(EventContext);
     const formatter = buildFormatter(frenchStrings);
     const [imgFocus, setImgFocus] = useState(false);
     const [entryDelete, setEntryDelete] = useState({
@@ -115,7 +114,6 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
                                 formatter={formatter}
                                 userAuth={userAuth}
                                 handleSubmit={handleSubmit} 
-                                filled={filled}
                                 entryDelete={entryDelete}
                                 setEntryDelete={setEntryDelete}
                             />

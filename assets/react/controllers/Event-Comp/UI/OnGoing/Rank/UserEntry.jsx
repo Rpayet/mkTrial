@@ -59,7 +59,6 @@ export default function UserEntry({ entry, rank, hoveredEntryKey,setHoveredEntry
                 handleShowClick= { handleShowClick }
                 hideDelay= { hideDelay }
                 formatTime={ formatTime} />
-            
         </div>
     )
 

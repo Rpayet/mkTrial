@@ -15,7 +15,10 @@ export const EventProvider = ({ children }) => {
   const [data, setData] = useState(null);
 
   const [countdown, setCountdown] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [filled, setFilled] = useState(0);
+
   const [animation, setAnimation] = useState({
     firstAnimation: true,
   });
@@ -40,7 +43,7 @@ export const EventProvider = ({ children }) => {
   const eventContextValue = {
     eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
     isUserRegistered, countdown, newEntry, setNewEntry, data, setData,
-    isLoading, setIsLoading, animation, setAnimation,
+    isLoading, setIsLoading, animation, setAnimation, filled, setFilled,
   };
 
   return (

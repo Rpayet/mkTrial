@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function Register({ setRegistration, setFilled }) {
+export default function Register({ setRegistration }) {
 
-    const { setIsLoading, setEventData, event } = useContext(EventContext);
+    const { setIsLoading, setEventData, event, setFilled } = useContext(EventContext);
     const [errors, setErrors] = useState(null);
 
     const handleSubmit = async (e) => {
