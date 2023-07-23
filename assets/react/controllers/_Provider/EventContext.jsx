@@ -37,7 +37,10 @@ export const EventProvider = ({ children }) => {
     interruption: false,
   })
 
-  const [registration, setRegistration] = useState(false);
+  const [registration, setRegistration] = useState({
+    unregister: false,
+    removeConfirmation: false,
+  })
 
   const isUserRegistered = (user !== null 
     && event.registered.map((registeredUser) => 
@@ -61,7 +64,7 @@ export const EventProvider = ({ children }) => {
     eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
     isUserRegistered, countdown, newEntry, setNewEntry, data, setData,
     isLoading, setIsLoading, animation, setAnimation, filled, setFilled,
-    section, setSection, registration, setRegistration
+    section, setSection, registration, setRegistration,
   };
 
   return (

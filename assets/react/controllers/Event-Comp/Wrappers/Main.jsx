@@ -9,13 +9,12 @@ export default function Main({ id }) {
     const date = new Date();
     
     const [isLoading, setIsLoading] = useState(true);
+    const [isOngoing, setIsOngoing] = useState(true);
     const { setEventData, setEventId, event, entries, countdown } = useContext(EventContext);
        
     useEffect(() => {
         setEventId(id);
     }, [id]);
-
-    const [isOngoing, setIsOngoing] = useState(true);
     
     useEffect(() => {
         if (id) {

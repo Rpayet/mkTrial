@@ -1,35 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { RxCrossCircled } from 'react-icons/rx';
 import RemoveRegistration from "./RemoveRegistration";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function UsersList({userAdd, unregister, setUnregister, 
-    selectedUser, setSelectedUser, removeConfirmation, setRemoveConfirmation}) {
+export default function UsersList({userAdd, selectedUser, setSelectedUser}) {
 
-    const { event, user, filled, isLoading, setSection, section } = useContext(EventContext);
+    const { event, user, filled, isLoading, setSection, section, registration, setRegistration } = useContext(EventContext);
 
     useEffect(() => {
         if (event?.user.id != user?.id) {
             setSelectedUser(user?.id);
-            setRemoveConfirmation(true);
+            setRegistration({...registration, removeConfirmation: false});
         }
     }, [event, user, selectedUser]);
 
     const handleUser = (e) => {
         setSelectedUser(e);
-        setUnregister(true);
-        setRemoveConfirmation(true);
+        setRegistration({...registration, removeConfirmation: true, unregister: true});
     }
 
-    if (unregister && removeConfirmation) {
+    if (registration.unregister && registration.removeConfirmation) {
         return(
-            <RemoveRegistration 
-                selectedUser={selectedUser}
-                setUnregister={setUnregister}
-                setSelectedUser={setSelectedUser}
-                setRemoveConfirmation={setRemoveConfirmation} />
+            <RemoveRegistration selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
         )
     }
 
@@ -45,7 +39,7 @@ export default function UsersList({userAdd, unregister, setUnregister,
                         alt="default"
                         className="w-10 rounded-full"
                     />
-                    { (unregister && (user?.id === event.user.id) && (u.id != event.user.id) ) &&
+                    { (registration.unregister && (user?.id === event.user.id) && (u.id != event.user.id) ) &&
                         <RxCrossCircled 
                             onClick={() => handleUser(u)}
                             title="Supprimer l'inscription"
@@ -56,7 +50,7 @@ export default function UsersList({userAdd, unregister, setUnregister,
                 </div>
             ))}
 
-            {( userAdd && !unregister )&&
+            {( userAdd && !registration.unregister )&&
                 <button
                     disabled={isLoading.user}
                     onClick={() => {setSection(toggleSection(section, 'registration'))}}>

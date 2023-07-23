@@ -3,13 +3,12 @@ import { BiEditAlt, BiArrowToLeft } from 'react-icons/bi';
 import UsersList from "./UsersList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function Userinfo({ unregister, setUnregister }) {
+export default function Userinfo() {
 
-    const { event, user, isUserRegistered, section, setSection} = useContext(EventContext);
+    const { event, user, isUserRegistered, section, registration, setRegistration } = useContext(EventContext);
 
     const [userAdd, setUserAdd] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [removeConfirmation, setRemoveConfirmation] = useState(false);
 
     useEffect(() => {
         if ( event?.capacity != null && user != null ) {
@@ -25,12 +24,17 @@ export default function Userinfo({ unregister, setUnregister }) {
         }
     }, [isUserRegistered, event, user, event]);
 
-    const handleCancel = () => {
-        setUnregister(false);
-        setSelectedUser(null);
+    const handleRegistration = () => {
         if (event?.user.id != user?.id) {
-            setRemoveConfirmation(true);
+            setRegistration({...registration, unregister: true, removeConfirmation: true});
+        } else {
+            setRegistration({...registration, unregister: true});
         }
+    }
+
+    const handleCancel = () => {
+        setRegistration({...registration, unregister: false, removeConfirmation: false});
+        setSelectedUser(null);
     }
     
     return (
@@ -45,13 +49,14 @@ export default function Userinfo({ unregister, setUnregister }) {
                     <div className="flex gap-1">
                         <p className="block text-left text-xs text-silver duration-500">Participants</p>
                         
-                        { (isUserRegistered && !section.editor) && 
+                        { (isUserRegistered && !section.editor && !registration.unregister) && 
                             <BiEditAlt 
                                 title="Gérer les participants"
-                                onClick={() => {setSection({ ...section, editor: true })}}
+                                onClick={handleRegistration}
                                 className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`}/>
                         }
-                        { (isUserRegistered && unregister && (event?.user.id === user.id) && !removeConfirmation && !section.editor)  &&
+                        { (isUserRegistered && registration.unregister && (event?.user.id === user.id) 
+                            && !registration.removeConfirmation && !section.editor) &&
                             <BiArrowToLeft
                                 title="Revenir à la liste des participants"
                                 onClick={handleCancel}
@@ -73,13 +78,9 @@ export default function Userinfo({ unregister, setUnregister }) {
                     className="relative p-4 mx-auto flex flex-wrap gap-2 justify-center items-center
                     bg-slate-100 border-solid border-[1px] border-lumi rounded-lg">
                         <UsersList
-                            unregister={unregister}
-                            setUnregister={setUnregister}
                             userAdd={userAdd}
                             selectedUser={selectedUser}
-                            setSelectedUser={setSelectedUser}
-                            removeConfirmation={removeConfirmation}
-                            setRemoveConfirmation={setRemoveConfirmation} />
+                            setSelectedUser={setSelectedUser} />
                         
                 </div>
 

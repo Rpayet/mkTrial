@@ -74,7 +74,7 @@ export function EventService () {
   };
 
   // Requête DELETE
-  const eventUnregister = async (eventId, userId, setEventData, setFilled, setUnregister) => {
+  const eventUnregister = async (eventId, userId, setEventData, setFilled) => {
     try {
       const startTime = performance.now();
 
@@ -90,7 +90,6 @@ export function EventService () {
       setEventData(eventResponse.data);
 
       setFilled(0);
-      setUnregister(false);
 
     }
     catch (error) {

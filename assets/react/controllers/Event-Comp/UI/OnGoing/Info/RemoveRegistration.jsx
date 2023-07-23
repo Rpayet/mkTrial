@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function RemoveRegistration({ selectedUser, setUnregister, setSelectedUser, setRemoveConfirmation }) {
+export default function RemoveRegistration({ selectedUser, setSelectedUser}) {
 
-    const { event, user, setEventData, filled, setFilled } = useContext(EventContext);
+    const { event, user, setEventData, filled, setFilled, 
+            registration, setRegistration } = useContext(EventContext);
 
     const [userId, setUserId] = useState(null);
     
@@ -21,18 +22,19 @@ export default function RemoveRegistration({ selectedUser, setUnregister, setSel
     const handleRegistrationRemoval = async (e) => {
         e.preventDefault();
         setLoading(true);
-        await EventService().eventUnregister(event.id, userId, setEventData, setFilled, setUnregister);
+        await EventService().eventUnregister(event.id, userId, setEventData, setFilled);
+        setRegistration({...registration, unregister: false});
         setLoading(false);
     }
 
     const handleCancel = (e) => {
         e.preventDefault();
-        setRemoveConfirmation(false);
-        setUnregister(false);
+        setRegistration({...registration, unregister: false});
+        setRegistration({...registration, removeConfirmation: false});
         setSelectedUser(null);
-        if (event?.user.id != user?.id) {
-            setRemoveConfirmation(true);
-        }
+        // if (event?.user.id != user?.id) {
+        //     setRegistration(toggleSection(registration, 'removeConfirmation'));
+        // }
     }
 
     return (

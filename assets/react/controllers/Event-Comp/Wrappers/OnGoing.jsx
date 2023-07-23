@@ -7,7 +7,6 @@ import { EventContext } from "../../_Provider/EventContext";
 export default function OnGoing() {
 
     const { animation, isLoading } = useContext(EventContext);
-    const [unregister, setUnregister] = useState(false); // provider
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
@@ -19,9 +18,7 @@ export default function OnGoing() {
 
                 <EventInfo />
 
-                <Userinfo
-                    unregister={ unregister }
-                    setUnregister={ setUnregister } />
+                <Userinfo />
 
                 { isLoading.event &&
                     <img 
