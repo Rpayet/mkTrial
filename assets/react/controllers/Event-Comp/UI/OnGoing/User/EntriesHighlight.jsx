@@ -27,13 +27,13 @@ export default function EntriesHighlight({ showUserEntries }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
+        setIsLoading({...setIsLoading, entry: true});
         await EventService()  
             .deleteEntry(
                 hoveredEntry.id, setEventData, setFilled, 
                 event.id, showUserEntries, setSection,
                 setEntryDelete);
-        setIsLoading(false);
+        setIsLoading({...setIsLoading, entry: false});
     };
       
     const userAuth = () => {

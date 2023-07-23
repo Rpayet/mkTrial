@@ -19,7 +19,7 @@ export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, 
 
                     <div className="flex items-center gap-2">
                         <button
-                            disabled={isLoading}
+                            disabled={isLoading.entry}
                             onClick={() => {setEntryDelete({...entryDelete, visibility: false})}} >
                                 <RxCross2
                                     title="Annuler"
@@ -28,7 +28,7 @@ export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, 
                                     hover:bg-mario hover:text-white" />
                         </button>
                         <button
-                            disabled={isLoading}
+                            disabled={isLoading.entry}
                             onClick={handleSubmit}>
                                 <RxCheck
                                     title="Confirmer"
@@ -47,13 +47,13 @@ export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, 
                     </span>
                     { (hoveredEntry?.key === i && userAuth() ) && 
                         <button
-                            disabled={isLoading}
+                            disabled={isLoading.entry}
                             onClick={() => {setEntryDelete({id: hoveredEntry?.key, visibility : true})}}>
                                 <BsTrash 
                                     title="Supprimer l'entrée"
                                     className={`w-6 h-6 p-1 bg-white rounded-full block
                                                 border-solid border-[1px] border-silver
-                                                ${isLoading ? 'hover:bg-lite' : 'hover:bg-mario'} hover:text-white`}/>
+                                                ${isLoading.entry ? 'hover:bg-lite' : 'hover:bg-mario'} hover:text-white`}/>
                         </button>     
                     }
                 </div>

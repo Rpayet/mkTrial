@@ -3,7 +3,6 @@ import { BiEditAlt, BiArrowToLeft } from 'react-icons/bi';
 import UsersList from "./UsersList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
-
 export default function Userinfo({ unregister, setUnregister, setRegistration }) {
 
     const { event, user, editor, isUserRegistered} = useContext(EventContext);
@@ -12,15 +11,14 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
     const [selectedUser, setSelectedUser] = useState(null);
     const [removeConfirmation, setRemoveConfirmation] = useState(false);
 
-
     useEffect(() => {
-        if ( event.capacity != null && user != null ) {
-            if ( !isUserRegistered && event.registered.length < event.capacity ) {
+        if ( event?.capacity != null && user != null ) {
+            if ( !isUserRegistered && event?.registered.length < event?.capacity ) {
                 setUserAdd(true);
-            } else if ( isUserRegistered && event.capacity.length == event.capacity.registered ) {
+            } else if ( isUserRegistered && event?.capacity.length == event?.capacity.registered ) {
                 setUserAdd(false);
             } 
-        } else if ( !isUserRegistered && user != null && event.capacity == null ) {
+        } else if ( !isUserRegistered && user != null && event?.capacity == null ) {
             setUserAdd(true);
         } else {
             setUserAdd(false);
@@ -30,7 +28,7 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
     const handleCancel = () => {
         setUnregister(false);
         setSelectedUser(null);
-        if (event.user.id != user.id) {
+        if (event?.user.id != user?.id) {
             setRemoveConfirmation(true);
         }
     }
@@ -47,13 +45,13 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
                     <div className="flex gap-1">
                         <p className="block text-left text-xs text-silver duration-500">Participants</p>
                         
-                        { (isUserRegistered && !unregister && !editor) && 
+                        { (isUserRegistered && !editor) && 
                             <BiEditAlt 
                                 title="Gérer les participants"
                                 onClick={() => {setUnregister(!unregister)}}
                                 className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`}/>
                         }
-                        { (isUserRegistered && unregister && (event.user.id === user.id) && !removeConfirmation && !editor)  &&
+                        { (isUserRegistered && unregister && (event?.user.id === user.id) && !removeConfirmation && !editor)  &&
                             <BiArrowToLeft
                                 title="Revenir à la liste des participants"
                                 onClick={handleCancel}
@@ -62,7 +60,11 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
                         }
                     </div>
                     
-                    {event.capacity >= 3 && <p className="block text-right text-xs text-silver">{event.registered.length}/{event.capacity}</p>}
+                    {event.capacity >= 3 && 
+                        <p className="block text-right text-xs text-silver">
+                            {event?.registered.length}/{event?.capacity}
+                        </p>
+                    }
                     
                 </div>
                 
@@ -78,9 +80,7 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
                             selectedUser={selectedUser}
                             setSelectedUser={setSelectedUser}
                             removeConfirmation={removeConfirmation}
-                            setRemoveConfirmation={setRemoveConfirmation}
-                             />
-                        
+                            setRemoveConfirmation={setRemoveConfirmation} />
                         
                 </div>
 

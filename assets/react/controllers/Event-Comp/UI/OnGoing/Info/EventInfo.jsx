@@ -4,14 +4,14 @@ import DelayInfo from "./DelayInfo";
 import { BiEditAlt } from 'react-icons/bi';
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EventInfo({ unregister }) {
+export default function EventInfo() {
 
     const { event, user, setSection, section } = useContext(EventContext);
 
     const [editAuth, setEditAuth] = useState(false);
 
     useEffect(() => {
-        if (user && user.name == event.user.name) {
+        if (user && user?.name == event?.user.name) {
             setEditAuth(true)
         }
     }, [user, event]);
@@ -23,7 +23,7 @@ export default function EventInfo({ unregister }) {
             <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
-                    { (editAuth && !unregister) &&         
+                    { (editAuth) &&         
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
                             onClick={() => {setSection({...section, editor: true, ranking: false, highlight: false})}}

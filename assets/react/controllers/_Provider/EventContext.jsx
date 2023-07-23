@@ -16,7 +16,11 @@ export const EventProvider = ({ children }) => {
 
   const [countdown, setCountdown] = useState(null);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    event: false,
+    user: false,
+    entry: false,
+  });
   const [filled, setFilled] = useState(0);
 
   const [animation, setAnimation] = useState({

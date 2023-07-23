@@ -21,9 +21,9 @@ export default function EditorValidation({ setEditValidation, setErrors, errors 
         const clear = await EventService().updateEvent(event.id, data, setErrors, errors);
         if (!clear) {
             setSection({...section, editor: false, ranking: true, highlight: false});
-            setIsLoading(true);
+            setIsLoading({...event, event: true});
             await EventService().getEvent(event.id, setEventData);
-            setIsLoading(false);
+            setIsLoading({...event, event: false});
         }
     }
     

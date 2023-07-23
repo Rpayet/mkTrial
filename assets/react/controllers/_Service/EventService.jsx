@@ -49,12 +49,11 @@ export function EventService () {
   };
 
   // Requête POST
-  const eventRegister = async (eventId, setEventData, setErrors, startTime, setFilled) => {
+  const eventRegister = async (eventId, setEventData, setErrors, setFilled) => {
 
     try {
-      
+      const startTime = performance.now();
       await axios.post(`/api/event/${eventId}/register`);
-
       const endTime = performance.now();
       const loadTime = endTime - startTime;
 
@@ -99,7 +98,7 @@ export function EventService () {
   };
 
   // Requête POST
-  const postEntry = async (eventId, formData, setEventData, setToggleView, setErrors, setFilled, setNewEntry, user, entryInput, setIsLoading) => {
+  const postEntry = async (eventId, formData, setEventData, setToggleView, setErrors, setFilled, setNewEntry, user, entryInput ) => {
       try {
         const startTime = performance.now();
         
@@ -117,7 +116,6 @@ export function EventService () {
                           setToggleView(false);
                           setEventData(response.data);
                           setFilled(0);
-                          setIsLoading(false);
                         })
                         .catch((errors) => {
                           setErrors(errors.response.data);

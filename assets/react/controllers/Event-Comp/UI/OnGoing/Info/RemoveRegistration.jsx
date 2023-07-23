@@ -1,12 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 
 export default function RemoveRegistration({ selectedUser, setUnregister, setSelectedUser, setRemoveConfirmation }) {
 
     const { event, user, setEventData, filled, setFilled } = useContext(EventContext);
-    const userId = selectedUser ? selectedUser?.id : null;
 
+    const [userId, setUserId] = useState(null);
+    
+    useEffect(() => {
+        if (user.id === selectedUser) {
+            setUserId(user.id);
+        } else {
+            setUserId(selectedUser.id);
+        }
+    }, [selectedUser]);
+    
     const [loading, setLoading] = useState(false);
 
     const handleRegistrationRemoval = async (e) => {
@@ -40,11 +49,13 @@ export default function RemoveRegistration({ selectedUser, setUnregister, setSel
                 <button 
                     disabled={loading}
                     onClick={handleRegistrationRemoval}
-                    className="text-sm border-[1px] border-solid border-silver hover:text-white hover:bg-mario px-4 py-2 rounded-lg">Oui</button>
+                    className="text-sm border-[1px] border-solid border-silver 
+                        hover:text-white hover:bg-mario px-4 py-2 rounded-lg">Oui</button>
                 <button 
                     disabled={loading}
                     onClick={handleCancel}
-                    className="text-sm border-[1px] border-solid border-silver hover:text-white hover:bg-lumi px-4 py-2 rounded-lg">Non</button>
+                    className="text-sm border-[1px] border-solid border-silver 
+                        hover:text-white hover:bg-lumi px-4 py-2 rounded-lg">Non</button>
             </div>
             <div 
                 style={{height: `${filled}%`}}

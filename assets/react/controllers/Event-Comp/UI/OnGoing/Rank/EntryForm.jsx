@@ -34,9 +34,11 @@ export default function EntryForm({ toggleView, setToggleView }) {
         setErrors({});
         setIsLoading(true);
         await EventService().postEntry(event.id, formData, setEventData, 
-            setToggleView, setErrors, setFilled, setNewEntry, user, entryInput, setIsLoading);
+            setToggleView, setErrors, setFilled, setNewEntry, user, entryInput);
+        setIsLoading({...isLoading, entry: false})
+        
         if (errors) {
-            setIsLoading(false);
+            setIsLoading({...isLoading, entry: false});
         }
     }
 
@@ -65,7 +67,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
 
                 <div className="flex gap-2 items-center">
                     <button
-                        disabled={isLoading}
+                        disabled={isLoading.entry}
                         onClick={handleCancel}>
                         <RxCross2 
                             title="Annuler"
@@ -75,7 +77,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
                             />
                     </button>
                     <button
-                        disabled={isLoading}
+                        disabled={isLoading.entry}
                         onClick={handleSubmit}>
                         <RxCheck
                             title="Valider"

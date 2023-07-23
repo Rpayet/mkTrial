@@ -59,7 +59,8 @@ export default function Main({ id }) {
                 ? (isOngoing 
                     ? (<OnGoing />) 
                     : (<Finished /> )) 
-                : (<div>No data available</div>)}
+                : (<div>No data available</div>)
+            }
         </>
     );
 }

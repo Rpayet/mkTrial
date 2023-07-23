@@ -7,15 +7,14 @@ import { EventContext } from "../../../../_Provider/EventContext";
 export default function UsersList({userAdd, unregister, setUnregister, setRegistration, 
     selectedUser, setSelectedUser, removeConfirmation, setRemoveConfirmation}) {
 
-    const { eventData, isLoading } = useContext(EventContext);
-    const { user, event, filled } = eventData;
+    const { event, user, filled, isLoading } = useContext(EventContext);
 
     useEffect(() => {
-        if (event.user.id != user?.id) {
+        if (event?.user.id != user?.id) {
             setSelectedUser(user?.id);
             setRemoveConfirmation(true);
         }
-    }, [event, user]);
+    }, [event, user, selectedUser]);
 
     const handleUser = (e) => {
         setSelectedUser(e);
@@ -49,17 +48,20 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
                         <RxCrossCircled 
                             onClick={() => handleUser(u)}
                             title="Supprimer l'inscription"
-                            className="absolute top-0 right-0 w-5 h-5 text-silver bg-white opacity-70 rounded-full cursor-pointer transition-all
+                            className="absolute top-0 right-0 w-5 h-5 text-silver bg-white 
+                            opacity-70 rounded-full cursor-pointer transition-all
                             duration-500 hover:text-white hover:bg-mario hover:opacity-100 hover:w-10 hover:h-10"/>
                     }
                 </div>
             ))}
             {( userAdd && !unregister )&&
                 <button
-                    disabled={isLoading}
+                    disabled={isLoading.user}
                     onClick={() => {setRegistration(true)}}>
                     <AiOutlineUserAdd 
-                        className={`${isLoading ? 'bg-black' : 'bg-white'  }duration-500 h-10 w-10 p-1 bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver`} />
+                        title="S'inscrire à l'évènement"
+                        className={`${isLoading.user ? 'bg-black' : 'bg-white' }duration-500 h-10 w-10 p-1 
+                        bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver`} />
 
                 </button>
             }

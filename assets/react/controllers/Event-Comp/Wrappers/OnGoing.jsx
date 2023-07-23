@@ -16,16 +16,16 @@ export default function OnGoing() {
             <div 
                 className={`relative sm:w-1/3 sm:h-fit bg-white 
                 rounded-xl flex sm:flex-col gap-4 p-4 mb-2
-                ${animation.firstAnimation && 'zoomIn'} ${isLoading && 'shake'}`}>
+                ${animation.firstAnimation && 'zoomIn'} ${isLoading.event && 'shake'}`}>
 
-                <EventInfo unregister={ unregister } />
+                <EventInfo />
 
                 <Userinfo
                     setRegistration= { setRegistration }
                     unregister={ unregister }
                     setUnregister={ setUnregister } />
 
-                { isLoading &&
+                { isLoading.event &&
                     <img 
                         className="w-44 absolute -top-44 right-0 z-10 origin-bottom"
                         src="/assets/admin/img/gif/Lakitu---Hammer.gif" 
