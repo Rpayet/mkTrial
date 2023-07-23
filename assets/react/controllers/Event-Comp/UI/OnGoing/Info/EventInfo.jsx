@@ -9,7 +9,7 @@ export default function EventInfo() {
 
     const { event, user, setSection, section } = useContext(EventContext);
 
-    const [editAuth, setEditAuth] = useState(false);
+    const [editAuth, setEditAuth] = useState(false); // todo : Edit Authorization
 
     useEffect(() => {
         if (user && user?.name == event?.user.name) {
@@ -28,17 +28,14 @@ export default function EventInfo() {
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
                             onClick={() => {setSection(toggleSection(section, "editor"))}}
-                            className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
+                            className={`text-silver hover:text-lumi 
+                            cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
                     }
                 </div>
                 <DelayInfo />
             </div>
 
-            <div className="w-full">
-
-                <RaceInfo />
-
-            </div>
+            <div className="w-full"><RaceInfo /></div>
 
         </div>
 

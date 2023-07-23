@@ -36,7 +36,6 @@ export const EventProvider = ({ children }) => {
     registration: false,
     interruption: false,
   })
-
   const [registration, setRegistration] = useState({
     unregister: false,
     removeConfirmation: false,
@@ -45,6 +44,7 @@ export const EventProvider = ({ children }) => {
   const isUserRegistered = (user !== null 
     && event.registered.map((registeredUser) => 
       registeredUser.id).includes(user.id));
+  
   
   useEffect(() => {
     if (eventData) {

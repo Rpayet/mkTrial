@@ -29,12 +29,8 @@ export default function RemoveRegistration({ selectedUser, setSelectedUser}) {
 
     const handleCancel = (e) => {
         e.preventDefault();
-        setRegistration({...registration, unregister: false});
-        setRegistration({...registration, removeConfirmation: false});
+        setRegistration({...registration, unregister: false, removeConfirmation: false});
         setSelectedUser(null);
-        // if (event?.user.id != user?.id) {
-        //     setRegistration(toggleSection(registration, 'removeConfirmation'));
-        // }
     }
 
     return (
