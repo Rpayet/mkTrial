@@ -4,7 +4,7 @@ import UsersEntries from "./UsersEntries";
 import { rankService } from "../../../_Services/RankService";
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function RankOptions({ setShowUser, setSection }) {
+export default function RankOptions({ setShowUser }) {
 
     const { entries } = useContext(EventContext);
     const rankList = rankService(entries);
@@ -15,8 +15,7 @@ export default function RankOptions({ setShowUser, setSection }) {
             
                 ? <UsersEntries 
                     rankList= { rankList }
-                    setShowUser= { setShowUser }
-                    setSection= { setSection } />
+                    setShowUser= { setShowUser } />
 
                 : <NoEntry />
             }

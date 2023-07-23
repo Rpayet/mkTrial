@@ -36,12 +36,12 @@ export function EventService () {
   };
 
   // Requête POST
-  const postInterruption = async (eventId, setEventStop, setEditor, setEventData) => {
+  const postInterruption = async (eventId, setEventStop, setSection, setEventData) => {
     try {
       const response = await axios.post(`/api/event/${eventId}/interruption`);
       const eventResponse = await axios.get(`/api/event/${eventId}`);
       setEventStop(false);
-      setEditor(false);
+      setSection({...setSection, editor: false, ranking: true, highlight: false});
       setEventData(eventResponse.data);
     } catch (error) {
       console.error(error);
@@ -150,7 +150,7 @@ export function EventService () {
           setEventData(eventResponse.data);
 
           if (showUserEntries.length === 0) {
-            setSection("ranking");
+            setSection({...section, ranking: true, highlight: false, editor: false});
           }
           setFilled(0);
           setEntryDelete({id: null, visibility : false});

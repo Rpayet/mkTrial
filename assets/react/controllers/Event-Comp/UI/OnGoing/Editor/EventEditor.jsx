@@ -6,10 +6,10 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 
-export default function EventEditor({ setEditor }) {
+export default function EventEditor() {
 
     const [disabled, setDisabled] = useState(true);
-    const {data, setData, event, eventData} = useContext(EventContext);
+    const {data, setData, event, eventData, setSection} = useContext(EventContext);
     const [editValidation, setEditValidation] = useState(false);
     const [eventStop, setEventStop] = useState(false);
 
@@ -39,7 +39,7 @@ export default function EventEditor({ setEditor }) {
 
     {/* Ferme le composant*/}
     const handleCancel = () => {
-        setEditor(false)
+        setSection({...setSection, editor: false, ranking: true, highlight: false});
         setData({...data, 
             name: event.name,
             speed: event.speed,
@@ -69,7 +69,6 @@ export default function EventEditor({ setEditor }) {
 
         return (
             <EditorValidation 
-                setEditor= { setEditor }
                 errors={ errors }
                 setErrors= { setErrors }
                 setEditValidation= { setEditValidation } />
@@ -78,9 +77,7 @@ export default function EventEditor({ setEditor }) {
     } else if (eventStop) {
 
         return (
-            <EventStop 
-                setEditor= { setEditor }
-                setEventStop= { setEventStop } />
+            <EventStop setEventStop= { setEventStop } />
         )
 
     } else {
@@ -144,7 +141,6 @@ export default function EventEditor({ setEditor }) {
     
                         <EditorRequestOptions 
                             disabled= { disabled }
-                            setEditor= { setEditor } 
                             setEditValidation= { setEditValidation }
                             setEventStop= { setEventStop } />
     

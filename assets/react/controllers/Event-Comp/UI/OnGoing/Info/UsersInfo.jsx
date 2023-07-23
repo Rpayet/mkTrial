@@ -4,10 +4,9 @@ import UsersList from "./UsersList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
 
-export default function Userinfo({ unregister, setUnregister, setRegistration, editor }) {
+export default function Userinfo({ unregister, setUnregister, setRegistration }) {
 
-    const { eventData, isUserRegistered} = useContext(EventContext);
-    const { user, event } = eventData;
+    const { event, user, editor, isUserRegistered} = useContext(EventContext);
 
     const [userAdd, setUserAdd] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);

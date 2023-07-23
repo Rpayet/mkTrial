@@ -7,9 +7,9 @@ import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function EntriesHighlight({ showUserEntries, setSection }) {
+export default function EntriesHighlight({ showUserEntries }) {
 
-    const { setEventData, setIsLoading, event, user, setFilled } = useContext(EventContext);
+    const { setEventData, setIsLoading, event, user, setFilled, section, setSection } = useContext(EventContext);
     const formatter = buildFormatter(frenchStrings);
     const [imgFocus, setImgFocus] = useState(false);
     const [entryDelete, setEntryDelete] = useState({
@@ -22,7 +22,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
     );
 
     if (showUserEntries?.length === 0) {
-        setSection('ranking');
+        setSection({...section, ranking: true, highlight: false, editor: false});
     };
 
     const handleSubmit = async (e) => {
@@ -59,7 +59,7 @@ export default function EntriesHighlight({ showUserEntries, setSection }) {
             <div className="flex gap-2 items-center justify-between">
                 <BackButton 
                     textTitle='Retour au classement'
-                    onClick={() => { setSection('ranking') }} />
+                    onClick={() => { setSection({...section, ranking: true, highlight: false, editor: false}) }} />
                 <h2 className="font-bold">Consulter les temps enregistrés</h2>
             </div>
 

@@ -6,8 +6,7 @@ import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function RankSection() {
 
-    const { animation, isUserRegistered, user, entries } = useContext(EventContext);
-    const [section, setSection] = useState('ranking');
+    const { animation, isUserRegistered, user, entries, section } = useContext(EventContext);
     const [showUser, setShowUser] = useState(null);
         
     const showUserEntries = entries.filter((entry) => entry.user.id === showUser).sort((a, b) => a.time - b.time);
@@ -31,13 +30,13 @@ export default function RankSection() {
         }, [entries, user.id]);
     }
     
-    if (section === 'ranking') {
+    if (section.ranking) {
         return (
             <div className="sm:w-2/3 flex flex-col items-center" >
 
                 { entries.length != 0 && <p className={`w-full text-left text-xs font-bold ${animation.firstAnimation ? 'zoomIn' : 'visible'}`}>#Classement</p>}
                 
-                <RankOptions setShowUser= { setShowUser } setSection={ setSection } />
+                <RankOptions setShowUser= { setShowUser } />
 
                 { (inputEntry === 'new' && user != null && isUserRegistered) && <AddEntry /> }
                     
@@ -45,9 +44,9 @@ export default function RankSection() {
         )
     }
 
-    if (section === "highlight") {
+    if (section.highlight) {
         return (
-            <EntriesHighlight showUserEntries= { showUserEntries } setSection= { setSection } />
+            <EntriesHighlight showUserEntries= { showUserEntries } />
         )
     }
 }

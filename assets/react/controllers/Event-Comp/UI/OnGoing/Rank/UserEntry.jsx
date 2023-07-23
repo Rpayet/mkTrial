@@ -5,10 +5,10 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import EntryCard from "./EntryCard";
 import { rankService } from "../../../_Services/RankService";
 
-export default function UserEntry({ entry, rank, hoveredEntryKey,setHoveredEntryKey, setShowUser, setSection}) {
+export default function UserEntry({ entry, rank, hoveredEntryKey,setHoveredEntryKey, setShowUser}) {
 
     const [toggleView, setToggleView] = useState(false);
-    const { animation, setAnimation, entries } = useContext(EventContext);
+    const { animation, setAnimation, entries, section, setSection } = useContext(EventContext);
     const [hideDelay, setHideDelay] = useState('hidden');
 
     const rankList = rankService(entries);
@@ -22,7 +22,7 @@ export default function UserEntry({ entry, rank, hoveredEntryKey,setHoveredEntry
     
     const handleShowClick = () => {
         setShowUser(entry.user.id)
-        setSection('highlight')
+        setSection({...section, ranking: false, highlight: true, editor: false})
     }
     
     useEffect(() => {

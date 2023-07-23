@@ -23,6 +23,13 @@ export const EventProvider = ({ children }) => {
     firstAnimation: true,
   });
 
+  const [ section, setSection ] = useState({
+    ranking: true,
+    highlight: false,
+    editor: false,
+  })
+
+
   const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
   
   useEffect(() => {
@@ -44,6 +51,7 @@ export const EventProvider = ({ children }) => {
     eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
     isUserRegistered, countdown, newEntry, setNewEntry, data, setData,
     isLoading, setIsLoading, animation, setAnimation, filled, setFilled,
+    section, setSection
   };
 
   return (

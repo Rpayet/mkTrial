@@ -8,7 +8,6 @@ export default function OnGoing() {
 
     const { animation, eventId, isLoading } = useContext(EventContext);
     const [registration, setRegistration] = useState(false);
-    const [editor, setEditor] = useState(false); // provider
     const [unregister, setUnregister] = useState(false); // provider
 
     return (
@@ -19,13 +18,9 @@ export default function OnGoing() {
                 rounded-xl flex sm:flex-col gap-4 p-4 mb-2
                 ${animation.firstAnimation && 'zoomIn'} ${isLoading && 'shake'}`}>
 
-                <EventInfo 
-                    setEditor= { setEditor }
-                    editor= { editor }
-                    unregister={ unregister } />
+                <EventInfo unregister={ unregister } />
 
                 <Userinfo
-                    editor= { editor }
                     setRegistration= { setRegistration }
                     unregister={ unregister }
                     setUnregister={ setUnregister } />
@@ -41,8 +36,6 @@ export default function OnGoing() {
 
             <EventRegistration
                 eventId = { eventId }
-                editor= { editor }
-                setEditor={ setEditor }
                 registration= { registration }
                 setRegistration={ setRegistration } />
 

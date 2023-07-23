@@ -4,9 +4,9 @@ import DelayInfo from "./DelayInfo";
 import { BiEditAlt } from 'react-icons/bi';
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EventInfo({ setEditor, editor, unregister }) {
+export default function EventInfo({ unregister }) {
 
-    const { event, user } = useContext(EventContext);
+    const { event, user, setSection, section } = useContext(EventContext);
 
     const [editAuth, setEditAuth] = useState(false);
 
@@ -26,8 +26,8 @@ export default function EventInfo({ setEditor, editor, unregister }) {
                     { (editAuth && !unregister) &&         
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
-                            onClick={() => {setEditor(true)}}
-                            className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${editor ? 'hidden' : ''}`}/>
+                            onClick={() => {setSection({...section, editor: true, ranking: false, highlight: false})}}
+                            className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
 }
                 </div>
                 <DelayInfo />

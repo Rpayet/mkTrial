@@ -3,9 +3,9 @@ import { Button, BackButton }from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 
-export default function EventStop({ setEditor, setEventStop }) {
+export default function EventStop({ setEventStop }) {
 
-    const { eventData, setEventData } = useContext(EventContext);
+    const { eventData, setEventData, setSection } = useContext(EventContext);
     const [loading, setLoading] = useState(false);
 
     const handleCancel = () => {
@@ -23,7 +23,7 @@ export default function EventStop({ setEditor, setEventStop }) {
     const handleInterruption = async (e) => {
         e.preventDefault();
         setLoading(true);
-        await EventService().postInterruption(eventData.event.id, setEventStop, setEditor, setEventData);
+        await EventService().postInterruption(eventData.event.id, setEventStop, setSection, setEventData);
     }
 
     return (

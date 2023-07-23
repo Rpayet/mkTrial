@@ -4,9 +4,8 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function RemoveRegistration({ selectedUser, setUnregister, setSelectedUser, setRemoveConfirmation }) {
 
-    const { eventData, setEventData, filled, setFilled } = useContext(EventContext);
-    const { event, user } = eventData;
-    const userId = selectedUser ? selectedUser.id : null;
+    const { event, user, setEventData, filled, setFilled } = useContext(EventContext);
+    const userId = selectedUser ? selectedUser?.id : null;
 
     const [loading, setLoading] = useState(false);
 
@@ -19,9 +18,10 @@ export default function RemoveRegistration({ selectedUser, setUnregister, setSel
 
     const handleCancel = (e) => {
         e.preventDefault();
+        setRemoveConfirmation(false);
         setUnregister(false);
         setSelectedUser(null);
-        if (event.user.id != user.id) {
+        if (event?.user.id != user?.id) {
             setRemoveConfirmation(true);
         }
     }
@@ -30,7 +30,9 @@ export default function RemoveRegistration({ selectedUser, setUnregister, setSel
         <div className="flex flex-col gap-2 items-center justify-center text-center">
             <h2 className="text-sm text-silver font-bold">Supprimer l'inscription</h2>
             { (event.user.id === user.id) ? 
-                <p className="text-xs text-silver">Êtes-vous sûr de vouloir <span className="text-mario">expulser</span> <span className="font-bold">{selectedUser.name}</span> ?</p>
+                <p className="text-xs text-silver">Êtes-vous sûr de vouloir 
+                    <span className="text-mario"> expulser</span> 
+                    <span className="font-bold"> {selectedUser?.name}</span> ?</p>
                 :
                 <p className="text-xs text-silver">Êtes-vous sûr de vouloir vous désinscrire de l'évènement ?</p>
             }
