@@ -54,6 +54,7 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
                     }
                 </div>
             ))}
+
             {( userAdd && !unregister )&&
                 <button
                     disabled={isLoading.user}
@@ -62,9 +63,9 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
                         title="S'inscrire à l'évènement"
                         className={`${isLoading.user ? 'bg-black' : 'bg-white' }duration-500 h-10 w-10 p-1 
                         bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver`} />
-
                 </button>
             }
+            
             <div 
                 style={{height: `${filled}%`}}
                 className={`bg-lumi absolute

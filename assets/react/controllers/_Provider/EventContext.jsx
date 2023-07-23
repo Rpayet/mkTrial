@@ -5,36 +5,41 @@ export const EventContext = createContext();
 
 export const EventProvider = ({ children }) => {
 
+  {/** Event Data Manager */}
   const [eventData, setEventData] = useState(null);
   const [event, setEvent] = useState(null);
   const [user, setUser] = useState(null);
   const [entries, setEntries] = useState(null);
   const [eventId, setEventId] = useState(null);
-
-  const [newEntry, setNewEntry] = useState(null);
   const [data, setData] = useState(null);
 
+  {/** Event Interaction/Animation Manager */}
+  const [newEntry, setNewEntry] = useState(null);
   const [countdown, setCountdown] = useState(null);
-
+  const [animation, setAnimation] = useState({
+    firstAnimation: true,
+  });
+  
+  [/** Loading Manager */]
   const [isLoading, setIsLoading] = useState({
     event: false,
     user: false,
     entry: false,
   });
   const [filled, setFilled] = useState(0);
-
-  const [animation, setAnimation] = useState({
-    firstAnimation: true,
-  });
-
+  
+  {/** Section Manager */}
   const [ section, setSection ] = useState({
     ranking: true,
     highlight: false,
     editor: false,
   })
 
+  const [registration, setRegistration] = useState(false);
 
-  const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
+  const isUserRegistered = (user !== null 
+    && event.registered.map((registeredUser) => 
+      registeredUser.id).includes(user.id));
   
   useEffect(() => {
     if (eventData) {
@@ -50,12 +55,11 @@ export const EventProvider = ({ children }) => {
     }
   }, [event]);
 
-
   const eventContextValue = {
     eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
     isUserRegistered, countdown, newEntry, setNewEntry, data, setData,
     isLoading, setIsLoading, animation, setAnimation, filled, setFilled,
-    section, setSection
+    section, setSection, registration, setRegistration
   };
 
   return (
