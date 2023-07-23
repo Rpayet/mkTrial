@@ -3,9 +3,9 @@ import { BiEditAlt, BiArrowToLeft } from 'react-icons/bi';
 import UsersList from "./UsersList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function Userinfo({ unregister, setUnregister, setRegistration }) {
+export default function Userinfo({ unregister, setUnregister }) {
 
-    const { event, user, editor, isUserRegistered} = useContext(EventContext);
+    const { event, user, isUserRegistered, section, setSection} = useContext(EventContext);
 
     const [userAdd, setUserAdd] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
@@ -45,13 +45,13 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
                     <div className="flex gap-1">
                         <p className="block text-left text-xs text-silver duration-500">Participants</p>
                         
-                        { (isUserRegistered && !editor) && 
+                        { (isUserRegistered && !section.editor) && 
                             <BiEditAlt 
                                 title="Gérer les participants"
-                                onClick={() => {setUnregister(!unregister)}}
+                                onClick={() => {setSection({ ...section, editor: true })}}
                                 className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 duration-500`}/>
                         }
-                        { (isUserRegistered && unregister && (event?.user.id === user.id) && !removeConfirmation && !editor)  &&
+                        { (isUserRegistered && unregister && (event?.user.id === user.id) && !removeConfirmation && !section.editor)  &&
                             <BiArrowToLeft
                                 title="Revenir à la liste des participants"
                                 onClick={handleCancel}
@@ -76,7 +76,6 @@ export default function Userinfo({ unregister, setUnregister, setRegistration })
                             unregister={unregister}
                             setUnregister={setUnregister}
                             userAdd={userAdd}
-                            setRegistration={setRegistration}
                             selectedUser={selectedUser}
                             setSelectedUser={setSelectedUser}
                             removeConfirmation={removeConfirmation}

@@ -5,11 +5,12 @@ import { BackButton }from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
+import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function EventEditor() {
 
     const [disabled, setDisabled] = useState(true);
-    const {data, setData, event, eventData, setSection} = useContext(EventContext);
+    const {data, setData, event, eventData, setSection, section } = useContext(EventContext);
     const [editValidation, setEditValidation] = useState(false);
     const [eventStop, setEventStop] = useState(false);
 
@@ -39,7 +40,7 @@ export default function EventEditor() {
 
     {/* Ferme le composant*/}
     const handleCancel = () => {
-        setSection({...setSection, editor: false, ranking: true, highlight: false});
+        setSection(toggleSection(section, "ranking"));
         setData({...data, 
             name: event.name,
             speed: event.speed,

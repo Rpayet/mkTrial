@@ -6,6 +6,7 @@ import { BackButton } from "../../../../_GlobalUi/Buttons";
 import EntriesHistoryList from "./EntriesHistoricalList";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
+import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function EntriesHighlight({ showUserEntries }) {
 
@@ -22,7 +23,7 @@ export default function EntriesHighlight({ showUserEntries }) {
     );
 
     if (showUserEntries?.length === 0) {
-        setSection({...section, ranking: true, highlight: false, editor: false});
+        setSection(toggleSection(section, "ranking"));
     };
 
     const handleSubmit = async (e) => {
@@ -59,7 +60,7 @@ export default function EntriesHighlight({ showUserEntries }) {
             <div className="flex gap-2 items-center justify-between">
                 <BackButton 
                     textTitle='Retour au classement'
-                    onClick={() => { setSection({...section, ranking: true, highlight: false, editor: false}) }} />
+                    onClick={() => { setSection(toggleSection(section, 'ranking')) }} />
                 <h2 className="font-bold">Consulter les temps enregistrés</h2>
             </div>
 

@@ -3,6 +3,7 @@ import { Button } from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { getFormattedDate } from "../../../_Services/FormatTime";
 import { EventService } from "../../../../_Service/EventService";
+import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function EditorValidation({ setEditValidation, setErrors, errors }) {
 
@@ -20,7 +21,7 @@ export default function EditorValidation({ setEditValidation, setErrors, errors 
         setEditValidation(false);
         const clear = await EventService().updateEvent(event.id, data, setErrors, errors);
         if (!clear) {
-            setSection({...section, editor: false, ranking: true, highlight: false});
+            setSection(toggleSection(section, "ranking"));
             setIsLoading({...event, event: true});
             await EventService().getEvent(event.id, setEventData);
             setIsLoading({...event, event: false});

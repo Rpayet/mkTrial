@@ -33,6 +33,8 @@ export const EventProvider = ({ children }) => {
     ranking: true,
     highlight: false,
     editor: false,
+    registration: false,
+    interruption: false,
   })
 
   const [registration, setRegistration] = useState(false);

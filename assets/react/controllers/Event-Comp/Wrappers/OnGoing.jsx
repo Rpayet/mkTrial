@@ -6,8 +6,7 @@ import { EventContext } from "../../_Provider/EventContext";
 
 export default function OnGoing() {
 
-    const { animation, eventId, isLoading } = useContext(EventContext);
-    const [registration, setRegistration] = useState(false);
+    const { animation, isLoading } = useContext(EventContext);
     const [unregister, setUnregister] = useState(false); // provider
 
     return (
@@ -21,7 +20,6 @@ export default function OnGoing() {
                 <EventInfo />
 
                 <Userinfo
-                    setRegistration= { setRegistration }
                     unregister={ unregister }
                     setUnregister={ setUnregister } />
 
@@ -34,10 +32,7 @@ export default function OnGoing() {
 
             </div>
 
-            <EventRegistration
-                eventId = { eventId }
-                registration= { registration }
-                setRegistration={ setRegistration } />
+            <EventRegistration />
 
         </div>
     )

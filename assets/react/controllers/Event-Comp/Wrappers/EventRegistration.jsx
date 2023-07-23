@@ -4,29 +4,16 @@ import Register from "../UI/OnGoing/Info/Register";
 import EventEditor from "../UI/OnGoing/Editor/EventEditor";
 import { EventContext } from "../../_Provider/EventContext";
 
-export default function EventRegistration({ registration, setRegistration}) {
+export default function EventRegistration() {
 
     const { section }  = useContext(EventContext);
 
-
-    if (!registration && !section.editor) {
-
-        return ( 
-            <RankSection /> 
-        )
-
-    } else if(registration && !section.editor) {
-
-        return (
-            <Register setRegistration= {setRegistration} />
-        )
-
-    } else if (section.editor && !registration) {
-
-        return (
-            <EventEditor />
-        )
-
+    if (!section.registration && !section.editor) {
+        return ( <RankSection /> )
+    } else if(section.registration && !section.editor) {
+        return ( <Register /> )
+    } else if (section.editor && !section.registration) {
+        return ( <EventEditor /> )
     }
 
 }

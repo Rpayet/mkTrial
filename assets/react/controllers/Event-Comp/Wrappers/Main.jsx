@@ -22,7 +22,7 @@ export default function Main({ id }) {
             const fetchData = async () => {
                 try {
                   await EventService().getEvent(id, setEventData);
-                  setIsLoading(false);
+                    setIsLoading(false);
                 } catch (error) {
                   setIsLoading(false);
                 }
@@ -33,7 +33,6 @@ export default function Main({ id }) {
 
     useEffect(() => {
         const isCountdownOngoing = countdown > date;
-        setIsOngoing(isCountdownOngoing);
         if (isCountdownOngoing) {
             const timer = setTimeout(() => {
                 setIsOngoing(false);
@@ -56,7 +55,7 @@ export default function Main({ id }) {
     return (
         <>
             {(event && entries)
-                ? (isOngoing 
+                ? ((isOngoing) 
                     ? (<OnGoing />) 
                     : (<Finished /> )) 
                 : (<div>No data available</div>)

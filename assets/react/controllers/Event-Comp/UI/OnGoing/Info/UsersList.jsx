@@ -3,11 +3,12 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import { RxCrossCircled } from 'react-icons/rx';
 import RemoveRegistration from "./RemoveRegistration";
 import { EventContext } from "../../../../_Provider/EventContext";
+import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function UsersList({userAdd, unregister, setUnregister, setRegistration, 
+export default function UsersList({userAdd, unregister, setUnregister, 
     selectedUser, setSelectedUser, removeConfirmation, setRemoveConfirmation}) {
 
-    const { event, user, filled, isLoading } = useContext(EventContext);
+    const { event, user, filled, isLoading, setSection, section } = useContext(EventContext);
 
     useEffect(() => {
         if (event?.user.id != user?.id) {
@@ -58,7 +59,7 @@ export default function UsersList({userAdd, unregister, setUnregister, setRegist
             {( userAdd && !unregister )&&
                 <button
                     disabled={isLoading.user}
-                    onClick={() => {setRegistration(true)}}>
+                    onClick={() => {setSection(toggleSection(section, 'registration'))}}>
                     <AiOutlineUserAdd 
                         title="S'inscrire à l'évènement"
                         className={`${isLoading.user ? 'bg-black' : 'bg-white' }duration-500 h-10 w-10 p-1 

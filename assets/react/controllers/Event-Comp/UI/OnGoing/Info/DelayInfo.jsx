@@ -7,13 +7,13 @@ import { EventContext } from "../../../../_Provider/EventContext";
 export default function DelayInfo() {
 
     const { countdown } = useContext(EventContext);
+    console.log(countdown);
 
     const Completionist = () => <span className="text-xs">Terminé</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
           return <Completionist />;
-
         } else if (days >= 1) {
           return <span className="text-xs">{days > 1 ? `${days} jours` : `${days} jour`}</span>;
         } else if (days < 1 && hours >= 1) {

@@ -3,6 +3,7 @@ import RaceInfo from "./RaceInfo";
 import DelayInfo from "./DelayInfo";
 import { BiEditAlt } from 'react-icons/bi';
 import { EventContext } from "../../../../_Provider/EventContext";
+import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function EventInfo() {
 
@@ -26,9 +27,9 @@ export default function EventInfo() {
                     { (editAuth) &&         
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
-                            onClick={() => {setSection({...section, editor: true, ranking: false, highlight: false})}}
+                            onClick={() => {setSection(toggleSection(section, "editor"))}}
                             className={`text-silver hover:text-lumi cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
-}
+                    }
                 </div>
                 <DelayInfo />
             </div>

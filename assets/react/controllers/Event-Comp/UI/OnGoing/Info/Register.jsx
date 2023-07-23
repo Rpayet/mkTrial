@@ -1,16 +1,17 @@
 import React, { useContext, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
+import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function Register({ setRegistration }) {
+export default function Register() {
 
-    const { isLoading, setIsLoading, setEventData, event, setFilled } = useContext(EventContext);
+    const { isLoading, setIsLoading, setEventData, event, setFilled, setSection, section } = useContext(EventContext);
     const [errors, setErrors] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading({...isLoading, entries: true});
-        setRegistration(false);
+        setSection(toggleSection(section, "ranking"));
         await EventService().eventRegister(event.id, setEventData, setErrors, setFilled);
         setIsLoading({...isLoading, entries: false});
     }
@@ -34,7 +35,7 @@ export default function Register({ setRegistration }) {
                     <div className="flex">
 
                         <button
-                            onClick={() => setRegistration(false)}
+                            onClick={() => setSection(toggleSection(section, "ranking"))}
                             type="button" 
                             className="block mx-auto my-6 w-fit bg-white py-1 px-8 rounded-3xl
                             text-lite text-lg text-center border-solid border-[1px] border-lite

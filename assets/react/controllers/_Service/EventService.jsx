@@ -1,5 +1,6 @@
 import axios from "axios";
 import { updateProgress } from "./Loading";
+import { toggleSection } from "./SectionService";
 
 export function EventService () {
 
@@ -41,7 +42,7 @@ export function EventService () {
       const response = await axios.post(`/api/event/${eventId}/interruption`);
       const eventResponse = await axios.get(`/api/event/${eventId}`);
       setEventStop(false);
-      setSection({...setSection, editor: false, ranking: true, highlight: false});
+      setSection(toggleSection(section, "ranking"));
       setEventData(eventResponse.data);
     } catch (error) {
       console.error(error);
@@ -148,7 +149,7 @@ export function EventService () {
           setEventData(eventResponse.data);
 
           if (showUserEntries.length === 0) {
-            setSection({...section, ranking: true, highlight: false, editor: false});
+            setSection(toggleSection(section, "ranking"));
           }
           setFilled(0);
           setEntryDelete({id: null, visibility : false});

@@ -4,8 +4,9 @@ import { formatTime } from "../../../_Services/FormatTime";
 import { EventContext } from "../../../../_Provider/EventContext";
 import EntryCard from "./EntryCard";
 import { rankService } from "../../../_Services/RankService";
+import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function UserEntry({ entry, rank, hoveredEntryKey,setHoveredEntryKey, setShowUser}) {
+export default function UserEntry({ entry, rank, hoveredEntryKey, setHoveredEntryKey, setShowUser}) {
 
     const [toggleView, setToggleView] = useState(false);
     const { animation, setAnimation, entries, section, setSection } = useContext(EventContext);
@@ -21,8 +22,8 @@ export default function UserEntry({ entry, rank, hoveredEntryKey,setHoveredEntry
 
     
     const handleShowClick = () => {
-        setShowUser(entry.user.id)
-        setSection({...section, ranking: false, highlight: true, editor: false})
+        setShowUser(entry.user.id);
+        setSection(toggleSection(section, "highlight"));
     }
     
     useEffect(() => {
