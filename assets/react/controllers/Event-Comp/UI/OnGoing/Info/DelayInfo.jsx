@@ -5,15 +5,16 @@ import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function DelayInfo() {
 
-    const { event } = useContext(EventContext);
+    const { event, setIsOngoing } = useContext(EventContext);
 
     const Completionist = () => <span className="text-xs">Terminé</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
-          return <Completionist />;
+            setIsOngoing(false);
+            return <Completionist />;
         } else if (days >= 1) {
-          return <span className="text-xs">{days > 1 ? `${days} jours` : `${days} jour`}</span>;
+            return <span className="text-xs">{days > 1 ? `${days} jours` : `${days} jour`}</span>;
         } else if (days < 1 && hours >= 1) {
             return <span className="text-xs">{hours > 1 ? `${hours} heures` : `${hours} heure`}</span>
         } else if (hours < 1 ) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
@@ -9,8 +9,8 @@ export default function Main({ id }) {
     const date = new Date();
     
     const [isLoading, setIsLoading] = useState(true);
-    const [isOngoing, setIsOngoing] = useState(true);
-    const { setEventData, setEventId, event, entries, countdown } = useContext(EventContext);
+
+    const { setEventData, setEventId, event, entries, isOngoing } = useContext(EventContext);
        
     useEffect(() => {
         setEventId(id);
@@ -30,16 +30,6 @@ export default function Main({ id }) {
             }
     }, []);
 
-    useEffect(() => {
-        const isCountdownOngoing = countdown > date;
-        if (isCountdownOngoing) {
-            const timer = setTimeout(() => {
-                setIsOngoing(false);
-            }, countdown - date);
-            return () => clearTimeout(timer);
-        }
-    }, [date, countdown]);
-    
     if (isLoading) {
         return (
             <div>

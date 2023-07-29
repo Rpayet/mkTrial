@@ -8,7 +8,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
-    const [capacity, setCapacity] = useState(data?.capacity || null);
+    const [capacity, setCapacity] = useState(data?.capacity || '');
     const { event } = eventData ? eventData : '';
 
     const toggleSpeed = () => {
@@ -130,7 +130,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
             </div>
             <div>
-                { (capacity < event?.registered.length && capacity !== '') && 
+                { (capacity < event?.registered.length && capacity != null && capacity != '' ) && 
                     <p className="text-xs text-center text-mario font-bold px-4">
                         Le nombre de place disponible ne peut pas être inférieur au nombre de participant inscrit actuellement.
                     </p> }
