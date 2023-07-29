@@ -1,7 +1,8 @@
 import React from "react";
 import {RxCrossCircled} from 'react-icons/rx'
 
-export default function HourSelect ({ hour, setHour, data, setData }) {
+export default function HourSelect ({ event, setHour, data, setData }) {
+
 
     const handleHourChange = (event) => {   
         setData({ ...data, hourEnd: event.target.value });

@@ -30,7 +30,7 @@ export default function EditorValidation({ setEditValidation, setErrors, errors 
     
     return (
 
-        <div className="sm:w-2/3 flex flex-col gap-4 bg-white rounded-lg text-center justify-center">
+        <div className="sm:w-2/3 h-fit py-4 flex flex-col gap-4 bg-white rounded-lg text-center justify-center">
 
             <div className="margin-auto">
 

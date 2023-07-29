@@ -89,6 +89,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
                 {/* Sélection heure de fin de l'événement */}
                 {  hour 
                     && <HourSelect 
+                        event={event}
                         setHour={setHour}
                         hour={hour}
                         setData={setData} 
