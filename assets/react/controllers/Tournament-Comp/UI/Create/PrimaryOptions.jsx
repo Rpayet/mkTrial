@@ -91,7 +91,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
                     && <HourSelect 
                         setHour={setHour}
                         hour={hour}
-                        setData={ setData} 
+                        setData={setData} 
                         data={ data } /> }
 
                 {/* Sélection du nombre de participants */}

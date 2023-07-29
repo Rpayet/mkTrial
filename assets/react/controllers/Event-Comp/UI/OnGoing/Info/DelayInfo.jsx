@@ -30,7 +30,7 @@ export default function DelayInfo() {
                 <div className="flex gap-1 items-center">
                     <Countdown 
                         zeroPadTime={2}
-                        date= { `${event?.endAt}T${event.hourEnd}` }
+                        date= { `${event?.endAt}T${event?.hourEnd || '00:00'}` }
                         daysInHours= {false}
                         renderer= { renderer } />
                     <AiOutlineClockCircle 
