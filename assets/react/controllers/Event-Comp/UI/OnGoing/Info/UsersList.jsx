@@ -61,7 +61,7 @@ export default function UsersList({userAdd, selectedUser, setSelectedUser}) {
                     onClick={() => {setSection(toggleSection(section, 'registration'))}}>
                     <AiOutlineUserAdd 
                         title="S'inscrire à l'évènement"
-                        className={`${isLoading.user ? 'bg-black' : 'bg-white' }duration-500 h-10 w-10 p-1 
+                        className={`${isLoading.user ? 'bg-black' : 'bg-white'} duration-500 h-10 w-10 p-1 
                         bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver`} />
                 </button>
             }

@@ -11,7 +11,7 @@ export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, 
 
     return (
         <>
-            { entryDelete.visibility && hoveredEntry?.key === i && userAuth()
+            { entryDelete.visibility && hoveredEntry?.key === i && userAuth() // Reprendre ici
             
             ?   <div className="w-full flex items-center justify-around">
 

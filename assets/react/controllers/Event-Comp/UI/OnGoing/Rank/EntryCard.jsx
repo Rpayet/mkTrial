@@ -3,17 +3,18 @@ import { BiEditAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function EntryCard({ rank, entry, hoveredEntryKey, setHoveredEntryKey, hideDelay, handleShowClick, handleEditClick, formatTime }) {
+export default function EntryCard({ rank, entry, hideDelay, handleShowClick, handleEditClick, formatTime }) {
 
     const { newEntry, setNewEntry, animation, user } = useContext(EventContext);
 
     const [newEntryAnimation, setNewEntryAnimation] = useState('');
+    const [hoveredEntryKey, setHoveredEntryKey] = useState(null);
 
     useEffect(() => {
         let timeout;
 
         if (newEntry?.isNew && newEntry?.user === user.id && newEntry?.time === entry.time) {
-            setNewEntryAnimation('newEntry')
+            setNewEntryAnimation('newEntry');
             setNewEntry(null);
             timeout = setTimeout(() => {
                 setNewEntryAnimation('')

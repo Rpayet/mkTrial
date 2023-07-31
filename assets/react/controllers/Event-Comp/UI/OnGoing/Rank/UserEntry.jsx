@@ -6,7 +6,7 @@ import EntryCard from "./EntryCard";
 import { rankService } from "../../../_Services/RankService";
 import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function UserEntry({ entry, rank, hoveredEntryKey, setHoveredEntryKey, setShowUser}) {
+export default function UserEntry({ entry, rank, setShowUser}) {
 
     const [toggleView, setToggleView] = useState(false);
     const { animation, setAnimation, entries, section, setSection } = useContext(EventContext);
@@ -15,11 +15,9 @@ export default function UserEntry({ entry, rank, hoveredEntryKey, setHoveredEntr
     const rankList = rankService(entries);
     const totalEntries = rankList.length;
 
-
     const handleEditClick = () => {
         setToggleView(true);
     };
-
     
     const handleShowClick = () => {
         setShowUser(entry.user.id);
@@ -46,7 +44,7 @@ export default function UserEntry({ entry, rank, hoveredEntryKey, setHoveredEntr
 
     if (toggleView) {
 
-        return <EntryForm toggleView= {toggleView} setToggleView={ setToggleView } />;
+        return <EntryForm toggleView= { toggleView } setToggleView={ setToggleView } />;
     } 
 
     return (
@@ -54,12 +52,10 @@ export default function UserEntry({ entry, rank, hoveredEntryKey, setHoveredEntr
             <EntryCard     
                 entry= { entry }
                 rank= { rank }
-                hoveredEntryKey= { hoveredEntryKey }
-                setHoveredEntryKey= { setHoveredEntryKey }
                 handleEditClick= { handleEditClick }
                 handleShowClick= { handleShowClick }
                 hideDelay= { hideDelay }
-                formatTime={ formatTime} />
+                formatTime={ formatTime } />
         </div>
     )
 

@@ -7,15 +7,7 @@ import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function EventInfo() {
 
-    const { event, user, setSection, section } = useContext(EventContext);
-
-    const [editAuth, setEditAuth] = useState(false); // todo : Edit Authorization
-
-    useEffect(() => {
-        if (user && user?.name == event?.user.name) {
-            setEditAuth(true)
-        }
-    }, [user, event]);
+    const { event, setSection, section, isModerator } = useContext(EventContext);
 
     return (
 
@@ -24,7 +16,7 @@ export default function EventInfo() {
             <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
-                    { (editAuth) &&         
+                    { (isModerator) &&         
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
                             onClick={() => {setSection(toggleSection(section, "editor"))}}
