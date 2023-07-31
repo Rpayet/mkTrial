@@ -8,7 +8,8 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
     const [speed, setSpeed] = useState(false);
     const [privacy, setPrivacy] = useState(false);
-    const [capacity, setCapacity] = useState(data?.capacity || null);
+    const [capacity, setCapacity] = useState(data?.capacity || '');
+    const [hour, setHour] = useState(data.hourEnd ? true : false);
     const { event } = eventData ? eventData : '';
 
     const toggleSpeed = () => {
@@ -56,7 +57,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
                 {/* Sélection de la vitesse */}
                 <div>
-                    <span className="block text-xs text-center text-gray-500 font-bold">Vitesse</span>
+                    <span className="block text-xs text-center text-gray-500 font-bold p-1">Vitesse</span>
                     <Switch 
                         width={ 40 }
                         height={ 20 }
@@ -80,14 +81,23 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
                 {/* Sélection date de fin de l'événement */}
                 <DateSelect
+                    setHour={setHour}
+                    hour={hour}
                     setData= { setData }
                     data= { data } />
 
-                <HourSelect setData={ setData} data={ data } />
+                {/* Sélection heure de fin de l'événement */}
+                {  hour 
+                    && <HourSelect 
+                        event={event}
+                        setHour={setHour}
+                        hour={hour}
+                        setData={setData} 
+                        data={ data } /> }
 
                 {/* Sélection du nombre de participants */}
                 <div>
-                    <span className="block text-xs text-center text-gray-500 font-bold">Places disponibles</span>
+                    <span className="block text-xs text-center text-gray-500 font-bold p-1">Places disponibles</span>
                     <input 
                         type="number"
                         className="block w-36 mx-auto px-2 py-1 border rounded-lg 
@@ -102,7 +112,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
                 {/* Sélection de la confidentialité de l'événement */}
                 <div>
                         
-                    <span className="block text-xs text-center text-gray-500 font-bold">Visibilité</span>
+                    <span className="block text-xs text-center text-gray-500 font-bold p-1">Visibilité</span>
                     <Switch 
                         width={ 40 }
                         height={ 20 }
@@ -130,7 +140,7 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
 
             </div>
             <div>
-                { (capacity < event?.registered.length && capacity !== '') && 
+                { (capacity < event?.registered.length && capacity != null && capacity != '' ) && 
                     <p className="text-xs text-center text-mario font-bold px-4">
                         Le nombre de place disponible ne peut pas être inférieur au nombre de participant inscrit actuellement.
                     </p> }

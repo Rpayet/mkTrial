@@ -29,6 +29,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
     const [data, setData] = useState({
         name: '',
         endAt: minDate,
+        hourEnd: null,
         race: '',
         speed: '150cc',
         privacy: false,
@@ -89,5 +90,3 @@ export default function TournamentPage({ tournaments, races, mode }) {
         </form>
     )
 }
-
-// https://axios-http.com/fr/docs/post_example

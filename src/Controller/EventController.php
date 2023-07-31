@@ -19,10 +19,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class EventController extends AbstractController
 {
     #[Route('event/{id}', name: 'app_event')]
-    public function index($id): Response
+    public function index(int $id, TournamentRepository $tournamentRepository ): Response
     {
+        $event = $tournamentRepository->find($id);
+
         return $this->render('event/index.html.twig', [
-            'id' => $id
+            'id' => $id,
+            'eventName' => $event->getName(),
         ]);
     }
 
@@ -93,7 +96,7 @@ class EventController extends AbstractController
         $event = $tournamentRepository->find($id);
         $data = json_decode($request->getContent(), true);
 
-        if ($data['capacity'] < $event->getRegistered()->count()) {
+        if ($data['capacity'] != null && $data['capacity'] < $event->getRegistered()->count()) {
             $errors = ['capacity' => 'Le nombre de place disponible ne peut être inférieur au nombre d\'inscrits.'];
             return $this->json($errors, 422);
         }

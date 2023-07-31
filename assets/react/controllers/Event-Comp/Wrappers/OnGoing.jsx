@@ -3,10 +3,11 @@ import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
 import { EventContext } from "../../_Provider/EventContext";
+import { getFormattedDate } from "../_Services/FormatTime";
 
 export default function OnGoing() {
 
-    const { animation, isLoading } = useContext(EventContext);
+    const { animation, isLoading, event } = useContext(EventContext);
 
     return (
         <div className="w-full sm:flex gap-4 p-4">
@@ -17,6 +18,11 @@ export default function OnGoing() {
                 ${animation.firstAnimation && 'zoomIn'} ${isLoading.event && 'shake'}`}>
 
                 <EventInfo />
+
+                <div className='text-sm'>
+                    <p>Crée par <span className='font-bold'>{event.user.name}</span></p>
+                    <p>Démarré le <span className='font-bold'>{getFormattedDate(event.createdAt)}</span></p>
+                </div>
 
                 <Userinfo />
 

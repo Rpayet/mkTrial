@@ -45,6 +45,7 @@ export default function EventEditor() {
             name: event.name,
             speed: event.speed,
             endAt: event.endAt,
+            hourEnd: event.hourEnd,
             capacity: event.capacity,
             privacy: event.privacy,
             race: event.race.id,

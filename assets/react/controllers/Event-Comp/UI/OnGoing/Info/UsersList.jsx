@@ -29,24 +29,29 @@ export default function UsersList({userAdd, selectedUser, setSelectedUser}) {
 
     return (
         <>
-            {event.registered.map((u, i) => (
-                <div
-                    key={i}
-                    className="relative">
-                    <img
-                        title={u.name}
-                        src={u.picture ? `/assets/user/img/${u.picture}` : `/assets/admin/img/icons/Default.png`}
-                        alt="default"
-                        className="w-10 rounded-full"
-                    />
-                    { (registration.unregister && (user?.id === event.user.id) && (u.id != event.user.id) ) &&
-                        <RxCrossCircled 
-                            onClick={() => handleUser(u)}
-                            title="Supprimer l'inscription"
-                            className="absolute top-0 right-0 w-5 h-5 text-silver bg-white 
-                            opacity-70 rounded-full cursor-pointer transition-all
-                            duration-500 hover:text-white hover:bg-mario hover:opacity-100 hover:w-10 hover:h-10"/>
-                    }
+            {event.registered.map((u) => (
+                <div 
+                    key={u.id}
+                    className="text-center flex flex-col items-center">
+                    <div
+                        className="relative">
+                        <img
+                            title={u.name}
+                            src={u.picture ? `/assets/user/img/${u.picture}` : `/assets/admin/img/icons/Default.png`}
+                            alt="default"
+                            className="w-10 rounded-full"
+                        />
+                        { (registration.unregister && (user?.id === event.user.id) && (u.id != event.user.id) ) &&
+                            <RxCrossCircled 
+                                onClick={() => handleUser(u)}
+                                title="Supprimer l'inscription"
+                                className="absolute top-0 right-0 w-5 h-5 text-silver bg-white 
+                                opacity-70 rounded-full cursor-pointer transition-all
+                                duration-500 hover:text-white hover:bg-mario hover:opacity-100 hover:w-10 hover:h-10"/>
+                        }
+                    </div>
+                    {/** TODO: Si name trop long, reduire la taille */}
+                    <p className='text-xs'>{u.name}</p> 
                 </div>
             ))}
 

@@ -29,7 +29,7 @@ export default function EventInfo() {
                             title="Éditer les informations de l'évènement"
                             onClick={() => {setSection(toggleSection(section, "editor"))}}
                             className={`text-silver hover:text-lumi 
-                            cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
+                                    cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
                     }
                 </div>
                 <DelayInfo />

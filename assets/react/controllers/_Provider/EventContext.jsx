@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import { createDateTimeObject } from '../Event-Comp/_Services/FormatTime'
 
 export const EventContext = createContext();
 
@@ -15,8 +14,8 @@ export const EventProvider = ({ children }) => {
 
   {/** Event Interaction/Animation Manager */}
   const [newEntry, setNewEntry] = useState(null);
-  const [countdown, setCountdown] = useState(null);
-  const [animation, setAnimation] = useState({
+    const [isOngoing, setIsOngoing] = useState(true);
+    const [animation, setAnimation] = useState({
     firstAnimation: true,
   });
   
@@ -41,6 +40,7 @@ export const EventProvider = ({ children }) => {
     removeConfirmation: false,
   })
 
+  {/** todo : User State for auth */}
   const isUserRegistered = (user !== null 
     && event.registered.map((registeredUser) => 
       registeredUser.id).includes(user.id));
@@ -54,15 +54,9 @@ export const EventProvider = ({ children }) => {
     }
   }, [eventData]);
 
-  useEffect(() => {
-    if (event && event?.endAt && event?.hourEnd) {
-        setCountdown(createDateTimeObject(event?.endAt, event?.hourEnd));
-    }
-  }, [event]);
-
   const eventContextValue = {
     eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
-    isUserRegistered, countdown, newEntry, setNewEntry, data, setData,
+    isUserRegistered, isOngoing, setIsOngoing, newEntry, setNewEntry, data, setData,
     isLoading, setIsLoading, animation, setAnimation, filled, setFilled,
     section, setSection, registration, setRegistration,
   };
