@@ -43,7 +43,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
     }
 
     return (
-        <div className="bg-white w-full py-4 mb-2 relative rounded-lg overflow-hidden zoomIn">
+        <div className="bg-white w-full py-2 mb-2 relative rounded-lg overflow-hidden zoomIn">
             <form className="w-full h-fit flex rounded-lg justify-around my-4">
 
                 <div className="flex flex-col w-2/5">

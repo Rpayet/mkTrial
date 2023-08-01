@@ -6,10 +6,11 @@ import EntryCard from "./EntryCard";
 import { rankService } from "../../../_Services/RankService";
 import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function UserEntry({ entry, rank, setShowUser}) {
+export default function UserEntry({ entry, rank }) {
 
     const [toggleView, setToggleView] = useState(false);
-    const { animation, setAnimation, entries, section, setSection } = useContext(EventContext);
+    const { animation, setAnimation, entries, 
+            section, setSection, setShowUser } = useContext(EventContext);
     const [hideDelay, setHideDelay] = useState('hidden');
 
     const rankList = rankService(entries);

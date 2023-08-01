@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import UserEntry from "./UserEntry";
 
-export default function UsersEntries({ rankList, setShowUser }) {
+export default function UsersEntries({ rankList }) {
 
     return (
         <>
@@ -9,8 +9,7 @@ export default function UsersEntries({ rankList, setShowUser }) {
                 <UserEntry 
                     key= { entry.id }
                     rank= { i }
-                    entry= { entry } 
-                    setShowUser= { setShowUser } />
+                    entry= { entry } />
             ))}
         </>
     )

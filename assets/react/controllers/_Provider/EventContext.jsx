@@ -26,6 +26,8 @@ export const EventProvider = ({ children }) => {
     useEffect(() => {
         checkIsModerator(user, event);
     }, [user, event]);
+
+    const [ showUser, setShowUser ] = useState(null);
     
     {/** Event Interaction/Animation Manager */}
     const [newEntry, setNewEntry] = useState(null);
@@ -73,7 +75,8 @@ export const EventProvider = ({ children }) => {
     const eventContextValue = {
         eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
         isUserRegistered, isOngoing, setIsOngoing, newEntry, setNewEntry, data, setData,
-        isLoading, setIsLoading, animation, setAnimation, filled, setFilled,
+        showUser, setShowUser,
+        isLoading, setIsLoading, animation, setAnimation, filled, setFilled, 
         section, setSection, registration, setRegistration, isModerator, setIsModerator,
     };
 

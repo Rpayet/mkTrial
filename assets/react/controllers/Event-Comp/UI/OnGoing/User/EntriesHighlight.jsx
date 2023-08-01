@@ -8,9 +8,11 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function EntriesHighlight({ showUserEntries }) {
+export default function EntriesHighlight() {
 
-    const { setEventData, setIsLoading, event, user, setFilled, section, setSection } = useContext(EventContext);
+    const { setEventData, setIsLoading, event, user, entries, showUser, setFilled, section, setSection } = useContext(EventContext);
+    const showUserEntries = entries.filter((entry) => entry.user.id === showUser).sort((a, b) => a.time - b.time);
+
     const formatter = buildFormatter(frenchStrings);
     const [imgFocus, setImgFocus] = useState(false);
     const [entryDelete, setEntryDelete] = useState({
@@ -107,7 +109,7 @@ export default function EntriesHighlight({ showUserEntries }) {
                     <ul className="grid grid-cols-2 gap-4">
                         { showUserEntries?.map((entry, i) => (
                             <EntriesHistoryList
-                                key={i}
+                                key={entry.id}
                                 i={i}
                                 entry={entry}
                                 hoveredEntry={hoveredEntry}
