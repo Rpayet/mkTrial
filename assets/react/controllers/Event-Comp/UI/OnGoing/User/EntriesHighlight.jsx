@@ -3,14 +3,16 @@ import { formatTime } from "../../../_Services/FormatTime";
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { BackButton } from "../../../../_GlobalUi/Buttons";
-import EntriesHistoryList from "./EntriesHistoricalList";
+import EntryHistoryCard from "./EntryHistoricalCard";
 import { EventContext } from "../../../../_Provider/EventContext";
 import { EventService } from "../../../../_Service/EventService";
 import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function EntriesHighlight() {
 
-    const { setEventData, setIsLoading, event, user, entries, showUser, setFilled, section, setSection } = useContext(EventContext);
+    const { setEventData, setIsLoading, isLoading, event,
+        entries, showUser, setFilled, section, setSection } = useContext(EventContext);
+
     const showUserEntries = entries.filter((entry) => entry.user.id === showUser).sort((a, b) => a.time - b.time);
 
     const formatter = buildFormatter(frenchStrings);
@@ -20,9 +22,7 @@ export default function EntriesHighlight() {
         visibility: false,
     });
 
-    const [hoveredEntry, setHoveredEntry] = useState(
-        { id: null, key: null }
-    );
+    const [hoveredEntry, setHoveredEntry] = useState(null);
 
     if (showUserEntries?.length === 0) {
         setSection(toggleSection(section, "ranking"));
@@ -30,19 +30,18 @@ export default function EntriesHighlight() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading({...setIsLoading, entry: true});
+        setIsLoading({...isLoading, entry: true});
         await EventService()  
             .deleteEntry(
-                hoveredEntry.id, setEventData, setFilled, 
+                hoveredEntry, setEventData, setFilled, 
                 event.id, showUserEntries, setSection,
                 setEntryDelete);
-        setIsLoading({...setIsLoading, entry: false});
+        setIsLoading({...isLoading, entry: false});
     };
-      
-    const userAuth = () => {
-        if (user?.id === showUserEntries[0]?.user.id ) {
-            return true;
-        }
+    
+    const handleMouseLeave = () => {
+        setHoveredEntry( null );
+        setEntryDelete({...entryDelete, visibility: false});
     }
     
     return (
@@ -107,19 +106,25 @@ export default function EntriesHighlight() {
                 <div className="w-full">
 
                     <ul className="grid grid-cols-2 gap-4">
+                        {/**  Up "li" here & make 2 components "show"/"delete" conditional view */}
                         { showUserEntries?.map((entry, i) => (
-                            <EntriesHistoryList
+                            <li 
                                 key={entry.id}
-                                i={i}
-                                entry={entry}
-                                hoveredEntry={hoveredEntry}
-                                setHoveredEntry={setHoveredEntry}
-                                formatter={formatter}
-                                userAuth={userAuth}
-                                handleSubmit={handleSubmit} 
-                                entryDelete={entryDelete}
-                                setEntryDelete={setEntryDelete}
-                            />
+                                onMouseEnter={() => setHoveredEntry( entry?.id )}
+                                onMouseLeave={handleMouseLeave}
+                                className="relative bg-white px-1 py-3 rounded-lg overflow-hidden
+                                        hover:scale-[1.02]">
+                                    {/** TODO : Simplify Component */}
+                                    <EntryHistoryCard
+                                        i={i}
+                                        entry={entry}
+                                        formatter={formatter}
+                                        hoveredEntry={hoveredEntry}
+                                        entryDelete={entryDelete}
+                                        setEntryDelete={setEntryDelete}
+                                        handleSubmit={handleSubmit} />
+
+                            </li>
                         ))}
                     </ul>
 
@@ -129,6 +134,4 @@ export default function EntriesHighlight() {
         </div>
     )
 }
-
-// https://www.npmjs.com/package/react-timeago
 

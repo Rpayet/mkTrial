@@ -66,11 +66,12 @@ export default function UsersList({userAdd, selectedUser, setSelectedUser}) {
                 </button>
             }
             
+            { isLoading.user && 
             <div 
                 style={{height: `${filled}%`}}
                 className={`bg-lumi absolute
                 bottom-0 left-0 right-0 opacity-25 rounded-lg`}>
-            </div>
+            </div> }
         </>
     )
 }

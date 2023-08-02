@@ -4,7 +4,7 @@ import { EventService } from "../../../../_Service/EventService";
 
 export default function RemoveRegistration({ selectedUser, setSelectedUser}) {
 
-    const { event, user, setEventData, filled, setFilled, 
+    const { event, user, setEventData, filled, setFilled, setIsLoading, isLoading,
             registration, setRegistration } = useContext(EventContext);
 
     const [userId, setUserId] = useState(null);
@@ -17,14 +17,12 @@ export default function RemoveRegistration({ selectedUser, setSelectedUser}) {
         }
     }, [selectedUser]);
     
-    const [loading, setLoading] = useState(false);
-
     const handleRegistrationRemoval = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        setIsLoading({...isLoading, user: true});
         await EventService().eventUnregister(event.id, userId, setEventData, setFilled);
         setRegistration({...registration, unregister: false});
-        setLoading(false);
+        setIsLoading({...isLoading, user: false});
     }
 
     const handleCancel = (e) => {

@@ -27,7 +27,7 @@ export const EventProvider = ({ children }) => {
         checkIsModerator(user, event);
     }, [user, event]);
 
-    const [ showUser, setShowUser ] = useState(null);
+    const [showUser, setShowUser] = useState(null);
     
     {/** Event Interaction/Animation Manager */}
     const [newEntry, setNewEntry] = useState(null);
@@ -46,7 +46,7 @@ export const EventProvider = ({ children }) => {
     const [filled, setFilled] = useState(0);
     
     {/** Section Manager */}
-    const [ section, setSection ] = useState({
+    const [section, setSection] = useState({
         ranking: true,
         highlight: false,
         editor: false,
@@ -61,14 +61,14 @@ export const EventProvider = ({ children }) => {
 
     const isUserRegistered = (user !== null 
         && event.registered.map((registeredUser) => 
-        registeredUser.id).includes(user.id));
+            registeredUser.id).includes(user.id));
     
     
     useEffect(() => {
         if (eventData) {
-        setEvent(eventData.event);
-        setUser(eventData.user);
-        setEntries(eventData.entries);
+            setEvent(eventData.event);
+            setUser(eventData.user);
+            setEntries(eventData.entries);
         }
     }, [eventData]);
 

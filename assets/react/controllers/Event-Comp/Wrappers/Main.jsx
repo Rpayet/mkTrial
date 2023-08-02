@@ -5,8 +5,6 @@ import { EventContext } from "../../_Provider/EventContext";
 import { EventService } from "../../_Service/EventService";
 
 export default function Main({ id }) {
-
-    const date = new Date();
     
     const [isLoading, setIsLoading] = useState(true);
 
@@ -43,11 +41,11 @@ export default function Main({ id }) {
     
     return (
         <>
-            {(event && entries)
-                ? ((isOngoing) 
-                    ? (<OnGoing />) 
-                    : (<Finished /> )) 
-                : (<div>No data available</div>)
+            { ( event && entries )
+                ? ( (isOngoing) 
+                    ? ( <OnGoing /> ) 
+                    : ( <Finished /> ) ) 
+                : ( <div>No data available</div> )
             }
         </>
     );

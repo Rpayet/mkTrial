@@ -5,13 +5,14 @@ import { RxCross2, RxCheck  } from 'react-icons/rx';
 import { EventContext } from "../../../../_Provider/EventContext";
 import ElapsedTime from "../../../../_GlobalUi/ElapsedTime";
 
-export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, entryDelete, setEntryDelete, handleSubmit}) {
+export default function EntryHistoricalCard({ entry, hoveredEntry, i, entryDelete, setEntryDelete, handleSubmit}) {
 
-    const { isLoading, filled } = useContext(EventContext);
+    const { isLoading, filled, user, isModerator } = useContext(EventContext);
+    const userAuth = (user?.id === entry?.user.id) || isModerator;
 
     return (
         <>
-            { entryDelete.visibility && hoveredEntry?.key === i && userAuth() // Reprendre ici
+            { entryDelete.visibility && hoveredEntry === entry.id && userAuth // Reprendre ici
             
             ?   <div className="w-full flex items-center justify-around">
 
@@ -45,10 +46,10 @@ export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, 
                     <span className="text-xs">
                         <ElapsedTime date={entry.createdAt} />
                     </span>
-                    { (hoveredEntry?.key === i && userAuth() ) && 
+                    { (hoveredEntry === entry?.id && userAuth ) && 
                         <button
                             disabled={isLoading.entry}
-                            onClick={() => {setEntryDelete({id: hoveredEntry?.key, visibility : true})}}>
+                            onClick={() => {setEntryDelete({id: hoveredEntry, visibility : true})}}>
                                 <BsTrash 
                                     title="Supprimer l'entrée"
                                     className={`w-6 h-6 p-1 bg-white rounded-full block
@@ -58,7 +59,7 @@ export default function EntryHistoricalCard({ entry, hoveredEntry, i, userAuth, 
                     }
                 </div>
             }
-            { entryDelete?.id === i &&
+            { (entryDelete?.id === entry.id && isLoading.entry) &&
                 <div 
                     style={{width: `${filled}%`}}
                     className={`bg-red-500 absolute

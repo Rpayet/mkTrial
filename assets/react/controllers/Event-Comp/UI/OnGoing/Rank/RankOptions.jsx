@@ -13,8 +13,7 @@ export default function RankOptions() {
         <>
             {rankList.length > 0 
             
-                ? <UsersEntries 
-                    rankList= { rankList } />
+                ? <UsersEntries rankList= { rankList } />
 
                 : <NoEntry />
             }

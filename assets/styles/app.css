@@ -46,6 +46,11 @@
   to {transform: scale(1);}
 }
 
+@keyframes zoomTopIn {
+  from {transform: scaleY(0);}
+  to {transform: scaleY(1);}
+}
+
 @keyframes shake {
   0% {transform: rotateZ(0deg);}
   21% {transform: rotateZ(0deg);}
@@ -105,6 +110,11 @@
 
 .zoomIn {
   animation: zoomIn .35s ease-out;
+}
+
+.zoomTopIn {
+  transform-origin: top center;
+  animation: zoomTopIn .15s ease-out;
 }
 
 .denied {

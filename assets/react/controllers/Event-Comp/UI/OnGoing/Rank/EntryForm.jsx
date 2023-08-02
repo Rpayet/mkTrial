@@ -29,10 +29,11 @@ export default function EntryForm({ toggleView, setToggleView }) {
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 
+    {/** TODO: Fix Loading */}
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-        setIsLoading(true);
+        setIsLoading({...isLoading, entry: true});
         await EventService().postEntry(event.id, formData, setEventData, 
             setToggleView, setErrors, setFilled, setNewEntry, user, entryInput);
         setIsLoading({...isLoading, entry: false})
@@ -43,7 +44,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
     }
 
     return (
-        <div className="bg-white w-full py-2 mb-2 relative rounded-lg overflow-hidden zoomIn">
+        <div className="bg-white w-full py-2 mb-2 relative rounded-lg overflow-hidden zoomTopIn">
             <form className="w-full h-fit flex rounded-lg justify-around my-4">
 
                 <div className="flex flex-col w-2/5">
@@ -89,11 +90,13 @@ export default function EntryForm({ toggleView, setToggleView }) {
 
             </form>
 
-            <div 
-                style={{height: `${filled}%`}}
-                className={`bg-lumi absolute
-                bottom-0 left-0 right-0 opacity-25 rounded-lg`}>
-            </div>
+            { isLoading.entry &&
+                <div 
+                    style={{height: `${filled}%`}}
+                    className={`bg-lumi absolute
+                    bottom-0 left-0 right-0 opacity-25 rounded-lg`}>
+                </div>
+            }
 
         </div>
     )

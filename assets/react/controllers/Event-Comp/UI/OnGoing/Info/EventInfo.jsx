@@ -14,8 +14,11 @@ export default function EventInfo() {
         <div className="w-1/2 sm:w-full text-center">
 
             <div className="flex items-center justify-between px-1">
+
                 <div className="flex items-center gap-2">
+
                     <h2 className="text-sm text-silver font-bold">{event.name.toUpperCase()}</h2>
+
                     { (isModerator) &&         
                         <BiEditAlt 
                             title="Éditer les informations de l'évènement"
@@ -23,11 +26,18 @@ export default function EventInfo() {
                             className={`text-silver hover:text-lumi 
                                     cursor-pointer w-4 h-4 ${section.editor ? 'hidden' : ''}`}/>
                     }
+
                 </div>
+
                 <DelayInfo />
+
             </div>
 
-            <div className="w-full"><RaceInfo /></div>
+            <div className="w-full">
+
+                <RaceInfo />
+                
+            </div>
 
         </div>
 
