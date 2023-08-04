@@ -37,18 +37,16 @@ export function EventService () {
   };
 
   // Requête POST
-  const postInterruption = async (eventId, setEventData) => {
+  const postInterruption = async (eventId) => {
     try {
       await axios.post(`/api/event/${eventId}/interruption`);
-      const eventResponse = await axios.get(`/api/event/${eventId}`);
-      setEventData(eventResponse.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   // Requête POST
-  const eventRegister = async (eventId, setEventData, setErrors, setFilled) => {
+  const eventRegister = async (eventId, setErrors, setFilled) => {
 
     try {
       const startTime = performance.now();
@@ -59,11 +57,6 @@ export function EventService () {
       updateProgress((loadTime/2), (progress) => {
           setFilled(progress);
       });
-
-      const eventResponse = await axios.get(`/api/event/${eventId}`);
-      setEventData(eventResponse.data);
-
-      setFilled(0);
 
     } catch (error) {
       console.error(error);

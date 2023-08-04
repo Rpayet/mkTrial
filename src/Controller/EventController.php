@@ -185,7 +185,7 @@ class EventController extends AbstractController
     ) {
         $event = $tournamentRepository->find($id);
 
-        $event->setEndAt(new \DateTimeImmutable());
+        $event->setEndAt(new \DateTimeImmutable() );
 
         $manager->persist($event);
         $manager->flush();

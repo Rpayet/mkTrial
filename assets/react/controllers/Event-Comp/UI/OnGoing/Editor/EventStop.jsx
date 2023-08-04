@@ -23,7 +23,8 @@ export default function EventStop({ setEventStop }) {
     const handleInterruption = async (e) => {
         e.preventDefault();
         setLoading(true);
-        await EventService().postInterruption(eventData.event.id, setEventStop, setSection, setEventData);
+        await EventService().postInterruption(eventData.event.id);
+        EventService().getEvent(eventData.event.id, setEventData);
     }
 
     return (

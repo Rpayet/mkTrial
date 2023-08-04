@@ -43,12 +43,12 @@ export default function RemoveRegistration({ selectedUser, setSelectedUser}) {
             }
             <div className="flex gap-4">
                 <button 
-                    disabled={loading}
+                    disabled={isLoading.user}
                     onClick={handleRegistrationRemoval}
                     className="text-sm border-[1px] border-solid border-silver 
                         hover:text-white hover:bg-mario px-4 py-2 rounded-lg">Oui</button>
                 <button 
-                    disabled={loading}
+                    disabled={isLoading.user}
                     onClick={handleCancel}
                     className="text-sm border-[1px] border-solid border-silver 
                         hover:text-white hover:bg-lumi px-4 py-2 rounded-lg">Non</button>

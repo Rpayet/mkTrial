@@ -10,10 +10,12 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading({...isLoading, entries: true});
+        setIsLoading({...isLoading, user: true});
         setSection(toggleSection(section, "ranking"));
-        await EventService().eventRegister(event.id, setEventData, setErrors, setFilled);
-        setIsLoading({...isLoading, entries: false});
+        await EventService().eventRegister(event.id, setErrors, setFilled);
+        await EventService().getEvent(event.id, setEventData);
+        setFilled(0);
+        setIsLoading({...isLoading, user: false});
     }
 
     return (
