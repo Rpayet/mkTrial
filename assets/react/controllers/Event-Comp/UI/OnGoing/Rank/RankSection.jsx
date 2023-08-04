@@ -7,7 +7,7 @@ import { EventContext } from "../../../../_Provider/EventContext";
 export default function RankSection() {
 
     const { animation, isUserRegistered, user, entries, section, showUser } = useContext(EventContext);
-    const userEntries = entries.filter((entry) => entry.user.id === user.id);
+    const userEntries = entries.filter((entry) => entry.user.id === user?.id);
     
     if (section.ranking) {
         return (

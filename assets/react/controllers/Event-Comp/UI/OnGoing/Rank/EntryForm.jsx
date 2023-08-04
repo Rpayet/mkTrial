@@ -29,7 +29,7 @@ export default function EntryForm({ toggleView, setToggleView }) {
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 
-    {/** TODO: Fix Loading */}
+    {/** TODO: Fix Loading by Separate post & get  */}
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});

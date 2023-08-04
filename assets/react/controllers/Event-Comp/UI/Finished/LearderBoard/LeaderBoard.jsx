@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import RaceInfo from "../../OnGoing/Info/RaceInfo"
+import RaceInfo from "../../OnGoing/Info/RaceInfo";
 import TopList from "./TopList";
 import { rankService } from "../../../_Services/RankService";
 import BottomList from "./BottomList";
@@ -23,8 +23,8 @@ export default function LeaderBoard() {
                     <RaceInfo event={ event } />
                 </div>
                 <div className="text-center px-2">
-                    <p>Du <span className="font-bold">{event.createdAt}</span> 
-                    au 
+                    <p>Du <span className="font-bold">{event.createdAt}</span>{' '}
+                    au {' '}
                     <span className="font-bold">{event.endAt}</span></p>
                     <p>Organisé par <span className="font-bold">{event.user.name}</span></p>
                 </div>

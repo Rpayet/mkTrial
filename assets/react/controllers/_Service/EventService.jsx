@@ -29,7 +29,7 @@ export function EventService () {
   // Requête DELETE
   const deleteEvent = async (eventId) => {
     try {
-      const response = await axios.delete(`/api/event/${eventId}/delete`);
+      await axios.delete(`/api/event/${eventId}/delete`);
       location = "/";
     } catch (error) {
       console.error("error");
@@ -37,12 +37,10 @@ export function EventService () {
   };
 
   // Requête POST
-  const postInterruption = async (eventId, setEventStop, setSection, setEventData) => {
+  const postInterruption = async (eventId, setEventData) => {
     try {
-      const response = await axios.post(`/api/event/${eventId}/interruption`);
+      await axios.post(`/api/event/${eventId}/interruption`);
       const eventResponse = await axios.get(`/api/event/${eventId}`);
-      setEventStop(false);
-      setSection(toggleSection(section, "ranking"));
       setEventData(eventResponse.data);
     } catch (error) {
       console.error(error);
