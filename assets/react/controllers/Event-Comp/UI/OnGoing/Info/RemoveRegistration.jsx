@@ -20,7 +20,9 @@ export default function RemoveRegistration({ selectedUser, setSelectedUser}) {
     const handleRegistrationRemoval = async (e) => {
         e.preventDefault();
         setIsLoading({...isLoading, user: true});
-        await EventService().eventUnregister(event.id, userId, setEventData, setFilled);
+        await EventService().eventUnregister(event.id, userId, setFilled);
+        await EventService().getEvent(event.id, setEventData);
+        setFilled(0);
         setRegistration({...registration, unregister: false});
         setIsLoading({...isLoading, user: false});
     }

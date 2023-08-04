@@ -65,7 +65,7 @@ export function EventService () {
   };
 
   // Requête DELETE
-  const eventUnregister = async (eventId, userId, setEventData, setFilled) => {
+  const eventUnregister = async (eventId, userId, setFilled) => {
     try {
       const startTime = performance.now();
 
@@ -76,11 +76,6 @@ export function EventService () {
       updateProgress((loadTime/2), (progress) => {
         setFilled(progress);
       });
-
-      const eventResponse = await axios.get(`/api/event/${eventId}`);
-      setEventData(eventResponse.data);
-
-      setFilled(0);
 
     }
     catch (error) {
