@@ -64,6 +64,9 @@ class Tournament
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $hourEnd = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $pinCode = null;
+
     public function __construct()
     {
         $this->entries = new ArrayCollection();
@@ -233,6 +236,18 @@ class Tournament
     public function setHourEnd(?\DateTimeInterface $hourEnd): self
     {
         $this->hourEnd = $hourEnd;
+
+        return $this;
+    }
+
+    public function getPinCode(): ?int
+    {
+        return $this->pinCode;
+    }
+
+    public function setPinCode(?int $pinCode): self
+    {
+        $this->pinCode = $pinCode;
 
         return $this;
     }
