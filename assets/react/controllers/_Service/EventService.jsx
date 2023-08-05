@@ -84,32 +84,21 @@ export function EventService () {
   };
 
   // Requête POST
-  const postEntry = async (eventId, formData, setEventData, setToggleView, setErrors, setFilled, setNewEntry, user, entryInput ) => {
+  const postEntry = async (eventId, formData, setErrors, setFilled ) => {
       try {
         const startTime = performance.now();
         
         await axios.post(`/api/event/${eventId}/addEntry`, formData)
-                    .then((response) => {
-                      const endTime = performance.now();
-                      const loadTime = endTime - startTime;
-                      updateProgress((loadTime/2), (progress) => {
-                        setFilled(progress);
-                      });
-                      
-                      setNewEntry({user: user.id, time: entryInput.time, isNew: true});
-                      axios.get(`/api/event/${eventId}`)
-                        .then((response) => {
-                          setToggleView(false);
-                          setEventData(response.data);
-                          setFilled(0);
-                        })
-                        .catch((errors) => {
-                          setErrors(errors.response.data);
-                        });
-                    })
-                    .catch((errors) => {
-                      setErrors(errors.response.data);
-                    });
+          .then((response) => {
+            const endTime = performance.now();
+            const loadTime = endTime - startTime;
+            updateProgress((loadTime/2), (progress) => {
+              setFilled(progress);
+            });
+          })
+          .catch((errors) => {
+            setErrors(errors.response.data);
+          });
       } catch (error) {
         console.error(error);
     };
@@ -117,32 +106,20 @@ export function EventService () {
 
 
   // Requête DELETE
-  const deleteEntry = 
-    async (entryId, setEventData, setFilled, 
-      eventId, showUserEntries, setSection, setEntryDelete) => {
-        try {
-          const startTime = performance.now();
-          await axios.delete(`/api/entry/${entryId}/delete`);
-          const endTime = performance.now();
-          const loadTime = endTime - startTime;
+  const deleteEntry = async (entryId, setFilled) => {
+    try {
+      const startTime = performance.now();
+      await axios.delete(`/api/entry/${entryId}/delete`);
+      const endTime = performance.now();
+      const loadTime = endTime - startTime;
 
-          updateProgress((loadTime/2), (progress) => {
-              setFilled(progress);
-          });
-
-          const eventResponse = await axios.get(`/api/event/${eventId}`);
-          setEventData(eventResponse.data);
-
-          if (showUserEntries.length === 0) {
-            setSection(toggleSection(section, "ranking"));
-          }
-          setFilled(0);
-          setEntryDelete({id: null, visibility : false});
-
-        } catch (error) {
-          console.error(error);
-        }
-      };
+      updateProgress((loadTime/2), (progress) => {
+          setFilled(progress);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return {
     getEvent,

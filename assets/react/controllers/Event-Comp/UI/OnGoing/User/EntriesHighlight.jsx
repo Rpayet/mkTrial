@@ -31,11 +31,13 @@ export default function EntriesHighlight() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading({...isLoading, entry: true});
-        await EventService()  
-            .deleteEntry(
-                hoveredEntry, setEventData, setFilled, 
-                event.id, showUserEntries, setSection,
-                setEntryDelete);
+        await EventService().deleteEntry(hoveredEntry, setFilled);
+        await EventService().getEvent(event.id, setEventData);
+        if (showUserEntries.length === 0) {
+            setSection(toggleSection(section, "ranking"));
+          }
+        setFilled(0);
+        setEntryDelete({id: null, visibility : false});
         setIsLoading({...isLoading, entry: false});
     };
     

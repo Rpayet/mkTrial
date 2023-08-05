@@ -29,13 +29,15 @@ export default function EntryForm({ toggleView, setToggleView }) {
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 
-    {/** TODO: Fix Loading by Separate post & get  */}
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
         setIsLoading({...isLoading, entry: true});
-        await EventService().postEntry(event.id, formData, setEventData, 
-            setToggleView, setErrors, setFilled, setNewEntry, user, entryInput);
+        await EventService().postEntry(event.id, formData, setErrors, setFilled );
+        setNewEntry({user: user.id, time: entryInput.time, isNew: true});
+        await EventService().getEvent(event.id, setEventData);
+        setToggleView(false);
+        setFilled(0);
         setIsLoading({...isLoading, entry: false})
         
         if (errors) {

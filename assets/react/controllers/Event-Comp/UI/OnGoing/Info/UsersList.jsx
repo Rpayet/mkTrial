@@ -56,14 +56,16 @@ export default function UsersList({userAdd, selectedUser, setSelectedUser}) {
             ))}
 
             {( userAdd && !registration.unregister )&&
-                <button
+                <div
                     disabled={isLoading.user}
+                    className="text-center flex flex-col items-center"
                     onClick={() => {setSection(toggleSection(section, 'registration'))}}>
                     <AiOutlineUserAdd 
                         title="S'inscrire à l'évènement"
                         className={`${isLoading.user ? 'bg-black' : 'bg-white'} duration-500 h-10 w-10 p-1 
                         bg-white cursor-pointer rounded-full border-solid border-[1px] border-silver`} />
-                </button>
+                    <p className='text-xs'>Inscription</p>
+                </div>
             }
             
             { isLoading.user && 
