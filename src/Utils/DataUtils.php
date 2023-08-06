@@ -61,7 +61,6 @@ class DataUtils
             'createdAt' => $event->getCreatedAt()->format('Y-m-d'),
             'endAt' => $event->getEndAt()->format('Y-m-d'),
             'speed' => $event->getSpeed(),
-            'privacy' => $event->isPrivacy(),
             'capacity' => $event->getCapacity(),
             'registered' => $event->getRegistered()->map(function ($user) {
                 return self::getUserData($user);

@@ -4,16 +4,16 @@ import { BiSolidLockOpen, BiSolidLock, BiEditAlt } from 'react-icons/bi';
 
 export default function PrivacySelect({ data, setData, event, setModal }) {
 
-    const [privacy, setPrivacy] = useState(data?.privacy || false);
+    // const [privacy, setPrivacy] = useState(data?.privacy || false);
     const [ pinCode, setPinCode ] = useState(data?.pinCode || null);
 
-    useEffect(() => {
-        if (data?.privacy === true) {
-            setData({...data, pinCode: pinCode});
-        } else {
-            setData({...data, pinCode: null});
-        }
-    }, [privacy, pinCode])
+    // useEffect(() => {
+    //     if (data?.privacy === true) {
+    //         setData({...data, pinCode: pinCode});
+    //     } else {
+    //         setData({...data, pinCode: null});
+    //     }
+    // }, [privacy, pinCode])
 
     const modalContent = {
         visibility: true,
@@ -36,7 +36,6 @@ export default function PrivacySelect({ data, setData, event, setModal }) {
                     setModal((prevModal) => ({ ...prevModal, visibility: false }));
                     if (!data?.pinCode) {
                         setPrivacy(false);
-                        setData({ ...data, privacy: false });
                     }
                 },
                 type: false,
@@ -46,7 +45,6 @@ export default function PrivacySelect({ data, setData, event, setModal }) {
                 text: 'Valider',
                 action: () => {
                     setModal((prevModal) => ({ ...prevModal, visibility: false }));
-                    setData({ ...data, privacy: true })
                 },
                 type: true,
                 disabled: false,
@@ -58,21 +56,20 @@ export default function PrivacySelect({ data, setData, event, setModal }) {
         setModal(modalContent);
     }
 
-    const handlePrivacy = () => {
-        setPrivacy(!privacy);
-        setData({ ...data, privacy: privacy })
-        if (!privacy) {
-            setModal(modalContent);
-        } else if (privacy) {
-            setData({ ...data, pinCode: null, privacy: false })
-        }
-    }
+    // const handlePrivacy = () => {
+    //     setPrivacy(!privacy);
+    //     if (!privacy) {
+    //         setModal(modalContent);
+    //     } else if (privacy) {
+    //         setData({ ...data, pinCode: null })
+    //     }
+    // }
         
     return (
         <div className='flex flex-col items-center justify-center'>
                             
             <div className='flex items-center'>
-                { event?.privacy && event?.pinCode &&
+                { event?.pinCode &&
                     <BiEditAlt 
                         className='cursor-pointer text-silver hover:text-lumi'
                         onClick={handlePinCodeEdit} /> }
@@ -86,7 +83,7 @@ export default function PrivacySelect({ data, setData, event, setModal }) {
                 offColor="#EBEBEB"
                 onHandleColor="#9F9F9F"
                 offHandleColor="#9F9F9F"
-                checked={ privacy }
+                // checked={ privacy }
                 onChange={ handlePrivacy }
                 handleDiameter={ 30 }
                 uncheckedIcon={ false }
