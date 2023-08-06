@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entry;
+use App\Form\EntryType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
 use App\Utils\DataUtils;
@@ -28,9 +29,9 @@ class EntryController extends AbstractController
         ]);
     }
 
-    #[Route('/api/event/{id}/entry', name: 'app_event_entry_new', methods: ['POST'])]
+    #[Route('/api/event/{id}/addEntry', name: 'app_event_entry_add', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
-    public function newEntry(
+    public function addEntry(
         Request $request,
         $id,
         EntityManagerInterface $manager, 
@@ -39,17 +40,15 @@ class EntryController extends AbstractController
             {
                 $user = $security->getUser();
                 $event = $tournamentRepository->find($id);
-
                 $time = $request->request->get('time');
-
                 $imageFile = $request->files->get('picture');
+                $newFilename = null;
 
                 $entry = new Entry();
                 $entry
                     ->setUser($user)
-                    ->setCreatedAt(new \DateTimeImmutable())
-                    ->setTournament($event)
-                    ->setTime($time);
+                    ->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')))
+                    ->setTournament($event);
 
                 if ($imageFile) {
                     // Génération d'un nom unique pour le fichier
@@ -69,11 +68,60 @@ class EntryController extends AbstractController
                     // Mise à jour de l'objet Entry avec le nom du fichier
                     $entry->setPicture($newFilename);
                 }
+
+                $data = [
+                    'time' => $time ? $time : null,
+                    'picture' => $newFilename ? $newFilename : null,
+                ];
+                $form = $this->createForm(EntryType::class, $entry, ['csrf_protection' => false]);
+                $form->submit($data);
+
+                if (!$form->isValid()) {
+                    $errors = [];
+                    foreach ($form->getErrors(true) as $error) {
+                        $errors[$error->getOrigin()->getName()] = $error->getMessage();
+                    }
+                    return $this->json($errors, 422);
+                }
+                
+                
                 
                 $manager->persist($entry);
                 $manager->flush();
 
+                // $imageFile = $request->files->get('picture'); retourner le nom de l'image stocker dans la variable $imageFile
                 return $this->json(['success' => true]);
+
+                
             }
+
+    #[Route('api/entry/{id}/delete', name: 'api_entry', methods: ['DELETE'])]
+    public function update(
+        EntryRepository $entryRepository,
+        int $id,
+        EntityManagerInterface $manager
+        )
+            {               
+                // Récupère l'entrée avec l'ID
+                $entry = $entryRepository->find($id);
+                
+                // Supprimer l'image associée à l'entrée
+                $imageFilename = $entry->getPicture();
+                if ($imageFilename) {
+                    $imagePath = $this->getParameter('kernel.project_dir') . '/public/assets/user/entries/' . $imageFilename;
+
+                    // Vérifier si le fichier existe avant de le supprimer
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+
+                // Supprimer l'entrée
+                $manager->remove($entry);
+                $manager->flush();
+
+                return $this->json(['data' => 'success']);
+            }
+
 
 }

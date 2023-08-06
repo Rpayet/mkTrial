@@ -68,7 +68,7 @@ export default function ListSorter({ tournaments, sortList }) {
     }
 
     const tournamentCards = filteredTournaments.slice(0, endIndex).map((tournament, index) => (
-        <EventCard tournament={tournament} index={index} />
+        <EventCard tournament={tournament} key={index} />
     ));
 
     return (

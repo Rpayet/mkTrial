@@ -19,14 +19,11 @@ class Entry
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Temps requis pour entrer au tableau')]
+    #[Assert\GreaterThan(value: 30000, message: 'Aucun temps ne peut être inférieur à 30 secondes (Ou alors vous êtes un demi-god). Contactez-nous avec une capture de votre temps pour régler le problème.')]
     private ?int $time = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Capture d\'écran obligatoire')]
-    #[Assert\File(
-        extensions: ['jpg', 'jpeg', 'png'],
-        extensionsMessage: 'Format accepté : jpeg, jpg, png'
-    )]
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'entries')]

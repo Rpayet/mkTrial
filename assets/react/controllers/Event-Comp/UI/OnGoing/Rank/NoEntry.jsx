@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { EventContext } from "../../../../_Provider/EventContext";
 
-export default function NoEntry({ isUserRegistered }) {
+export default function NoEntry() {
+
+    const { isUserRegistered } = useContext(EventContext);
 
     return (
         <>

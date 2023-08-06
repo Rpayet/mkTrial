@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Utils\DataUtils;
 use App\Form\EventType;
 use App\Repository\EntryRepository;
 use App\Repository\TournamentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -17,10 +19,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class EventController extends AbstractController
 {
     #[Route('event/{id}', name: 'app_event')]
-    public function index($id): Response
+    public function index(int $id, TournamentRepository $tournamentRepository ): Response
     {
+        $event = $tournamentRepository->find($id);
+
         return $this->render('event/index.html.twig', [
-            'id' => $id
+            'id' => $id,
+            'eventName' => $event->getName(),
         ]);
     }
 
@@ -56,17 +61,15 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/api/event/register', name: 'app_event_register', methods: ['POST'])]
+    #[Route('/api/event/{id}/register', name: 'app_event_register', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function register(
-        Request $request, 
+        int $id,
         EntityManagerInterface $manager, 
         Security $security, 
         TournamentRepository $tournamentRepository) 
         {
-        
-            $data = json_decode($request->getContent(), true);
-            $event = $tournamentRepository->find($data['id']);
+            $event = $tournamentRepository->find($id);
             $user = $security->getUser();
 
             if ($event->getRegistered()->contains($user)) {
@@ -85,13 +88,18 @@ class EventController extends AbstractController
     #[isGranted('ROLE_USER')]
     public function edit(
         Request $request,
-        $id, 
+        int $id, 
         TournamentRepository $tournamentRepository,
         EntityManagerInterface $manager, 
         )
     {
         $event = $tournamentRepository->find($id);
         $data = json_decode($request->getContent(), true);
+
+        if ($data['capacity'] != null && $data['capacity'] < $event->getRegistered()->count()) {
+            $errors = ['capacity' => 'Le nombre de place disponible ne peut être inférieur au nombre d\'inscrits.'];
+            return $this->json($errors, 422);
+        }
 
         $form = $this->createForm(EventType::class, $event, ['csrf_protection' => false]);
         $form->submit($data);
@@ -177,7 +185,7 @@ class EventController extends AbstractController
     ) {
         $event = $tournamentRepository->find($id);
 
-        $event->setEndAt(new \DateTimeImmutable());
+        $event->setEndAt(new \DateTimeImmutable() );
 
         $manager->persist($event);
         $manager->flush();
@@ -185,7 +193,49 @@ class EventController extends AbstractController
         return $this->json(['data' => 'success']);
     }
 
-    
+    #[Route('/api/event/{eventId}/unregister/{userId}', name: 'app_event_unregister', methods: ['DELETE'])]
+    #[isGranted('ROLE_USER')]
+    public function unregister(
+        int $eventId,
+        int $userId,
+        TournamentRepository $tournamentRepository,
+        UserRepository $userRepository,
+        EntityManagerInterface $manager, 
+        )
+    {
+        $event = $tournamentRepository->find($eventId);
+        $user = $userRepository->find($userId); 
+
+        if (!$event->getRegistered()->contains($user)) {
+            return $this->json(['error' => 'Vous n\'êtes pas inscrit']);
+        }
+
+        $entries = $event->getEntries();
+        foreach ($entries as $entry) {
+            if ($entry->getUser() === $user) {
+                $imageFilename = $entry->getPicture();
+        
+                if ($imageFilename) {
+                    $imagePath = $this->getParameter('kernel.project_dir') . '/public/assets/user/entries/' . $imageFilename;
+
+                    // Vérifier si le fichier existe avant de le supprimer
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+
+                $event->removeEntry($entry);
+                $manager->remove($entry);
+            }
+        }        
+
+        $event->removeRegistered($user);
+
+        $manager->persist($event);
+        $manager->flush();
+
+        return $this->json(['success' => true]);
+    }
 
 }
  

@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}kekchoz | {{ parent() }}{% endblock %}
+{% block title %}{{eventName}} | {{ parent() }}{% endblock %}
 
 {% block body %}
 
-    <div
-        class="my-20"
+    <div class="my-20"
         {{ react_component('Event', { id: app.request.get('id') } )}}>
     </div>
 

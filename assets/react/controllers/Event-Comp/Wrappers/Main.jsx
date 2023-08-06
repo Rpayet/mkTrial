@@ -1,41 +1,54 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
+import { EventService } from "../../_Service/EventService";
 
 export default function Main({ id }) {
-
-    const eventId = id;
-
-    const date = new Date();
-
-    const { eventData, setEventData } = useContext(EventContext);
+    
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [isOngoing, setIsOngoing] = useState(true);
-    
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await axios.get(`/api/event/${eventId}`);
-            setEventData(response.data);
-            setIsLoading(false);
-          } catch (error) {
-            setError(error.message);
-            setIsLoading(false);
-          }
-        };
-    
-        fetchData();
-    }, [eventId]);
 
+    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing } = useContext(EventContext);
+       
     useEffect(() => {
-        if (eventData && eventData.event && eventData.event.endAt) {
-            const eventEndAt = new Date(eventData.event.endAt);
-            setIsOngoing(eventEndAt > date);
-        }
-      }, [eventData, date]);
+        setEventId(id);
+    }, [id]);
+    
+    useEffect(() => {
+        if (id) {
+            const fetchData = async () => {
+                try {
+                  await EventService().getEvent(id, setEventData);
+                    setIsLoading(false);
+                } catch (error) {
+                  setIsLoading(false);
+                }
+              };
+              fetchData();
+            }
+    }, []);
+
+    
+    useEffect(() => {
+        // Fonction pour mettre à jour l'état de l'événement en cours
+        const checkEventOngoing = () => {
+            if (event) {
+                const date = event?.endAt + "T" + (event?.hourEnd || "00:00");
+                let startTimestamp = new Date(date).getTime();
+                let timeLeft = startTimestamp - new Date().getTime();
+                setIsOngoing(timeLeft > 0);
+            }
+        };
+
+        // Vérifier si l'événement est en cours au montage du composant
+        checkEventOngoing();
+
+        // Vérifier à intervalle régulier si l'événement est toujours en cours
+        const interval = setInterval(checkEventOngoing, 1000);
+
+        // Nettoyer l'intervalle lorsque le composant est démonté
+        return () => clearInterval(interval);
+    }, [event]);
 
     if (isLoading) {
         return (
@@ -47,29 +60,15 @@ export default function Main({ id }) {
             </div>
         )
     }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-    const { event, user, entries } = eventData; 
-
+    
     return (
-        <div className="">
-            {event && entries ? (
-                isOngoing ? (
-                    <OnGoing 
-                        eventId= {eventId}
-                        user={user}
-                        event={event}
-                        entries={entries}
-                        setEventData= { setEventData } />
-                ) : (
-                    <Finished event={event} entries={entries} />
-                )
-            ) : (
-                <div>No data available</div>
-            )}
-        </div>
+        <>
+            { ( event && entries )
+                ? ( (isOngoing) 
+                    ? ( <OnGoing /> ) 
+                    : ( <Finished /> ) ) 
+                : ( <div>No data available</div> )
+            }
+        </>
     );
 }

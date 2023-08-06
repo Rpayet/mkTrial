@@ -1,53 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import EventInfo from "../UI/OnGoing/Info/EventInfo";
 import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
-import { DataProvider } from "../../_Provider/EventContext";
+import { EventContext } from "../../_Provider/EventContext";
+import { getFormattedDate } from "../_Services/FormatTime";
+import Modal from "../../_GlobalUi/Modal";
 
+export default function OnGoing() {
 
-export default function OnGoing({ user, eventId, event, setEventData }) {
-
-    const [registration, setRegistration] = useState(false);
-    const isUserRegistered = user !== null && event.registered.map((registeredUser) => registeredUser.id).includes(user.id);
-
-    const [editor, setEditor] = useState(false);
-
-    const [loadingProgress, setLoadingProgress] = useState(0);
+    const { animation, isLoading, event, modal } = useContext(EventContext);
 
     return (
-        <div className="w-full sm:flex gap-4 p-4">
+        <div className="relative w-full sm:flex gap-4 p-4">
 
-                <div 
-                    className="sm:w-1/3 sm:h-fit bg-white 
-                    rounded-xl flex sm:flex-col gap-4 p-4
-                    zoomIn">
+            { modal.visibility && <Modal />}
 
-                    <EventInfo 
-                        user= { user }
-                        event={ event }
-                        setEditor= { setEditor }
-                        editor= { editor } />
+            <div className={`relative sm:w-1/3 sm:h-fit bg-white 
+                rounded-xl flex sm:flex-col gap-4 p-4 mb-2
+                ${animation.firstAnimation && 'zoomIn'} ${isLoading.event && 'shake'}`}>
 
-                    <Userinfo
-                        user= { user }
-                        event= { event }
-                        setRegistration= { setRegistration }
-                        isUserRegistered= { isUserRegistered }
-                        loadingProgress= { loadingProgress } />
+                <EventInfo />
+
+                <div className='text-sm'>
+
+                    <p>Crée par{" "}
+                        <span className='font-bold'>{event.user.name}</span>
+                    </p>
+                    <p>Démarré le{" "}
+                        <span className='font-bold'>{getFormattedDate(event.createdAt)}</span>
+                    </p>
 
                 </div>
 
-                <DataProvider>
-                    <EventRegistration
-                        eventId = { eventId }
-                        setEventData= { setEventData }
-                        editor= { editor }
-                        setEditor={ setEditor }
-                        isUserRegistered= { isUserRegistered }
-                        registration= { registration }
-                        setRegistration={ setRegistration } 
-                        setLoadingProgress= { setLoadingProgress } />
-                </DataProvider>
+                <Userinfo />
+
+                { isLoading.event &&
+
+                    <img 
+                        className="w-44 absolute -top-44 right-0 z-10 origin-bottom"
+                        src="/assets/admin/img/gif/Lakitu---Hammer.gif" 
+                        alt="Loading" /> }
+
+            </div>
+
+            <EventRegistration />
 
         </div>
     )

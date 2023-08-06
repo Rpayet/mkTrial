@@ -1,23 +1,134 @@
 import axios from "axios";
+import { updateProgress } from "./Loading";
+import { toggleSection } from "./SectionService";
 
-const ApiService = {
-  async get(url) {
+export function EventService () {
+
+  // Requête GET
+  const getEvent = async (eventId, setEventData) => {
     try {
-      const response = await axios.get(url);
-      return response.data;
+      const response = await axios.get(`/api/event/${eventId}`);
+      setEventData(response.data);
     } catch (error) {
-      throw new Error(error.message);
+      console.error(error);
     }
-  },
-  async post(url, data) {
+  };
+
+  // Requête POST
+  const updateEvent = async (eventId, data, setErrors) => {
+    try {  
+      await axios.post(`/api/event/${eventId}/edit`, data);
+      return false;
+    } 
+    catch (errors) {
+      setErrors(errors.response.data);
+      return true;
+    }
+  };
+
+  // Requête DELETE
+  const deleteEvent = async (eventId) => {
     try {
-      const response = await axios.post(url, data);
-      return response.data;
+      await axios.delete(`/api/event/${eventId}/delete`);
+      location = "/";
     } catch (error) {
-      throw new Error(error.message);
+      console.error("error");
     }
-  },
-  // Autres méthodes (put, delete, etc.)
+  };
+
+  // Requête POST
+  const postInterruption = async (eventId) => {
+    try {
+      await axios.post(`/api/event/${eventId}/interruption`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Requête POST
+  const eventRegister = async (eventId, setErrors, setFilled) => {
+
+    try {
+      const startTime = performance.now();
+      await axios.post(`/api/event/${eventId}/register`);
+      const endTime = performance.now();
+      const loadTime = endTime - startTime;
+
+      updateProgress((loadTime/2), (progress) => {
+          setFilled(progress);
+      });
+
+    } catch (error) {
+      console.error(error);
+      setErrors(error.response.data.errors);
+    }
+  };
+
+  // Requête DELETE
+  const eventUnregister = async (eventId, userId, setFilled) => {
+    try {
+      const startTime = performance.now();
+
+      await axios.delete(`/api/event/${eventId}/unregister/${userId}`);
+
+      const endTime = performance.now();
+      const loadTime = endTime - startTime;
+      updateProgress((loadTime/2), (progress) => {
+        setFilled(progress);
+      });
+
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Requête POST
+  const postEntry = async (eventId, formData, setErrors, setFilled ) => {
+      try {
+        const startTime = performance.now();
+        
+        await axios.post(`/api/event/${eventId}/addEntry`, formData)
+          .then((response) => {
+            const endTime = performance.now();
+            const loadTime = endTime - startTime;
+            updateProgress((loadTime/2), (progress) => {
+              setFilled(progress);
+            });
+          })
+          .catch((errors) => {
+            setErrors(errors.response.data);
+          });
+      } catch (error) {
+        console.error(error);
+    };
+  };
+
+
+  // Requête DELETE
+  const deleteEntry = async (entryId, setFilled) => {
+    try {
+      const startTime = performance.now();
+      await axios.delete(`/api/entry/${entryId}/delete`);
+      const endTime = performance.now();
+      const loadTime = endTime - startTime;
+
+      updateProgress((loadTime/2), (progress) => {
+          setFilled(progress);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return {
+    getEvent,
+    updateEvent,
+    deleteEvent,
+    postInterruption,
+    eventRegister,
+    eventUnregister,
+    postEntry,
+    deleteEntry,
+  };
 };
-
-export default ApiService;

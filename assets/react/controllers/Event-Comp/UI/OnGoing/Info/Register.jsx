@@ -1,54 +1,21 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
+import { EventService } from "../../../../_Service/EventService";
+import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function Register({ event, setRegistration, setLoadingProgress }) {
+export default function Register() {
 
-    const { eventData, setEventData } = useContext(EventContext);
-    const [error, setError] = useState(null);
+    const { isLoading, setIsLoading, setEventData, event, setFilled, setSection, section } = useContext(EventContext);
+    const [errors, setErrors] = useState(null);
 
-    const handleCancel = () => {
-        setRegistration(false);
-    }
-
-    const handleSubmit = (e) => {
-
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const data = {
-            id: event.id
-        };
-
-        axios
-            .post("/api/event/register", data)
-            .then(response => {
-                if (response.data) {
-                    axios.get(`/api/event/${event.id}`, {
-                        onDownloadProgress: progressEvent => {
-                          const progress = Math.round(
-                            (progressEvent.loaded * 100) / progressEvent.total
-                          );
-                          setLoadingProgress(progress);
-                        }
-                      })
-                        .then(response => {
-                            setRegistration(false);
-                            setEventData(response.data);
-                            setLoadingProgress(0);
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                } else {
-                    setError(response.data.error);
-                }
-                
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        
-            setRegistration(false);
+        setIsLoading({...isLoading, user: true});
+        setSection(toggleSection(section, "ranking"));
+        await EventService().eventRegister(event.id, setErrors, setFilled);
+        await EventService().getEvent(event.id, setEventData);
+        setFilled(0);
+        setIsLoading({...isLoading, user: false});
     }
 
     return (
@@ -56,12 +23,12 @@ export default function Register({ event, setRegistration, setLoadingProgress })
             id="rank-container"
             className="w-2/3 flex flex-col items-center justify-center">
         
-            { error ?
+            { errors ?
                 <div className="w-1/2 text-center bg-white p-10 rounded-xl">
-                    <p>{error}</p>
+                    <p>{errors}</p>
                 </div>
             :
-                <div className="w-full text-center bg-white p-10 rounded-xl">
+                <div className="relative w-full text-center bg-white p-10 rounded-xl">
                     <p className="text-xl font-bold">Rappel des contraintes</p>
                     <p className="text-mario">Vitesse : {event.speed}</p>
                     <p className="text-mario">Capture d'écran obligatoire</p>
@@ -70,7 +37,7 @@ export default function Register({ event, setRegistration, setLoadingProgress })
                     <div className="flex">
 
                         <button
-                            onClick={handleCancel}
+                            onClick={() => setSection(toggleSection(section, "ranking"))}
                             type="button" 
                             className="block mx-auto my-6 w-fit bg-white py-1 px-8 rounded-3xl
                             text-lite text-lg text-center border-solid border-[1px] border-lite
@@ -90,6 +57,7 @@ export default function Register({ event, setRegistration, setLoadingProgress })
                         </button>
 
                     </div>
+                    
                 </div>
             }
                 

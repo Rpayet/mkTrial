@@ -1,4 +1,5 @@
 import React from "react";
+import { RxCross2, RxUpload } from 'react-icons/rx';
 
 export default function UploadInput({ entryInput, setEntryInput, image, setImage, fileName, setFileName }) {
 
@@ -23,9 +24,10 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
         setFileName('');
         setImage(null);
     }
+    
 
     return (
-        <div className="flex flex-col w-2/5">
+        <>
             <div className="flex justify-between">
                 <label 
                     htmlFor="timer"
@@ -33,13 +35,11 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
                         Capture
                 </label>
                 {image && 
-                    <span 
-                        className="flex items-center text-xs cursor-pointer">
-                            <img src="/assets/admin/img/icons/Cross.svg" 
-                                alt="cross"
-                                className="w-4 h-4 p-1 bg-red-600 rounded-full"
-                                onClick={handleDelete} />
-                            {fileName.substring(0, 5)+ '...' + fileName.substring(fileName.length - 4)}    
+                    <span className="flex items-center text-xs cursor-pointer">
+                        <RxCross2
+                            className="w-4 h-4 p-1 bg-red-600 rounded-full"
+                            onClick={handleDelete} />
+                        <span>{fileName.substring(0, 5)+ '...' + fileName.substring(fileName.length - 4)}</span>   
                     </span>
                 }
             </div>
@@ -59,24 +59,19 @@ export default function UploadInput({ entryInput, setEntryInput, image, setImage
                     multiple={false}
                     hidden />
 
-                {image ? 
-                    <img 
+                {image 
+                    ? <img 
                         className="mx-auto"
                         src={image} 
                         width={120} 
                         alt={fileName} />
-                    :
-                    <div className="mx-auto border-solid border-[1px] border-lumi rounded-full hover:bg-slate-100">
-                        <img 
-                            className="w-4 p-1"
-                            src="/assets/admin/img/icons/Upload.svg" 
-                            alt="upload" />
-                    </div>
+                    : <RxUpload className="m-auto text-lumi w-5 h-5" />
+                    
                 }
 
             </div>
             
-        </div>
+        </>
 
     )
 }

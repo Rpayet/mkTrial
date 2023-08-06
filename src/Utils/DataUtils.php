@@ -48,14 +48,14 @@ class DataUtils
             'id' => $entry->getId(),
             'user' => self::getUserData($entry->getUser()),
             'time' => $entry->getTime(),
-            'createdAt' => $entry->getCreatedAt()->format('Y-m-d'),
+            'createdAt' => $entry->getCreatedAt(),
             'picture' => $entry->getPicture(),
         ];
     }
 
     public static function getEventData(Tournament $event): array
     {
-        return [
+        $data = [
             'id' => $event->getId(),
             'name' => $event->getName(),
             'createdAt' => $event->getCreatedAt()->format('Y-m-d'),
@@ -68,7 +68,17 @@ class DataUtils
             })->toArray(),
             'user' => self::getUserData($event->getUser()),
             'race' => self::getRaceData($event->getRace()),
+            'pinCode' => $event->getPinCode(),
         ];
+    
+        // Vérifie si hourEnd est null avant de l'ajouter au tableau
+        if ($event->getHourEnd() !== null) {
+            $data['hourEnd'] = $event->getHourEnd()->format('H:i');
+        } else {
+            $data['hourEnd'] = null;
+        }
+    
+        return $data;
     }
 
 }

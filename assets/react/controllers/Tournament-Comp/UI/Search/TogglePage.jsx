@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TogglePage( {page, setPage} ) {
     
-
+    // Todo : Modifier les SVG. Problème de rendu
     return(
         <div className="flex gap-2">
 

@@ -2,31 +2,34 @@ import React, { useContext, useEffect, useState } from "react";
 import EditorRequestOptions from "./EditorRequestOptions";
 import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions";
 import { BackButton }from "../../../../_GlobalUi/Buttons";
-import { DataContext } from "../../../../_Provider/EventContext";
+import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
+import { toggleSection } from "../../../../_Service/SectionService";
 
-export default function EventEditor({ setEditor, eventData }) {
+export default function EventEditor() {
 
     const [disabled, setDisabled] = useState(true);
-    const {data, setData} = useContext(DataContext);
+    const {data, setData, event, eventData, setSection, section, setModal } = useContext(EventContext);
     const [editValidation, setEditValidation] = useState(false);
     const [eventStop, setEventStop] = useState(false);
 
     {/* Charge l'état de Data avec la BDD */}
     useEffect(() => {
-        if (!data) {
+        if (!data && event) {
             setData({...data, 
-                name: eventData.event.name,
-                speed: eventData.event.speed,
-                endAt: eventData.event.endAt,
-                capacity: eventData.event.capacity,
-                privacy: eventData.event.privacy,
-                race: eventData.event.race.id,
+                name: event.name,
+                speed: event.speed,
+                endAt: event.endAt,
+                hourEnd: event.hourEnd,
+                capacity: event.capacity,
+                privacy: event.privacy,
+                pinCode: event.pinCode,
+                race: event.race.id,
             })
         }
-    }, [data, eventData]);
-
+    }, [data, event]);
+    
     {/* Met à jour le nom de data */}
     const handleName = (event) => {
         const inputValue = event.target.value;
@@ -38,39 +41,39 @@ export default function EventEditor({ setEditor, eventData }) {
 
     {/* Ferme le composant*/}
     const handleCancel = () => {
-        setEditor(false)
+        setSection(toggleSection(section, "ranking"));
         setData({...data, 
-            name: eventData.event.name,
-            speed: eventData.event.speed,
-            endAt: eventData.event.endAt,
-            capacity: eventData.event.capacity,
-            privacy: eventData.event.privacy,
-            race: eventData.event.race.id,
+            name: event.name,
+            speed: event.speed,
+            endAt: event.endAt,
+            hourEnd: event.hourEnd,
+            capacity: event.capacity,
+            privacy: event.privacy,
+            pinCode: event.pinCode,
+            race: event.race.id,
         })
     } 
 
     {/* Erreurs POST */}
     const [errors, setErrors] = useState({});
 
-    // console.log(errors) todo
-
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
-        const { name, speed, endAt, capacity, privacy } = eventData.event;
+        const { name, speed, endAt, capacity, privacy, hourEnd, pinCode } = event;
         
-        if (data?.name === name && data?.speed === speed && data?.endAt === endAt &&
-            data?.capacity === capacity && data?.privacy === privacy) {
+        if ((data?.name === name) && (data?.speed === speed) && (data?.endAt === endAt) && (data?.pinCode === pinCode) &&
+            (data?.capacity === capacity) && (data?.privacy === privacy) && (data?.hourEnd === hourEnd)) {
             setDisabled(true);
         } else {
             setDisabled(false);
         }
-    }, [data, eventData]);
+    }, [data, event]);
 
     if (editValidation) {
 
         return (
             <EditorValidation 
-                setEditor= { setEditor }
+                errors={ errors }
                 setErrors= { setErrors }
                 setEditValidation= { setEditValidation } />
         )
@@ -78,9 +81,7 @@ export default function EventEditor({ setEditor, eventData }) {
     } else if (eventStop) {
 
         return (
-            <EventStop 
-                setEditor= { setEditor }
-                setEventStop= { setEventStop } />
+            <EventStop setEventStop= { setEventStop } />
         )
 
     } else {
@@ -90,20 +91,24 @@ export default function EventEditor({ setEditor, eventData }) {
                 
                 <div className="flex gap-2 items-center justify-between">
     
-                    <BackButton onClick= { handleCancel } />
+                    <BackButton 
+                        textTitle="Annuler les modifications"
+                        onClick= { handleCancel } />
     
                     <h2 className="font-bold">Modifier les informations de l'événement</h2>
     
                 </div>
     
                 {/* Messages d'erreurs */}
-                <div className={`text-center bg-white rounded-lg w-1/2 my-2 mx-auto`}>
+                <div className={`text-center bg-white rounded-lg w-full my-2 mx-auto`}>
     
                     {errors.name && <p className="text-red-500" >{ errors.name }</p>}
                     {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
-                    {errors.race && <p className="text-red-500" >{ errors.race }</p>}
                     {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
                     {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
+                    {errors.capacity && <p className="text-red-500" >{ errors.capacity }</p>}
+                    {errors.hourEnd && <p className="text-red-500" >{ errors.hourEnd }</p>}
+                    {errors.pinCode && <p className="text-red-500" >{ errors.pinCode }</p>}
     
                 </div>
     
@@ -112,7 +117,15 @@ export default function EventEditor({ setEditor, eventData }) {
                         className="flex flex-col gap-4">
     
                         <div className="flex flex-col"> 
-                            <label className="font-bold">Nom</label>
+                            <div className="flex justify-between">
+                                <div className="flex gap-1 items-center">
+                                    <label className="font-bold">Nom de l'événement</label>
+                                    <p className="text-xs text-mario" >{data.name.length < 3 && 'Le nom du tournoi doit comporter 3 caractères minimum.'}</p>
+                                </div>
+                                <p className={`text-sm ${(data.name.length == 15 || data.name.length < 3) && 'text-mario'}`} >
+                                    {data.name.length}/15
+                                </p>
+                            </div>
                             <input 
                                 value={data.name}
                                 onChange={handleName}
@@ -125,16 +138,16 @@ export default function EventEditor({ setEditor, eventData }) {
                             <label className="font-bold">Options</label>
                             <div className="bg-white rounded-lg py-4">
                                 <PrimaryOptions 
+                                    setModal={setModal}
+                                    eventData={ eventData }
                                     setData= { setData }
-                                    data= { data }
-                                    eventData= { eventData } />
+                                    data= { data } />
                             </div>
     
                         </div>
     
                         <EditorRequestOptions 
                             disabled= { disabled }
-                            setEditor= { setEditor } 
                             setEditValidation= { setEditValidation }
                             setEventStop= { setEventStop } />
     

@@ -61,6 +61,23 @@ class Tournament
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $registered;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $hourEnd = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\Positive]
+    #[Assert\Length(
+        min: 6,
+        max: 6,
+        minMessage: 'Le mot de passe doit comporter {{ limit }} chiffres.',
+        maxMessage: 'Le mot de passe doit comporter {{ limit }} chiffres.',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/',
+        message: 'Le mot de passe doit être composé de chiffres uniquement.'
+    )]
+    private ?int $pinCode = null;
+
     public function __construct()
     {
         $this->entries = new ArrayCollection();
@@ -218,6 +235,30 @@ class Tournament
     public function removeRegistered(User $registered): self
     {
         $this->registered->removeElement($registered);
+
+        return $this;
+    }
+
+    public function getHourEnd(): ?\DateTimeInterface
+    {
+        return $this->hourEnd;
+    }
+
+    public function setHourEnd(?\DateTimeInterface $hourEnd): self
+    {
+        $this->hourEnd = $hourEnd;
+
+        return $this;
+    }
+
+    public function getPinCode(): ?int
+    {
+        return $this->pinCode;
+    }
+
+    public function setPinCode(?int $pinCode): self
+    {
+        $this->pinCode = $pinCode;
 
         return $this;
     }

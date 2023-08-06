@@ -34,4 +34,24 @@ export function getFormattedDate(dateString) {
   
     return `${jour} ${jourMois} ${moisAnnee} ${annee}`;
   }
+
+  {/** Formate Date et Time en new Date */}
   
+  export function createDateTimeObject(dateString, timeString) {
+    // Concaténer la date et l'heure avec le séparateur 'T'
+    const dateTimeString = `${dateString}T${timeString}`;
+  
+    // Créer un nouvel objet Date à partir de la chaîne formatée
+    const dateTimeObject = new Date(dateTimeString);
+  
+    // Vérifier si la date est valide
+    if (isNaN(dateTimeObject.getTime())) {
+      console.error("Date ou heure invalide !");
+      return null;
+    }
+  
+    // Vous pouvez ajuster la date en fonction du fuseau horaire ici
+    // Exemple : dateTimeObject.setHours(dateTimeObject.getHours() + offsetHours);
+  
+    return dateTimeObject;
+  }

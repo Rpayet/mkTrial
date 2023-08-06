@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import UserEntry from "./UserEntry";
 
-export default function UsersEntries({ user, event, rankList, setShowUser, setSection }) {
-
-    const [hoveredEntryKey, setHoveredEntryKey] = useState(null);
+export default function UsersEntries({ rankList }) {
 
     return (
         <>
             {rankList.map((entry, i) => (
                 <UserEntry 
-                    user= { user }
-                    event= { event }
-                    entry= { entry } 
-                    i= { i }
-                    hoveredEntryKey= { hoveredEntryKey }
-                    setHoveredEntryKey= { setHoveredEntryKey }
-                    setShowUser= { setShowUser } 
-                    setSection= { setSection } />
+                    key= { entry.id }
+                    rank= { i }
+                    entry= { entry } />
             ))}
         </>
     )
