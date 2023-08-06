@@ -65,6 +65,17 @@ class Tournament
     private ?\DateTimeInterface $hourEnd = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Positive]
+    #[Assert\Length(
+        min: 6,
+        max: 6,
+        minMessage: 'Le mot de passe doit comporter {{ limit }} chiffres.',
+        maxMessage: 'Le mot de passe doit comporter {{ limit }} chiffres.',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/',
+        message: 'Le mot de passe doit être composé de chiffres uniquement.'
+    )]
     private ?int $pinCode = null;
 
     public function __construct()

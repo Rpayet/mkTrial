@@ -3,7 +3,6 @@ import {RxCrossCircled} from 'react-icons/rx'
 
 export default function HourSelect ({ event, setHour, data, setData }) {
 
-
     const handleHourChange = (event) => {   
         setData({ ...data, hourEnd: event.target.value });
     }

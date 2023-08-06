@@ -4,13 +4,16 @@ import Userinfo from "../UI/OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
 import { EventContext } from "../../_Provider/EventContext";
 import { getFormattedDate } from "../_Services/FormatTime";
+import Modal from "../../_GlobalUi/Modal";
 
 export default function OnGoing() {
 
-    const { animation, isLoading, event } = useContext(EventContext);
+    const { animation, isLoading, event, modal } = useContext(EventContext);
 
     return (
-        <div className="w-full sm:flex gap-4 p-4">
+        <div className="relative w-full sm:flex gap-4 p-4">
+
+            { modal.visibility && <Modal />}
 
             <div className={`relative sm:w-1/3 sm:h-fit bg-white 
                 rounded-xl flex sm:flex-col gap-4 p-4 mb-2

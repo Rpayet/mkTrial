@@ -10,7 +10,7 @@ import { toggleSection } from "../../../../_Service/SectionService";
 export default function EventEditor() {
 
     const [disabled, setDisabled] = useState(true);
-    const {data, setData, event, eventData, setSection, section } = useContext(EventContext);
+    const {data, setData, event, eventData, setSection, section, setModal } = useContext(EventContext);
     const [editValidation, setEditValidation] = useState(false);
     const [eventStop, setEventStop] = useState(false);
 
@@ -24,11 +24,12 @@ export default function EventEditor() {
                 hourEnd: event.hourEnd,
                 capacity: event.capacity,
                 privacy: event.privacy,
+                pinCode: event.pinCode,
                 race: event.race.id,
             })
         }
     }, [data, event]);
-
+    
     {/* Met à jour le nom de data */}
     const handleName = (event) => {
         const inputValue = event.target.value;
@@ -48,6 +49,7 @@ export default function EventEditor() {
             hourEnd: event.hourEnd,
             capacity: event.capacity,
             privacy: event.privacy,
+            pinCode: event.pinCode,
             race: event.race.id,
         })
     } 
@@ -57,15 +59,17 @@ export default function EventEditor() {
 
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
-        const { name, speed, endAt, capacity, privacy, hourEnd } = event;
+        const { name, speed, endAt, capacity, privacy, hourEnd, pinCode } = event;
         
-        if (data?.name === name && data?.speed === speed && data?.endAt === endAt &&
-            data?.capacity === capacity && data?.privacy === privacy && data?.hourEnd === hourEnd) {
+        if ((data?.name === name) && (data?.speed === speed) && (data?.endAt === endAt) && (data?.pinCode === pinCode) &&
+            (data?.capacity === capacity) && (data?.privacy === privacy) && (data?.hourEnd === hourEnd)) {
             setDisabled(true);
         } else {
             setDisabled(false);
         }
     }, [data, event]);
+
+    console.log(data);
 
     if (editValidation) {
 
@@ -105,6 +109,8 @@ export default function EventEditor() {
                     {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
                     {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
                     {errors.capacity && <p className="text-red-500" >{ errors.capacity }</p>}
+                    {errors.hourEnd && <p className="text-red-500" >{ errors.hourEnd }</p>}
+                    {errors.pinCode && <p className="text-red-500" >{ errors.pinCode }</p>}
     
                 </div>
     
@@ -134,6 +140,7 @@ export default function EventEditor() {
                             <label className="font-bold">Options</label>
                             <div className="bg-white rounded-lg py-4">
                                 <PrimaryOptions 
+                                    setModal={setModal}
                                     eventData={ eventData }
                                     setData= { setData }
                                     data= { data } />

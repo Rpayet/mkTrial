@@ -72,10 +72,31 @@ export const EventProvider = ({ children }) => {
         }
     }, [eventData]);
 
+    {/** Modal / Pop-Up State */}
+    const [modal, setModal] = useState({
+        visibility: false,
+        title: '',
+        content: null,
+        buttons: [
+        {
+            text: 'Annuler',
+            action: () => setModal({ ...modal, visibility: false }),
+            type: null,
+            disabled: false,
+        },
+        {
+            text: 'Valider',
+            action: null,
+            type: null,
+            disabled: false,
+        },
+        ],
+    });
+    
     const eventContextValue = {
         eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
         isUserRegistered, isOngoing, setIsOngoing, newEntry, setNewEntry, data, setData,
-        showUser, setShowUser,
+        showUser, setShowUser, modal, setModal,
         isLoading, setIsLoading, animation, setAnimation, filled, setFilled, 
         section, setSection, registration, setRegistration, isModerator, setIsModerator,
     };

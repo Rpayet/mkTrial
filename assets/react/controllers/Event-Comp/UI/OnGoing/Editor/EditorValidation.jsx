@@ -27,6 +27,8 @@ export default function EditorValidation({ setEditValidation, setErrors, errors 
             setIsLoading({...event, event: false});
         }
     }
+
+    console.log(data?.pinCode, event?.pinCode)
     
     return (
 
@@ -46,7 +48,7 @@ export default function EditorValidation({ setEditValidation, setErrors, errors 
                 {data.capacity != event.capacity && <p>Place disponible :<span className="font-bold"> {data.capacity ? data.capacity : 'Ouvert'}</span></p>}
                 {data.privacy != event.privacy && <p>Confidentialité :<span className="font-bold"> {data.privacy ? 'Privée' : 'Public'}</span></p>}
                 {data.hourEnd != event.hourEnd && <p>Heure de fin :<span className="font-bold"> {data.hourEnd}</span></p>}          
-
+                {data.pinCode != event.pinCode && <p>Code d'accès :<span className="font-bold"> {data.pinCode}</span></p>}
             </div> 
             
 

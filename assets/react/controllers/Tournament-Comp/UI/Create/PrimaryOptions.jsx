@@ -1,146 +1,58 @@
-import React, { useEffect, useState } from "react";
-import Switch from "react-switch";
+import React, { useState } from "react";
 import DateSelect from "./DateSelect";
-import { BiSolidLockOpen, BiSolidLock } from 'react-icons/bi';
 import HourSelect from "./HourSelect";
+import PrivacySelect from "./PrivacySelect";
+import SpeedSelect from "./SpeedSelect";
+import CapacitySelect from "./CapacitySelect";
 
-export default function PrimaryOptions ({ setData, data, eventData }) {
+export default function PrimaryOptions ({ setModal, setData, data, eventData }) {
 
-    const [speed, setSpeed] = useState(false);
-    const [privacy, setPrivacy] = useState(false);
-    const [capacity, setCapacity] = useState(data?.capacity || '');
     const [hour, setHour] = useState(data.hourEnd ? true : false);
     const { event } = eventData ? eventData : '';
-
-    const toggleSpeed = () => {
-
-        setSpeed(!speed);
-
-        if (speed === false) {
-            setData({ ...data, speed: '200cc' });
-        } else {
-            setData({ ...data, speed: '150cc' });
-        }
-    }
-
-    const togglePrivacy = () => {
-
-        setPrivacy(!privacy);
-    
-        if (privacy == false) {
-            setData({ ...data, privacy: true })
-        } else {
-            setData({ ...data, privacy: false })
-        }
-    }
-
-    const handleCapacity = (event) => {
-        setData({...data, capacity: parseInt(event.target.value)});
-        setCapacity(event.target.value);
-    }
-
-    useEffect(() => {
-        
-        if (data?.speed === '200cc') {
-            setSpeed(true);
-        }
-
-        if (data?.privacy === true) {
-            setPrivacy(true);
-        }
-
-    }, [eventData])
 
     return (
         <>
             <div className="flex flex-wrap items-center justify-center gap-4">
 
                 {/* Sélection de la vitesse */}
-                <div>
-                    <span className="block text-xs text-center text-gray-500 font-bold p-1">Vitesse</span>
-                    <Switch 
-                        width={ 40 }
-                        height={ 20 }
-                        onColor="#EBEBEB"
-                        offColor="#EBEBEB"
-                        onHandleColor="#efc900"
-                        offHandleColor="#02affc"
-                        checked={ speed }
-                        onChange={ toggleSpeed }
-                        handleDiameter={ 30 }
-                        uncheckedIcon={ false }
-                        checkedIcon={ false }
-                        uncheckedHandleIcon={
-                            <div className="flex items-center text-xs font-bold text-white p-1.5">150</div>
-                            }
-                        checkedHandleIcon={
-                            <div className="flex items-center text-xs font-bold text-white p-1.5">200</div>
-                        } />
-
-                </div>
+                <SpeedSelect 
+                    event={event}
+                    data={data}
+                    setData={setData} />
 
                 {/* Sélection date de fin de l'événement */}
                 <DateSelect
                     setHour={setHour}
                     hour={hour}
-                    setData= { setData }
-                    data= { data } />
+                    setData= {setData}
+                    data= {data} />
 
                 {/* Sélection heure de fin de l'événement */}
-                {  hour 
-                    && <HourSelect 
+                {  hour &&
+                    <HourSelect 
                         event={event}
                         setHour={setHour}
                         hour={hour}
                         setData={setData} 
-                        data={ data } /> }
+                        data={data} /> }
 
                 {/* Sélection du nombre de participants */}
-                <div>
-                    <span className="block text-xs text-center text-gray-500 font-bold p-1">Places disponibles</span>
-                    <input 
-                        type="number"
-                        className="block w-36 mx-auto px-2 py-1 border rounded-lg 
-                        cursor-pointer focus:outline-none focus:border-lumi" 
-                        placeholder="Sans limite"
-                        min={ event?.registered.length || 3 }
-                        value={ capacity }
-                        onChange={ handleCapacity }/>
-
-                </div>
+                <CapacitySelect 
+                    event={event}
+                    data={data}
+                    setData={setData} />
 
                 {/* Sélection de la confidentialité de l'événement */}
-                <div>
-                        
-                    <span className="block text-xs text-center text-gray-500 font-bold p-1">Visibilité</span>
-                    <Switch 
-                        width={ 40 }
-                        height={ 20 }
-                        onColor="#EBEBEB"
-                        offColor="#EBEBEB"
-                        onHandleColor="#9F9F9F"
-                        offHandleColor="#9F9F9F"
-                        checked={ privacy }
-                        onChange={ togglePrivacy }
-                        handleDiameter={ 30 }
-                        uncheckedIcon={ false }
-                        checkedIcon={ false }
-                        uncheckedHandleIcon={
-                            <div className="flex items-center p-1.5">
-                                <BiSolidLockOpen className="w-4 h-4"/>
-                            </div>
-                            }
-                        checkedHandleIcon={
-                            <div className="flex items-center p-1.5">
-                                <BiSolidLock className="w-4 h-4 text-mario"/>
-                            </div>
-                        } />
-
-                </div>
+                <PrivacySelect 
+                    data={data}
+                    setData={setData}
+                    event={event}
+                    setModal={setModal} />
 
             </div>
+
             <div>
-                { (capacity < event?.registered.length && capacity != null && capacity != '' ) && 
+                { (data?.capacity < event?.registered.length && data?.capacity != null && data?.capacity != '' ) && 
                     <p className="text-xs text-center text-mario font-bold px-4">
                         Le nombre de place disponible ne peut pas être inférieur au nombre de participant inscrit actuellement.
                     </p> }
@@ -148,5 +60,3 @@ export default function PrimaryOptions ({ setData, data, eventData }) {
         </>
     )
 }
-
-// https://www.npmjs.com/package/react-switch

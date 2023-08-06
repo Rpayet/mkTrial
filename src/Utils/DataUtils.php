@@ -68,6 +68,7 @@ class DataUtils
             })->toArray(),
             'user' => self::getUserData($event->getUser()),
             'race' => self::getRaceData($event->getRace()),
+            'pinCode' => $event->getPinCode(),
         ];
     
         // Vérifie si hourEnd est null avant de l'ajouter au tableau

@@ -42,6 +42,9 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'invalid_message' => 'Le format de l\'heure est non-conforme',
             ])
+            ->add('pinCode', null, [
+                'invalid_message' => 'Le mot de passe doit contenir 6 chiffres.',
+            ])
         ;
     }
 
