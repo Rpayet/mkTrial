@@ -69,8 +69,6 @@ export default function EventEditor() {
         }
     }, [data, event]);
 
-    console.log(data);
-
     if (editValidation) {
 
         return (
