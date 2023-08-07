@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CupSelection from "../UI/Create/CupSelect";
-import RaceSelect from "../UI/Create/RaceSelect";
+import CupSelection from "../../Event-Form/UI/CupSelect";
+import RaceSelect from "../../Event-Form/UI/RaceSelect";
 import PrimaryOptions from "../UI/Create/PrimaryOptions";
 
 export default function EventForm({ races, setData, data, errors, minDate }) {
