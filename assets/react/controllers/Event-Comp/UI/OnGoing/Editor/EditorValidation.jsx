@@ -27,8 +27,6 @@ export default function EditorValidation({ setEditValidation, setErrors, errors 
             setIsLoading({...event, event: false});
         }
     }
-
-    console.log(data?.pinCode, event?.pinCode)
     
     return (
 
