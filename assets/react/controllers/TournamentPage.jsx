@@ -32,7 +32,6 @@ export default function TournamentPage({ tournaments, races, mode }) {
         hourEnd: null,
         race: '',
         speed: '150cc',
-        privacy: false,
         pinCode: null,
         capacity: null,
     })

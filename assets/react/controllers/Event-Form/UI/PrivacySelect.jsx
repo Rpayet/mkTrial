@@ -54,7 +54,7 @@ export default function PrivacySelect({ data, setData }) {
 
             { privacy && (
                 <div className="flex flex-col gap-2 w-full text-center">
-                    <p className='text-xs'>{`${data?.pinCode ? 'Mettre à jour' : 'Définir'} le code d'accès au tournoi`}</p>
+                    <p className='text-xs'>{`${data?.pinCode ? 'Mettre à jour' : 'Définir'} le code d'accès au tournoi (6 chiffres)`}</p>
                     <input 
                         type="text" 
                         className='rounded-lg m-auto w-1/2 h-6 text-center font-bold bg-gray-200'
