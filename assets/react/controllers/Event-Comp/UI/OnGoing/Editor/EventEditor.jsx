@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import EditorRequestOptions from "./EditorRequestOptions";
-import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions";
 import { BackButton }from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";

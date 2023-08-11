@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
-import { BiSolidLockOpen, BiSolidLock, BiEditAlt } from 'react-icons/bi';
+import { BiSolidLockOpen, BiSolidLock } from 'react-icons/bi';
 
 export default function PrivacySelect({ data, setData }) {
 
@@ -54,11 +54,11 @@ export default function PrivacySelect({ data, setData }) {
 
             { privacy && (
                 <div className="flex flex-col gap-2 w-full text-center">
-                    <p className='text-xs'>{`${data?.pinCode ? 'Mettre à jour' : 'Définir'} le code d'accès au tournoi (6 chiffres)`}</p>
+                    <p className='text-xs'>{`${data?.pinCode ? 'Mettre à jour' : 'Définir'} le code d'accès au tournoi`}</p>
                     <input 
                         type="text" 
                         className='rounded-lg m-auto w-1/2 h-6 text-center font-bold bg-gray-200'
-                        placeholder='000000'
+                        placeholder='Code à 6 chiffres'
                         onChange={handlePinCode}
                         value={data?.pinCode || ''} />
                 </div>
