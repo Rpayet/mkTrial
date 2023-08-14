@@ -15,8 +15,8 @@ export default function PrivacySelect({ data, setData }) {
 
     const handlePinCode = (e) => {
         const value = e.target.value;
-        if (value.length <= 6) {
-            setData({ ...data, pinCode: parseInt(value) });
+        if (value.length <= 6 && value.match(/^[0-9]*$/)) {
+            setData({ ...data, pinCode: value });
         }
     }
         

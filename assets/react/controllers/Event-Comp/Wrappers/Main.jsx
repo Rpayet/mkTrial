@@ -3,13 +3,14 @@ import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
 import { EventService } from "../../_Service/EventService";
+import Pincode from "../UI/OnGoing/PinCode/Pincode";
 
 export default function Main({ id }) {
     
     const [isLoading, setIsLoading] = useState(true);
 
-    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing } = useContext(EventContext);
-       
+    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing, isLocked } = useContext(EventContext);
+    
     useEffect(() => {
         setEventId(id);
     }, [id]);
@@ -60,10 +61,18 @@ export default function Main({ id }) {
             </div>
         )
     }
+
+    // Si l'événement est complet et que l'utilisateur n'est pas inscrit, affichez un message
+
+    if (event && isLocked) {
+        return (
+            <Pincode />
+        )
+    }
     
     return (
         <>
-            { ( event && entries )
+            { ( event && entries && !isLocked )
                 ? ( (isOngoing) 
                     ? ( <OnGoing /> ) 
                     : ( <Finished /> ) ) 

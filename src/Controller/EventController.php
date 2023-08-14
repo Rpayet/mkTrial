@@ -237,5 +237,19 @@ class EventController extends AbstractController
         return $this->json(['success' => true]);
     }
 
+    #[Route('/api/event/{id}/checkPin', name: 'app_event_checkpin', methods: ['POST'])]
+    #[isGranted('ROLE_USER')]
+    public function checkPin( Request $request, int $id, TournamentRepository $tournamentRepository ) {
+        $event = $tournamentRepository->find($id);
+        $data = json_decode($request->getContent(), true);
+
+        if ($data['pincode'] != $event->getPinCode()) {
+            $error = ['pincode' => 'Le code est incorrect.'];
+            return $this->json($error, 422);
+        }
+
+        return $this->json(['success' => true]);
+    }
+
 }
  

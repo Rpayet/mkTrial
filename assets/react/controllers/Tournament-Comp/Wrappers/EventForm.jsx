@@ -28,6 +28,9 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                 {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
                 {errors.race && <p className="text-red-500" >{ errors.race }</p>}
                 {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
+                {errors.capacity && <p className="text-red-500" >{ errors.capacity }</p>}
+                {errors.hourEnd && <p className="text-red-500" >{ errors.hourEnd }</p>}
+                {errors.pinCode && <p className="text-red-500" >{ errors.pinCode }</p>}
 
             </div>
 
