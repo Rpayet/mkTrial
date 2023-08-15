@@ -26,7 +26,7 @@ export default function Pincode() {
 
     return (
         <div className="flex flex-col justify-center gap-2 font-bold text-center bg-white rounded-lg p-2 w-1/2 m-auto">
-                <p className=''>Vous souhaitez accéder au tournoi <span className='text-lumi'>{event?.name.toUpperCase()}</span></p>
+                <p>Vous souhaitez accéder au tournoi <span className='text-lumi'>{event?.name.toUpperCase()}</span></p>
                 <p>Organisé par <span className='text-lumi'>{event?.user.name.toUpperCase()}</span></p>
                 <input
                     className='w-1/3 m-auto p-2 border-2 focus:border-lumi rounded-md text-xl bg-slate-200 text-center'
@@ -35,6 +35,7 @@ export default function Pincode() {
                     value={code || ''}
                     type="text" />
                 {error && <p className='text-red-500'>{error.pincode}</p>}
+                {error && <p className='text-red-500'>{error.capacity}</p>}
                 <div className='flex gap-2 justify-center w-1/2 m-auto'>
                     <Button
                         onClick={handlePinCodeSubmit}

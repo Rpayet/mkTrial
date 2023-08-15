@@ -4,12 +4,13 @@ import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
 import { EventService } from "../../_Service/EventService";
 import Pincode from "../UI/OnGoing/PinCode/Pincode";
+import Closed from "../UI/OnGoing/PinCode/Closed";
 
 export default function Main({ id }) {
     
     const [isLoading, setIsLoading] = useState(true);
 
-    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing, isLocked } = useContext(EventContext);
+    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing, isLocked, isUserRegistered } = useContext(EventContext);
     
     useEffect(() => {
         setEventId(id);
@@ -62,14 +63,20 @@ export default function Main({ id }) {
         )
     }
 
-    // Si l'événement est complet et que l'utilisateur n'est pas inscrit, affichez un message
-
     if (event && isLocked) {
-        return (
-            <Pincode />
-        )
+
+        if (( event.registered.length !== event.capacity ) && !isUserRegistered){ 
+            return (
+                <Pincode />
+            )
+        } else if(( event.registered.length >= event.capacity ) && !isUserRegistered) {
+            return (
+                <Closed />
+            )
+        }
     }
-    
+
+
     return (
         <>
             { ( event && entries && !isLocked )

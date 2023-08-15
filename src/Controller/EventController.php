@@ -248,6 +248,13 @@ class EventController extends AbstractController
             return $this->json($error, 422);
         }
 
+        if ($data['pincode'] == $event->getPinCode() 
+            && $event->getRegistered()->count() >= $event->getCapacity()
+            && $event->getCapacity() != null) {
+            $error = ['capacity' => 'Plus de places disponibles.'];
+            return $this->json($error, 422);
+        }
+
         return $this->json(['success' => true]);
     }
 

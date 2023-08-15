@@ -11,13 +11,13 @@ export default function TopList({entry, i}) {
                 className="absolute z-10 bottom-0 left-1/2 transform -translate-x-1/2
                             p-2 rounded-lg flex flex-col items-center gap-4">
             
-                    <div className="relative p-1 rounded-full bg-gradient-to-t from-first-200 to-first-400">
+                    <div className="relative p-2 rounded-full bg-gradient-to-t from-first-200 to-first-400">
                         <img
                             className="h-32 rounded-full"
                             src={entry.user.picture ? `/assets/user/img/${entry.user.picture}` : '/assets/admin/img/icons/Default.png'} 
                             alt={entry.user.picture ? `${entry.user.picture}` : 'Default.png'} />
                         <img 
-                            className="absolute -bottom-4 transform scale-150"
+                            className="absolute -bottom-4 left-0 transform scale-150"
                             src="/assets/admin/img/icons/First-Icon.png"
                             alt="FirstIcon" />
                     </div>
@@ -37,7 +37,7 @@ export default function TopList({entry, i}) {
                 className="absolute bottom-0 left-12
                             p-2 rounded-lg flex flex-col items-center gap-4">
             
-                    <div className="relative p-1 rounded-full bg-gradient-to-b from-second-200 to-second-400">
+                    <div className="relative p-1.5 rounded-full bg-gradient-to-b from-second-200 to-second-400">
                         <img
                             className="h-28 rounded-full" 
                             src={entry.user.picture ? `/assets/user/img/${entry.user.picture}` : '/assets/admin/img/icons/Default.png'} 
