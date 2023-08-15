@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import DateSelect from "./DateSelect";
-import HourSelect from "./HourSelect";
-import PrivacySelect from "./PrivacySelect";
+import DateSelect from "../../../Event-Form/UI/DateSelect";
+import HourSelect from "../../../Event-Form/UI/HourSelect";
+import PrivacySelect from "../../../Event-Form/UI/PrivacySelect";
 import SpeedSelect from "./SpeedSelect";
-import CapacitySelect from "./CapacitySelect";
+import CapacitySelect from "../../../Event-Form/UI/CapacitySelect";
 
 export default function PrimaryOptions ({ setModal, setData, data, eventData }) {
 

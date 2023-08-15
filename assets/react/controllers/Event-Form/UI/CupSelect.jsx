@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
-import RaceRandomizer from "./RaceRandomizer";
+import RaceRandomizer from "../../Tournament-Comp/UI/Create/RaceRandomizer";
 
 
 export default function CupSelect({ data, setData, races, cupSelection, setCupSelection, currentPage, setCurrentPage, setRaceSelection }) {

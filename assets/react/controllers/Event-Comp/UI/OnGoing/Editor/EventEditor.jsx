@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import EditorRequestOptions from "./EditorRequestOptions";
-import PrimaryOptions from "../../../../Tournament-Comp/UI/Create/PrimaryOptions";
 import { BackButton }from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 import { toggleSection } from "../../../../_Service/SectionService";
+import Options from "./Options";
 
 export default function EventEditor() {
 
@@ -23,7 +23,6 @@ export default function EventEditor() {
                 endAt: event.endAt,
                 hourEnd: event.hourEnd,
                 capacity: event.capacity,
-                privacy: event.privacy,
                 pinCode: event.pinCode,
                 race: event.race.id,
             })
@@ -48,7 +47,6 @@ export default function EventEditor() {
             endAt: event.endAt,
             hourEnd: event.hourEnd,
             capacity: event.capacity,
-            privacy: event.privacy,
             pinCode: event.pinCode,
             race: event.race.id,
         })
@@ -59,10 +57,10 @@ export default function EventEditor() {
 
     {/* Vérifie Si l'état de Data a été modifié */}
     useEffect(() => {
-        const { name, speed, endAt, capacity, privacy, hourEnd, pinCode } = event;
+        const { name, speed, endAt, capacity, hourEnd, pinCode } = event;
         
         if ((data?.name === name) && (data?.speed === speed) && (data?.endAt === endAt) && (data?.pinCode === pinCode) &&
-            (data?.capacity === capacity) && (data?.privacy === privacy) && (data?.hourEnd === hourEnd)) {
+            (data?.capacity === capacity) && (data?.hourEnd === hourEnd)) {
             setDisabled(true);
         } else {
             setDisabled(false);
@@ -105,7 +103,6 @@ export default function EventEditor() {
                     {errors.name && <p className="text-red-500" >{ errors.name }</p>}
                     {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
                     {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
-                    {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
                     {errors.capacity && <p className="text-red-500" >{ errors.capacity }</p>}
                     {errors.hourEnd && <p className="text-red-500" >{ errors.hourEnd }</p>}
                     {errors.pinCode && <p className="text-red-500" >{ errors.pinCode }</p>}
@@ -137,7 +134,7 @@ export default function EventEditor() {
                             
                             <label className="font-bold">Options</label>
                             <div className="bg-white rounded-lg py-4">
-                                <PrimaryOptions 
+                                <Options
                                     setModal={setModal}
                                     eventData={ eventData }
                                     setData= { setData }

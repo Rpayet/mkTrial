@@ -24,7 +24,7 @@ class TournamentController extends AbstractController
         // Pour récupérer le tableau d'objet des Tournois.
         $tournaments = $tournamentRepository
                     ->createQueryBuilder('t')
-                    ->where('t.endAt >= :today')
+                    ->where('t.endAt >= :today', 't.pinCode IS NULL')
                     ->setParameter('today', new \DateTime())
                     ->orderBy('t.endAt', 'ASC')
                     ->getQuery()

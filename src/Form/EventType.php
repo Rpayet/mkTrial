@@ -32,9 +32,6 @@ class EventType extends AbstractType
                 'invalid_message' => 'Erreur dans la sélection de la vitesse.',
 
             ])
-            ->add('privacy', null, [
-                'invalid_message' => 'Erreur dans la sélection de la confidentialités.',
-            ])
             ->add('capacity', null, [
                 'invalid_message' => 'La sélection doit être supérieur ou égale à 3.',
             ])

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { updateProgress } from "./Loading";
-import { toggleSection } from "./SectionService";
 
 export function EventService () {
 
@@ -121,6 +120,16 @@ export function EventService () {
     }
   };
 
+  // Requête POST check pincode
+  const checkPin = async (eventId, pincode, setErrors) => {
+    try {
+      const response = await axios.post(`/api/event/${eventId}/checkPin`, { pincode });
+      return response.data;
+    } catch (error) {
+      setErrors(error.response.data);
+    }
+  };
+  
   return {
     getEvent,
     updateEvent,
@@ -130,5 +139,6 @@ export function EventService () {
     eventUnregister,
     postEntry,
     deleteEntry,
+    checkPin,
   };
 };

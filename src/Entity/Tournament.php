@@ -38,9 +38,6 @@ class Tournament
     #[ORM\Column(length: 255)]
     private ?string $speed = null;
 
-    #[ORM\Column]
-    private ?bool $privacy = null;
-
     #[ORM\ManyToOne(inversedBy: 'tournaments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'Choix de course requis.')]
@@ -133,18 +130,6 @@ class Tournament
     public function setSpeed(string $speed): self
     {
         $this->speed = $speed;
-
-        return $this;
-    }
-
-    public function isPrivacy(): ?bool
-    {
-        return $this->privacy;
-    }
-
-    public function setPrivacy(bool $privacy): self
-    {
-        $this->privacy = $privacy;
 
         return $this;
     }

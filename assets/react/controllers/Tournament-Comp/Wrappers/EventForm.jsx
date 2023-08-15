@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CupSelection from "../UI/Create/CupSelect";
-import RaceSelect from "../UI/Create/RaceSelect";
+import CupSelection from "../../Event-Form/UI/CupSelect";
+import RaceSelect from "../../Event-Form/UI/RaceSelect";
 import PrimaryOptions from "../UI/Create/PrimaryOptions";
 
 export default function EventForm({ races, setData, data, errors, minDate }) {
@@ -28,7 +28,9 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                 {errors.endAt && <p className="text-red-500" >{ errors.endAt }</p>}
                 {errors.race && <p className="text-red-500" >{ errors.race }</p>}
                 {errors.speed && <p className="text-red-500" >{ errors.speed }</p>}
-                {errors.privacy && <p className="text-red-500" >{ errors.privacy }</p>}
+                {errors.capacity && <p className="text-red-500" >{ errors.capacity }</p>}
+                {errors.hourEnd && <p className="text-red-500" >{ errors.hourEnd }</p>}
+                {errors.pinCode && <p className="text-red-500" >{ errors.pinCode }</p>}
 
             </div>
 

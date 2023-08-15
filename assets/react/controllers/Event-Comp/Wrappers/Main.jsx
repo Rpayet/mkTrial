@@ -3,13 +3,15 @@ import OnGoing from "../Wrappers/OnGoing";
 import Finished from "../Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
 import { EventService } from "../../_Service/EventService";
+import Pincode from "../UI/OnGoing/PinCode/Pincode";
+import Closed from "../UI/OnGoing/PinCode/Closed";
 
 export default function Main({ id }) {
     
     const [isLoading, setIsLoading] = useState(true);
 
-    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing } = useContext(EventContext);
-       
+    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing, isLocked, isUserRegistered } = useContext(EventContext);
+    
     useEffect(() => {
         setEventId(id);
     }, [id]);
@@ -60,10 +62,24 @@ export default function Main({ id }) {
             </div>
         )
     }
-    
+
+    if (event && isLocked) {
+
+        if (( event.registered.length !== event.capacity ) && !isUserRegistered){ 
+            return (
+                <Pincode />
+            )
+        } else if(( event.registered.length >= event.capacity ) && !isUserRegistered) {
+            return (
+                <Closed />
+            )
+        }
+    }
+
+
     return (
         <>
-            { ( event && entries )
+            { ( event && entries && !isLocked )
                 ? ( (isOngoing) 
                     ? ( <OnGoing /> ) 
                     : ( <Finished /> ) ) 

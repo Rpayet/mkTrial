@@ -72,6 +72,13 @@ export const EventProvider = ({ children }) => {
         }
     }, [eventData]);
 
+    const [isLocked, setIsLocked] = useState(false);
+    useEffect(() => {
+        if (event?.pinCode && !isUserRegistered ) {
+            setIsLocked(true);
+        }
+    }, [event]);
+    
     {/** Modal / Pop-Up State */}
     const [modal, setModal] = useState({
         visibility: false,
@@ -96,7 +103,7 @@ export const EventProvider = ({ children }) => {
     const eventContextValue = {
         eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,
         isUserRegistered, isOngoing, setIsOngoing, newEntry, setNewEntry, data, setData,
-        showUser, setShowUser, modal, setModal,
+        showUser, setShowUser, isLocked, setIsLocked, modal, setModal,
         isLoading, setIsLoading, animation, setAnimation, filled, setFilled, 
         section, setSection, registration, setRegistration, isModerator, setIsModerator,
     };

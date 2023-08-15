@@ -30,7 +30,6 @@ class HomeController extends AbstractController
                 'createdAt' => $tournament->getCreatedAt(),
                 'endAt' => $tournament->getEndAt()->format('m/d/Y'),
                 'speed' => $tournament->getSpeed(),
-                'privacy' => $tournament->isPrivacy(),
                 'capacity' => $tournament->getCapacity(),
                 'race' => [
                     'id' => $tournament->getRace()->getId(),
