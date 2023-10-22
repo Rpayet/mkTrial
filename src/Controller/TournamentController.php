@@ -82,4 +82,20 @@ class TournamentController extends AbstractController
             ],
         ]);
     }
+
+    #[Route('/api/tournament/list', name: 'app_tournament_list', methods: ['GET'])]
+    public function list(TournamentRepository $tournamentRepository): Response
+    {
+        $tournaments = $tournamentRepository
+                    ->createQueryBuilder('t')
+                    ->where('t.endAt >= :today', 't.pinCode IS NULL')
+                    ->setParameter('today', new \DateTime())
+                    ->orderBy('t.endAt', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+
+        $data = array_map([DataUtils::class, 'getEventData'], $tournaments);
+
+        return $this->json($data);
+    }
 }

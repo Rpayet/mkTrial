@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./Tournament-Comp/UI/Search/SearchBar";
 import ListSorter from "./Tournament-Comp/Wrappers/ListSorter";
 import EventForm from "./Tournament-Comp/Wrappers/EventForm";
 import axios from "axios";
 
-export default function TournamentPage({ tournaments, races, mode }) {
+export default function Tournament({ races, mode }) {
 
+    const [tournaments, setTournaments] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get("/api/tournament/list")
+            .then(response => setTournaments(response.data))
+            .catch(error => console.error(error));
+    }, []);
+    
     const [visibility, setVisibility] = useState(false);
 
     const minDate = new Date().toISOString().substring(0, 10);
@@ -18,12 +27,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
     const [eventName, setEventName] = useState('');
 
     {/* Tableau des paramètres de filtres */}
-    const [sortList, setSortList] = useState({
-        cup: [],
-        race: [],
-        input: '',
-        speed: [],
-    });
+    const [sortList, setSortList] = useState({ cup: [], race: [], input: '', speed: [], });
 
     {/* Tableau des paramètres à envoyer au formulaire */}
     const [data, setData] = useState({
@@ -34,7 +38,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
         speed: '150cc',
         pinCode: null,
         capacity: null,
-    })
+    });
 
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
@@ -51,7 +55,7 @@ export default function TournamentPage({ tournaments, races, mode }) {
                 location = "/event/" + response.data.event.id;
             })
             .catch(errors => setErrors(errors.response.data));
-    }
+    };
     
     return (
 

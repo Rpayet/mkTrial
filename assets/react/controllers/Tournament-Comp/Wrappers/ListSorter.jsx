@@ -27,6 +27,14 @@ export default function ListSorter({ tournaments, sortList }) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (tournaments === null) {
+            return (
+                <div className=''>Chargement...</div>
+            ) ;
+        }
+    }, [tournaments]);
+
     {/* Filtres avec les noms des checkboxes "race"/"cup" et le champ input */}
     let filteredTournaments = tournaments;
 
