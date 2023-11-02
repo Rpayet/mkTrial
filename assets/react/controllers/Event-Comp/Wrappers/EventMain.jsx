@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
-import OnGoing from "../Wrappers/OnGoing";
-import Finished from "../Wrappers/Finished";
+import OnGoing from "./OnGoing";
+import Finished from "./Finished";
 import { EventContext } from "../../_Provider/EventContext";
 import { EventService } from "../../_Service/EventService";
 import Pincode from "../UI/OnGoing/PinCode/Pincode";
 import Closed from "../UI/OnGoing/PinCode/Closed";
 
-export default function Main({ id }) {
+export default function EventMain({ id }) {
     
     const [isLoading, setIsLoading] = useState(true);
 
