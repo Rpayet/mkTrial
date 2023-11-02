@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function RandomNameButton({ setEventName, data, setData }) {
+export default function RandomNameButton({ setEventName }) {
+
+    const { setData } = useContext(TournamentContext);
 
     const firstWord = ['ultra', 'retro', 'star', 'banana', 'virtual',
                     'bonus', 'bobomb', 'jungle', 'slam', 'master',
@@ -25,7 +28,7 @@ export default function RandomNameButton({ setEventName, data, setData }) {
                             + randomSecondWord.charAt(0).toUpperCase() 
                             + randomSecondWord.slice(1);
         setEventName(randomName);
-        setData({ ...data, name: randomName });
+        setData((prevData) => ({ ...prevData, name: randomName }));
     }
 
     return (
@@ -34,7 +37,7 @@ export default function RandomNameButton({ setEventName, data, setData }) {
                             border-solid border-[1px] border-silver text-silver 
                             hover:text-lumi hover:cursor-pointer"
                 onClick={handleRandomName}>
-                Nom aléatoire
+                    Nom aléatoire
             </div>
         </div>
     )

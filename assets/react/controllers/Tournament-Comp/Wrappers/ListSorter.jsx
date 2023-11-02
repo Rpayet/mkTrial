@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import EventCard from "../UI/Search/EventCard";
 import ScrollReset from "../UI/Search/ScrollReset";
+import { TournamentContext } from "../../_Provider/TournamentContext";
 
-export default function ListSorter({ tournaments, sortList }) {
+export default function ListSorter({ sortList }) {
+
+    const { tournaments } = useContext(TournamentContext);
 
     {/* Scroll Content Control */}
     const [endIndex, setEndIndex] = useState(6);

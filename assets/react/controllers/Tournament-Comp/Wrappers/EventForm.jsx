@@ -3,7 +3,7 @@ import CupSelection from "../../Event-Form/UI/CupSelect";
 import RaceSelect from "../../Event-Form/UI/RaceSelect";
 import PrimaryOptions from "../UI/Create/PrimaryOptions";
 
-export default function EventForm({ races, setData, data, errors, minDate }) {
+export default function EventForm({ races, errors }) {
 
     const [cupSelection, setCupSelection] = useState('');
     const [raceSelection, setRaceSelection] = useState('');
@@ -40,11 +40,8 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
 
                     {/* Comp avec les switches Speed / Privacy */}
                     <PrimaryOptions
-                        data= { data }
-                        setData= { setData }
                         dateValue= { dateValue } 
-                        setDateValue= { setDateValue }
-                        minDate= { minDate } />
+                        setDateValue= { setDateValue } />
 
                 </div>
 
@@ -52,8 +49,6 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                     
                     {/* Sélection des coupes */}
                     <CupSelection
-                        data= { data }
-                        setData= { setData }
                         races= { races } 
                         cupSelection= { cupSelection } 
                         setCupSelection= { setCupSelection }
@@ -66,9 +61,7 @@ export default function EventForm({ races, setData, data, errors, minDate }) {
                         races= {races} 
                         cupSelection= { cupSelection } 
                         raceSelection= { raceSelection } 
-                        setRaceSelection= { setRaceSelection }
-                        data= { data }
-                        setData= { setData } />
+                        setRaceSelection= { setRaceSelection } />
 
                 </div>
 

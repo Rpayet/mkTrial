@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TournamentContext } from "../../_Provider/TournamentContext";
 
-export default function RaceSelect({ races, cupSelection, data, setData }) {
+export default function RaceSelect({ races, cupSelection }) {
+
+    const { data, setData } = useContext(TournamentContext);
 
     const start = (cupSelection - 1) * 4;
     const end = cupSelection * 4;
 
     const handleSelect = (event) => {
-        setData({ ...data, race: parseInt(event.target.id) });
+        setData((prevData) => ({ ...prevData, race: parseInt(event.target.id) }));
     }
 
     return (

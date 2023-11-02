@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchBar from "../UI/Search/SearchBar";
 import ListSorter from "./ListSorter";
 import EventForm from "./EventForm";
 import axios from "axios";
+import { TournamentContext } from "../../_Provider/TournamentContext";
 
 export default function Tournament({ races, mode }) {
 
-    const [tournaments, setTournaments] = useState([]);
+    const {data, setTournaments} = useContext(TournamentContext);
 
     useEffect(() => {
         axios
@@ -17,8 +18,6 @@ export default function Tournament({ races, mode }) {
     
     const [visibility, setVisibility] = useState(false);
 
-    const minDate = new Date().toISOString().substring(0, 10);
-
     {/* Pagination filtre courses */}
     const pageSetup = mode ? mode : 'sort';
     const [page, setPage] = useState(pageSetup);
@@ -28,17 +27,6 @@ export default function Tournament({ races, mode }) {
 
     {/* Tableau des paramètres de filtres */}
     const [sortList, setSortList] = useState({ cup: [], race: [], input: '', speed: [], });
-
-    {/* Tableau des paramètres à envoyer au formulaire */}
-    const [data, setData] = useState({
-        name: '',
-        endAt: minDate,
-        hourEnd: null,
-        race: '',
-        speed: '150cc',
-        pinCode: null,
-        capacity: null,
-    });
 
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
@@ -68,8 +56,6 @@ export default function Tournament({ races, mode }) {
                 setPage= { setPage } 
                 sortList= { sortList }
                 setSortList={ setSortList }
-                data= { data }
-                setData= { setData }
                 eventName= { eventName }
                 setEventName= { setEventName }
                 visibility= { visibility }
@@ -77,18 +63,11 @@ export default function Tournament({ races, mode }) {
 
             { page === "sort" ? (
 
-                <ListSorter 
-                    tournaments={tournaments} 
-                    sortList={sortList} />
+                <ListSorter sortList={sortList} />
                 ) : (
                 <EventForm
-                    tournaments={tournaments}
                     races={races}
-                    eventName={eventName}
-                    data={data}
-                    setData={setData}
-                    errors={errors}
-                    minDate={minDate} />
+                    errors={errors} />
             )}
         
         </form>

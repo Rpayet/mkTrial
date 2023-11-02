@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Switch from "react-switch";
+import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function SpeedSelect({ event, data, setData }) {
+export default function SpeedSelect({ event }) {
+
+    const { data, setData } = useContext(TournamentContext);
 
     const [speed, setSpeed] = useState(false);
 
@@ -9,9 +12,9 @@ export default function SpeedSelect({ event, data, setData }) {
         setSpeed(!speed);
 
         if (speed === false) {
-            setData({ ...data, speed: '200cc' });
+            setData((prevData) => ({ ...prevData, speed: '200cc' }));
         } else {
-            setData({ ...data, speed: '150cc' });
+            setData((prevData) => ({ ...prevData, speed: '150cc' }));
         }
     }
 

@@ -4,7 +4,7 @@ import InputField from "./InputField";
 import TogglePage from "./TogglePage";
 import RandomNameButton from "../Create/RandomNameButton";
 
-export default function SearchBar({ races, page, setPage, setSortList, sortList, eventName, setEventName, data, setData, visibility, setVisibility }) {
+export default function SearchBar({ races, page, setPage, setSortList, sortList, eventName, setEventName, visibility, setVisibility }) {
   
     const inputFields = {
         sort : {id: 'sort', placeholder : 'Rechercher un tournoi', type: 'button', text: 'Rechercher'},
@@ -18,9 +18,7 @@ export default function SearchBar({ races, page, setPage, setSortList, sortList,
                 eventName= { eventName }
                 setEventName = { setEventName }
                 sortList= { sortList }
-                setSortList= { setSortList }
-                data= { data }
-                setData= { setData } />
+                setSortList= { setSortList } />
 
             <div className="flex gap-4 items-center mt-4">
 
@@ -41,10 +39,7 @@ export default function SearchBar({ races, page, setPage, setSortList, sortList,
                         
                     : <RandomNameButton 
                         eventName= { eventName }
-                        setEventName = { setEventName }
-                        data= { data }
-                        setData= { setData }
-                        /> 
+                        setEventName = { setEventName } /> 
                 }
                 
             </div>

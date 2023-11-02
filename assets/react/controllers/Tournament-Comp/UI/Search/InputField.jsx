@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function InputField({ pageMode, sortList, setSortList, eventName, setEventName, data, setData }) {
+export default function InputField({ pageMode, sortList, setSortList, eventName, setEventName, }) {
+
+    const { setData } = useContext(TournamentContext);
 
     const handleEventValue = (event) => {
         setEventName(event.target.value);
-        setData({ ...data, name: event.target.value });
+        setData((prevData) => ({ ...prevData, name: event.target.value }));
     }
 
     const handleSearchValue = (event) => {

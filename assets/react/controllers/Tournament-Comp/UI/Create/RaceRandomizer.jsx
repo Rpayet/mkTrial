@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function raceRandomizer({ setCupSelection, setRaceSelection, data, setData }) {
+export default function raceRandomizer({ setCupSelection, setRaceSelection }) {
+
+    const { setData } = useContext(TournamentContext);
 
     {/* Randomizer pour sélectionner une coupe et une courses aléatoirement */}
     const randomRace = () => {
@@ -14,7 +17,7 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection, data
 
         setCupSelection(randomCup);
         setRaceSelection(randomRace);
-        setData({...data, race: randomRace });
+        setData((prevData) => ({...prevData, race: randomRace }));
     }
     
 
