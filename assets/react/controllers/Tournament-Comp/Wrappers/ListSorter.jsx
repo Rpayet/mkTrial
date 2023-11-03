@@ -3,7 +3,9 @@ import EventCard from "../UI/Search/EventCard";
 import ScrollReset from "../UI/Search/ScrollReset";
 import { TournamentContext } from "../../_Provider/TournamentContext";
 
-export default function ListSorter({ sortList }) {
+export default function ListSorter() {
+
+    const { sortList } = useContext(TournamentContext);
 
     const { tournaments } = useContext(TournamentContext);
 

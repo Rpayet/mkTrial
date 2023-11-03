@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import axios from "axios";
+import React, { createContext, useEffect, useState } from "react";
 
 export const TournamentContext = createContext();
 
@@ -15,10 +16,25 @@ export const TournamentProvider = ({ children }) => {
         name: '', endAt: minDate, hourEnd: null,
         race: '', speed: '150cc', pinCode: null, capacity: null,
     });
+
+    {/* Tableau des paramètres de filtres */}
+    const [sortList, setSortList] = useState({ cup: [], race: [], input: '', speed: [], });
+
+
+    {/* Gestion de l'affichage du menu de filtres */}
+    const [filterMenu, setFilterMenu] = useState(false);
+
+    {/* Requête GET */}
+    useEffect(() => {
+        axios
+            .get("/api/tournament/list")
+            .then(response => setTournaments(response.data))
+            .catch(error => console.error(error));
+    }, []);
     
     const tournamentContextValue = {
         data, setData, tournaments, setTournaments, 
-        minDate,
+        minDate, filterMenu, setFilterMenu, sortList, setSortList,
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function RandomNameButton({ setEventName }) {
+export default function RandomNameButton() {
 
     const { setData } = useContext(TournamentContext);
 
@@ -27,7 +27,6 @@ export default function RandomNameButton({ setEventName }) {
                             + " " 
                             + randomSecondWord.charAt(0).toUpperCase() 
                             + randomSecondWord.slice(1);
-        setEventName(randomName);
         setData((prevData) => ({ ...prevData, name: randomName }));
     }
 

@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function InputField({ pageMode, sortList, setSortList, eventName, setEventName, }) {
+export default function InputField({ pageMode }) {
 
-    const { setData } = useContext(TournamentContext);
+    const { data, setData, sortList, setSortList } = useContext(TournamentContext);
 
     const handleEventValue = (event) => {
-        setEventName(event.target.value);
         setData((prevData) => ({ ...prevData, name: event.target.value }));
     }
 
@@ -24,7 +23,7 @@ export default function InputField({ pageMode, sortList, setSortList, eventName,
                             focus:outline-none focus:border-lumi 
                             focus:ring-lumi focus:border-2`}
                 placeholder={ pageMode.placeholder }
-                value={pageMode.id === "sort" ? sortList.input : eventName} 
+                value={pageMode.id === "sort" ? sortList.input : data.name} 
                 onChange={pageMode.id === "sort" ? handleSearchValue : handleEventValue}
             />
 

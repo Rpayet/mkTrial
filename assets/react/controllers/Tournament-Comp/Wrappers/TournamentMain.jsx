@@ -7,33 +7,18 @@ import { TournamentContext } from "../../_Provider/TournamentContext";
 
 export default function Tournament({ races, mode }) {
 
-    const {data, setTournaments} = useContext(TournamentContext);
-
-    useEffect(() => {
-        axios
-            .get("/api/tournament/list")
-            .then(response => setTournaments(response.data))
-            .catch(error => console.error(error));
-    }, []);
+    const {data} = useContext(TournamentContext);
     
-    const [visibility, setVisibility] = useState(false);
-
     {/* Pagination filtre courses */}
     const pageSetup = mode ? mode : 'sort';
     const [page, setPage] = useState(pageSetup);
 
-    {/* Nom de l'évènement créé depuis le champ input, envoyé vers le formulaire */}
-    const [eventName, setEventName] = useState('');
-
-    {/* Tableau des paramètres de filtres */}
-    const [sortList, setSortList] = useState({ cup: [], race: [], input: '', speed: [], });
-
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (e) => {
 
-        event.preventDefault();
+        e.preventDefault();
 
         setErrors({});
 
@@ -47,28 +32,14 @@ export default function Tournament({ races, mode }) {
     
     return (
 
-        <form 
-            onSubmit={handleSubmit}> 
+        <form onSubmit={handleSubmit}> 
 
-            <SearchBar 
-                races= { races } 
-                page= { page } 
-                setPage= { setPage } 
-                sortList= { sortList }
-                setSortList={ setSortList }
-                eventName= { eventName }
-                setEventName= { setEventName }
-                visibility= { visibility }
-                setVisibility= { setVisibility } />
+            <SearchBar races= { races } page= { page } setPage= { setPage } />
 
-            { page === "sort" ? (
-
-                <ListSorter sortList={sortList} />
-                ) : (
-                <EventForm
-                    races={races}
-                    errors={errors} />
-            )}
+            { page === "sort" 
+                ? ( <ListSorter /> ) 
+                : ( <EventForm races={races} errors={errors} /> )
+            }
         
         </form>
     )
