@@ -1,17 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchBar from "../UI/Search/SearchBar";
 import ListSorter from "./ListSorter";
 import EventForm from "./EventForm";
 import axios from "axios";
 import { TournamentContext } from "../../_Provider/TournamentContext";
 
-export default function Tournament({ races, mode }) {
+export default function Tournament() {
 
-    const {data} = useContext(TournamentContext);
-    
-    {/* Pagination filtre courses */}
-    const pageSetup = mode ? mode : 'sort';
-    const [page, setPage] = useState(pageSetup);
+    const {data, page} = useContext(TournamentContext);
 
     {/* Requête POST */}
     const [errors, setErrors] = useState({});
@@ -24,21 +20,19 @@ export default function Tournament({ races, mode }) {
 
         axios
             .post("/api/tournament/create", data)
-            .then(response => {
-                location = "/event/" + response.data.event.id;
-            })
-            .catch(errors => setErrors(errors.response.data));
+            .then( response => {location = "/event/" + response.data.event.id} )
+            .catch( errors => setErrors(errors.response.data) );
     };
     
     return (
 
         <form onSubmit={handleSubmit}> 
 
-            <SearchBar races= { races } page= { page } setPage= { setPage } />
+            <SearchBar />
 
             { page === "sort" 
                 ? ( <ListSorter /> ) 
-                : ( <EventForm races={races} errors={errors} /> )
+                : ( <EventForm errors={errors} /> )
             }
         
         </form>

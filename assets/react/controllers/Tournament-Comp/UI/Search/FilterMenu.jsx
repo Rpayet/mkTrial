@@ -7,9 +7,9 @@ import { RxCross2 } from 'react-icons/rx';
 import { TournamentContext } from "../../../_Provider/TournamentContext";
 
 
-export default function FilterMenu({ races }) {
+export default function FilterMenu() {
 
-    const { filterMenu, setFilterMenu, setSortList, sortList } = useContext(TournamentContext);
+    const { filterMenu, setFilterMenu, setSortList, sortList, races } = useContext(TournamentContext);
     
     return(
 

@@ -4,14 +4,8 @@
 
 {% block body %}
 
-    <div 
-        class="my-20"
-        {{ react_component('Tournament', { 
-            tournaments: tournaments, 
-            races: races, 
-            mode: app.request.get('id') 
-            }) 
-        }} >
+    <div class="my-20"
+        {{ react_component('Tournament') }} >
     </div>
 
 {% endblock %}

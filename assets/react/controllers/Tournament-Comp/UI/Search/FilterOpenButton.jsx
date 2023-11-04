@@ -3,7 +3,7 @@ import FilterMenu from "./FilterMenu";
 import { GiSettingsKnobs } from 'react-icons/gi';
 import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function FilterOpenButton({ races }) {
+export default function FilterOpenButton() {
 
   const { filterMenu, setFilterMenu } = useContext(TournamentContext);
 
@@ -38,7 +38,7 @@ export default function FilterOpenButton({ races }) {
                 <span>Filtres</span>
             </div>
             
-            <FilterMenu races= { races } />
+            <FilterMenu />
         </div>
     )
 }

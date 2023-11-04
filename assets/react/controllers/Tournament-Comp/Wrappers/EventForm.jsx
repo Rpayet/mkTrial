@@ -3,7 +3,7 @@ import CupSelection from "../../Event-Form/UI/CupSelect";
 import RaceSelect from "../../Event-Form/UI/RaceSelect";
 import PrimaryOptions from "../UI/Create/PrimaryOptions";
 
-export default function EventForm({ races, errors }) {
+export default function EventForm({ errors }) {
 
     const [cupSelection, setCupSelection] = useState('');
     const [raceSelection, setRaceSelection] = useState('');
@@ -49,7 +49,6 @@ export default function EventForm({ races, errors }) {
                     
                     {/* Sélection des coupes */}
                     <CupSelection
-                        races= { races } 
                         cupSelection= { cupSelection } 
                         setCupSelection= { setCupSelection }
                         currentPage= { currentPage } 
@@ -58,7 +57,6 @@ export default function EventForm({ races, errors }) {
                         
                     {/* Sélection des courses */}
                     <RaceSelect
-                        races= {races} 
                         cupSelection= { cupSelection } 
                         raceSelection= { raceSelection } 
                         setRaceSelection= { setRaceSelection } />

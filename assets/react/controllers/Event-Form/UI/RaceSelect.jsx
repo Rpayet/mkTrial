@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { TournamentContext } from "../../_Provider/TournamentContext";
 
-export default function RaceSelect({ races, cupSelection }) {
+export default function RaceSelect({ cupSelection }) {
 
-    const { data, setData } = useContext(TournamentContext);
+    const { data, setData, races } = useContext(TournamentContext);
 
     const start = (cupSelection - 1) * 4;
     const end = cupSelection * 4;

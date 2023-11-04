@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Tournament;
 use App\Form\EventType;
-use App\Repository\RaceRepository;
 use App\Repository\TournamentRepository;
 use App\Utils\DataUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,36 +17,16 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class TournamentController extends AbstractController
 {
     #[Route('/tournament', name: 'app_tournament')]
-    public function index(TournamentRepository $tournamentRepository, 
-                            RaceRepository $raceRepository): Response
-    {
-        // Pour récupérer le tableau d'objet des Tournois.
-        $tournaments = $tournamentRepository
-                    ->createQueryBuilder('t')
-                    ->where('t.endAt >= :today', 't.pinCode IS NULL')
-                    ->setParameter('today', new \DateTime())
-                    ->orderBy('t.endAt', 'ASC')
-                    ->getQuery()
-                    ->getResult();
-
-        // Récupère la liste des tournois
-        $eventsData = array_map([DataUtils::class, 'getEventData'], $tournaments);
-        
-        // Récupère la liste des courses/coupes
-        $races = $raceRepository->findAll();
-        $racesData = array_map([DataUtils::class, 'getRaceData'], $races);
-
-        return $this->render('tournament/index.html.twig', [
-            'tournaments' => $eventsData, // Retourne le tableau d'objet des tournois
-            'races' => $racesData, // retourne le tableau des courses (Récupère les coupes par relation)
-        ]);
+    public function index(): Response
+    {        
+        return $this->render('tournament/index.html.twig', []);
     }
 
     #[Route('/api/tournament/create', name: 'app_tournament_create', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function create(
         Request $request, 
-        EntityManagerInterface $manager, 
+        EntityManagerInterface $manager,
         Security $security): Response
     {
         $user = $security->getUser();
@@ -86,6 +65,7 @@ class TournamentController extends AbstractController
     #[Route('/api/tournament/list', name: 'app_tournament_list', methods: ['GET'])]
     public function list(TournamentRepository $tournamentRepository): Response
     {
+        // Pour récupérer la liste complète des Tournois
         $tournaments = $tournamentRepository
                     ->createQueryBuilder('t')
                     ->where('t.endAt >= :today', 't.pinCode IS NULL')
@@ -98,4 +78,5 @@ class TournamentController extends AbstractController
 
         return $this->json($data);
     }
+
 }
