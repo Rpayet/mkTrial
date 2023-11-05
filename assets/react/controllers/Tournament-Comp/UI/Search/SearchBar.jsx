@@ -8,6 +8,14 @@ import { TournamentContext } from "../../../_Provider/TournamentContext";
 export default function SearchBar() {
 
     const {inputFields, page} = useContext(TournamentContext);
+
+    const buttonRender = () => {
+        if (page == 'sort') {
+            return <FilterOpenButton /> ;
+        } else {
+            return <RandomNameButton /> ;
+        }
+    }
   
     return (
         <div className="bg-white py-6 px-2 sm:px-12 rounded-lg relative z-30">
@@ -19,11 +27,7 @@ export default function SearchBar() {
                 
                 <span>|</span>
 
-                { page == 'sort' 
-                    ? ( <FilterOpenButton /> ) 
-                        
-                    : ( <RandomNameButton /> )
-                }
+                { buttonRender() }
                 
             </div>
         </div>
