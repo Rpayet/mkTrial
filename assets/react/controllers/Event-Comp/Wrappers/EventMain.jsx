@@ -6,21 +6,17 @@ import { EventService } from "../../_Service/EventService";
 import Pincode from "../UI/OnGoing/PinCode/Pincode";
 import Closed from "../UI/OnGoing/PinCode/Closed";
 
-export default function EventMain({ id }) {
+export default function EventMain() {
     
     const [isLoading, setIsLoading] = useState(true);
 
-    const { setEventData, setEventId, event, entries, isOngoing, setIsOngoing, isLocked, isUserRegistered } = useContext(EventContext);
-    
+    const { setEventData, eventId, event, entries, isOngoing, setIsOngoing, isLocked, isUserRegistered } = useContext(EventContext);
+        
     useEffect(() => {
-        setEventId(id);
-    }, [id]);
-    
-    useEffect(() => {
-        if (id) {
+        if (eventId) {
             const fetchData = async () => {
                 try {
-                  await EventService().getEvent(id, setEventData);
+                  await EventService().getEvent(eventId, setEventData);
                     setIsLoading(false);
                 } catch (error) {
                   setIsLoading(false);

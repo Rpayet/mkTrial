@@ -12,10 +12,6 @@ import './styles/app.css';
 import './bootstrap';
 
 // assets/app.js
-import React from 'react';
 import { registerReactControllerComponents } from '@symfony/ux-react';
-import { BrowserRouter } from 'react-router-dom';
 
-<BrowserRouter>
-    {registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/))};
-</BrowserRouter>
+{registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/))};

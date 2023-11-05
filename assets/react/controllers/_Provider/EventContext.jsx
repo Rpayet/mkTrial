@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export const EventContext = createContext();
 
@@ -9,7 +10,7 @@ export const EventProvider = ({ children }) => {
     const [event, setEvent] = useState(null);
     const [user, setUser] = useState(null);
     const [entries, setEntries] = useState(null);
-    const [eventId, setEventId] = useState(null);
+    const [eventId, setEventId] = useState(useParams().id);
     const [data, setData] = useState(null);
 
     {/** Moderator Authorisation */}
