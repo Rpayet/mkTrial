@@ -23,8 +23,7 @@ class EventController extends AbstractController
     {
         $event = $tournamentRepository->find($id);
 
-        return $this->render('event/index.html.twig', [
-            'id' => $id,
+        return $this->render('base.html.twig', [
             'eventName' => $event->getName(),
         ]);
     }

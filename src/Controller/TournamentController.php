@@ -19,7 +19,7 @@ class TournamentController extends AbstractController
     #[Route('/tournament', name: 'app_tournament')]
     public function index(): Response
     {        
-        return $this->render('tournament/index.html.twig', []);
+        return $this->render('base.html.twig', []);
     }
 
     #[Route('/api/tournament/create', name: 'app_tournament_create', methods: ['POST'])]

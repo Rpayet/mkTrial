@@ -14,116 +14,11 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="bg-neutral-200">
 
-        <header class="max-w-6xl mx-auto bg-shell rounded-b-3xl text-white font-bold">
+    <body class="bg-neutral-200 max-w-6xl mx-auto">
 
-            <nav class="flex justify-between items-center py-4 mx-20">
-                <div class="flex w-2/5 items-center gap-4">
-                    <img 
-                        src="/assets/admin/img/icons/Logo.png"
-                        alt="logo">
-                    <a 
-                        
-                        href="{{ path('app_home') }}" 
-                        class="">
-                        Accueil</a>
-                    <a 
-                        href="{{ path('app_tournament') }}" 
-                        class="">
-                        Tournois</a>
-                </div>
+        <div {{ react_component('Index') }} ></div>
 
-                <div class="">
-                    {% if app.user %}
-                        <div class="flex items-center gap-4">
-                            {% if app.user.picture %}
-                                <img 
-                                src="/assets/user/img/{{ app.user.picture }}"
-                                alt="{{ app.user.name }}" 
-                                class="w-10 rounded-full border-solid border-2 border-white">
-                            {% else %}
-                                <img 
-                                src="/assets/admin/img/icons/Default.png"
-                                alt="{{ app.user.name }}" 
-                                class="w-10 rounded-full border-solid border-2 border-white">
-                            {% endif %}
-                            
-                            <a 
-                                class="block"
-                                href="#">{{ app.user.name }}</a>
-                        </div>
-                    {% else %}
-                        <div class="">
-                            <a href="{{ path('app_login') }}">Connexion</a>
-                        </div>
-                        
-                    {% endif %}
-                </div>
-
-            </nav>
-        
-        </header>
-
-        <div class="max-w-4xl mx-auto">
-            {% block body %}{% endblock %}
-        </div>
-
-        {# <footer class="max-w-[1200px] mx-auto bg-shell rounded-t-3xl w-full text-center text-white">
-				<div class="max-w-[960px] mx-auto flex justify-between py-5 text-center">
-					<div>
-						<h2 class="font-bold text-xl mb-2">MK8D</h2>
-						<img src="/assets/admin/img/icons/Logo.png" alt="/">
-					</div>
-
-					<div>
-						<h2 class="font-bold text-xl mb-2">Aide</h2>
-						<ul>
-							<li class="hover:underline">
-								<a href="#">Qu'est-ce que MK8D ?</a>
-							</li>
-							<li class="hover:underline">
-								<a href="#">Qui sommes-nous ?</a>
-							</li>
-							<li class="hover:underline">
-								<a href="#">F.A.Q.</a>
-							</li>
-							<li class="hover:underline">
-								<a href="#">Contact / Support</a>
-							</li>
-						</ul>
-					</div>
-
-					<div>
-						<h2 class="font-bold text-xl mb-2">Légal</h2>
-						<ul>
-							<li class="hover:underline">
-								<a href="#">RGPD</a>
-							</li>
-							<li class="hover:underline">
-								<a href="#">Politique de confidentialité</a>
-							</li>
-							<li class="hover:underline">
-								<a href="#">Conditions d’utilisations</a>
-							</li>
-							<li class="hover:underline">
-								<a href="#">Avis de non-responsabilité</a>
-							</li>
-						</ul>
-					</div>
-
-					<div>
-						<h2 class="font-bold text-xl mb-2">Nous suivre</h2>
-						<div class="flex gap-3">
-							<a href="#"><img src="/assets/admin/img/icons/Facebook.png" alt="/"></a>
-							<a href="#"><img src="/assets/admin/img/icons/Twitter.png" alt="/"></a>
-							<a href="#"><img src="/assets/admin/img/icons/Youtube.png" alt="/"></a>
-						</div>
-					</div>
-				</div>
-				<p class="my-3 text-xs">Tous droits réservés.
-					{{'now' | date('Y')}}</p>
-			</footer> #}
-            
     </body>
+    
 </html>
