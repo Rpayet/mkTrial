@@ -23,7 +23,7 @@ export default function Navigation() {
                 </div>
 
                 <div className="">
-                        <div className="flex items-center gap-4">
+                        {/* <div className="flex items-center gap-4">
                                 <img 
                                 src=""
                                 alt="" 
@@ -36,9 +36,11 @@ export default function Navigation() {
                             <a 
                                 className="block"
                                 href="#">USER</a>
-                        </div>
+                        </div> */}
                         <div className="">
-                            <a href="">Connexion</a>
+                            <p 
+                                className='cursor-pointer'
+                                onClick={() => navigate('/login')}>Connexion</p>
                         </div>
                         
                 </div>
