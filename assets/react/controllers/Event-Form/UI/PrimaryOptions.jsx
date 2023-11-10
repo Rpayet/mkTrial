@@ -1,14 +1,11 @@
-import React, { useContext, useState } from "react";
-import DateSelect from "../../../Event-Form/UI/DateSelect";
-import HourSelect from "../../../Event-Form/UI/HourSelect";
-import PrivacySelect from "../../../Event-Form/UI/PrivacySelect";
+import React, { useState } from "react";
+import DateSelect from "./DateSelect";
+import HourSelect from "./HourSelect";
+import PrivacySelect from "./PrivacySelect";
 import SpeedSelect from "./SpeedSelect";
-import CapacitySelect from "../../../Event-Form/UI/CapacitySelect";
-import { TournamentContext } from "../../../_Provider/TournamentContext";
+import CapacitySelect from "./CapacitySelect";
 
-export default function PrimaryOptions ({ setModal, eventData }) {
-
-    const {data, setData} = useContext(TournamentContext);
+export default function PrimaryOptions ({ data, setData, setModal, eventData }) {
 
     const [hour, setHour] = useState(data.hourEnd ? true : false);
     const { event } = eventData ? eventData : '';
@@ -19,7 +16,9 @@ export default function PrimaryOptions ({ setModal, eventData }) {
 
                 {/* Sélection de la vitesse */}
                 <SpeedSelect 
-                    event={event} />
+                    event={event}
+                    data={data}
+                    setData={setData} />
 
                 {/* Sélection date de fin de l'événement */}
                 <DateSelect

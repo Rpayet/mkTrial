@@ -1,15 +1,26 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm({ error, user, lastUsername, csrfToken, onLogout }) {
 
-    console.log('user', user, 'lastUsername', lastUsername, 'csrfToken', csrfToken)
-
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const [email, setEmail] = useState(lastUsername || '');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/login');
+        try {
+            await axios.post('/login', {
+                email,
+                password,
+                _csrf_token: csrfToken || '',
+            });
+            navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -32,9 +43,10 @@ export default function LoginForm({ error, user, lastUsername, csrfToken, onLogo
             <label htmlFor="inputEmail" className="block font-medium mb-1">Email</label>
             <input
                 type="email"
-                value={lastUsername}
+                value={email}
                 name="email"
                 id="inputEmail"
+                onChange={(e) => setEmail(e.target.value)}
                 className="border-gray-300 focus:ring-2 focus:ring-blue-500 rounded-md shadow-sm py-2 px-4 block w-full sm:text-sm border-2"
                 autoComplete="email"
                 required
@@ -46,6 +58,8 @@ export default function LoginForm({ error, user, lastUsername, csrfToken, onLogo
                 type="password"
                 name="password"
                 id="inputPassword"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="border-gray-300 focus:ring-2 focus:ring-blue-500 rounded-md shadow-sm py-2 px-4 block w-full sm:text-sm border-2"
                 autoComplete="current-password"
                 required
@@ -68,7 +82,8 @@ export default function LoginForm({ error, user, lastUsername, csrfToken, onLogo
 
             <button
                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-                type="submit"
+                type="button"
+                onClick={handleSubmit}
             >
                 Connexion
             </button>

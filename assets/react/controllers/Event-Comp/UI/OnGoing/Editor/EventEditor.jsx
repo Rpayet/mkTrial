@@ -5,7 +5,7 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 import { toggleSection } from "../../../../_Service/SectionService";
-import Options from "./Options";
+import PrimaryOptions from "../../../../Event-Form/UI/PrimaryOptions";
 
 export default function EventEditor() {
 
@@ -134,7 +134,7 @@ export default function EventEditor() {
                             
                             <label className="font-bold">Options</label>
                             <div className="bg-white rounded-lg py-4">
-                                <Options
+                                <PrimaryOptions
                                     setModal={setModal}
                                     eventData={ eventData }
                                     setData= { setData }

@@ -17,7 +17,7 @@ export default function Index() {
                         <Route index path='/' element={<Landing />} />
                         <Route path='/tournament' element={<Tournament />} />
                         <Route path='/event/:id' element={<Event />} />
-                        <Route path='/login' element={<Account />} />
+                        {/* <Route path='/login' element={<Account />} /> */}
                     </Routes>
                 </div>        
             </BrowserRouter>

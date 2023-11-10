@@ -5,7 +5,6 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
 
     const appContextValue = {
-            
     };
 
     return (

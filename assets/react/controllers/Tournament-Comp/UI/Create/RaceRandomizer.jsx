@@ -9,7 +9,7 @@ export default function raceRandomizer({ setCupSelection, setRaceSelection }) {
     {/* Randomizer pour sélectionner une coupe et une courses aléatoirement */}
     const randomRace = () => {
 
-        const randomCup = Math.floor(Math.random() * 22) + 1;
+        const randomCup = Math.floor(Math.random() * 24) + 1;
 
         const min = (randomCup * 4) - 3;
         const max = randomCup * 4;

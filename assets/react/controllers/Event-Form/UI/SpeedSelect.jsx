@@ -1,10 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
-import { TournamentContext } from "../../../_Provider/TournamentContext";
 
-export default function SpeedSelect({ event }) {
-
-    const { data, setData } = useContext(TournamentContext);
+export default function SpeedSelect({ event, data, setData }) {
 
     const [speed, setSpeed] = useState(false);
 

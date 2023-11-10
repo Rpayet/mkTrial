@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CupSelection from "../../Event-Form/UI/CupSelect";
 import RaceSelect from "../../Event-Form/UI/RaceSelect";
-import PrimaryOptions from "../UI/Create/PrimaryOptions";
+import PrimaryOptions from "../../Event-Form/UI/PrimaryOptions";
+import { TournamentContext } from "../../_Provider/TournamentContext";
 
 export default function EventForm({ errors }) {
+
+    const { data, setData } = useContext(TournamentContext);
 
     const [cupSelection, setCupSelection] = useState('');
     const [raceSelection, setRaceSelection] = useState('');
@@ -41,7 +44,9 @@ export default function EventForm({ errors }) {
                     {/* Comp avec les switches Speed / Privacy */}
                     <PrimaryOptions
                         dateValue= { dateValue } 
-                        setDateValue= { setDateValue } />
+                        setDateValue= { setDateValue }
+                        data={data}
+                        setData={setData} />
 
                 </div>
 

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../_Provider/AppContext';
 
 export default function Navigation() {
 
     const navigate = useNavigate();
+    const { user } = useContext(AppContext);
 
     return (
         <header className="max-w-6xl mx-auto bg-shell rounded-b-3xl text-white font-bold">
