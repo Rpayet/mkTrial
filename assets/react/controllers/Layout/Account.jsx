@@ -15,7 +15,7 @@ export default function LoginForm({ error, user, lastUsername, csrfToken, onLogo
             await axios.post('/login', {
                 email,
                 password,
-                _csrf_token: csrfToken || '',
+                csrf_token: csrfToken || '',
             });
             navigate('/');
         } catch (error) {

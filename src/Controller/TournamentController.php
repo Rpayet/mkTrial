@@ -16,12 +16,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class TournamentController extends AbstractController
 {
-    #[Route('/tournament', name: 'app_tournament')]
-    public function index(): Response
-    {        
-        return $this->render('base.html.twig', []);
-    }
-
     #[Route('/api/tournament/create', name: 'app_tournament_create', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function create(

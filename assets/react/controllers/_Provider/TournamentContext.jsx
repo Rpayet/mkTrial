@@ -5,9 +5,6 @@ export const TournamentContext = createContext();
 
 export const TournamentProvider = ({ children }) => {
 
-    {/** Liste des tournois à afficher */}
-    const [tournaments, setTournaments] = useState([]);
-    const [races, setRaces] = useState([]);
     const [page, setPage] = useState('sort');
 
     const inputFields = {
@@ -30,21 +27,11 @@ export const TournamentProvider = ({ children }) => {
 
     {/* Gestion de l'affichage du menu de filtres */}
     const [filterMenu, setFilterMenu] = useState(false);
-
-    {/* Requête GET */}
-    useEffect(() => {
-        axios
-            .get('/api/tournament/list')
-            .then(response => setTournaments(response.data))
-        axios
-            .get('/api/race/list')
-            .then(response => setRaces(response.data))
-    }, []);
     
     const tournamentContextValue = {
-        data, setData, tournaments, setTournaments, 
+        data, setData,
         minDate, filterMenu, setFilterMenu, sortList, setSortList,
-        races, page, setPage, inputFields
+        page, setPage, inputFields
     };
 
     return (

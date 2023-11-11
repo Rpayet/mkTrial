@@ -28,7 +28,7 @@ export default function PrimaryOptions ({ data, setData, setModal, eventData }) 
                     data= {data} />
 
                 {/* Sélection heure de fin de l'événement */}
-                {  hour &&
+                { hour &&
                     <HourSelect 
                         event={event}
                         setHour={setHour}

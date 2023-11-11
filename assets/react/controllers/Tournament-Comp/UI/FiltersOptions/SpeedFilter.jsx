@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FilterToggleButton from './FilterToggleButton';
 
-export default function  CupFilter({ setSortList, sortList }) {
+export default function  SpeedFilter({ setSortList, sortList }) {
 
     const [visibility, setVisibility] = useState(false);
 

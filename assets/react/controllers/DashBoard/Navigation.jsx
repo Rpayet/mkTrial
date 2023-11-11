@@ -5,7 +5,7 @@ import { AppContext } from '../_Provider/AppContext';
 export default function Navigation() {
 
     const navigate = useNavigate();
-    const { user } = useContext(AppContext);
+    const { userIdentifier } = useContext(AppContext);
 
     return (
         <header className="max-w-6xl mx-auto bg-shell rounded-b-3xl text-white font-bold">
@@ -25,25 +25,32 @@ export default function Navigation() {
                 </div>
 
                 <div className="">
-                        {/* <div className="flex items-center gap-4">
-                                <img 
-                                src=""
-                                alt="" 
-                                className="w-10 rounded-full border-solid border-2 border-white" />
-                                <img 
-                                src="/assets/admin/img/icons/Default.png"
-                                alt="" 
-                                className="w-10 rounded-full border-solid border-2 border-white" />
-                            
-                            <a 
-                                className="block"
-                                href="#">USER</a>
-                        </div> */}
-                        <div className="">
-                            <p 
-                                className='cursor-pointer'
-                                onClick={() => navigate('/login')}>Connexion</p>
-                        </div>
+                    { userIdentifier 
+                        ? (
+                            <div className="flex items-center gap-4">
+                                    <img 
+                                    src=""
+                                    alt="" 
+                                    className="w-10 rounded-full border-solid border-2 border-white" />
+                                    <img 
+                                    src="/assets/admin/img/icons/Default.png"
+                                    alt="" 
+                                    className="w-10 rounded-full border-solid border-2 border-white" />
+                                
+                                <a 
+                                    className="block"
+                                    href="#">USER</a>
+                            </div>
+                        ) : (
+                            <div className="">
+                                <p 
+                                    className='cursor-pointer'
+                                    onClick={() => navigate('/login')}>Connexion</p>
+                            </div>
+                        )
+
+                    }
+                        
                         
                 </div>
 

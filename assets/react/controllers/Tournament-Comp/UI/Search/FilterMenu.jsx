@@ -5,12 +5,14 @@ import RaceFilter from "../FiltersOptions/RaceFilter";
 import SpeedFilter from "../FiltersOptions/SpeedFilter";
 import { RxCross2 } from 'react-icons/rx';
 import { TournamentContext } from "../../../_Provider/TournamentContext";
+import { AppContext } from "../../../_Provider/AppContext";
 
 
 export default function FilterMenu() {
 
-    const { filterMenu, setFilterMenu, setSortList, sortList, races } = useContext(TournamentContext);
-    
+    const { filterMenu, setFilterMenu, setSortList, sortList } = useContext(TournamentContext);
+    const { races } = useContext(AppContext);
+
     return(
 
         <div 

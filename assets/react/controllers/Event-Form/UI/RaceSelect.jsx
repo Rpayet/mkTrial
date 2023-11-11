@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { TournamentContext } from "../../_Provider/TournamentContext";
+import { AppContext } from "../../_Provider/AppContext";
 
 export default function RaceSelect({ cupSelection }) {
 
-    const { data, setData, races } = useContext(TournamentContext);
+    const { data, setData } = useContext(TournamentContext);
+    const { races } = useContext(AppContext);
 
     const start = (cupSelection - 1) * 4;
     const end = cupSelection * 4;
@@ -20,7 +22,6 @@ export default function RaceSelect({ cupSelection }) {
                     key={race.id} 
                     className='m-auto'>
                     <img 
-                        
                         id={race.id}
                         className={`p-1 sm:p-2 w-44 rounded-lg cursor-pointer ${data.race === race.id ? 'bg-lumi' : ''}`}
                         src={`/assets/admin/img/races/${race.slug.split('_')[0]}/${race.picture}`} alt={`${race.picture}`}

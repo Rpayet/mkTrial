@@ -18,21 +18,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EventController extends AbstractController
 {
-    #[Route('event/{id}', name: 'app_event')]
-    public function index(int $id, TournamentRepository $tournamentRepository ): Response
-    {
-        $event = $tournamentRepository->find($id);
-
-        return $this->render('base.html.twig', [
-            'eventName' => $event->getName(),
-        ]);
-    }
-
     #[Route('api/event/{id}', name: 'api_event', methods: ['GET'])]
     public function event(
         TournamentRepository $tournamentRepository, 
         int $id,
-        EntryRepository $entryRepository)
+        EntryRepository $entryRepository): Response
     {
         // Récupère l'événement avec l'ID
         $event = $tournamentRepository->find($id);
@@ -66,7 +56,7 @@ class EventController extends AbstractController
         int $id,
         EntityManagerInterface $manager, 
         Security $security, 
-        TournamentRepository $tournamentRepository) 
+        TournamentRepository $tournamentRepository): Response
         {
             $event = $tournamentRepository->find($id);
             $user = $security->getUser();
@@ -127,8 +117,8 @@ class EventController extends AbstractController
         TournamentRepository $tournamentRepository,
         EntryRepository $entryRepository,
         int $id,
-        EntityManagerInterface $manager
-    ) {
+        EntityManagerInterface $manager): Response
+    {
     
         // Récupère l'événement avec l'ID
         $event = $tournamentRepository->find($id);
@@ -180,8 +170,8 @@ class EventController extends AbstractController
     public function interruption(
         TournamentRepository $tournamentRepository,
         int $id,
-        EntityManagerInterface $manager
-    ) {
+        EntityManagerInterface $manager): Response
+    {
         $event = $tournamentRepository->find($id);
 
         $event->setEndAt(new \DateTimeImmutable() );
@@ -200,7 +190,7 @@ class EventController extends AbstractController
         TournamentRepository $tournamentRepository,
         UserRepository $userRepository,
         EntityManagerInterface $manager, 
-        )
+        ): Response
     {
         $event = $tournamentRepository->find($eventId);
         $user = $userRepository->find($userId); 
@@ -238,7 +228,8 @@ class EventController extends AbstractController
 
     #[Route('/api/event/{id}/checkPin', name: 'app_event_checkpin', methods: ['POST'])]
     #[isGranted('ROLE_USER')]
-    public function checkPin( Request $request, int $id, TournamentRepository $tournamentRepository ) {
+    public function checkPin( Request $request, int $id, TournamentRepository $tournamentRepository ): Response
+    {
         $event = $tournamentRepository->find($id);
         $data = json_decode($request->getContent(), true);
 

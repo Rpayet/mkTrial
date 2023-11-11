@@ -100,6 +100,8 @@ export const EventProvider = ({ children }) => {
         },
         ],
     });
+
+    console.log(eventData);
     
     const eventContextValue = {
         eventData, setEventData, event, setEvent, user, setUser, entries, setEntries, eventId, setEventId,

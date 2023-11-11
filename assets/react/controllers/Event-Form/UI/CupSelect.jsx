@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
 import RaceRandomizer from "../../Tournament-Comp/UI/Create/RaceRandomizer";
-import { TournamentContext } from "../../_Provider/TournamentContext";
+import { AppContext } from "../../_Provider/AppContext";
 
 
 export default function CupSelect({ cupSelection, setCupSelection, currentPage, setCurrentPage, setRaceSelection }) {
 
-    const { races } = useContext(TournamentContext);
+    const { races } = useContext(AppContext);
 
     const cups = races.filter((race, index) => index % 4 === 0).map((race) => race.cup);
     
