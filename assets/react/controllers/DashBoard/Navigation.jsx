@@ -28,18 +28,22 @@ export default function Navigation() {
                     { userIdentifier 
                         ? (
                             <div className="flex items-center gap-4">
-                                    <img 
-                                    src=""
-                                    alt="" 
-                                    className="w-10 rounded-full border-solid border-2 border-white" />
-                                    <img 
-                                    src="/assets/admin/img/icons/Default.png"
-                                    alt="" 
-                                    className="w-10 rounded-full border-solid border-2 border-white" />
+                                    {userIdentifier.picture ? (
+                                        <img 
+                                            src={`/assets/user/img/${userIdentifier.picture}`}
+                                            alt="" 
+                                            className="w-10 rounded-full border-solid border-2 border-white" />
+                                    ) : (
+                                        <img 
+                                            src="/assets/admin/img/icons/Default.png"
+                                            alt="" 
+                                            className="w-10 rounded-full border-solid border-2 border-white" />
+                                    )}
+                                    
                                 
                                 <a 
                                     className="block"
-                                    href="#">USER</a>
+                                    href="#">{userIdentifier.name}</a>
                             </div>
                         ) : (
                             <div className="">

@@ -12,27 +12,24 @@ export const AppProvider = ({ children }) => {
     const [races, setRaces] = useState([]);
 
     useEffect(() => {
-        if (races.length === 0) {
+        // if (races.length === 0) {
             axios
             .get('/api/race/list')
             .then(response => setRaces(response.data))
-        }
-        if (tournaments.length === 0) {
+        // }
+        // if (tournaments.length === 0) {
             axios
             .get('/api/tournament/list')
             .then(response => setTournaments(response.data))
-        }
-    }, [races, tournaments]);
+        // }
 
-    // useEffect(() => {
-    //     axios.get('/api/user')
-    //         .then(response => {
-    //             setUserIdentifier(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // }, [])
+        axios
+            .get(`/api/user`)
+            .then(response => { 
+                const { user } = response.data;
+                setUserIdentifier(user);
+            })
+    }, []);
 
     const appContextValue = {
         userIdentifier,

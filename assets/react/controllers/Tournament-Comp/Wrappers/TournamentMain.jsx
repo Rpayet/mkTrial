@@ -4,6 +4,7 @@ import ListSorter from "./ListSorter";
 import EventForm from "./EventForm";
 import axios from "axios";
 import { TournamentContext } from "../../_Provider/TournamentContext";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 export default function Tournament() {
 

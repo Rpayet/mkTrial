@@ -6,10 +6,15 @@ import Navigation from './DashBoard/Navigation';
 import Landing from './Layout/Landing';
 import Account from './Layout/Account';
 import { AppProvider } from './_Provider/AppContext';
+import Logout from './UI/Account/Logout';
 
 export default function Index() {
+
     return (
         <AppProvider>
+            <div>
+                <p>Chargement</p>
+            </div>
             <BrowserRouter>
                 <Navigation /> 
                 <div className='my-20'>
@@ -18,6 +23,7 @@ export default function Index() {
                         <Route path='/tournament' element={<Tournament />} />
                         <Route path='/event/:id' element={<Event />} />
                         <Route path='/login' element={<Account />} />
+                        <Route path='/logout' element={<Logout />} />
                     </Routes>
                 </div>        
             </BrowserRouter>

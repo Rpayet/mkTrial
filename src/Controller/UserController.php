@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Utils\DataUtils;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
