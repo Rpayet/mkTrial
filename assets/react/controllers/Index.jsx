@@ -1,32 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Tournament from './Layout/Tournament';
-import Event from './Layout/Event';
-import Navigation from './DashBoard/Navigation';
-import Landing from './Layout/Landing';
-import Account from './Layout/Account';
 import { AppProvider } from './_Provider/AppContext';
-import Logout from './UI/Account/Logout';
+import PublicRouter from './Router/PublicRouter';
 
 export default function Index() {
 
     return (
         <AppProvider>
-            <div>
-                <p>Chargement</p>
-            </div>
-            <BrowserRouter>
-                <Navigation /> 
-                <div className='my-20'>
-                    <Routes>
-                        <Route index path='/' element={<Landing />} />
-                        <Route path='/tournament' element={<Tournament />} />
-                        <Route path='/event/:id' element={<Event />} />
-                        <Route path='/login' element={<Account />} />
-                        <Route path='/logout' element={<Logout />} />
-                    </Routes>
-                </div>        
-            </BrowserRouter>
+            <PublicRouter />
         </AppProvider>
     )
 }
