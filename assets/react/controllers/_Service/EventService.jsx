@@ -1,5 +1,5 @@
 import axios from "axios";
-import { updateProgress } from "./Loading";
+import { updateProgress } from "./LoadingService";
 
 export function EventService () {
 

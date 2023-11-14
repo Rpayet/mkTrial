@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "../../../../_GlobalUi/Buttons";
 import { EventContext } from "../../../../_Provider/EventContext";
-import { getFormattedDate } from "../../../_Services/FormatTime";
+import { getFormattedDate } from "../../../../_Service/FormatTime";
 import { EventService } from "../../../../_Service/EventService";
 import { toggleSection } from "../../../../_Service/SectionService";
 

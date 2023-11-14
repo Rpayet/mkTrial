@@ -1,5 +1,5 @@
 import React from "react";
-import LeaderBoard from "../UI/Finished/LearderBoard/LeaderBoard";
+import LeaderBoard from "../Finished/LeaderBoard/LeaderBoard";
 
 export default function Finished() {
 

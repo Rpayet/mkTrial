@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { formatTime } from "../../../_Services/FormatTime";
+import { formatTime } from "../../../../_Service/FormatTime";
 import { BsTrash  } from 'react-icons/bs';
 import { RxCross2, RxCheck  } from 'react-icons/rx';
 import { EventContext } from "../../../../_Provider/EventContext";

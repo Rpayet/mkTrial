@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { EventContext } from "../../../../_Provider/EventContext";
-import { rankService } from "../../../_Services/RankService";
+import { rankService } from "../../../../_Service/RankService";
 import { GrAddCircle } from 'react-icons/gr';
 
 export default function AddEntryButton({ setToggleView }) {

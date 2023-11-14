@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import OnGoing from "./OnGoing";
-import Finished from "./Finished";
+import OnGoing from "./Wrappers/OnGoing";
+import Finished from "./Wrappers/Finished";
 import { EventContext } from "../../_Provider/EventContext";
 import { EventService } from "../../_Service/EventService";
-import Pincode from "../UI/OnGoing/PinCode/Pincode";
-import Closed from "../UI/OnGoing/PinCode/Closed";
+import Pincode from "./OnGoing/Pincode/Pincode";
+import Closed from "./OnGoing/Pincode/Closed";
 
 export default function EventMain() {
     

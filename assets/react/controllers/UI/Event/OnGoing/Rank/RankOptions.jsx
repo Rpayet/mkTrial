@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import NoEntry from "./NoEntry";
 import UsersEntries from "./UsersEntries";
-import { rankService } from "../../../_Services/RankService";
+import { rankService } from "../../../../_Service/RankService";
 import { EventContext } from "../../../../_Provider/EventContext";
 
 export default function RankOptions() {

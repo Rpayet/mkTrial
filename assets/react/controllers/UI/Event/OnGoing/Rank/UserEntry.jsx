@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import EntryForm from "./EntryForm";
-import { formatTime } from "../../../_Services/FormatTime";
+import { formatTime } from "../../../../_Service/FormatTime";
 import { EventContext } from "../../../../_Provider/EventContext";
 import EntryCard from "./EntryCard";
-import { rankService } from "../../../_Services/RankService";
+import { rankService } from "../../../../_Service/RankService";
 import { toggleSection } from "../../../../_Service/SectionService";
 
 export default function UserEntry({ entry, rank }) {

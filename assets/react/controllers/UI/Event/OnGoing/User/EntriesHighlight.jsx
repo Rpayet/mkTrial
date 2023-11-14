@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { formatTime } from "../../../_Services/FormatTime";
+import { formatTime } from "../../../../_Service/FormatTime";
 import frenchStrings from 'react-timeago/lib/language-strings/fr';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { BackButton } from "../../../../_GlobalUi/Buttons";

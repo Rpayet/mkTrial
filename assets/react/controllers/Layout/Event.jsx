@@ -1,5 +1,5 @@
 import React from "react";
-import EventMain from "../Event-Comp/Wrappers/EventMain";
+import EventMain from "../UI/Event/EventMain";
 import { EventProvider } from "../_Provider/EventContext";
 
 export default function EventPage() {

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import EventInfo from "../UI/OnGoing/Info/EventInfo";
-import Userinfo from "../UI/OnGoing/Info/UsersInfo";
+import EventInfo from "../OnGoing/Info/EventInfo";
+import Userinfo from "../OnGoing/Info/UsersInfo";
 import EventRegistration from "./EventRegistration";
-import { EventContext } from "../../_Provider/EventContext";
-import { getFormattedDate } from "../_Services/FormatTime";
-import Modal from "../../_GlobalUi/Modal";
+import { EventContext } from "../../../_Provider/EventContext";
+import { getFormattedDate } from "../../../_Service/FormatTime";
+import Modal from "../../../_GlobalUi/Modal";
 
 export default function OnGoing() {
 

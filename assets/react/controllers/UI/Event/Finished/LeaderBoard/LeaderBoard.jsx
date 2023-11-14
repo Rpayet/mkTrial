@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import RaceInfo from "../../OnGoing/Info/RaceInfo";
 import TopList from "./TopList";
-import { rankService } from "../../../_Services/RankService";
+import { rankService } from "../../../../_Service/RankService";
 import BottomList from "./BottomList";
 import { EventContext } from "../../../../_Provider/EventContext";
 
