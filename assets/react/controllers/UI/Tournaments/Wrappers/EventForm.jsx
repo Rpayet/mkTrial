@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import CupSelection from "../../Event-Form/UI/CupSelect";
-import RaceSelect from "../../Event-Form/UI/RaceSelect";
-import PrimaryOptions from "../../Event-Form/UI/PrimaryOptions";
-import { TournamentContext } from "../../_Provider/TournamentContext";
+import CupSelection from "../../../Form/Event/CupSelect";
+import RaceSelect from "../../../Form/Event/RaceSelect";
+import PrimaryOptions from "../../../Form/Event/PrimaryOptions";
+import { TournamentContext } from "../../../_Provider/TournamentContext";
 
 export default function EventForm({ errors }) {
 

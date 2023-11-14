@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
-import RaceRandomizer from "../../Tournament-Comp/UI/Create/RaceRandomizer";
+import RaceRandomizer from "../../UI/Tournaments/Create/RaceRandomizer";
 import { AppContext } from "../../_Provider/AppContext";
 
 

@@ -5,7 +5,7 @@ import { EventContext } from "../../../../_Provider/EventContext";
 import EditorValidation from "./EditorValidation";
 import EventStop from "./EventStop";
 import { toggleSection } from "../../../../_Service/SectionService";
-import PrimaryOptions from "../../../../Event-Form/UI/PrimaryOptions";
+import PrimaryOptions from "../../../../Form/Event/PrimaryOptions";
 
 export default function EventEditor() {
 

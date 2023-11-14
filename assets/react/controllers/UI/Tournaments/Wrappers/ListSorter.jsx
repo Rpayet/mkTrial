@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import EventCard from "../UI/Search/EventCard";
-import ScrollReset from "../UI/Search/ScrollReset";
-import { TournamentContext } from "../../_Provider/TournamentContext";
-import { AppContext } from "../../_Provider/AppContext";
+import EventCard from "../Search/EventCard";
+import ScrollReset from "../Search/ScrollReset";
+import { TournamentContext } from "../../../_Provider/TournamentContext";
+import { AppContext } from "../../../_Provider/AppContext";
 
 export default function ListSorter() {
 

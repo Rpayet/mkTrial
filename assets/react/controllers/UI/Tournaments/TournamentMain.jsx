@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import SearchBar from "../UI/Search/SearchBar";
-import ListSorter from "./ListSorter";
-import EventForm from "./EventForm";
+import SearchBar from "./Search/SearchBar";
+import ListSorter from "./Wrappers/ListSorter";
+import EventForm from "./Wrappers/EventForm";
 import axios from "axios";
 import { TournamentContext } from "../../_Provider/TournamentContext";
 import { Outlet, Route, Routes } from "react-router-dom";
