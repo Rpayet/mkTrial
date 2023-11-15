@@ -18,8 +18,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EventController extends AbstractController
 {
-    #[Route('api/event/{id}', name: 'api_event', methods: ['GET'])]
-    public function event(
+    #[Route('api/event/{id}', name: 'api_event_show', methods: ['GET'])]
+    public function eventShow(
         TournamentRepository $tournamentRepository, 
         int $id,
         EntryRepository $entryRepository): Response

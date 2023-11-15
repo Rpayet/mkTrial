@@ -1,11 +1,22 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import { AppContext } from '../_Provider/AppContext';
+import { IoMdLogOut } from "react-icons/io";
+import axios from 'axios';
 
 export default function Navigation() {
 
     const navigate = useNavigate();
     const { userIdentifier } = useContext(AppContext);
+
+    const logout = () => {
+        redirect('/logout');
+    }
+
+    const handleLogout = async () => {
+        document.cookie = 'PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        redirect('/');
+    };
 
     return (
         <header className="max-w-6xl mx-auto bg-shell rounded-b-3xl text-white font-bold">
@@ -44,6 +55,9 @@ export default function Navigation() {
                                 <a 
                                     className="block"
                                     href="#">{userIdentifier.name}</a>
+                                <IoMdLogOut 
+                                    className="w-6 h-6 cursor-pointer"
+                                    onClick={handleLogout} />
                             </div>
                         ) : (
                             <div className="">

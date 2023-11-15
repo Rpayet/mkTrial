@@ -39,7 +39,7 @@ export default function AccountMain() {
 
             {userIdentifier && (
                 <div className="mb-3">
-                    {userIdentifier},
+                    {userIdentifier.name},
                     <button onClick={() => { navigate('/logout')}} className="text-blue-600 hover:underline">
                         Déconnexion
                     </button>
