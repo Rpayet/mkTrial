@@ -10,6 +10,8 @@ export default function AccountMain() {
     const { userIdentifier } = useContext(AppContext);
     const { lastUsername, error, csrfToken } = useContext(AccountContext);
 
+    console.log('react csrfToken', csrfToken)
+
     const [email, setEmail] = useState(lastUsername || '');
     const [password, setPassword] = useState('');
 

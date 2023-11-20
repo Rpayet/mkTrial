@@ -5,7 +5,6 @@ import Landing from "../Layout/Landing";
 import Tournament from "../Layout/Tournament";
 import Event from "../Layout/Event";
 import Account from "../Layout/Account";
-import Logout from "../UI/Account/Logout";
 import { AppContext } from "../_Provider/AppContext";
 import { LoadingLogo } from "../UI/Loading/LoadingAssets";
 

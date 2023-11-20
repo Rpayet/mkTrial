@@ -22,7 +22,7 @@ class EventController extends AbstractController
     public function eventShow(
         TournamentRepository $tournamentRepository, 
         int $id,
-        EntryRepository $entryRepository): Response
+        EntryRepository $entryRepository)
     {
         // Récupère l'événement avec l'ID
         $event = $tournamentRepository->find($id);
@@ -56,7 +56,7 @@ class EventController extends AbstractController
         int $id,
         EntityManagerInterface $manager, 
         Security $security, 
-        TournamentRepository $tournamentRepository): Response
+        TournamentRepository $tournamentRepository)
         {
             $event = $tournamentRepository->find($id);
             $user = $security->getUser();
@@ -117,7 +117,7 @@ class EventController extends AbstractController
         TournamentRepository $tournamentRepository,
         EntryRepository $entryRepository,
         int $id,
-        EntityManagerInterface $manager): Response
+        EntityManagerInterface $manager)
     {
     
         // Récupère l'événement avec l'ID
@@ -170,7 +170,7 @@ class EventController extends AbstractController
     public function interruption(
         TournamentRepository $tournamentRepository,
         int $id,
-        EntityManagerInterface $manager): Response
+        EntityManagerInterface $manager)
     {
         $event = $tournamentRepository->find($id);
 
@@ -190,7 +190,7 @@ class EventController extends AbstractController
         TournamentRepository $tournamentRepository,
         UserRepository $userRepository,
         EntityManagerInterface $manager, 
-        ): Response
+        )
     {
         $event = $tournamentRepository->find($eventId);
         $user = $userRepository->find($userId); 
@@ -228,7 +228,7 @@ class EventController extends AbstractController
 
     #[Route('/api/event/{id}/checkPin', name: 'app_event_checkpin', methods: ['POST'])]
     #[isGranted('ROLE_USER')]
-    public function checkPin( Request $request, int $id, TournamentRepository $tournamentRepository ): Response
+    public function checkPin( Request $request, int $id, TournamentRepository $tournamentRepository )
     {
         $event = $tournamentRepository->find($id);
         $data = json_decode($request->getContent(), true);

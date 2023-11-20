@@ -20,12 +20,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
+    private LoggerInterface $logger;
+
     public const LOGIN_ROUTE = 'app_login';
 
-
-
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, LoggerInterface $logger)
     {
+        $this->logger = $logger;
     }
 
     public function authenticate(Request $request): Passport
@@ -34,12 +35,15 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
+        $csrfToken = $request->request->get('_csrf_token');
+        $this->logger->info('CSRF Token Received: ' . $csrfToken);
+
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
-            // [
-            //     new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
-            // ]
+            [
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+            ]
         );
     }
 

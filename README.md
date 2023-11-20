@@ -1,5 +1,10 @@
 1 - Les bases
 
+Symfony Clear Cache
+```bash
+php bin/console cache:clear
+```
+
 Pour gérer les pages d'erreurs
 ```bash
 composer require symfony/twig-pack
