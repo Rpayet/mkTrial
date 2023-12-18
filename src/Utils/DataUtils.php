@@ -80,4 +80,30 @@ class DataUtils
         return $data;
     }
 
+    public static function eventNameRandomizer(): string
+    {
+        $firstWord = ['ultra', 'retro', 'star', 'banana', 'virtual',
+                    'bonus', 'bobomb', 'jungle', 'slam', 'master',
+                    'super', 'club', 'power', 'warp', 'burning',
+                    'pow', 'mega', 'luma', 'chomp', 'hero',
+                    'comet', 'double', 'fuzzy', 'shroom', 
+                    'crazy', 'jump', 'lucky', 'magic'];
+    
+        $secondWord = ['jam', 'team', 'bros', 'saga', 'world',
+                    'fury', 'plus', 'classic', 'special', 'charged',
+                    'clash', 'land', 'deluxe', 'fever', 'striker',
+                    'league', 'rush', 'party', 'mix', 'melee',
+                    'dash', 'fresh', 'shell', 'smasher',
+                    'barrel', 'punch', 'machine', 'blast'];
+        
+        $randomFirstWord = $firstWord[random_int(0, count($firstWord) - 1)];
+        $randomSecondWord = $secondWord[random_int(0, count($secondWord) - 1)];
+        $randomName = strtoupper(substr($randomFirstWord, 0, 1))
+                    .substr($randomFirstWord, 1)
+                    .' '
+                    .strtoupper(substr($randomSecondWord, 0, 1))
+                    .substr($randomSecondWord, 1);
+    
+        return $randomName;
+    }
 }
